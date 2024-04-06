@@ -1,8 +1,8 @@
 { 
     "states": [  
        {  
-          "distircts":"Andhra Pradesh",
-          "mandalam":[  
+          "state":"Andhra Pradesh",
+          "districts":[  
              "Anantapur",
              "Chittoor",
              "East Godavari",
