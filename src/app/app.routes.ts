@@ -8,6 +8,7 @@ import { LocationInfoComponent } from './components/profile/stepper/location-inf
 import { ExpertiseInfoComponent } from './components/profile/stepper/expertise-info/expertise-info.component';
 import { ExperinceInfoComponent } from './components/profile/stepper/experince-info/experince-info.component';
 import { OtpComponent } from './components/otp/otp.component';
+import { BakeryOwnerProfileComponent } from './components/bakery-owner-profile/bakery-owner-profile/bakery-owner-profile.component';
 
 export const routes: Routes = [
     {
@@ -34,7 +35,16 @@ export const routes: Routes = [
             }
         ],
     },
-    
+
+    {
+        path: 'bakeprofile', component: BakeryOwnerProfileComponent,
+        children: [
+
+            { path: '', redirectTo: 'personal', pathMatch: 'full' },
+            { path: 'personal', component: PersonalInfoComponent },
+   
+        ],
+    },
 
     {
         path:'otp',component:OtpComponent
