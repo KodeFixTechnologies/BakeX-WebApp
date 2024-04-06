@@ -55,7 +55,7 @@ export class LocationInfoComponent implements OnInit {
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
   
-      console.log(this.updatedlocationInfo)
+      console.log(data.states)
     })
 
    
