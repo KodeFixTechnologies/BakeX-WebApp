@@ -1,0 +1,64 @@
+<div class=" w-full  flex flex-col items-center justify-center mt-5">
+    <p-card>
+        <ng-template pTemplate="title"> Personal Information </ng-template>
+        <ng-template pTemplate="subtitle"> Enter your personal information </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid ">
+                <div class="field ">
+                    <label for="firstname" class="flex align-items-center ">Firstname</label>
+                    <input
+                        #firstname="ngModel"
+                        id="firstname"
+                        type="text"
+                        required
+                        pInputText
+                        [(ngModel)]="updatedPersonalInfo.firstname"
+                        [ngClass]="{ 'ng-dirty': (firstname.invalid && submitted) || (firstname.dirty && firstname.invalid) }"
+                    />
+                    <small *ngIf="(firstname.invalid && submitted) || (firstname.dirty && firstname.invalid)" class="p-error">Firstname is required.</small>
+                </div>
+                <div class="field ">
+                    <label for="lastname" class="flex align-items-center">Lastname</label>
+                    <input #lastname="ngModel" id="lastname" type="text" required pInputText [(ngModel)]="updatedPersonalInfo.lastname" [ngClass]="{ 'ng-dirty': (lastname.invalid && submitted) || (lastname.dirty && lastname.invalid) }" />
+                    <small class="p-error" *ngIf="(lastname.invalid && submitted) || (lastname.dirty && lastname.invalid)">Lastname is required.</small>
+                </div>
+                <div class="field ">
+                    <label for="age" class="flex align-items-center">Age</label>
+                    <input #age="ngModel" id="age" type="number" required pInputText [(ngModel)]="updatedPersonalInfo.age" [ngClass]="{ 'ng-dirty': (age.invalid && submitted) || (age.dirty && age.invalid) }" />
+                    <small class="p-error" *ngIf="(age.invalid && submitted) || (age.dirty && age.invalid)">Age is required.</small>
+                </div>
+
+                
+
+                <div class="field">
+                    <label for="class" class="flex align items-center">Gender</label>
+                    <p-dropdown inputId="class" [(ngModel)]="updatedPersonalInfo.gender" [options]="genders" (onChange)="setGender($event)" optionLabel="name" placeholder="Select a Gender"></p-dropdown>
+                </div>
+
+  
+
+                <div class="field">
+                    <label for="phoneNumber" class="flex align-items-center">Phone Number</label>
+                    <input #phoneNumber="ngModel" id="phoneNumber" type="tel" required pInputText [(ngModel)]="updatedPersonalInfo.phoneno" [ngClass]="{ 'ng-dirty': (phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid) }" />
+                    <small class="p-error" *ngIf="(phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid)">Phone number is required.</small>
+                </div>
+                
+
+
+
+                
+               
+                <!-- <div class="field ">
+                    <label for="gender" class="flex align-items-center">Gender</label>
+                    <input #gender="ngModel" id="age" type="number" required pInputText [(ngModel)]="personalInformation.gender" [ngClass]="{ 'ng-dirty': (gender.invalid && submitted) || (gender.dirty && gender.invalid) }" />
+                    <small class="p-error" *ngIf="(age.invalid && submitted) || (age.dirty && age.invalid)">Age is required.</small>
+                </div> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

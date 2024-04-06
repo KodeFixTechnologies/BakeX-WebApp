@@ -1,0 +1,11 @@
+{
+    "expertise": [
+        { "name": "Chips Maker", "code": "CM" },
+        { "name": "Snacks Maker", "code": "SM" },
+        { "name": "Sweet Maker", "code": "SW" },
+        { "name": "Cake Maker", "code": "CK" },
+        { "name": "Juice Maker", "code": "JM" },
+        { "name": "Driver", "code": "DR" }
+     
+    ]
+}

@@ -1,0 +1,32 @@
+
+
+<div class="w-full flex flex-col items-center justify-center mt-3">
+    <p-card>
+    <p class="flex align-items-center justify-content-center -mt-3 font-bold">What is Your Experince ?</p>
+    <p class="flex align-items-center justify-content-center mt-2 font-extralight">Please Select Your Field of Experience ?</p>
+    <hr class=" flex align-items-center justify-content-center h-px  bg-gray-200 border-0 dark:bg-gray-700">
+    <div class="flex align-items-center justify-content-center mt-5">
+        <p-listbox [options]="experience" [(ngModel)]="selectedExperience" optionLabel="name" [style]="{'width':'20rem'}"
+         (onChange)="updateExperience($event)"
+         [metaKeySelection]="false" [listStyle]="{'max-height': '300px'}" [focusOnHover]="true" ></p-listbox>
+
+    </div>
+    
+    <hr class=" flex align-items-center justify-content-center h-px  bg-blue-200 border-0 dark:bg-gray-700">
+    <p class="flex align-items-center justify-content-center mt-1 me-1 font-bold">Preffered Employment Type ?</p>
+    <div class="flex align-items-center justify-content-center mt-3">
+        <p-listbox [options]="employment" [(ngModel)]="selectedEmployment" optionLabel="employmentType" [style]="{'width':'20rem'}"
+         (onChange)=" updateEmployment($event)"
+        [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '300px'}"  [checkbox]="true" [selectAll]="false"  [showToggleAll]="false"></p-listbox>
+
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="grid grid-nogutter justify-content-center">
+            <p-button label="Continue" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+        </div>
+    </ng-template>
+
+</p-card>
+</div>
+

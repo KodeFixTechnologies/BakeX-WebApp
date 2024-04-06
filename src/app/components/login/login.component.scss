@@ -1,0 +1,9 @@
+body, html {
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  /* Ensure the section fills the viewport height */
+  .section-container {
+    min-height: 100vh; /* Ensure the section fills the viewport height */
+  }
