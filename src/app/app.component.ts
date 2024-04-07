@@ -10,13 +10,14 @@ import { BottomNavbarComponent } from "./components/bottom-navbar/bottom-navbar.
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ProfileComponent } from './components/profile/profile.component';
+import { BakeryOwnerProfileComponent } from './components/bakery-owner-profile/bakery-owner-profile/bakery-owner-profile.component';
 declare const google: any;
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [LoginComponent, HomeComponent,BottomNavbarComponent,ProfileComponent, RouterOutlet, RouterLink]
+    imports: [LoginComponent, HomeComponent,BottomNavbarComponent,ProfileComponent,BakeryOwnerProfileComponent, RouterOutlet, RouterLink]
 })
 export class AppComponent implements OnInit {
  googleUser:any;

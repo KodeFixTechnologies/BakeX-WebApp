@@ -1,0 +1,47 @@
+<div class=" w-full flex flex-col items-center justify-center mt-5">
+    <p-card>
+
+        <ng-template pTemplate="title"> Personal Information </ng-template>
+        <ng-template pTemplate="subtitle"> {{title}} </ng-template>
+
+        <ng-template pTemplate="content">
+            <div class="p-fluid  ">
+
+                <div class="flex justify-center">
+                    <button (click)="setOwner('bakemember')" type="button"
+                        class="text-white bg-blue-400 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Yes</button>
+                    <button (click)="setOwner('nonbakemember')" type="button"
+                        class="text-white bg-blue-400 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">No</button>
+                </div>
+
+                <div *ngIf="isbakeOwner" class="field">
+                    <label for="firstname" class="flex align-items-center ">Enter Your Mobile Number Registerd With Bake
+                        Kerala</label>
+                    <input #firstname="ngModel" id="firstname" type="text" required pInputText [(ngModel)]="phno" />
+                    <div class="mt-5">
+                        <p-button (click)="checkBakeUser(phno)"  label="Verify" ></p-button>
+
+                       
+                    
+                    </div>
+                
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </ng-template>
+
+
+
+
+
+
+
+
+    </p-card>
+</div>
