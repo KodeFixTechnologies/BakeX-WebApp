@@ -57,7 +57,7 @@ export class ProfileComponent  implements OnInit{
    },
    {
     label:'',
-    routerLink:''
+    routerLink:'resume'
  },
    
     ]

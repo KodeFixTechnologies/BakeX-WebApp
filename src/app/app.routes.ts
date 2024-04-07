@@ -8,6 +8,7 @@ import { LocationInfoComponent } from './components/profile/stepper/location-inf
 import { ExpertiseInfoComponent } from './components/profile/stepper/expertise-info/expertise-info.component';
 import { ExperinceInfoComponent } from './components/profile/stepper/experince-info/experince-info.component';
 import { OtpComponent } from './components/otp/otp.component';
+import { ResumeComponent } from './components/profile/stepper/resume/resume.component';
 
 export const routes: Routes = [
     {
@@ -31,6 +32,9 @@ export const routes: Routes = [
             },
             {
                 path: 'experience', component:ExperinceInfoComponent,
+            },
+            {
+                path: 'resume', component:ResumeComponent,
             }
         ],
     },
