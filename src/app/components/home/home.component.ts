@@ -35,6 +35,11 @@ export class HomeComponent implements OnInit {
                 console.log("employee clicked")
                 this.router.navigate(['\profile']);
             }
+        if(category=="owner")
+            {  
+                console.log("owner clicked")
+                this.router.navigate(['/bakeprofile']);
+            }    
 
       }
 }

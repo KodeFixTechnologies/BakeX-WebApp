@@ -33,7 +33,7 @@ export class BakeryOwnerProfileComponent implements OnInit {
       {
 
         icon: 'custom-icon',
-        routerLink: 'personal',
+        routerLink: 'owner',
 
       },
      

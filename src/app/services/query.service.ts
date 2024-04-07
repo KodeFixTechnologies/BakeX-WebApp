@@ -45,4 +45,10 @@ export class QueryService {
   {
     return this.http.get('assets/expertise-info.json')
   }
+
+
+  verifyBakeUser(phoneno: any): Observable<any> {
+    // Modify the API call to use query parameters
+    return this.http.post<any>(`${environment.API_URL}IsBakeUser?phoneno=${phoneno.phoneno}`, null);
+  }
 }
