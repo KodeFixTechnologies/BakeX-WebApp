@@ -12,6 +12,7 @@ import { BakeryOwnerProfileComponent } from './components/bakery-owner-profile/b
 import { OwnerInfoComponent } from './components/bakery-owner-profile/stepper/owner-info/owner-info.component';
 import { OwnerViewComponent } from './components/owner-view/owner-view.component';
 
+import { ResumeComponent } from './components/profile/stepper/resume/resume.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,9 @@ export const routes: Routes = [
             },
             {
                 path: 'experience', component:ExperinceInfoComponent,
+            },
+            {
+                path: 'resume', component:ResumeComponent,
             }
         ],
     },

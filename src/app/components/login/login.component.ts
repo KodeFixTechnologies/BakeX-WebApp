@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
             }
 
             this.queryService.insertUser(user).subscribe((response) => {
+                console.log("response: ",response);
                 if (response == true) {
                     // Wrap the navigation inside NgZone.run()
                     this.ngZone.run(() => {
@@ -66,6 +67,12 @@ export class LoginComponent implements OnInit,AfterViewInit {
                         this.dataService.setData(true);
                     });
                     
+                }else{
+                    // Wrap the navigation inside NgZone.run()
+                    this.ngZone.run(() => {
+                      this.router.navigate(['/home']);
+                      this.dataService.setData(true);
+                  });
                 }
                 else {
                   this.ngZone.run(() => {

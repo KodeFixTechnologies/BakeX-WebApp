@@ -50,6 +50,7 @@ export class LocationInfoComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.profileService.profileInformation)
+    
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
     console.log(this.updatedlocationInfo)
     this.queryService.getLocationData().subscribe((data) => {
@@ -60,7 +61,7 @@ export class LocationInfoComponent implements OnInit {
 
    
     this.queryService.getStateAndDistrict().subscribe((data)=>{
-      console.log(data)
+      //console.log(data)
     })
   }
 
