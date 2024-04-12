@@ -96,11 +96,6 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   }
 
 
-  saveBookMark(job:Job)
-  {
-    this.bookMarkJobs.push(job);
-    console.log(this.bookMarkJobs)
-  }
 }
 
 
