@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
+import {  OnboardingComponent } from './components/onboarding/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PersonalInfoComponent } from './components/profile/stepper/personal-info/personal-info.component';
@@ -13,6 +13,7 @@ import { OwnerInfoComponent } from './components/bakery-owner-profile/stepper/ow
 import { OwnerViewComponent } from './components/owner-view/owner-view.component';
 
 import { ResumeComponent } from './components/profile/stepper/resume/resume.component';
+import { OwnerProfileComponent } from './components/owner-view/owner-profile/owner-profile/owner-profile.component';
 
 export const routes: Routes = [
     {
@@ -20,7 +21,7 @@ export const routes: Routes = [
 
     },
     {
-        path: 'home', component: HomeComponent,
+        path: 'home', component: OnboardingComponent,
 
     },
 
@@ -49,6 +50,7 @@ export const routes: Routes = [
 
             { path: '', redirectTo: 'owner', pathMatch: 'full' },
             { path: 'owner', component: OwnerInfoComponent },
+            
    
         ],
     },
@@ -59,6 +61,14 @@ export const routes: Routes = [
 
     {
         path:'ownerview',component:OwnerViewComponent
+    },
+    
+    {
+        path:'owner-profile',component:OwnerProfileComponent
     }
+
+
+
+ 
 
 ];

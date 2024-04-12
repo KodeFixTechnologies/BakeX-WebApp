@@ -74,12 +74,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
                       this.dataService.setData(true);
                   });
                 }
-                else {
-                  this.ngZone.run(() => {
-                    this.router.navigate(['/home']);
-                    this.dataService.setData(true);
-                });
-                }
+             
             })
         } else {
             console.error("invalid format", response)

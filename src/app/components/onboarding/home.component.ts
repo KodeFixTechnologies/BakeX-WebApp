@@ -11,7 +11,7 @@ import { DataService } from '../../services/data.service';
     styleUrl: './home.component.scss',
     imports: [CommonModule,RouterOutlet, BottomNavbarComponent]
 })
-export class HomeComponent implements OnInit {
+export class OnboardingComponent implements OnInit {
     isLogin:any;
     constructor(private route: ActivatedRoute,
         private router:Router,

@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { QueryService } from '../../../../services/query.service';
 import { DialogModule } from 'primeng/dialog';
 import { Router } from '@angular/router';
+import { DataService } from '../../../../services/data.service';
 declare const initSendOTP: any;
 @Component({
   selector: 'owner-info',
@@ -23,6 +24,7 @@ export class OwnerInfoComponent implements OnInit{
     private render:Renderer2,
     private ngZone:NgZone,
     private router:Router,
+    private dataService:DataService,
   )
   {
    
@@ -76,6 +78,7 @@ export class OwnerInfoComponent implements OnInit{
                   // get verified token in response
                   this.ngZone.run(() => {
                     this.router.navigate(['/ownerview']);
+                    this.dataService.setPhoneData(phoneno)
 
                    
                 });
