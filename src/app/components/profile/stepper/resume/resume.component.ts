@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../services/data.service';
+import { ProfileService } from '../../../../services/profile.service';
 
 @Component({
   selector: 'resume',
@@ -9,10 +10,20 @@ import { DataService } from '../../../../services/data.service';
   styleUrl: './resume.component.scss'
 })
 export class ResumeComponent implements OnInit{
-  constructor(private dataService :  DataService ){
+  constructor(private dataService :  DataService,
+    private profileService:ProfileService 
+
+
+  ){
   
   }
+
+
   ngOnInit(): void {
     this.dataService.setData(false);
+
+
+
+
   }
 }

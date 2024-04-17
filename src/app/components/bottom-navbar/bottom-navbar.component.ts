@@ -26,7 +26,7 @@ export class BottomNavbarComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.dataService.setData(true);
+   
     this.dataService.getData().subscribe((data)=>{
       this.isLogin=data;
     })

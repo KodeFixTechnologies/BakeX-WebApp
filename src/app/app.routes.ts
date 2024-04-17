@@ -14,6 +14,8 @@ import { OwnerViewComponent } from './components/owner-view/owner-view.component
 
 import { ResumeComponent } from './components/profile/stepper/resume/resume.component';
 import { OwnerProfileComponent } from './components/owner-view/owner-profile/owner-profile/owner-profile.component';
+import { OwnerlocationInfoComponent } from './components/bakery-owner-profile/stepper/ownerlocation-info/ownerlocation-info.component';
+import { BusinessInfoComponent } from './components/bakery-owner-profile/stepper/business-info/business-info.component';
 
 export const routes: Routes = [
     {
@@ -50,6 +52,12 @@ export const routes: Routes = [
 
             { path: '', redirectTo: 'owner', pathMatch: 'full' },
             { path: 'owner', component: OwnerInfoComponent },
+            {
+                path:'ownerlocation-info',component:OwnerlocationInfoComponent
+            },
+            {
+                path:'business-info', component:BusinessInfoComponent
+            }
             
    
         ],

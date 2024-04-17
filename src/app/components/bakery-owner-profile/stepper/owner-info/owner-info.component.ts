@@ -8,11 +8,13 @@ import { QueryService } from '../../../../services/query.service';
 import { DialogModule } from 'primeng/dialog';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../services/data.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
 declare const initSendOTP: any;
 @Component({
   selector: 'owner-info',
   standalone: true,
-  imports: [CardModule,ButtonModule,CommonModule,InputTextModule,FormsModule,DialogModule],
+  imports: [CardModule,ButtonModule,CommonModule,InputTextModule,FormsModule,DialogModule,DropdownModule,CalendarModule],
   templateUrl: './owner-info.component.html',
   styleUrl: './owner-info.component.scss',
 })
@@ -29,40 +31,56 @@ export class OwnerInfoComponent implements OnInit{
   {
    
   }
+
+  date:any;
+
+  genders:any;
   ngOnInit(): void {
   
-
+    this.genders = [
+      { name: 'Male', code: 'M', factor: 1 },
+      { name: 'Female', code: 'F', factor: 2 },
+      { name: 'Other', code: 'O', factor: 3 }
+  ];
   }
+
+
+  
+  updatedPersonalInfo = {
+    firstname: '',
+    lastname: '',
+    age: null,
+    gender: '',
+    phoneno:''
+  };
+
+  submitted:boolean=false;
   script:any;
   isbakeOwner:boolean=false;
   isNonBakeOwner:boolean=false;
   visible:boolean=false;
   phno:string=''
-  title:string='Do You Have a Bake Kerala Membership?'
+  title:string='Enter Your Personal information'
 
-  setOwner(value:string)
+
+
+
+  setGender(event:any)
   {
-    if(value==='bakemember')
-      {
-    this.isbakeOwner=true;
-    this.isNonBakeOwner=false;
-    this.title='Do You Have a Bake Kerala Membership?'
-      }
-    else
-    {
-      this.isNonBakeOwner=true;
-      this.isbakeOwner=false;
-      this.title='Enter Your Personal Information'
-    }
-
+    this.updatedPersonalInfo.gender=event.value;
+  //  this.profileService.setProfileInformation = this.personalInformation;
+  
   }
-  async checkBakeUser(phoneno: string) {
+
+  nextPage()
+  {
+    if(this.updatedPersonalInfo.phoneno!='')
+    {
+
     this.script= this.render.createElement('script');
     this.script.src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
-    console.log(phoneno);
+   
     // Send the 'phoneno' parameter as a query parameter
-    this.queryService.verifyBakeUser({ phoneno: phoneno }).subscribe((response: boolean) => {
-      if (response == true) {
 
 
            this.script.onload=()=>{
@@ -70,7 +88,7 @@ export class OwnerInfoComponent implements OnInit{
             var configuration= {
               widgetId: "3464636a4a73333635343731",
               tokenAuth: "418358TlbdIOJ67q660d315aP1",
-              identifier: '+91'+phoneno,
+              identifier: '+91'+this.updatedPersonalInfo.phoneno,
               exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
               success: (data:any) => {
 
@@ -78,7 +96,7 @@ export class OwnerInfoComponent implements OnInit{
                   // get verified token in response
                   this.ngZone.run(() => {
                     this.router.navigate(['/ownerview']);
-                    this.dataService.setPhoneData(phoneno)
+                    this.dataService.setPhoneData(this.updatedPersonalInfo.phoneno)
 
                    
                 });
@@ -101,7 +119,7 @@ export class OwnerInfoComponent implements OnInit{
           this.render.appendChild(document.body,this.script)
         console.log('bak user');
       }
-    });
-  }
+    }
 
+  
 }

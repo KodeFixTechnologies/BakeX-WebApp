@@ -32,10 +32,20 @@ export class BakeryOwnerProfileComponent implements OnInit {
     this.items = [
       {
 
-        icon: 'custom-icon',
+        label:'Personal Info',
         routerLink: 'owner',
 
       },
+
+      {
+        label:'Location Info',
+        routerLink: 'ownerlocation-info',
+      },
+
+      {
+        label:'Business Info',
+        routerLink: 'business-info',
+      }
      
     ]
   }

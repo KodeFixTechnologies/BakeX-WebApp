@@ -58,4 +58,6 @@ export class QueryService {
   
     return this.http.post<any>(`${environment.API_URL}getBakeOwner?phoneno=${phoneno.phoneno}`,null)
   }
+
+  
 }

@@ -113,15 +113,14 @@ fullDetails:[]=[];
 
      console.log (this.profileService.getProfileInformation())
    
-     this.dataService.setPhoneData(this.profileService.getProfileInformation().personalInformation.phoneno);
-     this.router.navigate(['/otp']);
+    //  this.dataService.setPhoneData(this.profileService.getProfileInformation().personalInformation.phoneno);
+    //  this.router.navigate(['/otp']);
 
     
   
-    // if(this.updatedEmployement.types!=null)
-    //   {
-    //       this.router.navigate(['profile/experience'])
-    //   }
+  
+          this.router.navigate(['profile/resume'])
+      
     
   }
 }
