@@ -1,1 +1,43 @@
-<p>business-info works!</p>
+<div class="w-full flex flex-col items-center justify-center mt-10">
+    <p-card>
+        <ng-template pTemplate="title"> Business Information </ng-template>
+        <ng-template pTemplate="subtitle"> Enter your Business information </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="state" class="flex align items-center">Business Name</label>
+                    <input #placeInput="ngModel" id="place" type="text" required pInputText [(ngModel)]="updatedBusinessInfo.businessName" [ngClass]="{ 'ng-dirty': (placeInput.invalid && submitted) || (placeInput.dirty && placeInput.invalid) }" />
+                    <small class="p-error" *ngIf="(placeInput.invalid && submitted) || (placeInput.dirty &&placeInput.invalid)">Place is required.</small>
+                </div>
+
+                <div class="field">
+                    <label for="state" class="flex align items-center">Business Address</label>
+                    <input #address="ngModel" id="address" type="text" class="h-20 " required pInputText [(ngModel)]="updatedBusinessInfo.businessAddress" [ngClass]="{ 'ng-dirty': (address.invalid && submitted) || (address.dirty && address.invalid) }" />
+
+                    <small class="p-error" *ngIf="(address.invalid && submitted) || (address.dirty &&address.invalid)"> Address is required.</small>
+                </div>
+
+                <div class="field">
+                    <label for="fssaiLicense" class="flex align items-center">FSSAI License No</label>
+                    <input #fssaiInput="ngModel" id="fssaiLicense" type="text" required pInputText [(ngModel)]="updatedBusinessInfo.fssaiNo" [ngClass]="{ 'ng-dirty': (fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid) }" />
+                    <small class="p-error" *ngIf="(fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid)">FSSAI License No is required.</small>
+                </div>
+                
+                <div class="field ">
+                 
+                    <label for="age" class="flex align-items-center">FSSAI Expiry Date</label>
+                    <p-calendar [(ngModel)]="updatedBusinessInfo.fssaiExpirydate"></p-calendar>
+               
+                </div>
+                
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Next" (onClick)="nextPage()"  icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+
+        
+    </p-card>
+</div>

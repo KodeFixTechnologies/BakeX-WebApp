@@ -67,26 +67,19 @@ export class ProfileService {
       place: '',
       pincode:'',
     },
-    fssaiDetails:{
+    businessInformation:{
+      businessName:'',
+      businessAddress:'',
       licenseno:'',
-      fssaiExperity:''
+      fssaiExpiry:null
     },
-    profileImage:{
-
-    },
-    expertiseInformation: {
-      types: null,
-    },
-    educationInformation:{
-      types:null,
-    },
-    employmentInformation: {
-      types: null
-    },
-    experienceInformation:{
-      types:null
+    otherInformation:{
+      profileCreateDate:null
     }
-  });
+  
+    
+  }
+);
   
   bakeryOwnerProfileInfo$: Observable<any> = this.bakeryOwnerProfileInfoSubject.asObservable();
   

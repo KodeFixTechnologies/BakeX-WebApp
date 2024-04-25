@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Users } from '../models/user';
 import { BakeMember } from '../models/bakeMember';
+import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,12 @@ export class QueryService {
   {
   
     return this.http.post<any>(`${environment.API_URL}getBakeOwner?phoneno=${phoneno.phoneno}`,null)
+  }
+
+
+  createNonBakeryowner(NonBakeOwner:IBakerOwnerProfileRequest):Observable<any>
+  {
+    return this.http.post<any>(environment.API_URL+'createBakeryOwner',NonBakeOwner);
   }
 
   

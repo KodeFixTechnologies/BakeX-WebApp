@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../../../services/data.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { ProfileService } from '../../../../services/profile.service';
 declare const initSendOTP: any;
 @Component({
   selector: 'owner-info',
@@ -27,6 +28,7 @@ export class OwnerInfoComponent implements OnInit{
     private ngZone:NgZone,
     private router:Router,
     private dataService:DataService,
+    private profileService:ProfileService
   )
   {
    
@@ -44,7 +46,7 @@ export class OwnerInfoComponent implements OnInit{
   ];
   }
 
-
+  gender:string=''
   
   updatedPersonalInfo = {
     firstname: '',
@@ -67,59 +69,22 @@ export class OwnerInfoComponent implements OnInit{
 
   setGender(event:any)
   {
-    this.updatedPersonalInfo.gender=event.value;
+
+    this.gender=event.value;
+    this.updatedPersonalInfo.gender=event.value.name
+   
   //  this.profileService.setProfileInformation = this.personalInformation;
   
   }
 
   nextPage()
   {
-    if(this.updatedPersonalInfo.phoneno!='')
-    {
-
-    this.script= this.render.createElement('script');
-    this.script.src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
-   
-    // Send the 'phoneno' parameter as a query parameter
-
-
-           this.script.onload=()=>{
-     
-            var configuration= {
-              widgetId: "3464636a4a73333635343731",
-              tokenAuth: "418358TlbdIOJ67q660d315aP1",
-              identifier: '+91'+this.updatedPersonalInfo.phoneno,
-              exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
-              success: (data:any) => {
-
-                console.log('Sucesss')
-                  // get verified token in response
-                  this.ngZone.run(() => {
-                    this.router.navigate(['/ownerview']);
-                    this.dataService.setPhoneData(this.updatedPersonalInfo.phoneno)
-
-                   
-                });
-                  
-              },
-              failure: (error:any) => {
-                  // handle error
-                  console.log('failure reason', error);
-              },
-            
-            };
-           
-            initSendOTP(configuration)
-          }
-
-
-          this.script.onerror =(error:any)=> {
-            console.log("script error",error)
-          }
-          this.render.appendChild(document.body,this.script)
-        console.log('bak user');
-      }
-    }
-
+    
+    this.profileService.setBakeryOwnerProfileInfo({
+      ...this.profileService.getBakeryOwnerProfileInfo(),
+      personalInformation: this.updatedPersonalInfo
+    });
+    this.router.navigate(['bakeprofile/business-info']);
+  }
   
 }

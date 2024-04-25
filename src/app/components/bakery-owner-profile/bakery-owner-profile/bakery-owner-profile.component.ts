@@ -36,16 +36,17 @@ export class BakeryOwnerProfileComponent implements OnInit {
         routerLink: 'owner',
 
       },
+      
+      {
+        label:'Business Info',
+        routerLink: 'business-info',
+      },
 
       {
         label:'Location Info',
         routerLink: 'ownerlocation-info',
       },
 
-      {
-        label:'Business Info',
-        routerLink: 'business-info',
-      }
      
     ]
   }

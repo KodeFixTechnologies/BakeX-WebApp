@@ -1,12 +1,53 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CalendarModule } from 'primeng/calendar';
+import { Router } from '@angular/router';
+import { ProfileService } from '../../../../services/profile.service';
 @Component({
   selector: 'business-info',
   standalone: true,
-  imports: [],
+  imports: [CardModule,DropdownModule,ButtonModule,FormsModule,CommonModule,CalendarModule],
   templateUrl: './business-info.component.html',
   styleUrl: './business-info.component.scss'
 })
-export class BusinessInfoComponent {
+export class BusinessInfoComponent  implements OnInit{
 
+  constructor(
+    private router:Router,
+    private profileService:ProfileService
+  )
+  {
+
+  }
+  ngOnInit(): void {
+    console.log(
+      this.profileService.getBakeryOwnerProfileInfo()
+    )
+  }
+  submitted: boolean = false;
+  updatedBusinessInfo = {
+    businessName: '',
+    businessAddress: '',
+    age: null,
+    fssaiNo:'',
+    fssaiExpirydate:null
+  };
+
+
+
+  nextPage()
+  {
+    this.profileService.setBakeryOwnerProfileInfo({
+      ...this.profileService.getBakeryOwnerProfileInfo(),
+      businessInformation: this.updatedBusinessInfo
+    });
+
+
+    console.log(this.profileService.getBakeryOwnerProfileInfo())
+    this.router.navigate(['bakeprofile/ownerlocation-info']);
+  }
 }

@@ -25,15 +25,15 @@
 
                 <div class="field">
                     <label for="pincode" class="flex align-items-center">Pincode</label>
-                    <input #pincode="ngModel" id="pincode" type="number" required pInputText [(ngModel)]="pincode" [ngClass]="{ 'ng-dirty': (pincode.invalid && submitted) || (pincode.dirty && pincode.invalid) }" />
+                    <input #pincode="ngModel" id="pincode" type="text" required pInputText [(ngModel)]="pincodes" [ngClass]="{ 'ng-dirty': (pincode.invalid && submitted) || (pincode.dirty && pincode.invalid) }" />
                     <small class="p-error" *ngIf="(pincode.invalid && submitted) || (pincode.dirty && pincode.invalid)">Pincode is required.</small>
                 </div>
                 
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="grid grid-nogutter justify-content-end">
-                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+            <div class="grid grid-nogutter justify-content-center">
+                <p-button label="Finish" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
             </div>
         </ng-template>
 

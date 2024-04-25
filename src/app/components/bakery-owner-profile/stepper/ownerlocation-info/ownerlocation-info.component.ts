@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../../services/profile.service';
 import { QueryService } from '../../../../services/query.service';
 import { ButtonModule } from 'primeng/button'
-import { CommonModule } from '@angular/common';
+import { CommonModule, getLocaleDateFormat } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
+import { IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { FileService } from '../../../../services/file.service';
   styleUrl: './ownerlocation-info.component.scss'
 })
 export class OwnerlocationInfoComponent implements OnInit{
+
 
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class OwnerlocationInfoComponent implements OnInit{
     private router:Router,
     private fileService:FileService
   ) {
-
+   this.currentDate = new Date();
   }
   updatedlocationInfo = {
     state: '',
@@ -58,8 +60,14 @@ export class OwnerlocationInfoComponent implements OnInit{
     pincode:''
   }
 
-  pincode:any
 
+  updatedOtherInfo = {
+    profileCreateDate : ''
+  }
+
+  NonBakeOwner: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
+  pincodes:any
+  currentDate:Date;
   states: any;
   submitted: boolean = false;
   districts: any;
@@ -74,22 +82,37 @@ export class OwnerlocationInfoComponent implements OnInit{
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
-
+   
+    console.log(this.pincodes)
    // this.fileService.uploadObject();
 
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;
       this.updatedlocationInfo.district = this.selectedDistrict;
       this.updatedlocationInfo.place=this.userplace
-      this.updatedlocationInfo.pincode=this.pincode;
-
+      this.updatedlocationInfo.pincode=this.pincodes;
+      this.updatedOtherInfo.profileCreateDate=this.currentDate.toLocaleDateString();
+      
       this.profileService.setBakeryOwnerProfileInfo({
         ...this.profileService.getBakeryOwnerProfileInfo(),
-        locationInformation: this.updatedlocationInfo
+        locationInformation: this.updatedlocationInfo,
+        otherInformation: this.updatedOtherInfo,
       });
-      this.router.navigate(['profile/expertise']);
-
       
+    this.NonBakeOwner= this.profileService.getBakeryOwnerProfileInfo();
+
+
+     console.log(this.NonBakeOwner)
+      this.queryService.createNonBakeryowner(this.NonBakeOwner).subscribe((response)=>{
+        
+        if(response==true)
+          {
+            this.router.navigate([
+            
+            '/ownerview'
+            ])
+          }
+      })
       this.submitted = true;
     } else {
       console.error('No state selected.');

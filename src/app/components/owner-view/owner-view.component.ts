@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { Job } from '../../models/job';
 import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-
+import { Button, ButtonModule } from 'primeng/button';
+import { OwnerNavbarComponent } from '../owner-navbar/owner-navbar.component';
+import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'owner-view',
   standalone: true,
-  imports: [DialogModule,FormsModule,CommonModule,CardModule,ButtonModule],
+  imports: [DialogModule,FormsModule,CommonModule,CardModule,ButtonModule,OwnerNavbarComponent,FileUploadModule],
   templateUrl: './owner-view.component.html',
   styleUrl: './owner-view.component.scss'
 })
@@ -35,17 +37,21 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   constructor(
     private dataService:DataService,
     private queryService:QueryService,
-    private cdr:ChangeDetectorRef
+    private cdr:ChangeDetectorRef,
+    private messageService:MessageService
   )
   {
     
   }
 
 
-
+  maxSize:number=10000;
 
 
   ngOnInit(): void {
+
+   
+ 
     this.dataService.getPhoneData().subscribe((data)=>{
       this.phoneno='8921537948';
       console.log(data)
@@ -69,8 +75,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     this.showDialogSubscription.unsubscribe();
   }
 
-
- 
+  
+  uploadedFiles:any
   submitJob() {
     // Push the submitted job to the list of submitted jobs
     this.submittedJobs.push({
@@ -95,7 +101,18 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     this.cdr.detectChanges()
   }
 
-
+  onUpload(event: UploadEvent) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    console.log(event)
+}
+myUploader(event:any) {
+  console.log("onUpload() START");
+  for(let file of event.files) {
+    console.log("FILE TO BE UPLOADED: ", file);
+    this.uploadedFiles.push(file);
+  }
+  this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+}
 }
 
 
