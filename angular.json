@@ -30,9 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeicons/primeicons.css"
-            
+              "src/styles.scss"
+      
        
            
             ],
@@ -44,12 +43,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "500kb"
                 }
               ],
               "outputHashing": "all"
@@ -100,8 +99,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeicons/primeicons.css"
+              "src/styles.scss"
+           
               
              
 
@@ -113,6 +112,9 @@
     
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
  
 }

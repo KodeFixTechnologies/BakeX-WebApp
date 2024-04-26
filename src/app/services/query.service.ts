@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Users } from '../models/user';
+import { BakeMember } from '../models/bakeMember';
+import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +47,26 @@ export class QueryService {
   {
     return this.http.get('assets/expertise-info.json')
   }
+
+
+  verifyBakeUser(phoneno: any): Observable<any> {
+    // Modify the API call to use query parameters
+    return this.http.post<any>(`${environment.API_URL}IsBakeUser?phoneno=${phoneno.phoneno}`, null);
+  }
+
+  getBakeOwner(phoneno:any):Observable<any>
+  {
+  
+    return this.http.post<any>(`${environment.API_URL}getBakeOwner?phoneno=${phoneno.phoneno}`,null)
+  }
+
+
+  createNonBakeryowner(NonBakeOwner:IBakerOwnerProfileRequest):Observable<any>
+  {
+    return this.http.post<any>(environment.API_URL+'createBakeryOwner',NonBakeOwner);
+  }
+
+  
+
+  
 }

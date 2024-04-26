@@ -1,0 +1,215 @@
+{
+    "districts": [
+      {
+        "district": "Alappuzha",
+        "mandalams": [
+          "ALAPPUZHA",
+          "AMBALAPPUZHA",
+          "AROOR",
+          "CHENGANNUR",
+          "CHERTHALA",
+          "HARIPAD",
+          "KAYAMKULAM",
+          "KUTTANAD",
+          "MAVELIKARA"
+        ]
+      },
+      {
+        "district": "Calicut",
+        "mandalams": [
+          "BALUSSERY",
+          "BEYPORE",
+          "CALICUT NORTH",
+          "CALICUT SOUTH",
+          "ELATHUR",
+          "KODUVALLY",
+          "KOYILANDY",
+          "KUNNAMANGALAM",
+          "KUTTIADY",
+          "NADAPURAM",
+          "PERAMBRA",
+          "THIRUVAMBADY",
+          "VATAKARA"
+        ]
+      },
+      {
+        "district": "Ernakulam",
+        "mandalams": [
+          "ALUVA",
+          "ANGAMALY",
+          "ERNAKULAM",
+          "KALAMASSERY",
+          "KOCHI",
+          "KOTHAMANGALAM",
+          "KUNNATHUNAD",
+          "MUVATTUPUZHA",
+          "PARAVUR",
+          "PERUMBAVOOR",
+          "PIRAVOM",
+          "THRIKKAKARA",
+          "THRIPPUNITHURA",
+          "VYPIN"
+        ]
+      },
+      {
+        "district": "Idukki",
+        "mandalams": [
+          "DEVIKULAM",
+          "IDUKKI",
+          "PEERUMADE",
+          "THODUPUZHA",
+          "UDUMBANCHOLA"
+        ]
+      },
+      {
+        "district": "Kannur",
+        "mandalams": [
+          "AZHIKODE",
+          "DHARMADOM",
+          "IRIKKUR",
+          "KALLIASSERI",
+          "KANNUR",
+          "KUTHUPARAMBA",
+          "MATTANUR",
+          "PAYYANUR",
+          "PERAVOOR",
+          "TALIPARAMBA",
+          "THALASSERY"
+        ]
+      },
+      {
+        "district": "Kasaragod",
+        "mandalams": [
+          "KANHANGAD",
+          "KASARAGOD",
+          "MANJESHWARAM",
+          "THRIKARIPUR",
+          "UDMA"
+        ]
+      },
+      {
+        "district": "Kollam",
+        "mandalams": [
+          "CHADAYAMANGALAM",
+          "CHATHANNOOR",
+          "CHAVARA",
+          "ERAVIPURAM",
+          "KARUNAGAPALLY",
+          "KOLLAM",
+          "KOTTARAKKARA",
+          "KUNDARA",
+          "KUNNATHUR",
+          "PATHANAPURAM",
+          "PUNALUR"
+        ]
+      },
+      {
+        "district": "Kottayam",
+        "mandalams": [
+          "CHANGANASSERY",
+          "ETTUMANOOR",
+          "KADUTHURUTHY",
+          "KANJIRAPPALLY",
+          "KOTTAYAM",
+          "PALA",
+          "POONJAR",
+          "PUTHUPPALLY",
+          "VAIKOM"
+        ]
+      },
+      {
+        "district": "Malappuram",
+        "mandalams": [
+          "ERANAD",
+          "KONDOTTY",
+          "KOTTAKKAL",
+          "MALAPPURAM",
+          "MANJERI",
+          "MANKADA",
+          "NILAMBUR",
+          "PERINTHALMANNA",
+          "PONNANI",
+          "TANUR",
+          "THAVANUR",
+          "TIRUR",
+          "TIRURANGADI",
+          "VALLIKKUNNU",
+          "VENGARA",
+          "WANDOOR"
+        ]
+      },
+      {
+        "district": "Palakkad",
+        "mandalams": [
+          "ALATHUR",
+          "CHITTUR",
+          "KONGAD",
+          "MALAMPUZHA",
+          "MANNARKKAD",
+          "NENMARA",
+          "OTTAPALAM",
+          "PALAKKAD",
+          "PATTAMBI",
+          "SHORNUR",
+          "TARUR",
+          "THRITHALA"
+        ]
+      },
+      {
+        "district": "Pathanamthitta",
+        "mandalams": [
+          "ADOOR",
+          "ARANMULA",
+          "KONNI",
+          "RANNI",
+          "THIRUVALLA"
+        ]
+      },
+      {
+        "district": "Thrissur",
+        "mandalams": [
+          "CHALAKUDY",
+          "CHELAKKARA",
+          "GURUVAYUR",
+          "IRINJALAKUDA",
+          "KAIPAMANGALAM",
+          "KUNNAMKULAM",
+          "MALA",
+          "MANALUR",
+          "NATTIKA",
+          "OLLUR",
+          "PUTHUKKAD",
+          "THRISSUR",
+          "WADAKKANCHERY"
+        ]
+      },
+      {
+        "district": "Thiruvananthapuram",
+        "mandalams": [
+          "ARUVIKKARA",
+          "ATTINGAL",
+          "CHIRAYINKEEZHU",
+          "KATTAKKADA",
+          "KAZHAKKOOTTAM",
+          "KOVALAM",
+          "NEDUMANGAD",
+          "NEMOM",
+          "NEYYATTINKARA",
+          "PARASSALA",
+          "TRIVANDRUM",
+          "VAMANAPURAM",
+          "VARKALA",
+          "VATTIYOORKAVU"
+        ]
+      },
+      {
+        "district": "Wayanad",
+        "mandalams": [
+          "KALPETTA",
+          "MANANTHAVADY",
+          "SULTHAN BATHERY"
+        ]
+      }
+    ]
+  }
+  

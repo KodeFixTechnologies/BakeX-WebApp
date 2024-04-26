@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from '../../../../services/data.service';
 import { ChangeDetectionStrategy } from '@angular/compiler';
+import { FileService } from '../../../../services/file.service';
 declare const initSendOTP: any;
 @Component({
   selector: 'personal-info',
@@ -49,7 +50,8 @@ export class PersonalInfoComponent {
     private dataService:DataService,
     private cdr:ChangeDetectorRef,
     private render:Renderer2,
-    private ngZone:NgZone
+    private ngZone:NgZone,
+    private fileService:FileService
   ) {}
 
   ngOnInit() {
@@ -78,42 +80,42 @@ export class PersonalInfoComponent {
         });
           
 
-          this.script.onload=()=>{
+          // this.script.onload=()=>{
      
-            var configuration= {
-              widgetId: "3464636a4a73333635343731",
-              tokenAuth: "418358TlbdIOJ67q660d315aP1",
-              identifier: '',
-              exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
-              success: (data:any) => {
-                  // get verified token in response
-                  this.ngZone.run(() => {
-                    this.router.navigate(['profile/location']);
+          //   var configuration= {
+          //     widgetId: "3464636a4a73333635343731",
+          //     tokenAuth: "418358TlbdIOJ67q660d315aP1",
+          //     identifier: '',
+          //     exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
+          //     success: (data:any) => {
+          //         // get verified token in response
+          //         this.ngZone.run(() => {
+          //           this.router.navigate(['profile/location']);
 
                    
-                });
+          //       });
                   
-              },
-              failure: (error:any) => {
-                  // handle error
-                  console.log('failure reason', error);
-              },
+          //     },
+          //     failure: (error:any) => {
+          //         // handle error
+          //         console.log('failure reason', error);
+          //     },
             
-            };
+          //   };
            
-            initSendOTP(configuration)
-          }
+          //   initSendOTP(configuration)
+          // }
 
 
-          this.script.onerror =(error:any)=> {
-            console.log("script error",error)
-          }
-          this.render.appendChild(document.body,this.script)
+          // this.script.onerror =(error:any)=> {
+          //   console.log("script error",error)
+          // }
+          // this.render.appendChild(document.body,this.script)
         }
 
      
       
-
+        this.router.navigate(['profile/location']);
           this.submitted = true;
         
 

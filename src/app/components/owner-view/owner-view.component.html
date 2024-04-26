@@ -1,0 +1,101 @@
+<div class=" w-full flex flex-col justify-center -mt-1  bg-[#FDFCF8]  ">
+
+<div>
+  <p-card  [style]="{ height: '150px','background-color': '#FDFCF8'}"  >
+    <div class="custom-header"> <!-- Add a class to target the header -->
+      <p class="mt-1 text-sm"> Welcome,<span class="text-sm">{{bakeMember.memberName}}</span> </p> 
+      <div class="flex justify-between">
+      <p class="mt-1 font-semibold">Find your Right Employee</p>
+        <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+          <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+             
+        </div>
+      </div>
+    
+
+    </div>
+    <p>
+        
+    </p>
+   
+</p-card>
+
+<div class="mx-auto max-w-screen-md px-4 w-full mt-6">
+  
+  
+   
+
+   <div *ngFor="let submittedJob of submittedJobs" class="mx-auto max-w-screen-md px-4 w-full mt-6">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-2">{{submittedJob.jobTitle}}   </h3>
+      <p class="text-gray-600 mb-2">Company: {{submittedJob.jobTitle}}</p>
+      <p class="text-gray-600 mb-2">Location: {{submittedJob.location}}</p>
+      <p class="text-gray-600 mb-2">Job Type: {{submittedJob.jobType}}</p>
+      <p class="text-gray-600 mb-2">Salary: {{submittedJob.salary}}</p>
+      <p class="text-gray-600 mb-2">Description: {{submittedJob.jobDescription}}</p>
+    
+    </div>
+
+  </div>
+  </div>
+  
+    
+          
+   
+ </div>
+
+
+ <!--Job Pop Up Dialog-->
+  <p-dialog class="flex justify-center" header="Create new Job" [modal]="true" [(visible)]="visible" [style]="{width: '90vw', 'max-width': '600px'}" [maximizable]="true">
+    <div class="p-4">
+      <div class="mb-2 flex flex-col items-center">
+        <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
+        <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
+
+         
+    <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </ng-template>
+</p-fileUpload>
+
+    </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" [(ngModel)]="job.jobTitle" class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="company">Company:</label>
+            <input type="text" id="company" [(ngModel)]="bakeMember.businessName" readonly class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="location">Location:</label>
+            <input type="text" id="location" [(ngModel)]="job.location" class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobType">Job Type:</label>
+            <select id="jobType" [(ngModel)]="jobType" class="input-width">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+            </select>
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="salary">Salary:</label>
+            <input type="text" id="salary" [(ngModel)]="job.salary" class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobDescription">Job Description:</label>
+            <textarea id="jobDescription" [(ngModel)]="job.jobDescription" class="input-width"></textarea>
+        </div>
+        <div class="flex flex-col justify-center">
+          <button type="button" class="mt-4 "  (click)="submitJob()">Submit</button>
+        </div>
+      
+    </div>
+</p-dialog>
+
+
+  <owner-navbar></owner-navbar>
+

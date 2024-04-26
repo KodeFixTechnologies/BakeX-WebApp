@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { FileService } from '../../../../services/file.service';
 
 @Component({
   selector: 'location-info',
@@ -25,7 +26,8 @@ export class LocationInfoComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private queryService: QueryService,
-    private router:Router
+    private router:Router,
+    private fileService:FileService
   ) {
 
   }
@@ -48,17 +50,18 @@ export class LocationInfoComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.profileService.profileInformation)
+    
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
     console.log(this.updatedlocationInfo)
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
   
-      console.log(this.updatedlocationInfo)
+      console.log(data.states)
     })
 
    
     this.queryService.getStateAndDistrict().subscribe((data)=>{
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -68,6 +71,8 @@ export class LocationInfoComponent implements OnInit {
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
+
+   // this.fileService.uploadObject();
 
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;
@@ -85,7 +90,7 @@ export class LocationInfoComponent implements OnInit {
     } else {
       console.error('No state selected.');
     }
-  }
+   }
 
 
 }

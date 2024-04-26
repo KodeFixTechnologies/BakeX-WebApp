@@ -1,20 +1,24 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'bottom-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,DialogModule],
   templateUrl: './bottom-navbar.component.html',
   styleUrl: './bottom-navbar.component.scss'
 })
 export class BottomNavbarComponent implements OnInit{
   isLogin: boolean = false;
+  visible=false;
 
   constructor(
   private cdr:ChangeDetectorRef,
-  private dataService:DataService
+  private dataService:DataService,
+  private router:Router
   )
   {
 
@@ -22,6 +26,7 @@ export class BottomNavbarComponent implements OnInit{
 
   ngOnInit(): void {
     
+   
     this.dataService.getData().subscribe((data)=>{
       this.isLogin=data;
     })
@@ -29,7 +34,18 @@ export class BottomNavbarComponent implements OnInit{
   }
 
 
+   profilePageRediretion()
+   {
+     this.router.navigate(['/owner-profile'])
+   }
 
+   goToHome()
+   {
+    this.router.navigate(['/ownerview'])
+   }
 
+   showDialog() {
+    this.dataService.openDialog();
+}
 
 }
