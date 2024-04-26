@@ -38,7 +38,9 @@ export class OwnerInfoComponent implements OnInit{
 
   genders:any;
   ngOnInit(): void {
-  
+   
+    this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
+
     this.genders = [
       { name: 'Male', code: 'M', factor: 1 },
       { name: 'Female', code: 'F', factor: 2 },
@@ -63,6 +65,7 @@ export class OwnerInfoComponent implements OnInit{
   visible:boolean=false;
   phno:string=''
   title:string='Enter Your Personal information'
+
 
 
 

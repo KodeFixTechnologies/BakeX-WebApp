@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class ProfileService {
   });
 
 
+   nonBakeMember:IBakerOwnerProfileRequest= {} as IBakerOwnerProfileRequest;
 
 
    profileInformation$: Observable<any> = this.profileInformationSubject.asObservable();
@@ -70,7 +72,8 @@ export class ProfileService {
     businessInformation:{
       businessName:'',
       businessAddress:'',
-      licenseno:'',
+      businessPhone:'',
+      fssaiNo:'',
       fssaiExpiry:null
     },
     otherInformation:{
@@ -93,6 +96,36 @@ export class ProfileService {
   setBakeryOwnerProfileInfo(profileInformation: any): void {
     this.bakeryOwnerProfileInfoSubject.next(profileInformation);
   }
+
+  setProfileforBackend(value: IBakerOwnerProfile) {
+
+    console.log(value);
+    // Assign personal information
+
+    this.nonBakeMember.firstname = value.personalInformation.firstname;
+    this.nonBakeMember.lastname = value.personalInformation.lastname;
+    this.nonBakeMember.age = value.personalInformation.age;
+    this.nonBakeMember.gender = value.personalInformation.gender;
+    this.nonBakeMember.phoneno = value.personalInformation.phoneno;
+
+    // Assign location information
+    this.nonBakeMember.state = value.locationInformation.state;
+    this.nonBakeMember.district = value.locationInformation.district;
+    this.nonBakeMember.place = value.locationInformation.place;
+    this.nonBakeMember.pincode = value.locationInformation.pincode;
+
+    // Assign business information
+    this.nonBakeMember.businessName = value.businessInformation.businessName;
+    this.nonBakeMember.businessAddress = value.businessInformation.businessAddress;
+    this.nonBakeMember.fssaiNo = value.businessInformation.fssaiNo;
+    this.nonBakeMember.fssaiExpiryDate = value.businessInformation.fssaiExpiryDate;
+    this.nonBakeMember.businessPhone = value.businessInformation.businessPhone;
+
+    // Assign other information
+    this.nonBakeMember.profileCreateDate = value.otherInformation.profileCreateDate;
+
+    return this.nonBakeMember;
+}
 
 
   constructor() { }

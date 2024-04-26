@@ -2,7 +2,7 @@ import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } fro
 import { DataService } from '../../services/data.service';
 import { QueryService } from '../../services/query.service';
 import { DialogModule } from 'primeng/dialog';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BakeMember } from '../../models/bakeMember';
 import { FormsModule } from '@angular/forms';
 import { Job } from '../../models/job';
@@ -12,6 +12,7 @@ import { Button, ButtonModule } from 'primeng/button';
 import { OwnerNavbarComponent } from '../owner-navbar/owner-navbar.component';
 import { FileUploadModule, UploadEvent } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
+import { ProfileService } from '../../services/profile.service';
 @Component({
   selector: 'owner-view',
   standalone: true,
@@ -33,15 +34,18 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   jobDescription: string='';
   submittedJobs: Job[] = [];
   bookMarkJobs:Job[]=[];
-  showDialogSubscription: any;
+  showDialogSubscription: Subscription | undefined;
+
+  bakeryOwnerProfileInfoSubscription:Subscription;
   constructor(
     private dataService:DataService,
     private queryService:QueryService,
     private cdr:ChangeDetectorRef,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private profileService:ProfileService
   )
   {
-    
+    this.bakeryOwnerProfileInfoSubscription = this.profileService.bakeryOwnerProfileInfo$.subscribe();
   }
 
 
@@ -72,7 +76,13 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   
   ngOnDestroy(): void {
-    this.showDialogSubscription.unsubscribe();
+    console.log(this.showDialogSubscription?.unsubscribe())
+   
+ 
+    console.log(this.bakeryOwnerProfileInfoSubscription?.unsubscribe());
+  
+
+   
   }
 
   
@@ -105,14 +115,25 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
     console.log(event)
 }
-myUploader(event:any) {
+
+myUploader(event: any) {
   console.log("onUpload() START");
-  for(let file of event.files) {
-    console.log("FILE TO BE UPLOADED: ", file);
-    this.uploadedFiles.push(file);
-  }
-  this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  console.log(event);
+  const file = event.files[0]; // Assuming only one file is uploaded
+  const reader = new FileReader();
+  reader.onload = () => {
+    const base64String = reader.result as string;
+    // Now you can send this base64String to your .NET Web API
+    this.sendToBackend(base64String);
+  };
+  reader.readAsDataURL(file);
 }
+
+sendToBackend(base64String: string) {
+  
+  console.log(base64String)
+}
+
 }
 
 

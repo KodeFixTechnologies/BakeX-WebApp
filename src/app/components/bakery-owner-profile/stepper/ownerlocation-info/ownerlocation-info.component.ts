@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
-import { IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
+import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
 
 
 @Component({
@@ -65,7 +65,8 @@ export class OwnerlocationInfoComponent implements OnInit{
     profileCreateDate : ''
   }
 
-  NonBakeOwner: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
+  INonBakeMember: IBakerOwnerProfile= {} as IBakerOwnerProfile;
+  NonBakeMember:IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
   pincodes:any
   currentDate:Date;
   states: any;
@@ -99,14 +100,18 @@ export class OwnerlocationInfoComponent implements OnInit{
         otherInformation: this.updatedOtherInfo,
       });
       
-    this.NonBakeOwner= this.profileService.getBakeryOwnerProfileInfo();
+    this.INonBakeMember= this.profileService.getBakeryOwnerProfileInfo();
+     
+     this.NonBakeMember=this.profileService.setProfileforBackend(this.INonBakeMember);
 
+      
 
-     console.log(this.NonBakeOwner)
-      this.queryService.createNonBakeryowner(this.NonBakeOwner).subscribe((response)=>{
+      this.queryService.createNonBakeryowner(this.NonBakeMember).subscribe((response)=>{
         
         if(response==true)
           {
+
+          
             this.router.navigate([
             
             '/ownerview'

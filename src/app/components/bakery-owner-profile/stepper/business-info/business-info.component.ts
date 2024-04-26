@@ -24,17 +24,17 @@ export class BusinessInfoComponent  implements OnInit{
 
   }
   ngOnInit(): void {
-    console.log(
-      this.profileService.getBakeryOwnerProfileInfo()
-    )
+
+    this.updatedBusinessInfo=this.profileService.getBakeryOwnerProfileInfo().businessInformation
+  
   }
   submitted: boolean = false;
   updatedBusinessInfo = {
     businessName: '',
     businessAddress: '',
-    age: null,
+    businessPhone:'',
     fssaiNo:'',
-    fssaiExpirydate:null
+    fssaiExpiryDate:null
   };
 
 

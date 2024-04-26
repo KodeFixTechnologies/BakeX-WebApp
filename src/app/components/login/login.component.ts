@@ -5,17 +5,19 @@ import { Users } from '../../models/user';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { NgZone } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'login',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit,AfterViewInit {
   googleUser:any;
   user:any;
-  isLogin:any;
+  isLogin:boolean=true;
 
    constructor(
           private ngZone: NgZone ,
@@ -31,7 +33,15 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
 
 
+   mobileNumber: string = '';
+   checkingMobileNumber: boolean = false;
+
    ngOnInit() {
+    this.loadGoogle();
+   }
+
+   loadGoogle()
+   {
     const script= this.render.createElement('script');
     script.src= "https://accounts.google.com/gsi/client"
     script.onload=()=>{
@@ -41,6 +51,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
       console.log("script error",error)
     }
     this.render.appendChild(document.body,script)
+
    }
 
    ngAfterViewInit(): void {
@@ -83,6 +94,27 @@ export class LoginComponent implements OnInit,AfterViewInit {
 }
 
   
+
+checkMobileNumber() {
+  if (this.mobileNumber.length === 10) { 
+    this.checkingMobileNumber = true;
+
+    this.queryService.verifyBakeUser({phoneno:this.mobileNumber}).subscribe((response=>{
+      if(response==true)
+        {
+          this.checkingMobileNumber=false;
+        }
+      
+    }))
+  
+  }
+}
+
+signupClick()
+{
+  this.isLogin=!this.isLogin;
+  this.loadGoogle()
+}
 
  decodeJWTToken(token:string)
  {

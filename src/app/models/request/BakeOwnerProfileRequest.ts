@@ -1,4 +1,4 @@
-export interface IBakerOwnerProfileRequest {
+export interface IBakerOwnerProfile {
 
    personalInformation: {
         firstname: string;
@@ -16,12 +16,42 @@ export interface IBakerOwnerProfileRequest {
     businessInformation: {
         businessName: string;
         businessAddress: string;
-        licenseno: string;
-        fssaiExpiry: Date | null;
+        businessPhone:string;
+        fssaiNo: string;
+        fssaiExpiryDate: Date | null;
     };
     otherInformation:{
         profileCreateDate:Date|null;
     }
 
     
+}
+
+
+export interface IBakerOwnerProfileRequest {
+
+    firstname: string;
+    lastname: string;
+    age: number | null;
+    gender: string;
+    phoneno: string;
+
+
+    state: string;
+    district: string;
+    place: string;
+    pincode: string;
+
+
+    businessName: string;
+    businessAddress: string;
+    businessPhone:string,
+    fssaiNo: string;
+    fssaiExpiryDate: Date | null;
+
+
+    profileCreateDate: Date | null;
+
+
+
 }

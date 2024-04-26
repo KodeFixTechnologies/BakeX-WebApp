@@ -22,11 +22,18 @@
                     <input #fssaiInput="ngModel" id="fssaiLicense" type="text" required pInputText [(ngModel)]="updatedBusinessInfo.fssaiNo" [ngClass]="{ 'ng-dirty': (fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid) }" />
                     <small class="p-error" *ngIf="(fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid)">FSSAI License No is required.</small>
                 </div>
+
+                <div class="field">
+                    <label for="businessPhone" class="flex align items-center">Business Phone No</label>
+                    <input #businessPhoneInput="ngModel" id="businessPhone" type="tel" required pInputText [(ngModel)]="updatedBusinessInfo.businessPhone" pattern="[0-9]{10}" [ngClass]="{ 'ng-dirty': (businessPhoneInput.invalid && submitted) || (businessPhoneInput.dirty && businessPhoneInput.invalid) }" />
+                    <small class="p-error" *ngIf="(businessPhoneInput.invalid && submitted) || (businessPhoneInput.dirty && businessPhoneInput.invalid)">Please enter a valid 10-digit phone number.</small>
+                </div>
+                
                 
                 <div class="field ">
                  
                     <label for="age" class="flex align-items-center">FSSAI Expiry Date</label>
-                    <p-calendar [(ngModel)]="updatedBusinessInfo.fssaiExpirydate"></p-calendar>
+                    <p-calendar [(ngModel)]="updatedBusinessInfo.fssaiExpiryDate"></p-calendar>
                
                 </div>
                 
