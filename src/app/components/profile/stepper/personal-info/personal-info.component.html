@@ -23,9 +23,10 @@
                     <small class="p-error" *ngIf="(lastname.invalid && submitted) || (lastname.dirty && lastname.invalid)">Lastname is required.</small>
                 </div>
                 <div class="field ">
-                    <label for="age" class="flex align-items-center">Age</label>
-                    <input #age="ngModel" id="age" type="number" required pInputText [(ngModel)]="updatedPersonalInfo.age" [ngClass]="{ 'ng-dirty': (age.invalid && submitted) || (age.dirty && age.invalid) }" />
-                    <small class="p-error" *ngIf="(age.invalid && submitted) || (age.dirty && age.invalid)">Age is required.</small>
+                 
+                    <label for="age" class="flex align-items-center">Date Of Birth</label>
+                    <p-calendar [(ngModel)]="updatedPersonalInfo.age"></p-calendar>
+               
                 </div>
 
                 

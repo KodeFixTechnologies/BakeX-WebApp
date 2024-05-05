@@ -19,7 +19,7 @@
 
                 <div class="field">
                     <label for="fssaiLicense" class="flex align items-center">FSSAI License No</label>
-                    <input #fssaiInput="ngModel" id="fssaiLicense" type="text" required pInputText [(ngModel)]="updatedBusinessInfo.fssaiNo" [ngClass]="{ 'ng-dirty': (fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid) }" />
+                    <input #fssaiInput="ngModel" id="fssaiLicense" type="text" required pInputText [(ngModel)]="updatedBusinessInfo.fssaiLicenseNo" [ngClass]="{ 'ng-dirty': (fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid) }" />
                     <small class="p-error" *ngIf="(fssaiInput.invalid && submitted) || (fssaiInput.dirty && fssaiInput.invalid)">FSSAI License No is required.</small>
                 </div>
 

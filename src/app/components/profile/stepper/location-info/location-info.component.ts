@@ -36,8 +36,10 @@ export class LocationInfoComponent implements OnInit {
     state: '',
     district: '',
     place: '',
+    pincode:''
   }
 
+  pincodes:string='';
 
 
   // to get the location info from profie service
@@ -78,6 +80,7 @@ export class LocationInfoComponent implements OnInit {
       this.updatedlocationInfo.state = this.selectedState.state;
       this.updatedlocationInfo.district = this.selectedDistrict;
       this.updatedlocationInfo.place=this.userplace
+      this.updatedlocationInfo.pincode= this.pincodes;
 
       this.profileService.setProfileInformation({
         ...this.profileService.getProfileInformation(),

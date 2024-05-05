@@ -16,6 +16,7 @@ import { ResumeComponent } from './components/profile/stepper/resume/resume.comp
 import { OwnerProfileComponent } from './components/owner-view/owner-profile/owner-profile/owner-profile.component';
 import { OwnerlocationInfoComponent } from './components/bakery-owner-profile/stepper/ownerlocation-info/ownerlocation-info.component';
 import { BusinessInfoComponent } from './components/bakery-owner-profile/stepper/business-info/business-info.component';
+import { SeekerViewComponent } from './components/seeker-view/seeker-view.component';
 
 export const routes: Routes = [
     {
@@ -74,8 +75,12 @@ export const routes: Routes = [
     
     {
         path:'owner-profile',component:OwnerProfileComponent
-    }
+    },
+ 
 
+    {
+        path:'seeker',component:SeekerViewComponent
+    }
 
 
  

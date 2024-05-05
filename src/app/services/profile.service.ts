@@ -19,6 +19,7 @@ export class ProfileService {
       state: '',
       district: '',
       place: '',
+      pincode:''
     },
     expertiseInformation: {
       types: null,
@@ -73,7 +74,7 @@ export class ProfileService {
       businessName:'',
       businessAddress:'',
       businessPhone:'',
-      fssaiNo:'',
+      fssaiLicenseNo:'',
       fssaiExpiry:null
     },
     otherInformation:{
@@ -117,7 +118,7 @@ export class ProfileService {
     // Assign business information
     this.nonBakeMember.businessName = value.businessInformation.businessName;
     this.nonBakeMember.businessAddress = value.businessInformation.businessAddress;
-    this.nonBakeMember.fssaiNo = value.businessInformation.fssaiNo;
+    this.nonBakeMember.fssaiLicenseNo = value.businessInformation.fssaiLicenseNo;
     this.nonBakeMember.fssaiExpiryDate = value.businessInformation.fssaiExpiryDate;
     this.nonBakeMember.businessPhone = value.businessInformation.businessPhone;
 

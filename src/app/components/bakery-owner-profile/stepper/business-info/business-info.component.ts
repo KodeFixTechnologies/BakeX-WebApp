@@ -33,7 +33,7 @@ export class BusinessInfoComponent  implements OnInit{
     businessName: '',
     businessAddress: '',
     businessPhone:'',
-    fssaiNo:'',
+    fssaiLicenseNo:'',
     fssaiExpiryDate:null
   };
 

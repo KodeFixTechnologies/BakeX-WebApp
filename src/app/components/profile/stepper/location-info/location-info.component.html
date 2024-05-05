@@ -22,6 +22,13 @@
 
                     <small class="p-error" *ngIf="(placeInput.invalid && submitted) || (placeInput.dirty &&placeInput.invalid)">Place is required.</small>
                 </div>
+
+                <div class="field">
+                    <label for="pincode" class="flex align-items-center">Pincode</label>
+                    <input #pincode="ngModel" id="pincode" type="text" required pInputText [(ngModel)]="pincodes" [ngClass]="{ 'ng-dirty': (pincode.invalid && submitted) || (pincode.dirty && pincode.invalid) }" />
+                    <small class="p-error" *ngIf="(pincode.invalid && submitted) || (pincode.dirty && pincode.invalid)">Pincode is required.</small>
+                </div>
+                
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
