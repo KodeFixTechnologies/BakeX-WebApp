@@ -55,10 +55,10 @@ export class ProfileComponent  implements OnInit{
       label:'',
       routerLink:'experience'
    },
-   {
-    label:'',
-    routerLink:'resume'
- },
+//    {
+//     label:'',
+//     routerLink:'resume'
+//  },
    
     ]
 

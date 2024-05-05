@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { Msg91Service } from '../../../../services/msg91.service';
 import { DataService } from '../../../../services/data.service';
+import { UserProfile, Users } from '../../../../models/user';
 @Component({
    selector: 'experince-info',
   standalone: true,
@@ -18,7 +19,10 @@ import { DataService } from '../../../../services/data.service';
 })
 export class ExperinceInfoComponent implements OnInit {
 
+userProfile:UserProfile = { } as UserProfile
 fullDetails:[]=[];
+user:Users= {} as Users;
+profile:any;
  experience!:Experience[];
  employment!:Employment[];
  selectedEmployment!:Employment[];
@@ -42,6 +46,12 @@ fullDetails:[]=[];
 
   
   ngOnInit(): void {
+
+    this.dataService.getUserData().subscribe((data)=>{
+      this.user=data;
+
+    })
+
    
 
     this.queryService.getEmploymentTypes().subscribe((data)=>{
@@ -56,18 +66,18 @@ fullDetails:[]=[];
    
   this.experience = [
     {
-     name:'No Experince', code:'noxp',
+     name:'No Experince', id:1,
      
     },
     {
-      name:'1-5 Years', code :'min',
+      name:'1-5 Years', id :2,
     },
     {
-      name:'6-10 Years', code:'mid'
+      name:'6-10 Years', id:3
     },
 
     {
-      name:'More than 10 Years', code:'max'
+      name:'More than 10 Years', id:4
     },
 
  
@@ -89,7 +99,7 @@ fullDetails:[]=[];
 
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
-    ExperienceInformation: this.updatedExperience
+    experienceInformation: this.updatedExperience
   });
   }
 
@@ -100,18 +110,59 @@ fullDetails:[]=[];
 
    this.profileService.setProfileInformation({
      ...this.profileService.getProfileInformation(),
-     ExperienceInformation: this.updatedEmployment
+     employmentInformation: this.updatedEmployment
    });
   }
 
 
+  mapProfileInfoToAPI()
+  {
+    this.profile= this.profileService.getProfileInformation();
+   
+    console.log(this.profile)
+  this.userProfile.FirstName = this.profile.personalInformation.firstname;
+  this.userProfile.LastName = this.profile.personalInformation.lastname;
+  this.userProfile.Age = this.profile.personalInformation.age;
+  this.userProfile.MobileNo = this.profile.personalInformation.phoneno;
+  this.userProfile.Gender = this.profile.personalInformation.gender.name;
+  this.userProfile.State = this.profile.locationInformation.state;
+  this.userProfile.Place = this.profile.locationInformation.place;
+  this.userProfile.ProfileCreatedDate = new Date().toISOString(); // Assuming you want current date/time
+  this.userProfile.EducationId = this.profile.educationInformation.types.EducationId;
+  this.userProfile.ExperienceId = this.profile.experienceInformation.types.id;
+  this.userProfile.District = this.profile.locationInformation.district;
+  this.userProfile.ExpertiseIds = this.profile.expertiseInformation.map((expertise: { expertiseId: any; }) => expertise.expertiseId);
+  this.userProfile.JobTypeIds = this.profile.employmentInformation.types.map((job: { jobTypeId: any; }) => job.jobTypeId);
+  this.userProfile.Pincode = this.profile.locationInformation.pincode;
+
+  console.log(this.userProfile)
+  }
+
 
   nextPage() {
-   
+
+    this.profile= this.profileService.getProfileInformation();
+    this.queryService.createUser(this.user).subscribe((response=>{
+      console.log(response);
+
+
+      if(response==true)
+        {
+
+          this.queryService.insertProfile(this.userProfile).subscribe((response)=>{
+            console.log(response)
+            if(response==true)
+              {
+                this.router.navigate(['/seeker'])
+              }
+          })
+        }
+
+    }))
   
+  this.mapProfileInfoToAPI()
 
 
-     console.log (this.profileService.getProfileInformation())
    
     //  this.dataService.setPhoneData(this.profileService.getProfileInformation().personalInformation.phoneno);
     //  this.router.navigate(['/otp']);
@@ -119,7 +170,7 @@ fullDetails:[]=[];
     
   
   
-          this.router.navigate(['profile/resume'])
+        //  
       
     
   }

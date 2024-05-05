@@ -49,22 +49,22 @@ export class ExpertiseInfoComponent implements OnInit {
    
   this.education = [
     {
-     name:'Less Than High School', code:'LHS',
+     EducationLevel:'Less Than High School', EducationId:1,
      
     },
     {
-      name:'High School', code :'HS',
+      EducationLevel:'High School', EducationId :2,
     },
     {
-      name:'Diploma Degree', code:'DD'
-    },
-
-    {
-      name:'Bachleor\'s Degree', code:'BD'
+      EducationLevel:'Diploma Degree', EducationId:3
     },
 
     {
-      name:'Master\'s Degree', code:'MD'
+      EducationLevel:'Bachleor\'s Degree', EducationId:4
+    },
+
+    {
+      EducationLevel:'Master\'s Degree', EducationId:5
     }
   ]
 
@@ -82,7 +82,7 @@ export class ExpertiseInfoComponent implements OnInit {
 
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
-    expertiseInformation: this.updatedExpertise
+    expertiseInformation: this.updatedExpertise.types
   });
   }
 
@@ -93,7 +93,7 @@ export class ExpertiseInfoComponent implements OnInit {
 
    this.profileService.setProfileInformation({
      ...this.profileService.getProfileInformation(),
-     expertiseInformation: this.updatedEducation
+     educationInformation: this.updatedEducation
    });
   }
 

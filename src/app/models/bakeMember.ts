@@ -1,8 +1,9 @@
 export interface BakeMember
 {
-    membershipId: number;
-    memberName: string;
+    memberId: number;
+    memberName?: string;
     phone: string;
+    businessId:number
     businessName: string;
     businessPhone: string;
     businessAddress: string;

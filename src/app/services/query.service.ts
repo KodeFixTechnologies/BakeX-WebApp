@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Users } from '../models/user';
+import { UserProfile, Users } from '../models/user';
 import { BakeMember } from '../models/bakeMember';
 import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
+import { Jobpost } from '../models/job';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,20 @@ export class QueryService {
     return this.http.post<any>(environment.API_URL+'createBakeryOwner',NonBakeOwner);
   }
 
-  
+  createJobPost(jobpost:Jobpost):Observable<any>
+  {
+    return this.http.post<any>(environment.API_URL+'CreateJobPost',jobpost)
+  }
 
+
+  createUser(user:Users):Observable<any>
+  {
+    return this.http.post<any>(environment.API_URL+'InsertUser',user)
+  }
+
+insertProfile(userProfile:UserProfile):Observable<any>
+{
+  return this.http.post<any>(environment.API_URL+'InsertProfile',userProfile)
+}
   
 }

@@ -17,7 +17,7 @@ export interface IBakerOwnerProfile {
         businessName: string;
         businessAddress: string;
         businessPhone:string;
-        fssaiNo: string;
+        fssaiLicenseNo: string;
         fssaiExpiryDate: Date | null;
     };
     otherInformation:{
@@ -46,7 +46,7 @@ export interface IBakerOwnerProfileRequest {
     businessName: string;
     businessAddress: string;
     businessPhone:string,
-    fssaiNo: string;
+    fssaiLicenseNo: string;
     fssaiExpiryDate: Date | null;
 
 

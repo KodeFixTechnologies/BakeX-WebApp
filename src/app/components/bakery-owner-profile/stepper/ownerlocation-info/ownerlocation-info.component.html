@@ -1,17 +1,17 @@
 <div class="w-full flex flex-col items-center justify-center mt-10">
     <p-card>
         <ng-template pTemplate="title"> Location Information </ng-template>
-        <ng-template pTemplate="subtitle"> Enter your location information </ng-template>
+        <ng-template pTemplate="subtitle"> Enter your Business location information </ng-template>
         <ng-template pTemplate="content">
             <div class="p-fluid">
                 <div class="field">
-                    <label for="state" class="flex align items-center">State</label>
+                    <label for="state" class="flex align items-center">Business State</label>
                     <p-dropdown inputId="state" [(ngModel)]="selectedState" [options]="states" (onChange)="onStateChange()"
                         optionLabel="state" placeholder="Select a State"></p-dropdown>
                 </div>
 
                 <div class="field" *ngIf="selectedState">
-                    <label for="district" class="flex align items-center">District</label>
+                    <label for="district" class="flex align items-center">Business District</label>
                     <p-dropdown inputId="district" [(ngModel)]="selectedDistrict" [options]="districts"
                         placeholder="Select a District"></p-dropdown>
                 </div>

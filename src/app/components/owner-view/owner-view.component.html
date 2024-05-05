@@ -46,8 +46,87 @@
 
 
  <!--Job Pop Up Dialog-->
-  <p-dialog class="flex justify-center" header="Create new Job" [modal]="true" [(visible)]="visible" [style]="{width: '90vw', 'max-width': '600px'}" [maximizable]="true">
+  <p-dialog class="flex justify-center" header="Create new Job" [modal]="true" [(visible)]="visible" [style]="{width: '90vw', 'max-width': '600px', height:'900vw'}" [maximizable]="true">
+    <p-steps [model]="steps" [(activeIndex)]="activeIndex"></p-steps>
     <div class="p-4">
+
+          <div *ngIf="activeIndex===0">
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" [(ngModel)]="jobPost.Title" class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="company">Company:</label>
+            <input type="text" id="company" [(ngModel)]="bakeMember.businessName" readonly class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="location">Location:</label>
+            <p-dropdown [options]="district" [(ngModel)]="selectedDistrict" placeholder="Select a City" [editable]="true" optionLabel="name"></p-dropdown>
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobType">Job Type:</label>
+            <select id="jobType" [(ngModel)]="jobTypes" class="input-width">
+                <option value='1'>Full-time</option>
+                <option value='2'>Part-time</option>
+                <option value='3'>Contract</option>
+                <option value='4'>Temporary</option>
+            </select>
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="salary">Salary:</label>
+            <input type="text" id="salary" [(ngModel)]="jobPost.Salary" class="input-width">
+        </div>
+        <div class="mb-2 flex flex-col">
+            <label class="label-width mb-1" for="jobDescription">Job Description:</label>
+            <textarea id="jobDescription" [(ngModel)]="jobPost.JobDescription" class="input-width"></textarea>
+        </div>
+        <div class="flex flex-col justify-center">
+          <!-- <button type="button" class="mt-4 "  (click)="submitJob()">Submit</button> -->
+        </div>
+      
+    </div>
+
+
+      <div  *ngIf="activeIndex===1">
+        <div class="">
+          
+          <div class="flex justify-between items-center mb-5" >
+          
+            <div class="flex flex-row items-start">
+                <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
+                
+            </div>
+        </div>
+          
+          Select Atlease One Skill Required For this Job
+          <p-listbox [options]="expertise" [(ngModel)]="selectedExpertise" optionLabel="expertiseType" [style]="{'width':'18rem'}"
+           (onChange)="updateExpertise($event)" [filter]="true"
+          [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '300px'}" [focusOnHover]="true" [checkbox]="true" [selectAll]="false"  [showToggleAll]="false"></p-listbox>
+  
+    
+          
+          <div class="mt-10">
+            <hr class="line-clamp-1">
+            <label class="label-width mb-1 font-bold" for="Experince">Select the Required Experince</label>
+            <p-listbox [options]="experience" [(ngModel)]="selectedExperience" optionLabel="name" [style]="{'width':'15rem'}"
+            (onChange)="updateExperience($event)"
+            [metaKeySelection]="false" [listStyle]="{'max-height': '300px'}" [focusOnHover]="true" ></p-listbox>
+          </div>
+         
+      </div>
+      </div>
+
+    <div *ngIf="activeIndex===2">
+
+      <div class="flex justify-between items-center mb-5" >
+          
+        <div class="flex flex-row items-start">
+            <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
+            
+        </div>
+    </div>
+
+
       <div class="mb-2 flex flex-col items-center">
         <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
         <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
@@ -61,39 +140,21 @@
 </p-fileUpload>
 
     </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="jobTitle">Job Title:</label>
-            <input type="text" id="jobTitle" [(ngModel)]="job.jobTitle" class="input-width">
-        </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="company">Company:</label>
-            <input type="text" id="company" [(ngModel)]="bakeMember.businessName" readonly class="input-width">
-        </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="location">Location:</label>
-            <input type="text" id="location" [(ngModel)]="job.location" class="input-width">
-        </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="jobType">Job Type:</label>
-            <select id="jobType" [(ngModel)]="jobType" class="input-width">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-            </select>
-        </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="salary">Salary:</label>
-            <input type="text" id="salary" [(ngModel)]="job.salary" class="input-width">
-        </div>
-        <div class="mb-2 flex flex-col">
-            <label class="label-width mb-1" for="jobDescription">Job Description:</label>
-            <textarea id="jobDescription" [(ngModel)]="job.jobDescription" class="input-width"></textarea>
-        </div>
-        <div class="flex flex-col justify-center">
-          <button type="button" class="mt-4 "  (click)="submitJob()">Submit</button>
-        </div>
-      
-    </div>
+
+
+    </div> 
+
+    <hr class="line-clamp-1">
+    <div class="flex flex-col justify-center">
+
+   
+    <button  class="mt-5" type="button" (click)="submitJob()" *ngIf="activeIndex === steps.length - 1">Submit</button>
+      <button type="button" class="mt-4 justify-center" (click)="nextStep()" *ngIf="activeIndex !== steps.length - 1">Next</button>
+
+  </div>
+
+
+  </div>
 </p-dialog>
 
 

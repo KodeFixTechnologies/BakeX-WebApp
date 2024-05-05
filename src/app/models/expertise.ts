@@ -4,7 +4,7 @@ export interface Expertise {
   }
   
 export interface Education {
-    name: string,
-    code: string
+    EducationLevel: string,
+    EducationId: number
   
 }
