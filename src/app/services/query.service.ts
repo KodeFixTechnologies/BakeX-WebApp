@@ -82,5 +82,10 @@ insertProfile(userProfile:UserProfile):Observable<any>
 {
   return this.http.post<any>(environment.API_URL+'InsertProfile',userProfile)
 }
+
+checkUserExist(user:Users):Observable<any>
+{
+  return this.http.post<any>(environment.API_URL+'CheckUserExist',user)
+}
   
 }

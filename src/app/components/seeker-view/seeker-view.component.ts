@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'seeker-view',
@@ -8,6 +9,17 @@ import { CardModule } from 'primeng/card';
   templateUrl: './seeker-view.component.html',
   styleUrl: './seeker-view.component.scss'
 })
-export class SeekerViewComponent {
+export class SeekerViewComponent implements OnInit {
+
+
+  constructor(
+    private dataService:DataService
+  )
+  {
+
+  }
+  ngOnInit(): void {
+     this.dataService.setData(true);
+  }
 
 }
