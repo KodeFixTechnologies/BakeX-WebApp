@@ -6,6 +6,8 @@ import { UserProfile, Users } from '../models/user';
 import { BakeMember } from '../models/bakeMember';
 import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 import { Jobpost } from '../models/job';
+import { RecommendedJob } from '../models/RecommendedJobs';
+import { JobApplication } from '../models/jobApplcation';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +84,24 @@ insertProfile(userProfile:UserProfile):Observable<any>
 {
   return this.http.post<any>(environment.API_URL+'InsertProfile',userProfile)
 }
+
+checkUserExist(user:Users):Observable<any>
+{
+  return this.http.post<any>(environment.API_URL+'CheckUserExist',user)
+}
+
+
+getJobSeekerDetails(phoneno: any): Observable<any> {
+  return this.http.get<any>(`${environment.API_URL}getJobSeekerProfile/${phoneno}`);
+}
+
+getRecommendedJobs(profileId: number): Observable<RecommendedJob[]> {
+  return this.http.get<RecommendedJob[]>(`${environment.API_URL}getRecommendedJobs/${profileId}`);
+}
+
+applyForJob(application: JobApplication): Observable<any> {
+  return this.http.post<any>(environment.API_URL+'ApplyJobs', application);
+}
+
   
 }

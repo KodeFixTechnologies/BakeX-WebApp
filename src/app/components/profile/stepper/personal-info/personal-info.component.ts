@@ -76,6 +76,16 @@ export class PersonalInfoComponent {
           this.user.authId=1;
           console.log(this.user)
         }
+        else {
+
+          this.dataService.getUserData().subscribe((data)=>{
+            this.user.password=data.password
+            this.user.authId=2;
+            this.updatedPersonalInfo.phoneno= data.mobileNumber;
+          })
+        }
+      
+      
      
     })
 
@@ -103,43 +113,54 @@ export class PersonalInfoComponent {
         personalInformation: this.updatedPersonalInfo
       });
 
-       
-      if (this.script) {
-        this.render.removeChild(document.body, this.script);
-      }
-
-      this.script = this.render.createElement('script');
-      this.script.src = "https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
-
-       this.script.onload=()=>{
-
-       var configuration= {
-          widgetId: "3464636a4a73333635343731",
-          tokenAuth: "418358TlbdIOJ67q660d315aP1",
-          identifier: '+91'+ this.updatedPersonalInfo.phoneno,
-          exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
-          success: (data:any) => {
-            this.user.isMobileVerified='Y';
-            this.user.mobileNumber=this.updatedPersonalInfo.phoneno
+      this.user.isMobileVerified='Y';
+      this.user.mobileNumber=this.updatedPersonalInfo.phoneno
             this.dataService.setUserData(this.user);
             console.log(this.user)
-              // get verified token in response
-              this.ngZone.run(() => {
+             // get verified token in response
+             this.ngZone.run(() => {
                 this.router.navigate(['profile/location']);
 
 
-            });
+       });
 
-          },
-          failure: (error:any) => {
-              // handle error
-              console.log('failure reason', error);
-          },
 
-        };
+      // if (this.script) {
+      //   this.render.removeChild(document.body, this.script);
+      // }
 
-        initSendOTP(configuration)
-      }
+      // this.script = this.render.createElement('script');
+      // this.script.src = "https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
+
+      //  this.script.onload=()=>{
+
+      //  var configuration= {
+      //     widgetId: "3464636a4a73333635343731",
+      //     tokenAuth: "418358TlbdIOJ67q660d315aP1",
+      //     identifier: '+91'+ this.updatedPersonalInfo.phoneno,
+      //     exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
+      //     success: (data:any) => {
+      //       this.user.isMobileVerified='Y';
+      //       this.user.mobileNumber=this.updatedPersonalInfo.phoneno
+      //       this.dataService.setUserData(this.user);
+      //       console.log(this.user)
+      //         // get verified token in response
+      //         this.ngZone.run(() => {
+      //           this.router.navigate(['profile/location']);
+
+
+      //       });
+
+      //     },
+      //     failure: (error:any) => {
+      //         // handle error
+      //         console.log('failure reason', error);
+      //     },
+
+      //   };
+
+      //   initSendOTP(configuration)
+      // }
 
 
       this.script.onerror =(error:any)=> {

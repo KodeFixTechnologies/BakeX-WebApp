@@ -17,6 +17,7 @@ import { OwnerProfileComponent } from './components/owner-view/owner-profile/own
 import { OwnerlocationInfoComponent } from './components/bakery-owner-profile/stepper/ownerlocation-info/ownerlocation-info.component';
 import { BusinessInfoComponent } from './components/bakery-owner-profile/stepper/business-info/business-info.component';
 import { SeekerViewComponent } from './components/seeker-view/seeker-view.component';
+import { JobViewComponent } from './job-view/job-view.component';
 
 export const routes: Routes = [
     {
@@ -80,6 +81,9 @@ export const routes: Routes = [
 
     {
         path:'seeker',component:SeekerViewComponent
+    },
+    {
+        path:'jobview', component:JobViewComponent
     }
 
 

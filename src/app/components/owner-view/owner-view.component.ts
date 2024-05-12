@@ -128,20 +128,15 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
 
  
-    this.dataService.getPhoneData().subscribe((data)=>{
-      this.phoneno='8921537948';
-    
-
-  
-
-      
-    })
+     this.dataService.getUserData().subscribe((user=>{
+      this.phoneno= user.mobileNumber
+     }))
 
     
    this.queryService.getBakeOwner({ phoneno: this.phoneno}).subscribe((data)=>{
        this.bakeMember=data;
-       this.selectedDistrict=data.district;
-       console.log(this.bakeMember)
+       this.selectedDistrict= this.district?.find(item=> item.name===data.district);
+       console.log(this.selectedDistrict)
 
    });
 
@@ -212,6 +207,7 @@ updateExpertise(event: any) {
   
     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
       console.log(response)
+      this.visible=false
     })
 
     // Push the submitted job to the list of submitted jobs

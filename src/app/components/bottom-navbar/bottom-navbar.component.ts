@@ -36,12 +36,12 @@ export class BottomNavbarComponent implements OnInit{
 
    profilePageRediretion()
    {
-     this.router.navigate(['/owner-profile'])
+     this.router.navigate(['/owner-profiles'])
    }
 
    goToHome()
    {
-    this.router.navigate(['/ownerview'])
+    this.router.navigate(['/seeker'])
    }
 
    showDialog() {
