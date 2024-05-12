@@ -50,6 +50,8 @@ profile:any;
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
 
+      console.log(this.user)
+
     })
 
    
@@ -151,7 +153,7 @@ profile:any;
 
           this.queryService.insertProfile(this.userProfile).subscribe((response)=>{
             console.log(response)
-            if(response==true)
+            if(response==200)
               {
                 this.router.navigate(['/seeker'])
               }

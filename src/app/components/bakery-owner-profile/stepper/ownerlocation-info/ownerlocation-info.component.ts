@@ -13,6 +13,8 @@ import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
+import { DataService } from '../../../../services/data.service';
+import { Users } from '../../../../models/user';
 
 
 @Component({
@@ -22,24 +24,31 @@ import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../model
   templateUrl: './ownerlocation-info.component.html',
   styleUrl: './ownerlocation-info.component.scss'
 })
-export class OwnerlocationInfoComponent implements OnInit{
+export class OwnerlocationInfoComponent implements OnInit {
 
 
 
   ngOnInit(): void {
     // console.log(this.profileService.profileInformation)
-    
+
+    this.dataService.setData(false)
+
     this.updatedlocationInfo = this.profileService.getBakeryOwnerProfileInfo().locationInformation;
     console.log(this.updatedlocationInfo)
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
-  
+
       console.log(data.states)
     })
 
-   
-    this.queryService.getStateAndDistrict().subscribe((data)=>{
+
+    this.queryService.getStateAndDistrict().subscribe((data) => {
       //console.log(data)
+    })
+
+    this.dataService.getUserData().subscribe((data) => {
+      this.user = data;
+
     })
   }
 
@@ -48,81 +57,102 @@ export class OwnerlocationInfoComponent implements OnInit{
   constructor(
     private profileService: ProfileService,
     private queryService: QueryService,
-    private router:Router,
-    private fileService:FileService
+    private router: Router,
+    private fileService: FileService,
+    private dataService: DataService
   ) {
-   this.currentDate = new Date();
+    this.currentDate = new Date();
   }
   updatedlocationInfo = {
     state: '',
     district: '',
     place: '',
-    pincode:''
+    pincode: ''
   }
 
 
   updatedOtherInfo = {
-    profileCreateDate : ''
+    profileCreateDate: ''
   }
 
-  INonBakeMember: IBakerOwnerProfile= {} as IBakerOwnerProfile;
-  NonBakeMember:IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
-  pincodes:any
-  currentDate:Date;
+  INonBakeMember: IBakerOwnerProfile = {} as IBakerOwnerProfile;
+  NonBakeMember: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
+  pincodes: any
+  currentDate: Date;
   states: any;
   submitted: boolean = false;
   districts: any;
   selectedState: any;
   selectedDistrict: any;
-  userplace:string=''
+  userplace: string = ''
+
+  user: Users = {} as Users;
 
 
-  
   onStateChange() {
     console.log(this.selectedState)
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
-   
+
     console.log(this.pincodes)
-   // this.fileService.uploadObject();
+    // this.fileService.uploadObject();
 
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;
       this.updatedlocationInfo.district = this.selectedDistrict;
-      this.updatedlocationInfo.place=this.userplace
-      this.updatedlocationInfo.pincode=this.pincodes;
-      this.updatedOtherInfo.profileCreateDate=this.currentDate.toLocaleDateString();
-      
+      this.updatedlocationInfo.place = this.userplace
+      this.updatedlocationInfo.pincode = this.pincodes;
+      this.updatedOtherInfo.profileCreateDate = this.currentDate.toLocaleDateString();
+
       this.profileService.setBakeryOwnerProfileInfo({
         ...this.profileService.getBakeryOwnerProfileInfo(),
         locationInformation: this.updatedlocationInfo,
         otherInformation: this.updatedOtherInfo,
       });
-      
-    this.INonBakeMember= this.profileService.getBakeryOwnerProfileInfo();
+
+      this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
+
+      this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
+
+
+
+
+      this.queryService.createUser(this.user).subscribe((response => {
+        console.log(response);
      
-     this.NonBakeMember=this.profileService.setProfileforBackend(this.INonBakeMember);
 
-      
+        this.dataService.setUserData(this.user)
 
-      this.queryService.createNonBakeryowner(this.NonBakeMember).subscribe((response)=>{
-        
-        if(response==true)
-          {
+        if (response == true) {
 
-          
-            this.router.navigate([
-            
-            '/ownerview'
-            ])
-          }
-      })
-      this.submitted = true;
-    } else {
+
+          this.queryService.createNonBakeryowner(this.NonBakeMember).subscribe((response) => {
+            if (response == true) {
+
+
+              this.router.navigate([
+
+                '/ownerview'
+              ])
+            }
+
+          })
+
+
+        }
+
+      }));
+
+
+    }
+
+    else {
       console.error('No state selected.');
     }
-   }
+
+
+  }
 
 
 }

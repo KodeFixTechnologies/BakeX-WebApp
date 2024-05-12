@@ -120,13 +120,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
     if (this.mobileNumber.length === 10) {
       this.checkingMobileNumber = true;
 
-      this.queryService.verifyBakeUser({ phoneno: this.mobileNumber }).subscribe((response => {
-        if (response == true) {
-          this.checkingMobileNumber = false;
-          this.otpVerification()
-        }
+      // this.queryService.verifyBakeUser({ phoneno: this.mobileNumber }).subscribe((response => {
+      //   if (response == true) {
+      //     this.checkingMobileNumber = false;
+      //     this.otpVerification()
+      //   }
 
-      }))
+      // }))
 
     }
   }
@@ -173,5 +173,69 @@ export class LoginComponent implements OnInit, AfterViewInit {
       console.log("script error", error)
     }
     this.render.appendChild(document.body, this.script)
+  }
+
+
+  SignUp()
+  {
+    this.user.authId=2
+    this.user.isMobileVerified=''
+    this.user.id=0
+    this.user.createdAt= new Date
+    this.user.userTypeId=1
+    this.dataService.setUserData(this.user)
+  
+    this.queryService.checkUserExist(this.user).subscribe((response) => {
+      console.log("response: ",response);
+      if (response == true) {
+          // Wrap the navigation inside NgZone.run()
+          this.ngZone.run(() => {
+              this.router.navigate(['/seeker']);
+              this.dataService.setData(true);
+          });
+
+      }else{
+
+          // Wrap the navigation inside NgZone.run()
+          this.ngZone.run(() => {
+            this.dataService.setPhoneData(this.user.mobileNumber);
+            this.router.navigate(['/home']);
+            this.dataService.setData(true);
+        });
+      }
+
+  })
+  }
+
+
+  logIn(){
+
+    this.user.authId=2
+    this.user.isMobileVerified=''
+    this.user.id=0
+    this.user.createdAt= new Date
+    this.user.userTypeId=0
+    this.dataService.setUserData(this.user)
+
+     
+
+    this.queryService.checkUserExist(this.user).subscribe((response) => {
+      console.log("response: ",response);
+      if (response && response.userTypeId==1) {
+        
+          // Wrap the navigation inside NgZone.run()
+          this.ngZone.run(() => {
+              this.router.navigate(['/seeker']);
+              this.dataService.setData(true);
+          });
+
+      }else if (response && response.userTypeId==2)
+        {
+          this.router.navigate(['/ownerview']);
+      
+      }
+
+  })
+
   }
 }
