@@ -11,5 +11,6 @@ export interface RecommendedJob {
     stateName: string;
     districtName: string;
     experienceType: string;
+    appliedStatus : number;
   }
   
