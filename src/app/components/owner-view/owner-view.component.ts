@@ -24,6 +24,14 @@ import { Experience } from '../../models/experience';
 import { ListboxModule } from 'primeng/listbox';
 import { Expertise } from '../../models/expertise';
 import { Jobpost } from '../../models/job';
+import { Carousel } from 'flowbite';
+import type {
+    CarouselItem,
+    CarouselOptions,
+    CarouselInterface,
+} from 'flowbite';
+import type { InstanceOptions } from 'flowbite';
+
 
 @Component({
   selector: 'owner-view',
@@ -71,7 +79,6 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   jobTypes:any;
 
-
   bakeryOwnerProfileInfoSubscription:Subscription;
   constructor(
     private dataService:DataService,
@@ -108,6 +115,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
    
     ];
+
 
     this.district = [
       { id: 257, name: 'Alappuzha' },
@@ -188,11 +196,12 @@ previousStep() {
 updateExpertise(event: any) {
   console.log(event);
   // Extract expertiseIds from the event value array
-  const expertiseIds: number[] = event.value.map((item: any) => item.expertiseId);
+  const expertiseIds: number[] =[];
+  expertiseIds.push(event.value.expertiseId)
+  console.log(expertiseIds)
 
   // Assign expertiseIds to the ExpertiseIds list in jobPost
   this.jobPost.ExpertiseIds = expertiseIds;
-
   console.log(this.jobPost.ExpertiseIds)
 }
 

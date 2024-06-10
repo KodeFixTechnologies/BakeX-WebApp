@@ -6,7 +6,7 @@
     <p class="flex align-items-center justify-content-center mt-2 font-extralight">Please Select Your Field of Experience ?</p>
     <hr class=" flex align-items-center justify-content-center h-px  bg-gray-200 border-0 dark:bg-gray-700">
     <div class="flex align-items-center justify-content-center mt-5">
-        <p-listbox [options]="expertise" [(ngModel)]="selectedExpertise" optionLabel="expertiseType" [style]="{'width':'20rem'}"
+        <p-listbox [options]="expertise" [filter]="true" [(ngModel)]="selectedExpertise" optionLabel="expertiseType" [style]="{'width':'20rem'}"
          (onChange)="updateExpertise($event)"
         [multiple]="true" [metaKeySelection]="false" [listStyle]="{'max-height': '300px'}" [focusOnHover]="true" [checkbox]="true" [selectAll]="false"  [showToggleAll]="false"></p-listbox>
 
@@ -15,7 +15,7 @@
     <hr class=" flex align-items-center justify-content-center h-px  bg-blue-200 border-0 dark:bg-gray-700">
     <p class="flex align-items-center justify-content-center mt-1 me-10 font-bold">Select Your Education</p>
     <div class="flex align-items-center justify-content-center mt-3">
-        <p-listbox [options]="education" [(ngModel)]="selectedEducation" optionLabel="EducationLevel" [style]="{'width':'15rem'}"
+        <p-listbox [options]="education"   [(ngModel)]="selectedEducation" optionLabel="EducationLevel" [style]="{'width':'15rem'}"
          (onChange)=" updateEducation($event)"
         [multiple]="false" [metaKeySelection]="false" [listStyle]="{'max-height': '250px'}" [focusOnHover]="true" [checkbox]="true" [selectAll]="false"></p-listbox>
 
