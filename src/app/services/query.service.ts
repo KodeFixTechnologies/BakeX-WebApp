@@ -6,8 +6,9 @@ import { UserProfile, Users } from '../models/user';
 import { BakeMember } from '../models/bakeMember';
 import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 import { Jobpost } from '../models/job';
-import { RecommendedJob } from '../models/RecommendedJobs';
+
 import { JobApplication } from '../models/jobApplcation';
+import { RecommendedJob } from '../models/recommendedJobs';
 
 @Injectable({
   providedIn: 'root'
