@@ -208,6 +208,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
 
+  gotoOtp()
+ {
+  this.dataService.setPhoneData(this.user.mobileNumber);
+  this.router.navigate(['/otp']);
+ }
+
   logIn(){
 
     this.user.authId=2

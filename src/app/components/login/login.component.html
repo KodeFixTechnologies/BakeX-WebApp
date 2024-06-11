@@ -1,77 +1,72 @@
+<section>
+  <div class="max-w-screen-lg mx-auto">
+    <div class="flex flex-col justify-center items-center mt-10">
+      <h1 class="text-2xl font-medium text-center">Create Account</h1>
+      <p class="text-primary-grey text-center mt-3 mx-10">
+        Fill your information below or register with your social account.
+      </p>
+    </div>
+    <div class="flex flex-col mt-6 p-3 gap-4 md:items-center">
+      <div class="flex flex-col">
+        <label class="text-primary-black ml-3">Phone Number</label>
+        <input [(ngModel)]="user.mobileNumber" type="tel"
+          class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none" />
+      </div>
 
-<section *ngIf="!isLogin">
-<div class="max-w-screen-lg mx-auto">
-  <div class="flex flex-col justify-center items-center mt-10">
-    <h1 class="text-2xl font-medium text-center">Create Account</h1>
-    <p class="text-primary-grey text-center mt-3 mx-10">
-      Fill your information below or register with your social account.
-    </p>
-  </div>
-  <div class="flex flex-col mt-6 p-3 gap-4 md:items-center">
-    <div class="flex flex-col">
-      <label class="text-primary-black ml-3">Phone Number</label>
-      <input
-        type="tel"
-        class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
-      />
+      <button (click)="gotoOtp()" class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white">
+        Verify
+      </button>
     </div>
 
-    <button
-      class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white"
-    >
-      Verify
-    </button>
+    <p class="text-center text-primary-black mt-4">
+      Already Have an Account?
+      <span>
+        <a href="" class="underline text-primary-blue "> Sign In </a>
+      </span>
+    </p>
   </div>
-
-  <p class="text-center text-primary-black mt-4">
-    Already Have an Account?
-    <span>
-      <a href="" class="underline text-primary-blue "> Sign In </a>
-    </span>
-  </p>
-</div>
 
 </section>
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- <!--Login Section Section-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Login Section Section-->
 <!-- <section *ngIf="isLogin" class="text-gray-600 body-font">
     <div class="container px-5 py-20 mx-auto flex flex-wrap items-center">
       <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
@@ -118,8 +113,8 @@
     </div>
   </section> -->
 
-  <!--Sing Up Section-->
-  <!-- <section *ngIf="!isLogin" class="text-gray-600 body-font">
+<!--Sing Up Section-->
+<!-- <section *ngIf="!isLogin" class="text-gray-600 body-font">
     <div class="container px-5 py-20 mx-auto flex flex-wrap items-center">
       <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
         <h1 class="title-font font-medium text-3xl text-gray-900">Welcome Back </h1>
