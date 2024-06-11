@@ -21,11 +21,11 @@ import { JobViewComponent } from './job-view/job-view.component';
 
 export const routes: Routes = [
     {
-        path: '', component: LoginComponent,
+        path: '', component: OnboardingComponent,
 
     },
     {
-        path: 'home', component: OnboardingComponent,
+        path: 'login', component: LoginComponent,
 
     },
 

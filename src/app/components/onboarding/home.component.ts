@@ -33,12 +33,12 @@ export class OnboardingComponent implements OnInit {
         if(category=="employee")
             {
                 console.log("employee clicked")
-                this.router.navigate(['\profile']);
+                this.router.navigate(['\login']);
             }
         if(category=="owner")
             {  
                 console.log("owner clicked")
-                this.router.navigate(['/bakeprofile']);
+                this.router.navigate(['/\login']);
             }    
 
       }

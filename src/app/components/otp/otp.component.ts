@@ -54,7 +54,10 @@ export class OtpComponent implements OnInit, AfterViewInit {
    
 
   ngOnInit() {
+    this.script = this.render.createElement('script');
+    this.script.src = "https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
 
+    
     this.dataService.getPhoneData().subscribe((data)=>{
       this.phoneno=data;
       console.log(data)
