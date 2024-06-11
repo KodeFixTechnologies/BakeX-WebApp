@@ -72,6 +72,7 @@ export class LocationInfoComponent implements OnInit {
   onStateChange() {
     console.log(this.selectedState)
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
+    console.log(this.districts)
   }
   nextPage() {
 
