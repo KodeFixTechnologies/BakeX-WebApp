@@ -48,6 +48,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
                   }
                   else {
                     this.ngZone.run(() => {
+                      this.dataService.setPhoneData(this.phoneno);
                       this.router.navigate(['/bakeprofile']);
                       this.dataService.setData(true);
                   });
@@ -84,6 +85,8 @@ export class OtpComponent implements OnInit, AfterViewInit {
       this.phoneno=data;
       console.log(data)
     })
+
+    this.dataService.setPhoneData(this.phoneno);
 
 
     this.dataService.getUserData().subscribe((data)=>{
