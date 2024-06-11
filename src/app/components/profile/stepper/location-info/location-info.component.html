@@ -1,4 +1,96 @@
-<div class="w-full flex flex-col items-center justify-center mt-10">
+<div class="max-w-screen-lg mx-auto">
+    <div class="flex flex-col justify-center items-center mt-10">
+      <h1 class="text-primary-black text-2xl">Location information</h1>
+      <p class="text-primary-grey text-sm">Enter your location information</p>
+    </div>
+    <div class="flex flex-col mt-6 p-3 gap-4 md:items-center">
+      <div class="">
+        <label class="text-primary-black ml-5">State </label>
+        <select
+          name=""
+          id=""
+          class="mt-2 ml-3 p-3 w-11/12 border text-sm rounded-xl bg-primary-white outline-none"
+        >
+          <option disabled selected>Select a State</option>
+          <option
+            class=""
+            *ngFor="let state of states"
+            [value]="state"
+          >
+            {{ state }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="">
+        <label class="text-primary-black ml-5">District</label>
+        
+      </div>
+  
+  
+      <div class="flex flex-col">
+        <label class="text-primary-black ml-5">Place</label>
+        <input
+          type="tel"
+          class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
+        />
+      </div>
+  
+      <div class="flex flex-col">
+        <label class="text-primary-black ml-5">Pincode</label>
+        <input
+          type="tel"
+          class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
+        />
+      </div>
+  
+      <div class="flex flex-col justify-center items-center">
+        <button
+          class="py-3 px-32 bg-blue-600 mt-5 border-none rounded-2xl text-primary-white"
+        >
+          Continue
+        </button>
+      </div>
+  
+    
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="w-full flex flex-col items-center justify-center mt-10">
     <p-card>
         <ng-template pTemplate="title"> Location Information </ng-template>
         <ng-template pTemplate="subtitle"> Enter your location information </ng-template>
@@ -39,4 +131,4 @@
 
         
     </p-card>
-</div>
+</div> -->
