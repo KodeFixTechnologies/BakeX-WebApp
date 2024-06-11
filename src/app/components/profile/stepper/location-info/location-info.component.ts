@@ -12,11 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
-
+import { InputOtpModule } from 'primeng/inputotp';
 @Component({
   selector: 'location-info',
   standalone: true,
-  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule],
+  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule,InputOtpModule],
   templateUrl: './location-info.component.html',
   styleUrl: './location-info.component.scss'
 })
@@ -43,6 +43,7 @@ export class LocationInfoComponent implements OnInit {
 
 
   // to get the location info from profie service
+  value:any;
   states: any;
   submitted: boolean = false;
   districts: any;
