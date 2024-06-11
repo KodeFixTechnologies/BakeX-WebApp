@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { FormsModule } from '@angular/forms';
+import { InputOtpModule } from 'primeng/inputotp';
 
 declare const initSendOTP: any;
 
@@ -7,7 +9,7 @@ declare const initSendOTP: any;
 @Component({
   selector: 'otp',
   standalone: true,
-  imports: [],
+  imports: [InputOtpModule,FormsModule],
   templateUrl: './otp.component.html',
   styleUrl: './otp.component.scss'
 })
