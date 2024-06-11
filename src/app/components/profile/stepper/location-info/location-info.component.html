@@ -34,7 +34,7 @@
 
     <div class="flex flex-col">
       <label class="text-primary-black ml-5">Place</label>
-      <input
+      <input  [(ngModel)]="userplace"
         type="tel"
         class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
       />
@@ -42,14 +42,14 @@
 
     <div class="flex flex-col">
       <label class="text-primary-black ml-5">Pincode</label>
-      <input
+      <input [(ngModel)]="pincodes"
         type="tel"
         class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
       />
     </div>
 
     <div class="flex flex-col justify-center items-center">
-      <button
+      <button (click)="nextPage()"
         class="py-3 px-32 bg-blue-600 mt-5 border-none rounded-2xl text-primary-white"
       >
         Continue
