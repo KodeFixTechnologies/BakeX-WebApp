@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private queryService: QueryService,
     private router: Router,
     private dataService: DataService,
-
+  
     // this is used to send the data from one component to another using rxjs
   ) {
 
   }
 
   script: any;
-
+  private tokenKey = 'authToken';
   mobileNumber: string = '';
   checkingMobileNumber: boolean = false;
 
@@ -219,20 +219,27 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
      
 
-    this.queryService.checkUserExist(this.user).subscribe((response) => {
+    this.authService.checkUserExist(this.user).subscribe((response) => {
       console.log("response: ",response);
-      if (response && response.userTypeId==1) {
-        
-          // Wrap the navigation inside NgZone.run()
-          this.ngZone.run(() => {
-              this.router.navigate(['/seeker']);
-              this.dataService.setData(true);
-          });
+      if (response.token) {
+        this.authService.setToken(response.token);
+       let profileId =  this.authService.getUserIdFromToken()
+        let userTypeId = this.authService.getUserTypeId() 
+     
+        if(userTypeId==1)
+            {
 
-      }else if (response && response.userTypeId==2)
-        {
-          this.router.navigate(['/ownerview']);
-      
+              this.ngZone.run(() => {
+                this.router.navigate(['/seeker']);
+                this.dataService.setData(true);
+            });
+            }
+          // Wrap the navigation inside NgZone.run()
+       else {
+
+        this.router.navigate(['/ownerview']);
+       }
+
       }
 
   })
