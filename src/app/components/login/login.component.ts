@@ -183,6 +183,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.user.id=0
     this.user.createdAt= new Date
     this.user.userTypeId=1
+    this.user.mobileNumber= this.mobileNumber;
     this.dataService.setUserData(this.user)
   
     this.queryService.checkUserExist(this.user).subscribe((response) => {
@@ -214,6 +215,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   this.user.password=""
   this.user.isMobileVerified=""
   this.user.userTypeId=0;
+  console.log(this.user)
   this.authService.checkUserExist(this.user).subscribe((response) => {
     console.log("response: ",response);
     if (response.token) {
@@ -234,13 +236,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
           });
           }
         // Wrap the navigation inside NgZone.run()
-     else {
-
-      this.dataService.setPhoneData(this.user.mobileNumber);
-      this.router.navigate(['/profile/personal']);
-     }
+    
 
     }
+    else if(response.mobileNumber==null){
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/profile/personal']);
+    });
+    
+     }
 
 })
 
