@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './components/interceptor/jwt.interceptor';
+import { LoaderInterceptor } from './components/interceptor/loader.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -13,6 +14,12 @@ export const appConfig: ApplicationConfig = {
     {
         provide:HTTP_INTERCEPTORS,
         useClass:JwtInterceptor,
+        multi:true
+    },
+    provideHttpClient(withInterceptorsFromDi()),  
+    {
+        provide:HTTP_INTERCEPTORS,
+        useClass:LoaderInterceptor,
         multi:true
     },
 

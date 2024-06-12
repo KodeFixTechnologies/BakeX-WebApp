@@ -41,6 +41,7 @@ export class ExpertiseInfoComponent implements OnInit {
   
 
     this.queryService.getExpertiseTypes().subscribe((data)=>{
+      console.log(data)
       this.expertise=data;
     })
 
