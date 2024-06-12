@@ -17,7 +17,10 @@ import { CommonModule } from '@angular/common';
       <div class="panHandle"></div>
     </div>
     <div class="panShadow"></div>
+
+    
   </div>
+
 </div>
 
   </div>
