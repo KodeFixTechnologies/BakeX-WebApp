@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   signupClick() {
     this.isLogin = !this.isLogin;
-    this.loadGoogle()
+   // this.loadGoogle()
   }
 
   decodeJWTToken(token: string) {
@@ -210,8 +210,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   gotoOtp()
  {
+  this.user.authId=3;
   this.dataService.setPhoneData(this.user.mobileNumber);
-  this.router.navigate(['/otp']);
+  this.router.navigate(['/profile/personal']);
  }
 
   logIn(){

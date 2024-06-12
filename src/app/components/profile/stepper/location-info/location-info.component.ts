@@ -90,18 +90,6 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
    
   }
 
-  mapSelectedData() {
-    console.log(this.updatedlocationInfo);
-    // Check if this.states is defined
-    if (this.states && this.updatedlocationInfo.state) {
-        // Use the find method if this.states is defined
-        this.selectedState = this.states.find((state: { state: string; }) => state.state === this.updatedlocationInfo.state);
-        console.log(this.selectedState);
-        // Additional logic
-    } else {
-        console.error('States data is not available.');
-    }
-}
 
 
 

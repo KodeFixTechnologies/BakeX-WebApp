@@ -91,6 +91,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
 
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
+      console.log(this.user.authId)
     })
    
    

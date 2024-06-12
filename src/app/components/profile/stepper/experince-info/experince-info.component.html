@@ -14,6 +14,8 @@
           [style]="{ width: '15rem' }"
           [listStyle]="{ 'max-height': '220px' }"
           [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+          (onChange)="updateExperience($event)"
+          [(ngModel)]="selectedExperience"
         />
       </div>
   
@@ -38,11 +40,13 @@
           [selectAll]="false"
           [showToggleAll]="false"
           [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+          (onChange)=" updateEmployment($event)"
+          [(ngModel)]="selectedEmployment"
         />
       </div>
   
       <div class="mt-1 mb-5 mr-5">
-        <button
+        <button (click)="nextPage()"
           pButton
           pRipple
           label="Submit"

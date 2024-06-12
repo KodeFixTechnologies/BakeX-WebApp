@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!isLogin">
   <div class="max-w-screen-lg mx-auto">
     <div class="flex flex-col justify-center items-center mt-10">
       <h1 class="text-2xl font-medium text-center">Create Account</h1>
@@ -21,7 +21,7 @@
     <p class="text-center text-primary-black mt-4">
       Already Have an Account?
       <span>
-        <a href="" class="underline text-primary-blue "> Sign In </a>
+        <a  (click)="signupClick()"  class="underline text-primary-blue "> Sign In </a>
       </span>
     </p>
   </div>
@@ -30,7 +30,35 @@
 
 
 
+<section *ngIf="isLogin">
+  <div class="max-w-screen-lg mx-auto">
+    <div class="flex flex-col justify-center items-center mt-10">
+      <h1 class="text-2xl font-medium text-center">Log In</h1>
+      <p class="text-primary-grey text-center mt-3 mx-10">
+        Enter Your Registered Number to Login.
+      </p>
+    </div>
+    <div class="flex flex-col mt-6 p-3 gap-4 md:items-center">
+      <div class="flex flex-col">
+        <label class="text-primary-black ml-3">Phone Number</label>
+        <input [(ngModel)]="user.mobileNumber" type="tel"
+          class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none" />
+      </div>
 
+      <button (click)="gotoOtp()" class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white">
+        Verify
+      </button>
+    </div>
+
+    <p class="text-center text-primary-black mt-4">
+       Don't Have an Account?
+      <span>
+        <a (click)="signupClick()"  class="underline text-primary-blue "> Create One </a>
+      </span>
+    </p>
+  </div>
+
+</section>
 
 
 

@@ -76,13 +76,16 @@ export class PersonalInfoComponent {
           this.user.authId=1;
           console.log(this.user)
         }
-        else {
+        else if(this.user.password) {
 
           this.dataService.getUserData().subscribe((data)=>{
             this.user.password=data.password
-            this.user.authId=2;
+            this.user.authId=2; // 
             this.updatedPersonalInfo.phoneno= data.mobileNumber;
           })
+        }
+        else {
+          this.user.authId=3
         }
       
       

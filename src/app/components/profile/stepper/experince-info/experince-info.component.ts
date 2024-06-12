@@ -144,6 +144,8 @@ profile:any;
   nextPage() {
 
     this.profile= this.profileService.getProfileInformation();
+    console.log(this.user)
+  
     this.queryService.createUser(this.user).subscribe((response=>{
       console.log(response);
 
