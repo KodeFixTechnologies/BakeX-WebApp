@@ -3,7 +3,7 @@
     <div>
       <h1 class="text-xl font-medium">What is your Expertise?</h1>
       <p class="mt-2 text-xs text-primary-grey">
-        please select your field of experience!
+        Please select your field of experience!
       </p>
     </div>
 
@@ -15,16 +15,17 @@
         [style]="{ width: '25rem' }"
         [multiple]="true"
         [metaKeySelection]="false"
-        [listStyle]="{ 'max-height': '500px' }"
+        [listStyle]="{ 'max-height': '300px' }"
         [focusOnHover]="true"
         [checkbox]="true"
         [selectAll]="false"
         [showToggleAll]="false"
         [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+        [(ngModel)]="selectedExpertise"
       />
     </div>
 
-    <div>
+    <!-- <div>
       <h1 class="text-xl mt-5 font-medium">What is your Education?</h1>
       <p class="mt-2 text-xs text-primary-grey">
         please select your Education!
@@ -39,16 +40,19 @@
         [style]="{ width: '15rem' }"
         [listStyle]="{ 'max-height': '220px' }"
         [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+        (onChange)=" updateEducation($event)"
+        [(ngModel)]="selectedEducation"
       />
-    </div>
+    </div> -->
 
     <div class="mt-1 mb-5 mr-5">
       <button
         pButton
         pRipple
-        label="Submit"
+        label="Continue"
         class="p-button"
         [style]="{ width: '100%' }"
+        (click)="nextPage()" 
       ></button>
     </div>
   </div>
