@@ -25,7 +25,8 @@ export class OnboardingComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-     
+      
+        this.dataService.setData(false)
         
         let userTypeid = this.authService.getUserTypeId();
         let phoneNo = this.authService.getPhoneNo();
