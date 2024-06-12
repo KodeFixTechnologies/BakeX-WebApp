@@ -103,7 +103,12 @@ export class PersonalInfoComponent {
       { name: 'Other', code: 'O', factor: 3 }
     ];
     this.updatedPersonalInfo = this.profileService.getProfileInformation().personalInformation;
-
+   
+    this.dataService.getPhoneData().subscribe((data)=>{
+      console.log(data)
+      this.updatedPersonalInfo.phoneno=data;
+    })
+    
     console.log(this.updatedPersonalInfo)
     this.dataService.setData(false)
 

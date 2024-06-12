@@ -4,6 +4,7 @@ import { Education } from '../../../../models/expertise';
 import { ProfileService } from '../../../../services/profile.service';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'education-info',
@@ -14,7 +15,10 @@ import { ButtonModule } from 'primeng/button';
 })
 export class EducationInfoComponent  implements OnInit{
   selectedEducation!:Education[];
-  constructor(private profileService:ProfileService)
+  constructor(
+    private profileService:ProfileService,
+    private router:Router
+  )
   {
 
   }
@@ -62,8 +66,14 @@ export class EducationInfoComponent  implements OnInit{
   }
 
 
-  nextPage()
-  {
+ 
+  nextPage() {
 
+  
+    if(this.updatedEducation.types!=null)
+      {
+          this.router.navigate(['profile/experience'])
+      }
+    
   }
 }

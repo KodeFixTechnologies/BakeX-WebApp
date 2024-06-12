@@ -76,7 +76,7 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 
-      this.selectedState =  this.states.filter((state: { state: string; districts: string[] }) => state.state === "Kerala");
+      
   
       console.log(data.states)
     })

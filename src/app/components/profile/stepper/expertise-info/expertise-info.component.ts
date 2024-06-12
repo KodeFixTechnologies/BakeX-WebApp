@@ -102,9 +102,9 @@ export class ExpertiseInfoComponent implements OnInit {
   nextPage() {
 
   
-    if(this.updatedEducation.types!=null)
+    if(this.updatedExpertise.types!=null)
       {
-          this.router.navigate(['profile/experience'])
+          this.router.navigate(['profile/education'])
       }
     
   }
