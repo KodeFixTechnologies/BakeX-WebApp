@@ -39,7 +39,7 @@ export class OnboardingComponent implements OnInit {
         {
             this.router.navigate(['/ownerview']);
         }    
-        this.dataService.setData(true);
+        
      
         // Retrieve data from route parameters
         
