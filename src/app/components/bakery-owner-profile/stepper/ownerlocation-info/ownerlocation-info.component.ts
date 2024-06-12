@@ -48,6 +48,7 @@ export class OwnerlocationInfoComponent implements OnInit {
 
     this.dataService.getUserData().subscribe((data) => {
       this.user = data;
+      console.log(data)
 
     })
   }

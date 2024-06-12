@@ -142,11 +142,14 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     //   this.phoneno= user.mobileNumber
     //  }))
  
-    //  this.dataService.getPhoneData().subscribe((data)=>{
-    //   this.phoneno=data;
-    //  })
+     this.dataService.getPhoneData().subscribe((data)=>{
+      if(data)
+      this.phoneno=data;
+      else
+    this.phoneno=this.authService.getPhoneNo() || '';
+     })
 
-     this.phoneno=this.authService.getPhoneNo() || '';
+  
 
      console.log(this.authService.getToken)
 
