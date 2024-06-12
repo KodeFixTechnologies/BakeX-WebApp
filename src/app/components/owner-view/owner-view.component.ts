@@ -69,9 +69,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       { label: 'Job Details' },
       { label: 'Skills' },
       { label: 'Experince' },
-      {
-        label:'Logo'
-      }
+      // {
+      //   label:'Logo'
+      // }
       // Add more steps as needed
   ];
   values: string[] | undefined;
