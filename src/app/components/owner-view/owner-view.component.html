@@ -153,7 +153,7 @@
 
 
  <!--Job Pop Up Dialog-->
-  <p-dialog class="flex justify-center" header="Create new Job" [modal]="true"  [(visible)]="visible" [style]="{width: '90vw', 'max-width': '600px', height:'900vw'}" [maximizable]="true">
+  <p-dialog  class="flex justify-center" header="Create new Job" [modal]="true" #dialog (onShow)="dialog.maximize()"  [(visible)]="visible" [style]="{width: '90vw', 'max-width': '600px', height:'100%'}"  >
     <p-steps [model]="steps" [(activeIndex)]="activeIndex" ></p-steps>
     <div class="p-4">
 
