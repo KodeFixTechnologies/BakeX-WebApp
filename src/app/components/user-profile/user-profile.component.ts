@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-profile',
@@ -11,7 +13,9 @@ import { DataService } from '../../services/data.service';
 export class UserProfileComponent implements OnInit {
 
    constructor(
-    private dataService:DataService
+    private dataService:DataService,
+    private authService:AuthService,
+    private router:Router
    )
    {
  
@@ -22,6 +26,10 @@ export class UserProfileComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-
+  logout()
+  {
+    this.authService.logout();
+    this.router.navigate([""])
+  }
 
 }

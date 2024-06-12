@@ -31,6 +31,7 @@ import type {
     CarouselInterface,
 } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -85,7 +86,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     private queryService:QueryService,
     private cdr:ChangeDetectorRef,
     private messageService:MessageService,
-    private profileService:ProfileService
+    private profileService:ProfileService,
+    private authService:AuthService,
   )
   {
     this.bakeryOwnerProfileInfoSubscription = this.profileService.bakeryOwnerProfileInfo$.subscribe();
@@ -135,10 +137,20 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   ];
   
 
+    this.loadPhoneNumber()
+    //  this.dataService.getUserData().subscribe((user=>{
+    //   this.phoneno= user.mobileNumber
+    //  }))
  
-     this.dataService.getUserData().subscribe((user=>{
-      this.phoneno= user.mobileNumber
-     }))
+    //  this.dataService.getPhoneData().subscribe((data)=>{
+    //   this.phoneno=data;
+    //  })
+
+     this.phoneno=this.authService.getPhoneNo() || '';
+
+     console.log(this.authService.getToken)
+
+     console.log(this.phoneno)
 
     
    this.queryService.getBakeOwner({ phoneno: this.phoneno}).subscribe((data)=>{
@@ -158,11 +170,22 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       this.expertise=data;
     })
 
-
+  this.dataService.setData(false)
    
 
   }
 
+
+  loadPhoneNumber() {
+    const token = this.authService.getToken();
+    if (token) {
+      this.phoneno = this.authService.getPhoneNo() || '';
+      console.log('Phone number loaded:', this.phoneno);
+    } else {
+      console.log('Token not available yet');
+      // Optionally, you can retry after some delay or handle the missing token case
+    }
+  }
   
   ngOnDestroy(): void {
     console.log(this.showDialogSubscription?.unsubscribe())
