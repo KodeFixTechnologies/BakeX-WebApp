@@ -8,6 +8,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { JobApplication } from '../../models/jobApplcation';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'seeker-view',
   standalone: true,
@@ -18,7 +19,8 @@ import { JobApplication } from '../../models/jobApplcation';
 export class SeekerViewComponent implements OnInit {
   constructor(
     private dataService: DataService,
-    private queryService: QueryService
+    private queryService: QueryService,
+    private authService:AuthService
   ) {}
   application: JobApplication = {} as JobApplication;
   jobSeeker: JobSeeker = {} as JobSeeker;
@@ -56,7 +58,15 @@ export class SeekerViewComponent implements OnInit {
     });
   
     this.dataService.getPhoneData().subscribe((data)=>{
-      this.mobileno=data;
+
+      if(data)
+        {
+          this.mobileno=data;
+        }
+      else 
+      {
+        this.mobileno=this.authService.getPhoneNo()||''
+      }
     })
 
 

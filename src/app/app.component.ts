@@ -12,13 +12,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BakeryOwnerProfileComponent } from './components/bakery-owner-profile/bakery-owner-profile/bakery-owner-profile.component';
 import { OnboardingComponent } from './components/onboarding/home.component';
+import { LoaderComponent } from "./components/loader/loader.component";
+import { HeaderComponent } from "./components/header/header.component";
 declare const google: any;
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [LoginComponent, OnboardingComponent,BottomNavbarComponent,ProfileComponent,BakeryOwnerProfileComponent, RouterOutlet, RouterLink]
+    imports: [LoginComponent, OnboardingComponent, BottomNavbarComponent, ProfileComponent, BakeryOwnerProfileComponent, RouterOutlet, RouterLink, LoaderComponent, HeaderComponent]
 })
 export class AppComponent implements OnInit {
  googleUser:any;

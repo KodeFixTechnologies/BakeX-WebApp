@@ -3,13 +3,15 @@ import { DataService } from '../../../../services/data.service';
 import { Router } from '@angular/router';
 import { QueryService } from '../../../../services/query.service';
 import { BakeMember } from '../../../../models/bakeMember';
+import { OwnerNavbarComponent } from "../../../owner-navbar/owner-navbar.component";
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
-  selector: 'owner-profile',
-  standalone: true,
-  imports: [],
-  templateUrl: './owner-profile.component.html',
-  styleUrl: './owner-profile.component.scss'
+    selector: 'owner-profile',
+    standalone: true,
+    templateUrl: './owner-profile.component.html',
+    styleUrl: './owner-profile.component.scss',
+    imports: [OwnerNavbarComponent]
 })
 export class OwnerProfileComponent implements OnInit {
 
@@ -19,14 +21,24 @@ export class OwnerProfileComponent implements OnInit {
   constructor(
     private  dataService:DataService,
     private router:Router,
-    private queryService:QueryService
+    private queryService:QueryService,
+    private authService:AuthService
   )
   {
  
   }
   ngOnInit(): void {
     this.dataService.getPhoneData().subscribe((data)=>{
-      this.phoneno='8921537948';
+
+      if(data)
+        {
+          this.phoneno=data;
+        }
+        else {
+
+          this.phoneno= this.authService.getPhoneNo() || ''
+        }
+ 
       console.log(data)
     })
 
@@ -35,6 +47,13 @@ export class OwnerProfileComponent implements OnInit {
        this.bakeMember=data;
        console.log(data)
    })
+  }
+
+
+  logout()
+  {
+    this.authService.logout();
+    this.router.navigate([""])
   }
 
 }

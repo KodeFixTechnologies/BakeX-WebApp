@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-profile',
@@ -10,13 +11,24 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent implements OnInit {
-  constructor(private dataService: DataService,private router: Router) {}
+
+   constructor(
+    private dataService:DataService,
+    private authService:AuthService,
+    private router:Router
+   )
+   {
+ 
+   }
   ngOnInit(): void {
     this.dataService.setData(true);
     throw new Error('Method not implemented.');
   }
 
-  navigatetoPolicy() {
-    this.router.navigate(['/privacy-policy']);
+  logout()
+  {
+    this.authService.logout();
+    this.router.navigate([""])
   }
+
 }

@@ -214,7 +214,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   this.user.authId=3;
   this.user.password=""
   this.user.isMobileVerified=""
-  this.user.userTypeId=0;
+  this.dataService.getUserData().subscribe((data:Users)=>{
+    this.user.userTypeId=data.userTypeId;
+  })
   console.log(this.user)
   this.authService.checkUserExist(this.user).subscribe((response) => {
     console.log("response: ",response);
@@ -236,13 +238,26 @@ export class LoginComponent implements OnInit, AfterViewInit {
           });
           }
         // Wrap the navigation inside NgZone.run()
-    
+        else if(userTypeId==2)
+          {
+            this.ngZone.run(() => {
+              this.router.navigate(['/ownerview']);
+              this.dataService.setData(true);
+          });
+          }   
 
     }
-    else if(response.mobileNumber==null){
+    else if(response.mobileNumber==null && this.user.userTypeId==1){
       this.ngZone.run(() => {
         this.dataService.setPhoneData(this.user.mobileNumber);
         this.router.navigate(['/profile/personal']);
+    });
+    
+     }
+  else if(response.mobileNumber==null && this.user.userTypeId==2){
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/bakeprofile/owner']);
     });
     
      }
