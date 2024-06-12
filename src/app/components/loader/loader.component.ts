@@ -9,7 +9,17 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
   <div *ngIf="loading" class="loader-overlay">
-    <div class="loader"></div>
+  <div class="loader">
+  <div class="panWrapper">
+    <div class="pan">
+      <div class="food"></div>
+      <div class="panBase"></div>
+      <div class="panHandle"></div>
+    </div>
+    <div class="panShadow"></div>
+  </div>
+</div>
+
   </div>
 `,
   styleUrl: './loader.component.scss'
