@@ -69,7 +69,18 @@ export class AuthService {
     return null;
   }
 
+  getPhoneNo(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      console.log(decoded)
+      return decoded.PhoneNo || null;
+    }
+    return null;
+  }
 
+
+  
   getUserIdFromToken(): string | null {
     try {
       const decoded:any = this.getToken();

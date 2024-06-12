@@ -211,8 +211,40 @@ export class LoginComponent implements OnInit, AfterViewInit {
   gotoOtp()
  {
   this.user.authId=3;
-  this.dataService.setPhoneData(this.user.mobileNumber);
-  this.router.navigate(['/profile/personal']);
+  this.user.password=""
+  this.user.isMobileVerified=""
+  this.user.userTypeId=0;
+  this.authService.checkUserExist(this.user).subscribe((response) => {
+    console.log("response: ",response);
+    if (response.token) {
+      this.authService.setToken(response.token);
+     let profileId =  this.authService.getUserIdFromToken()
+      let userTypeId = this.authService.getUserTypeId() 
+      this.user.mobileNumber = this.authService.getPhoneNo() || '';
+     
+      console.log(this.user.mobileNumber)
+
+      this.dataService.setPhoneData(this.user.mobileNumber)
+      if(userTypeId==1)
+          {
+
+            this.ngZone.run(() => {
+              this.router.navigate(['/seeker']);
+              this.dataService.setData(true);
+          });
+          }
+        // Wrap the navigation inside NgZone.run()
+     else {
+
+      this.dataService.setPhoneData(this.user.mobileNumber);
+      this.router.navigate(['/profile/personal']);
+     }
+
+    }
+
+})
+
+
  }
 
   logIn(){

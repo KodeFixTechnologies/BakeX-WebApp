@@ -51,12 +51,21 @@ export class SeekerViewComponent implements OnInit {
     this.dataService.setData(true);
 
     this.dataService.getUserData().subscribe((data) => {
-      this.mobileno = data.mobileNumber;
+    //  this.mobileno = data.mobileNumber;
       console.log(data);
     });
+  
+    this.dataService.getPhoneData().subscribe((data)=>{
+      this.mobileno=data;
+    })
+
+
+    console.log(this.mobileno)
 
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
+
+      console.log(this.jobSeeker)
 
       if (this.jobSeeker.profileId != null) {
         this.queryService
