@@ -68,6 +68,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
+      { label: 'Experince' },
       {
         label:'Logo'
       }

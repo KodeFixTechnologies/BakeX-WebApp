@@ -46,8 +46,6 @@ export class OwnerInfoComponent implements OnInit{
     this.user.isMobileVerified='N';
     this.user.userTypeId=2;
 
-    this.dataService.getPhoneData()
- 
     this.dataService.getGoogleData().subscribe((data) => {
       if(data)
         {
@@ -71,6 +69,12 @@ export class OwnerInfoComponent implements OnInit{
      
     })
     this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
+
+    
+    this.dataService.getPhoneData().subscribe((data)=>{
+      this.updatedPersonalInfo.phoneno = data
+    })
+ 
 
     this.genders = [
       { name: 'Male', code: 'M', factor: 1 },

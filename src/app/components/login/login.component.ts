@@ -217,6 +217,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   this.dataService.getUserData().subscribe((data:Users)=>{
     this.user.userTypeId=data.userTypeId;
   })
+  
   console.log(this.user)
   this.authService.checkUserExist(this.user).subscribe((response) => {
     console.log("response: ",response);
