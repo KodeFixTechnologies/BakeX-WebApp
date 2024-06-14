@@ -12,7 +12,7 @@ export interface Job {
 export interface Jobpost {
     PostedById: number;
     title: string;
-    JobTypeId: number;
+    jobTypeId: number | 0;
     CreatedDate: Date;
     ExperienceId: number;
     BusinessId: number;

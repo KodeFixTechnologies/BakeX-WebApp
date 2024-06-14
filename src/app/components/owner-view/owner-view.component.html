@@ -35,17 +35,16 @@
 
 <div class="flex justify-between mt-3 mx-3">
   <p class="text-lg font-medium">My Jobs</p>
-  <button class="text-blue-600">See all</button>
+  <button (click)="goToAllJobs()" class="text-blue-600">See all</button>
 </div>
 
 <!-- job-posts.component.html -->
 
 <!-- Use ng-container to wrap the ngFor loop -->
 
-<div class="relative">
-  <div class="overflow-x-auto flex space-x-4 snap-x snap-mandatory">
-   
-      <ng-container *ngFor="let jobposted of jobPosts">
+<div class="relative pb-20">
+  <div class=" flex-initial snap-x snap-mandatory">
+      <ng-container *ngFor="let jobposted of top3JobPosts">
         <div class="shrink-0 w-11/12 md:w-1/2 lg:w-1/3 px-1">
         <job-card
           [jobPost]="jobposted"
@@ -218,7 +217,8 @@
   header="Create new Job"
   [modal]="true"
   #dialog
-  (onShow)="dialog.maximize()"
+  (onShow)="maximizeDialog()"
+  (onHide)="closeDialog()"
   [(visible)]="visible"
   [style]="{ width: '90vw', 'max-width': '600px', height: '100%' }"
 >
@@ -271,6 +271,7 @@
           id="salary"
           [(ngModel)]="jobPost.Salary"
           class="input-width"
+          
         />
       </div>
       <div class="mb-2 flex flex-col">

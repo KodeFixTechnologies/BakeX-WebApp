@@ -241,6 +241,8 @@
       [modal]="true"
       [style]="{ width: '85%', height: '100%' }"
       [maximizable]="true"
+      #dialog
+      (onShow)="dialog.maximize()"
     >
       <ng-template pTemplate="content">
         <div class="flex flex-col gap-3">
