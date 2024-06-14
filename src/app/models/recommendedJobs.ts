@@ -4,13 +4,19 @@ export interface RecommendedJob {
     title: string;
     jobDescription: string;
     jobType: string;
+    postedById:number;
     createdDate: Date;
-    businessAddress: string;
-    profileImage: string | null;
-    businessName: string;
-    stateName: string;
     districtName: string;
     experienceType: string;
     appliedStatus : number;
   }
   
+
+  // job.interface.ts
+export interface Business {
+  postedById:number;
+  businessAddress: string;
+  profileImage: string | null;
+  businessName: string;
+  profileImageBase64:string;
+}
