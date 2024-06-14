@@ -130,6 +130,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   jobPosts:Jobpost[]=[];
   jobTypes:any;
+  showImageUpload:boolean=false;
 
   bakeryOwnerProfileInfoSubscription:Subscription;
   constructor(
@@ -324,7 +325,7 @@ updateExpertise(event: any) {
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
     this.jobPost.JobTypeId = parseInt(this.jobTypes)
-    
+ 
   
     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
       console.log(response)
@@ -393,6 +394,11 @@ getImageUrl(profileImage: string | null) {
     // Handle unsupported image types or fallback
     return ''; // or default image URL
   }
+}
+
+editImage()
+{
+ this.showImageUpload=!this.showImageUpload;
 }
 
 

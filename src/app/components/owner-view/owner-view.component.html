@@ -316,38 +316,78 @@
       </div>
    
       
+<div *ngIf="displayImage==null">
+  <div *ngIf="activeIndex===3">
 
-<div *ngIf="activeIndex===3">
-
-  <div class="flex justify-between items-center mb-5" >
+    <div class="flex justify-between items-center mb-5" >
+            
+      <div class="flex flex-row items-start">
+          <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
           
+      </div>
+  </div>
+  
+    <div class="mb-2 flex flex-col items-center">
+      <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
+      <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
+  
+       
+  <ng-template pTemplate="content">
+      <ul *ngIf="uploadedFiles.length">
+          <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+      </ul>
+  </ng-template>
+  </p-fileUpload>
+  </div>
+  
+      
+  
+  
+       
+  
+  </div>  
+</div>
+
+<div class="flex justify-between items-center mb-5 ms-10" *ngIf="activeIndex===3">
+  <div class="flex justify-between items-center mb-5" >
+            
     <div class="flex flex-row items-start">
         <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
         
     </div>
 </div>
 
-  <div class="mb-2 flex flex-col items-center">
-    <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
-    <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
+ 
+  <div class="mb-2 flex flex-col items-center" >
+    Your Business Logo
+ 
+  <img class="flex-inline  mb-5" [src]="displayImage" alt="">
 
-     
+  
+  </div>
+
+  <span (click)="editImage()" class="pi pi-file-edit" style="font-size: 1.5rem; color: #4f7af0"> </span> 
+
+    
+ 
+
+  
+</div>
+
+<div *ngIf="showImageUpload && activeIndex===3" class="mb-2 flex flex-col items-center ">
+  <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
+  <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
+
+   
 <ng-template pTemplate="content">
-    <ul *ngIf="uploadedFiles.length">
-        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-    </ul>
+  <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+  </ul>
 </ng-template>
 </p-fileUpload>
 </div>
 
-    
-
-
-     
-
-</div>  
-
-<div class="flex flex-col justify-center">
+<div class="flex flex-col justify-center" >
 
        
   <button  class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="submitJob()" *ngIf="activeIndex === steps.length - 1">Submit</button>
