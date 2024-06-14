@@ -49,33 +49,7 @@ import { JobCardComponent } from "../shared/job-card/job-card.component";
 
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
-  products = [
-    {
-      name: 'Cake Maker',
-      brand: 'Mango Bakers',
-      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png', // replace with actual image paths
-      location: 'Aluva, Ernakulam',
-      inventoryStatus: 'In Stock', // example field
-      price: 29.99
-    },
-    {
-      name: 'Bread Baker',
-      brand: 'Mango Bakers',
-      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png',
-      location: 'Kochi, Ernakulam',
-      inventoryStatus: 'Low Stock',
-      price: 19.99
-    },
-    {
-      name: 'Pastry Chef',
-      brand: 'Mango Bakers',
-      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png',
-      location: 'Thrissur',
-      inventoryStatus: 'Out of Stock',
-      price: 25.99
-    }
-    // Add more products as needed
-  ];
+  
 
 
   responsiveOptions = [
@@ -129,7 +103,13 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   expertise!:Expertise[];
 
   jobPosts:Jobpost[]=[];
+
+
+
   jobTypes:any;
+
+
+ 
 
   bakeryOwnerProfileInfoSubscription:Subscription;
   constructor(
