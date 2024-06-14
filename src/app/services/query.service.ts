@@ -64,6 +64,12 @@ export class QueryService {
     return this.http.post<any>(`${environment.API_URL}getBakeOwner?phoneno=${phoneno.phoneno}`,null)
   }
 
+  getJobPostByOwner(Id:number):Observable<any>
+  {
+  
+    return this.http.get<any>(`${environment.API_URL}getJobPostByOwner/${Id}`);
+  }
+
 
   createNonBakeryowner(NonBakeOwner:IBakerOwnerProfileRequest):Observable<any>
   {

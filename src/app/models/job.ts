@@ -11,7 +11,7 @@ export interface Job {
 
 export interface Jobpost {
     PostedById: number;
-    Title: string;
+    title: string;
     JobTypeId: number;
     CreatedDate: Date;
     ExperienceId: number;
@@ -20,6 +20,7 @@ export interface Jobpost {
     Salary: string;
     DistrictId: number | undefined ;
     IsActive: string;
-    ProfileImage?: Uint8Array | null;
+    ProfileImage?: string | null;
     ExpertiseIds: number[];
+    ExpertiseId?:number[]
 }
