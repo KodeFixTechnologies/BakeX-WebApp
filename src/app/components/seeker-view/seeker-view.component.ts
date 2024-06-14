@@ -3,7 +3,7 @@ import { CardModule } from 'primeng/card';
 import { DataService } from '../../services/data.service';
 import { JobSeeker } from '../../models/jobSeeker';
 import { QueryService } from '../../services/query.service';
-import { RecommendedJob } from '../../models/recommendedJobs';
+import { Business, RecommendedJob } from '../../models/recommendedJobs';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -45,7 +45,8 @@ export class SeekerViewComponent implements OnInit {
   recommendedJobs: RecommendedJob[] = [];
   mobileno: string = '';
   selectedJob: RecommendedJob = {} as RecommendedJob;
-
+  business:Business[] = []
+  businesses: { [key: number]: Business } = {};
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -103,11 +104,35 @@ export class SeekerViewComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.setData(true);
 
-    this.dataService.getUserData().subscribe((data) => {
-      //  this.mobileno = data.mobileNumber;
-      console.log(data);
-    });
 
+
+    this.getPhoneDataorTokenData()
+    this.getJobSeekerDeatils();
+    this.getBusinnessDetails();
+    
+
+  }
+
+  getBusinnessDetails()
+  {
+    this.queryService.getDistinctBusinessDetails().subscribe((data:Business[])=>{
+        this.business=data;
+        this.business.forEach(business=>{
+          if(business.profileImageBase64)
+            {
+              business.profileImageBase64 = `data:image/png;base64,${business.profileImageBase64}`;
+            }
+        })
+        this.business.forEach(business => {
+          this.businesses[business.postedById] = business;
+        });
+        console.log(this.business)
+        console.log(this.businesses)
+    })
+  }
+
+  getPhoneDataorTokenData()
+  {
     this.dataService.getPhoneData().subscribe((data) => {
       if (data) {
         this.mobileno = data;
@@ -115,9 +140,10 @@ export class SeekerViewComponent implements OnInit {
         this.mobileno = this.authService.getPhoneNo() || '';
       }
     });
+  }
 
-    console.log(this.mobileno);
-
+  getJobSeekerDeatils()
+  {
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
 

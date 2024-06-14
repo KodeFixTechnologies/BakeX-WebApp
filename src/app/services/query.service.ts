@@ -8,7 +8,7 @@ import { IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileReq
 import { Jobpost } from '../models/job';
 
 import { JobApplication } from '../models/jobApplcation';
-import { RecommendedJob } from '../models/recommendedJobs';
+import { Business, RecommendedJob } from '../models/recommendedJobs';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,10 @@ export class QueryService {
   {
   
     return this.http.post<any>(`${environment.API_URL}getBakeOwner?phoneno=${phoneno.phoneno}`,null)
+  }
+
+  getDistinctBusinessDetails(): Observable<Business[]> {
+    return this.http.get<Business[]>(`${environment.API_URL}getDistinctBusinessDetails`);
   }
 
   getJobPostByOwner(Id:number):Observable<any>

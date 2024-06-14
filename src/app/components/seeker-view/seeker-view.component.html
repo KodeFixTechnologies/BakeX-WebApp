@@ -205,7 +205,12 @@
         >
           <div>
             <h2 class="font-semibold text-left text-xl text-slate-950">
-              {{ job.businessName }}
+              {{ businesses[job.postedById].businessName }}
+            </h2>
+          </div>
+          <div *ngIf="businesses[job.postedById].profileImageBase64">
+            <h2 class="font-semibold text-left text-xl text-slate-950">
+             <img class="w-10 h-10" [src]="businesses[job.postedById].profileImageBase64"> 
             </h2>
           </div>
           <div class="my-4">
@@ -241,7 +246,7 @@
         <div class="flex flex-col gap-3">
           <div>
             <p class="font-bold text-xl text-teal-700 mt-2">
-              {{ selectedJob.businessName }}
+              <!-- {{ selectedJob.businessName }} -->
             </p>
             <p class="text-xs mt-2">Date : {{ selectedJob.createdDate }}</p>
           </div>
@@ -261,7 +266,7 @@
           <hr />
           <div>
             <h3 class="text-sm font-medium text-slate-950">Address</h3>
-            <p class="text-xs mt-2">{{ selectedJob.businessAddress }}</p>
+            <!-- <p class="text-xs mt-2">{{ selectedJob.businessAddress }}</p> -->
           </div>
           <hr />
 
