@@ -24,6 +24,7 @@ import { Experience } from '../../models/experience';
 import { ListboxModule } from 'primeng/listbox';
 import { Expertise } from '../../models/expertise';
 import { Jobpost } from '../../models/job';
+import { CarouselModule } from 'primeng/carousel';
 import { Carousel } from 'flowbite';
 import type {
     CarouselItem,
@@ -38,7 +39,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'owner-view',
   standalone: true,
   imports: [DialogModule,FormsModule,CommonModule,CardModule,ButtonModule,OwnerNavbarComponent,FileUploadModule,DropdownModule,StepperModule,RouterOutlet,StepsModule,
-    ChipsModule,ListboxModule,ButtonModule],
+    ChipsModule,ListboxModule,ButtonModule,CarouselModule],
   templateUrl: './owner-view.component.html',
   styleUrl: './owner-view.component.scss'
 })
@@ -47,6 +48,53 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
+  products = [
+    {
+      name: 'Cake Maker',
+      brand: 'Mango Bakers',
+      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png', // replace with actual image paths
+      location: 'Aluva, Ernakulam',
+      inventoryStatus: 'In Stock', // example field
+      price: 29.99
+    },
+    {
+      name: 'Bread Baker',
+      brand: 'Mango Bakers',
+      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png',
+      location: 'Kochi, Ernakulam',
+      inventoryStatus: 'Low Stock',
+      price: 19.99
+    },
+    {
+      name: 'Pastry Chef',
+      brand: 'Mango Bakers',
+      image: 'https://www.mangobakers.com/wp-content/uploads/2018/05/Logo-SL-BG.png',
+      location: 'Thrissur',
+      inventoryStatus: 'Out of Stock',
+      price: 25.99
+    }
+    // Add more products as needed
+  ];
+
+
+  responsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+      numScroll: 3
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+      numScroll: 2
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+      numScroll: 1
+    }
+  ];
+
   items: MenuItem[] = [];
   bakeMember:BakeMember={} as BakeMember
   visible:boolean=false;

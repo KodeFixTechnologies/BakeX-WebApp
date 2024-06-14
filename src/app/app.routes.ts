@@ -65,10 +65,7 @@ export const routes: Routes = [
             },
             {
                 path:'business-info', component:BusinessInfoComponent
-            },
-        
-            
-   
+            },  
         ],
     },
 
