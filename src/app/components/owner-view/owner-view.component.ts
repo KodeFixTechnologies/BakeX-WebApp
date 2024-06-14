@@ -33,15 +33,16 @@ import type {
 } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
 import { AuthService } from '../../services/auth.service';
+import { JobCardComponent } from "../shared/job-card/job-card.component";
 
 
 @Component({
-  selector: 'owner-view',
-  standalone: true,
-  imports: [DialogModule,FormsModule,CommonModule,CardModule,ButtonModule,OwnerNavbarComponent,FileUploadModule,DropdownModule,StepperModule,RouterOutlet,StepsModule,
-    ChipsModule,ListboxModule,ButtonModule,CarouselModule],
-  templateUrl: './owner-view.component.html',
-  styleUrl: './owner-view.component.scss'
+    selector: 'owner-view',
+    standalone: true,
+    templateUrl: './owner-view.component.html',
+    styleUrl: './owner-view.component.scss',
+    imports: [DialogModule, FormsModule, CommonModule, CardModule, ButtonModule, OwnerNavbarComponent, FileUploadModule, DropdownModule, StepperModule, RouterOutlet, StepsModule,
+        ChipsModule, ListboxModule, ButtonModule, CarouselModule, JobCardComponent]
 })
 
 
@@ -117,9 +118,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       { label: 'Job Details' },
       { label: 'Skills' },
       { label: 'Experince' },
-      // {
-      //   label:'Logo'
-      // }
+      {
+         label:'Logo'
+       }
       // Add more steps as needed
   ];
   values: string[] | undefined;
@@ -127,6 +128,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   experience!:Experience[];
   expertise!:Expertise[];
 
+  jobPosts:Jobpost[]=[];
   jobTypes:any;
 
   bakeryOwnerProfileInfoSubscription:Subscription;
@@ -145,7 +147,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   maxSize:number=10000;
   selectedExpertise!: Expertise[];
-
+  displayImage:any;
   ngOnInit(): void {
 
      this.experience= [
@@ -205,12 +207,29 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
      console.log(this.phoneno)
 
     
-   this.queryService.getBakeOwner({ phoneno: this.phoneno}).subscribe((data)=>{
-       this.bakeMember=data;
-       this.selectedDistrict= this.district?.find(item=> item.name===data.district);
-       console.log(this.selectedDistrict)
+     this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
+      next: (data) => {
+        this.bakeMember = data;
+        this.selectedDistrict = this.district?.find(item => item.name === data.district);
+        console.log(this.selectedDistrict);
 
-   });
+        console.log(data)
+    
+        if (this.bakeMember.profileImageBase64) {
+          const imageUrl = `data:image/png;base64,${this.bakeMember.profileImageBase64}`; // Adjust the MIME type as per your image type
+          this.displayImage = imageUrl;
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching bake owner data', error);
+      },
+      complete: () => {
+        
+        console.log('Request completed');
+        this.getJobPostByOwner(this.bakeMember.memberId); // Assuming ownerId is available in bakeMember
+      }
+    });
+    
 
 
     this.showDialogSubscription = this.dataService.showDialog$.subscribe(() => {
@@ -224,6 +243,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   this.dataService.setData(false)
    
+   this.selectedDistrict = this.district.find(item=> item.id===this.bakeMember.districtId)
+
 
   }
 
@@ -247,6 +268,22 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
 
    
+  }
+
+  getJobPostByOwner(Id: number) {
+    this.queryService.getJobPostByOwner(Id).subscribe({
+      next: (data) => {
+        this.jobPosts=data;
+        
+        
+      },
+      error: (error) => {
+        console.error('Error fetching job post data', error);
+      },
+      complete: () => {
+        console.log(this.jobPosts)
+      }
+    });
   }
 
   updateExperience(event:any)
@@ -337,9 +374,27 @@ myUploader(event: any) {
 }
 
 sendToBackend(base64String: string) {
-  
+  this.jobPost.ProfileImage=base64String;
   console.log(base64String)
 }
+
+getImageUrl(profileImage: string | null) {
+  console.log(profileImage)
+  let imageType = '';
+  if (profileImage?.startsWith('data:image/png')) {
+    imageType = 'png';
+  } else if (profileImage?.startsWith('data:image/jpeg') || profileImage?.startsWith('data:image/jpg')) {
+    imageType = 'jpeg';
+  }
+
+  if (imageType) {
+    return `data:image/${imageType};base64,${profileImage?.split(',')[1]}`;
+  } else {
+    // Handle unsupported image types or fallback
+    return ''; // or default image URL
+  }
+}
+
 
 }
 
