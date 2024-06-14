@@ -21,6 +21,7 @@ import { JobViewComponent } from './job-view/job-view.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EducationInfoComponent } from './components/profile/stepper/education-info/education-info.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { OwnerJobsComponent } from './components/owner-view/owner-jobs/owner-jobs.component';
 
 export const routes: Routes = [
     {
@@ -66,6 +67,7 @@ export const routes: Routes = [
             {
                 path:'business-info', component:BusinessInfoComponent
             },  
+          
         ],
     },
 
@@ -75,6 +77,10 @@ export const routes: Routes = [
 
     {
         path:'ownerview',component:OwnerViewComponent
+    },
+
+    {
+        path:'owner-jobs', component:OwnerJobsComponent
     },
     
     {
