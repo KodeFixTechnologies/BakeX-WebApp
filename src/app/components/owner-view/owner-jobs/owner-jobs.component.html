@@ -1,6 +1,27 @@
+
+
 <div class="mt-4">
   <h2 class="ml-6 text-lg text-blue-600 font-semibold">Your Jobs</h2>
 </div>
+
+<div class="relative pb-20">
+  <div class=" flex-initial snap-x snap-mandatory">
+      <ng-container *ngFor="let jobposted of jobPost">
+        <div class="shrink-0 w-11/12 md:w-1/2 lg:w-1/3 px-1">
+        <job-card
+          [jobPost]="jobposted"
+          [displayImage]="displayImage"
+          [bakeMember]="bakeMember"
+        >
+        </job-card>
+      </div>
+      </ng-container>
+    </div>
+  </div>
+
+
+
+<!-- 
 
 <div class="ml-1 flex flex-col">
   <div class="shrink-0 w-full md:w-1/2 lg:w-1/3 pl-3 pr-10">
@@ -100,19 +121,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="flex flex-col mt-4 mb-5">
-  <h2 class="ml-6 text-lg text-blue-600 font-semibold">Applicants</h2>
 
-  <div class="bg-primary-white py-5 mt-3 flex ml-5 mr-10 rounded-lg items-center ">
-    <div class="inline-block ml-4 ">
-      <img
-        src="https://cdn.britannica.com/52/252752-050-2E120356/Cricketer-Rohit-Sharma-2023.jpg"
-        alt=""
-        class="h-10 w-10 rounded-full "
-      />
-    </div>
-    <h2 class="ml-9 text-lg font-medium">Jayakrishnan S</h2>
-  </div>
-</div>
+
+
+<owner-navbar></owner-navbar>

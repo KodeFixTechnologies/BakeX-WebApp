@@ -1,7 +1,7 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { QueryService } from '../../services/query.service';
-import { DialogModule } from 'primeng/dialog';
+import { Dialog, DialogModule } from 'primeng/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { BakeMember } from '../../models/bakeMember';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import { Dropdown } from 'flowbite';
 import { DropdownModule } from 'primeng/dropdown';
 import { District } from '../../models/location';
 import { Stepper, StepperModule } from 'primeng/stepper';
-import { RouterOutlet } from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { StepsModule } from 'primeng/steps';
 import { ChipsModule } from 'primeng/chips';
 import { Experience } from '../../models/experience';
@@ -34,6 +34,7 @@ import type {
 import type { InstanceOptions } from 'flowbite';
 import { AuthService } from '../../services/auth.service';
 import { JobCardComponent } from "../shared/job-card/job-card.component";
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -50,8 +51,8 @@ import { JobCardComponent } from "../shared/job-card/job-card.component";
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
   
-
-
+  @ViewChild('dialog', { static: false }) dialog: Dialog | undefined;
+  private backNavigationSubscription: Subscription | undefined;
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -103,6 +104,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   expertise!:Expertise[];
 
   jobPosts:Jobpost[]=[];
+  top3JobPosts:Jobpost[]=[];
 
 
 
@@ -120,6 +122,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     private messageService:MessageService,
     private profileService:ProfileService,
     private authService:AuthService,
+    private router:Router
   )
   {
     this.bakeryOwnerProfileInfoSubscription = this.profileService.bakeryOwnerProfileInfo$.subscribe();
@@ -130,6 +133,12 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   selectedExpertise!: Expertise[];
   displayImage:any;
   ngOnInit(): void {
+
+    this.backNavigationSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart && this.visible) {
+        this.visible = false;
+      }
+    });
 
      this.experience= [
       {
@@ -215,6 +224,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
     this.showDialogSubscription = this.dataService.showDialog$.subscribe(() => {
       this.visible = true; // Show the dialog when the service notifies
+      history.pushState(null, '', location.href);
     });
 
 
@@ -229,6 +239,16 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   }
 
+  closeDialog(): void {
+    this.visible = false;
+    history.back();
+  }
+
+  maximizeDialog(): void {
+    if (this.dialog) {
+      this.dialog.maximize();
+    }
+  }
 
   loadPhoneNumber() {
     const token = this.authService.getToken();
@@ -255,7 +275,13 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     this.queryService.getJobPostByOwner(Id).subscribe({
       next: (data) => {
         this.jobPosts=data;
-        
+        this.dataService.setPostedJobData(this.jobPosts)
+        this.dataService.setBakeryOwnerData(this.bakeMember)
+        this.dataService.setImage(this.displayImage)
+        this.top3JobPosts=this.jobPosts.slice(0,3);
+
+        console.log(this.jobPosts)
+      
         
       },
       error: (error) => {
@@ -304,7 +330,7 @@ updateExpertise(event: any) {
     this.jobPost.PostedById=this.bakeMember.memberId
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
-    this.jobPost.JobTypeId = parseInt(this.jobTypes)
+    this.jobPost.jobTypeId = parseInt(this.jobTypes)
  
   
     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
@@ -381,6 +407,11 @@ editImage()
  this.showImageUpload=!this.showImageUpload;
 }
 
+
+goToAllJobs()
+{
+  this.router.navigate(['\owner-jobs']);
+}
 
 }
 
