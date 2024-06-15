@@ -76,16 +76,23 @@ export class PersonalInfoComponent {
           this.user.authId=1;
           console.log(this.user)
         }
-        else {
+        else if(this.user.password) {
 
           this.dataService.getUserData().subscribe((data)=>{
             this.user.password=data.password
-            this.user.authId=2;
+            this.user.authId=2; // 
             this.updatedPersonalInfo.phoneno= data.mobileNumber;
           })
         }
+        else {
+          this.user.authId=3
+        }
       
       
+        this.dataService.getPhoneData().subscribe((data)=>{
+          console.log(data)
+          this.updatedPersonalInfo.phoneno=data;
+        })
      
     })
 
@@ -99,7 +106,12 @@ export class PersonalInfoComponent {
       { name: 'Other', code: 'O', factor: 3 }
     ];
     this.updatedPersonalInfo = this.profileService.getProfileInformation().personalInformation;
-
+   
+    this.dataService.getPhoneData().subscribe((data)=>{
+      console.log(data)
+      this.updatedPersonalInfo.phoneno=data;
+    })
+    
     console.log(this.updatedPersonalInfo)
     this.dataService.setData(false)
 

@@ -15,4 +15,6 @@ export interface BakeMember
     profileImage: string | null;
     membershipExpiry: Date | null;
     age: Date;
+    profileImageBase64:string | null;
+    district?:string;
 }

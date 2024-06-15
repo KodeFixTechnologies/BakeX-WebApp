@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Users } from '../models/user';
+import { Jobpost } from '../models/job';
+import { BakeMember } from '../models/bakeMember';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,12 @@ export class DataService {
 
 
   private userSubject = new BehaviorSubject<any>(null);
+
+  private jobSubject = new BehaviorSubject<any>(null);
+
+  private bakeOwnersubject = new BehaviorSubject<any>(null);
+
+  private displayImage = new BehaviorSubject<any>(null);
 
   showDialog$ = this.showDialogSource.asObservable();
 
@@ -63,6 +71,45 @@ export class DataService {
 
 
 
+  setPostedJobData(data:Jobpost[])
+  {
+    console.log(data)
+    this.jobSubject.next(data);
+    this.setSessionStorageItem('jobPosts', data);
+  }
+
+  getPostedJobData()
+  {
+    return this.jobSubject.asObservable();
+  }
+
+  
+  setBakeryOwnerData(data:BakeMember)
+  {
+    this.bakeOwnersubject.next(data);
+    this.setSessionStorageItem('bakeMember', data);
+  }
+
+  getBakeryOwnerData()
+  {
+    return this.bakeOwnersubject.asObservable();
+  }
+
+  setImage(data:string)
+  {
+    this.displayImage.next(data);
+    this.setSessionStorageItem('displayImage', data);
+  }
+
+  getImage()
+  {
+    return this.displayImage.asObservable();
+  }
+
+
+
+
+
   setUserData(data:Users)
   {
     this.userSubject.next(data);
@@ -72,6 +119,32 @@ export class DataService {
   {
     return this.userSubject.asObservable();
   }
+  private setSessionStorageItem(key: string, data: any): void {
+    sessionStorage.setItem(key, JSON.stringify(data));
+  }
 
-  constructor() { }
+  private getSessionStorageItem(key: string): any {
+    const data = sessionStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  }
+
+  constructor() { 
+
+    const storedJobPosts = this.getSessionStorageItem('jobPosts');
+    if (storedJobPosts) {
+      this.jobSubject.next(storedJobPosts);
+    }
+  
+    // Initialize bakeOwnersubject from sessionStorage
+    const storedBakeMember = this.getSessionStorageItem('bakeMember');
+    if (storedBakeMember) {
+      this.bakeOwnersubject.next(storedBakeMember);
+    }
+  
+    // Initialize displayImage from sessionStorage
+    const storedDisplayImage = this.getSessionStorageItem('displayImage');
+    if (storedDisplayImage) {
+      this.displayImage.next(storedDisplayImage);
+    }
+  }
 }

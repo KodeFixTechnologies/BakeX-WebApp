@@ -52,6 +52,10 @@ export class ProfileComponent  implements OnInit{
         routerLink:'expertise'
      },
      {
+      label:' ',
+      routerLink:'education'
+   },
+     {
       label:'',
       routerLink:'experience'
    },

@@ -1,0 +1,54 @@
+
+<div  class="mt-3 ml-6 p-3 bg-primary-white rounded-xl flex-initial flex-nowrap">
+      <div >
+        <div class="flex justify-between pt-1">
+          <div class="flex pt-2">
+            <div>
+              <img [src]="displayImage" alt="" class="w-16 h-16 ml-2" />
+            </div>
+            <div class="ml-3 mt-1">
+              <h3 class="text-lg font-medium text-primary-black">{{ jobPost?.title }}</h3>
+              <p class="text-xs text-primary-grey">{{ bakeMember?.businessName }}</p>
+            </div>
+          </div>
+          <div class="pr-4 pt-4">
+            <span class="pi pi-pencil" style="font-size: 1.5rem; color: #1d4ed8"></span>
+            <p> Edit</p>
+          </div>
+          
+        </div>
+        <div class="mt-3 mx-3 flex gap-1 pl-2 items-center">
+          <span class="pi pi-map-marker" style="font-size: 1rem; color: #1d4ed8"></span>
+          <p class="text-sm font-medium text-primary-black">{{ bakeMember?.district }}</p>
+        </div>
+        <div class=" flex justify-between  gap-3 items-center my-4 pr-4">
+          <div  class="p-2 rounded-md bg-gray-200  flex  shadow-lg ml-4 w-20">
+            <p class="text-xs font-medium">{{ getJobType() }}</p>
+           
+          </div>
+          <div (click)="seeApplicants()" class="flex flex-col items-center ">
+            <span class="pi pi-users ml-8" style="font-size: 2.0rem; color: #1d4ed8"></span>
+            <p class="text-sm mt-1 ml-7"> <span class="ml-7">View</span> <br class="ml-2">Candidates</p>
+            
+          </div>
+          <!-- Add more job types here based on your data -->
+        </div>
+
+       
+      </div>
+    </div>
+
+
+    <p-dialog
+      header="View Applicants"
+      [(visible)]="displayDialog"
+      [modal]="true"
+      [style]="{ width: '85%', height: '100%' }"
+      [maximizable]="true"
+      #dialog
+      (onShow)="dialog.maximize()"
+    >
+      <ng-template pTemplate="content">
+
+        </ng-template>
+</p-dialog>

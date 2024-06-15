@@ -1,7 +1,7 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { QueryService } from '../../services/query.service';
-import { DialogModule } from 'primeng/dialog';
+import { Dialog, DialogModule } from 'primeng/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { BakeMember } from '../../models/bakeMember';
 import { FormsModule } from '@angular/forms';
@@ -17,13 +17,14 @@ import { Dropdown } from 'flowbite';
 import { DropdownModule } from 'primeng/dropdown';
 import { District } from '../../models/location';
 import { Stepper, StepperModule } from 'primeng/stepper';
-import { RouterOutlet } from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { StepsModule } from 'primeng/steps';
 import { ChipsModule } from 'primeng/chips';
 import { Experience } from '../../models/experience';
 import { ListboxModule } from 'primeng/listbox';
 import { Expertise } from '../../models/expertise';
 import { Jobpost } from '../../models/job';
+import { CarouselModule } from 'primeng/carousel';
 import { Carousel } from 'flowbite';
 import type {
     CarouselItem,
@@ -31,21 +32,45 @@ import type {
     CarouselInterface,
 } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
+import { AuthService } from '../../services/auth.service';
+import { JobCardComponent } from "../shared/job-card/job-card.component";
+import { Location } from '@angular/common';
 
 
 @Component({
-  selector: 'owner-view',
-  standalone: true,
-  imports: [DialogModule,FormsModule,CommonModule,CardModule,ButtonModule,OwnerNavbarComponent,FileUploadModule,DropdownModule,StepperModule,RouterOutlet,StepsModule,
-    ChipsModule,ListboxModule,ButtonModule],
-  templateUrl: './owner-view.component.html',
-  styleUrl: './owner-view.component.scss'
+    selector: 'owner-view',
+    standalone: true,
+    templateUrl: './owner-view.component.html',
+    styleUrl: './owner-view.component.scss',
+    imports: [DialogModule, FormsModule, CommonModule, CardModule, ButtonModule, OwnerNavbarComponent, FileUploadModule, DropdownModule, StepperModule, RouterOutlet, StepsModule,
+        ChipsModule, ListboxModule, ButtonModule, CarouselModule, JobCardComponent]
 })
 
 
 
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
+  
+  @ViewChild('dialog', { static: false }) dialog: Dialog | undefined;
+  private backNavigationSubscription: Subscription | undefined;
+  responsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+      numScroll: 3
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+      numScroll: 2
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+      numScroll: 1
+    }
+  ];
+
   items: MenuItem[] = [];
   bakeMember:BakeMember={} as BakeMember
   visible:boolean=false;
@@ -67,9 +92,10 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
+      { label: 'Experince' },
       {
-        label:'Logo'
-      }
+         label:'Logo'
+       }
       // Add more steps as needed
   ];
   values: string[] | undefined;
@@ -77,7 +103,16 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   experience!:Experience[];
   expertise!:Expertise[];
 
+  jobPosts:Jobpost[]=[];
+  top3JobPosts:Jobpost[]=[];
+
+
+
   jobTypes:any;
+  showImageUpload:boolean=false;
+
+
+ 
 
   bakeryOwnerProfileInfoSubscription:Subscription;
   constructor(
@@ -85,7 +120,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     private queryService:QueryService,
     private cdr:ChangeDetectorRef,
     private messageService:MessageService,
-    private profileService:ProfileService
+    private profileService:ProfileService,
+    private authService:AuthService,
+    private router:Router
   )
   {
     this.bakeryOwnerProfileInfoSubscription = this.profileService.bakeryOwnerProfileInfo$.subscribe();
@@ -94,8 +131,14 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   maxSize:number=10000;
   selectedExpertise!: Expertise[];
-
+  displayImage:any;
   ngOnInit(): void {
+
+    this.backNavigationSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart && this.visible) {
+        this.visible = false;
+      }
+    });
 
      this.experience= [
       {
@@ -135,22 +178,53 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   ];
   
 
+    this.loadPhoneNumber()
+    //  this.dataService.getUserData().subscribe((user=>{
+    //   this.phoneno= user.mobileNumber
+    //  }))
  
-     this.dataService.getUserData().subscribe((user=>{
-      this.phoneno= user.mobileNumber
-     }))
+     this.dataService.getPhoneData().subscribe((data)=>{
+      if(data)
+      this.phoneno=data;
+      else
+    this.phoneno=this.authService.getPhoneNo() || '';
+     })
+
+  
+
+     console.log(this.authService.getToken)
+
+     console.log(this.phoneno)
 
     
-   this.queryService.getBakeOwner({ phoneno: this.phoneno}).subscribe((data)=>{
-       this.bakeMember=data;
-       this.selectedDistrict= this.district?.find(item=> item.name===data.district);
-       console.log(this.selectedDistrict)
+     this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
+      next: (data) => {
+        this.bakeMember = data;
+        this.selectedDistrict = this.district?.find(item => item.name === data.district);
+        console.log(this.selectedDistrict);
 
-   });
+        console.log(data)
+    
+        if (this.bakeMember.profileImageBase64) {
+          const imageUrl = `data:image/png;base64,${this.bakeMember.profileImageBase64}`; // Adjust the MIME type as per your image type
+          this.displayImage = imageUrl;
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching bake owner data', error);
+      },
+      complete: () => {
+        
+        console.log('Request completed');
+        this.getJobPostByOwner(this.bakeMember.memberId); // Assuming ownerId is available in bakeMember
+      }
+    });
+    
 
 
     this.showDialogSubscription = this.dataService.showDialog$.subscribe(() => {
       this.visible = true; // Show the dialog when the service notifies
+      history.pushState(null, '', location.href);
     });
 
 
@@ -158,11 +232,34 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       this.expertise=data;
     })
 
-
+  this.dataService.setData(false)
    
+   this.selectedDistrict = this.district.find(item=> item.id===this.bakeMember.districtId)
+
 
   }
 
+  closeDialog(): void {
+    this.visible = false;
+    history.back();
+  }
+
+  maximizeDialog(): void {
+    if (this.dialog) {
+      this.dialog.maximize();
+    }
+  }
+
+  loadPhoneNumber() {
+    const token = this.authService.getToken();
+    if (token) {
+      this.phoneno = this.authService.getPhoneNo() || '';
+      console.log('Phone number loaded:', this.phoneno);
+    } else {
+      console.log('Token not available yet');
+      // Optionally, you can retry after some delay or handle the missing token case
+    }
+  }
   
   ngOnDestroy(): void {
     console.log(this.showDialogSubscription?.unsubscribe())
@@ -172,6 +269,28 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
 
    
+  }
+
+  getJobPostByOwner(Id: number) {
+    this.queryService.getJobPostByOwner(Id).subscribe({
+      next: (data) => {
+        this.jobPosts=data;
+        this.dataService.setPostedJobData(this.jobPosts)
+        this.dataService.setBakeryOwnerData(this.bakeMember)
+        this.dataService.setImage(this.displayImage)
+        this.top3JobPosts=this.jobPosts.slice(0,3);
+
+        console.log(this.jobPosts)
+      
+        
+      },
+      error: (error) => {
+        console.error('Error fetching job post data', error);
+      },
+      complete: () => {
+        console.log(this.jobPosts)
+      }
+    });
   }
 
   updateExperience(event:any)
@@ -211,8 +330,8 @@ updateExpertise(event: any) {
     this.jobPost.PostedById=this.bakeMember.memberId
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
-    this.jobPost.JobTypeId = parseInt(this.jobTypes)
-    
+    this.jobPost.jobTypeId = parseInt(this.jobTypes)
+ 
   
     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
       console.log(response)
@@ -262,8 +381,36 @@ myUploader(event: any) {
 }
 
 sendToBackend(base64String: string) {
-  
+  this.jobPost.ProfileImage=base64String;
   console.log(base64String)
+}
+
+getImageUrl(profileImage: string | null) {
+  console.log(profileImage)
+  let imageType = '';
+  if (profileImage?.startsWith('data:image/png')) {
+    imageType = 'png';
+  } else if (profileImage?.startsWith('data:image/jpeg') || profileImage?.startsWith('data:image/jpg')) {
+    imageType = 'jpeg';
+  }
+
+  if (imageType) {
+    return `data:image/${imageType};base64,${profileImage?.split(',')[1]}`;
+  } else {
+    // Handle unsupported image types or fallback
+    return ''; // or default image URL
+  }
+}
+
+editImage()
+{
+ this.showImageUpload=!this.showImageUpload;
+}
+
+
+goToAllJobs()
+{
+  this.router.navigate(['\owner-jobs']);
 }
 
 }

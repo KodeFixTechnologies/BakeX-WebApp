@@ -61,4 +61,9 @@ export class OwnerNavbarComponent {
   showDialog() {
    this.dataService.openDialog();
 }
+
+goToJobPage()
+{
+  this.router.navigate(['/owner-jobs'])
+}
 }

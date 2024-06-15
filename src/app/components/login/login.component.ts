@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   signupClick() {
     this.isLogin = !this.isLogin;
-    this.loadGoogle()
+   // this.loadGoogle()
   }
 
   decodeJWTToken(token: string) {
@@ -183,6 +183,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.user.id=0
     this.user.createdAt= new Date
     this.user.userTypeId=1
+    this.user.mobileNumber= this.mobileNumber;
     this.dataService.setUserData(this.user)
   
     this.queryService.checkUserExist(this.user).subscribe((response) => {
@@ -207,6 +208,65 @@ export class LoginComponent implements OnInit, AfterViewInit {
   })
   }
 
+
+  gotoOtp()
+ {
+  this.user.authId=3;
+  this.user.password=""
+  this.user.isMobileVerified=""
+  this.dataService.getUserData().subscribe((data:Users)=>{
+    this.user.userTypeId=data.userTypeId;
+  })
+  
+  console.log(this.user)
+  this.authService.checkUserExist(this.user).subscribe((response) => {
+    console.log("response: ",response);
+    if (response.token) {
+      this.authService.setToken(response.token);
+     let profileId =  this.authService.getUserIdFromToken()
+      let userTypeId = this.authService.getUserTypeId() 
+      this.user.mobileNumber = this.authService.getPhoneNo() || '';
+     
+      console.log(this.user.mobileNumber)
+
+      this.dataService.setPhoneData(this.user.mobileNumber)
+      if(userTypeId==1)
+          {
+
+            this.ngZone.run(() => {
+              this.router.navigate(['/seeker']);
+              this.dataService.setData(true);
+          });
+          }
+        // Wrap the navigation inside NgZone.run()
+        else if(userTypeId==2)
+          {
+            this.ngZone.run(() => {
+              this.router.navigate(['/ownerview']);
+              this.dataService.setData(true);
+          });
+          }   
+
+    }
+    else if(response.mobileNumber==null && this.user.userTypeId==1){
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/profile/personal']);
+    });
+    
+     }
+  else if(response.mobileNumber==null && this.user.userTypeId==2){
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/bakeprofile/owner']);
+    });
+    
+     }
+
+})
+
+
+ }
 
   logIn(){
 

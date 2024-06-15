@@ -8,7 +8,8 @@ import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class 
+AuthService {
 
   constructor(
     private http: HttpClient
@@ -69,7 +70,18 @@ export class AuthService {
     return null;
   }
 
+  getPhoneNo(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      console.log(decoded)
+      return decoded.PhoneNo || null;
+    }
+    return null;
+  }
 
+
+  
   getUserIdFromToken(): string | null {
     try {
       const decoded:any = this.getToken();
@@ -79,6 +91,7 @@ export class AuthService {
       return null;
     }
   }
+  
   
 
 }

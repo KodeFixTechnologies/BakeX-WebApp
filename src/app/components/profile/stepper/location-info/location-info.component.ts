@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../../services/profile.service';
 import { QueryService } from '../../../../services/query.service';
 import { ButtonModule } from 'primeng/button'
@@ -13,6 +13,15 @@ import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
 import { InputOtpModule } from 'primeng/inputotp';
+
+interface State {
+  state: string;
+  districts: string[];
+}
+interface StatesData {
+  states: State[];
+}
+
 @Component({
   selector: 'location-info',
   standalone: true,
@@ -20,16 +29,24 @@ import { InputOtpModule } from 'primeng/inputotp';
   templateUrl: './location-info.component.html',
   styleUrl: './location-info.component.scss'
 })
-export class LocationInfoComponent implements OnInit {
+
+
+export class LocationInfoComponent implements OnInit, AfterViewInit {
 
 
   constructor(
     private profileService: ProfileService,
     private queryService: QueryService,
     private router:Router,
-    private fileService:FileService
+    private fileService:FileService,
+    private ref:ChangeDetectorRef
   ) {
 
+  }
+  ngAfterViewInit(): void {
+
+
+    console.log(this.selectedState)
   }
 
   updatedlocationInfo = {
@@ -54,10 +71,12 @@ export class LocationInfoComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.profileService.profileInformation)
     
-    this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
-    console.log(this.updatedlocationInfo)
+
+   
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
+
+      
   
       console.log(data.states)
     })
@@ -66,12 +85,18 @@ export class LocationInfoComponent implements OnInit {
     this.queryService.getStateAndDistrict().subscribe((data)=>{
       //console.log(data)
     })
+
+    this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
+   
   }
+
+
 
 
   onStateChange() {
     console.log(this.selectedState)
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
+    console.log(this.districts)
   }
   nextPage() {
 

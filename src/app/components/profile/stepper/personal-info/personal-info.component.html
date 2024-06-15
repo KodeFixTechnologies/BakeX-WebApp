@@ -1,4 +1,63 @@
-<div class=" w-full  flex flex-col items-center justify-center mt-5">
+<div class="max-w-screen-lg mx-auto">
+  <div class="flex flex-col justify-center items-center mt-10">
+    <h1 class="text-primary-black text-2xl">Complete Your Profile</h1>
+  </div>
+  <div class="flex flex-col mt-6 p-3 gap-4 md:items-center">
+    <div class="flex flex-col">
+      <label class="text-primary-black ml-5">First Name</label>
+      <input [(ngModel)]="updatedPersonalInfo.firstname"
+        type="text"
+        class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-primary-black ml-5">Last Name</label>
+      <input [(ngModel)]="updatedPersonalInfo.lastname"
+        type="text"
+        class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
+      />
+    </div>
+
+    <div class="flex flex-col md:w-72">
+      <label class="text-primary-black ml-5">Date of Birth </label>
+      <div class=" mt-3 ms-3">
+        <p-calendar [(ngModel)]="updatedPersonalInfo.age" [style]="{ width: '95%',  backgroundcolor: '#f6f6f6', }"></p-calendar>
+      </div>
+     
+    </div>
+
+    <div class="flex flex-col w-12/12 md:w-72">
+      <label class="text-primary-black ml-5">Gender </label>
+      <div class="mt-3 ml-3 w-25rem">
+        <p-dropdown
+          [options]="genders"
+          [(ngModel)]="updatedPersonalInfo.gender"
+          optionLabel="name"
+          placeholder="Select a Gender"
+          [style]="{ width: '95%', backgroundColor: '#f6f6f6' }"
+        />
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label class="text-primary-black ml-5">Phone Number</label>
+      <input [(ngModel)]="updatedPersonalInfo.phoneno" [disabled]="true"
+        type="tel"
+        class="mt-2 ml-3 p-3 w-11/12 border rounded-xl bg-primary-white outline-none"
+      />
+    </div>
+    
+    <div class="flex flex-col justify-center items-center">
+      <button (click)="nextPage()"
+        class="py-3 px-32 bg-blue-600 mt-5 border-none rounded-2xl text-primary-white"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class=" w-full  flex flex-col items-center justify-center mt-5">
     <p-card>
         <ng-template pTemplate="title"> Personal Information </ng-template>
         <ng-template pTemplate="subtitle"> Enter your personal information </ng-template>
@@ -42,19 +101,15 @@
                     <label for="phoneNumber" class="flex align-items-center">Phone Number</label>
                     <input #phoneNumber="ngModel" id="phoneNumber" type="tel" required pInputText [(ngModel)]="updatedPersonalInfo.phoneno" [ngClass]="{ 'ng-dirty': (phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid) }" />
                     <small class="p-error" *ngIf="(phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid)">Phone number is required.</small>
-                </div>
-                
+                </div> -->
 
-
-
-                
-               
-                <!-- <div class="field ">
+<!-- <div class="field ">
                     <label for="gender" class="flex align-items-center">Gender</label>
                     <input #gender="ngModel" id="age" type="number" required pInputText [(ngModel)]="personalInformation.gender" [ngClass]="{ 'ng-dirty': (gender.invalid && submitted) || (gender.dirty && gender.invalid) }" />
                     <small class="p-error" *ngIf="(age.invalid && submitted) || (age.dirty && age.invalid)">Age is required.</small>
                 </div> -->
-            </div>
+
+<!-- </div>
         </ng-template>
         <ng-template pTemplate="footer">
             <div class="grid grid-nogutter justify-content-end">
@@ -62,4 +117,4 @@
             </div>
         </ng-template>
     </p-card>
-</div>
+</div> -->

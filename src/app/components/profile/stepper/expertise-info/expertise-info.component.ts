@@ -41,6 +41,7 @@ export class ExpertiseInfoComponent implements OnInit {
   
 
     this.queryService.getExpertiseTypes().subscribe((data)=>{
+      console.log(data)
       this.expertise=data;
     })
 
@@ -102,9 +103,9 @@ export class ExpertiseInfoComponent implements OnInit {
   nextPage() {
 
   
-    if(this.updatedEducation.types!=null)
+    if(this.updatedExpertise.types!=null)
       {
-          this.router.navigate(['profile/experience'])
+          this.router.navigate(['profile/education'])
       }
     
   }

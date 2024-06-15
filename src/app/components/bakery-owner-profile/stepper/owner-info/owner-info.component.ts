@@ -46,8 +46,6 @@ export class OwnerInfoComponent implements OnInit{
     this.user.isMobileVerified='N';
     this.user.userTypeId=2;
 
-    this.dataService.getPhoneData()
- 
     this.dataService.getGoogleData().subscribe((data) => {
       if(data)
         {
@@ -56,16 +54,27 @@ export class OwnerInfoComponent implements OnInit{
           this.user.authId=1;
           console.log(this.user)
         }
-        else {
+        else if(this.user.password) {
+
           this.dataService.getUserData().subscribe((data)=>{
             this.user.password=data.password
-            this.user.authId=2;
+            this.user.authId=2; // 
             this.updatedPersonalInfo.phoneno= data.mobileNumber;
           })
+        }
+        else {
+          this.user.authId=3
+          console.log(this.user)
         }
      
     })
     this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
+
+    
+    this.dataService.getPhoneData().subscribe((data)=>{
+      this.updatedPersonalInfo.phoneno = data
+    })
+ 
 
     this.genders = [
       { name: 'Male', code: 'M', factor: 1 },

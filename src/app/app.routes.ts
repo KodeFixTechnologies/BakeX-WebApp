@@ -18,14 +18,18 @@ import { OwnerlocationInfoComponent } from './components/bakery-owner-profile/st
 import { BusinessInfoComponent } from './components/bakery-owner-profile/stepper/business-info/business-info.component';
 import { SeekerViewComponent } from './components/seeker-view/seeker-view.component';
 import { JobViewComponent } from './job-view/job-view.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EducationInfoComponent } from './components/profile/stepper/education-info/education-info.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { OwnerJobsComponent } from './components/owner-view/owner-jobs/owner-jobs.component';
 
 export const routes: Routes = [
     {
-        path: '', component: LoginComponent,
+        path: '', component: OnboardingComponent,
 
     },
     {
-        path: 'home', component: OnboardingComponent,
+        path: 'login', component: LoginComponent,
 
     },
 
@@ -38,6 +42,9 @@ export const routes: Routes = [
             { path: 'location', component: LocationInfoComponent },
             {
                 path: 'expertise', component: ExpertiseInfoComponent,
+            },
+            {
+                path: 'education', component: EducationInfoComponent,
             },
             {
                 path: 'experience', component:ExperinceInfoComponent,
@@ -59,10 +66,8 @@ export const routes: Routes = [
             },
             {
                 path:'business-info', component:BusinessInfoComponent
-            },
-        
-            
-   
+            },  
+          
         ],
     },
 
@@ -72,6 +77,10 @@ export const routes: Routes = [
 
     {
         path:'ownerview',component:OwnerViewComponent
+    },
+
+    {
+        path:'owner-jobs', component:OwnerJobsComponent
     },
     
     {
@@ -84,7 +93,14 @@ export const routes: Routes = [
     },
     {
         path:'jobview', component:JobViewComponent
-    }
+    },
+
+    {
+        path:'user-profile', component:UserProfileComponent
+    },
+     {
+        path : 'privacy-policy', component:PrivacyPolicyComponent
+     }
 
 
  

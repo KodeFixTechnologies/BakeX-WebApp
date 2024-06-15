@@ -1,4 +1,91 @@
+<div class="max-w-screen-lg mx-auto">
+    <div class="flex flex-col justify-center mt-10 ml-5">
+      <div>
+        <h1 class="text-xl font-medium">What is your Experience ?</h1>
+        <p class="mt-2 ml-2 text-xs text-primary-grey">
+          Please select your field of experience!
+        </p>
+      </div>
+  
+      <div class="my-5">
+        <p-listbox
+          [options]="experience"
+          optionLabel="name"
+          [style]="{ width: '15rem' }"
+          [listStyle]="{ 'max-height': '220px' }"
+          [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+          (onChange)="updateExperience($event)"
+          [(ngModel)]="selectedExperience"
+        />
+      </div>
+  
+      <div>
+        <h1 class="text-xl font-medium">Preffered Employment Type ?</h1>
+        <p class="mt-1 ml-2 text-xs text-primary-grey">
+          Please select your field of experience!
+        </p>
+      </div>
+  
+      <div class="my-5">
+        <p-listbox
+          [options]="employment"
+          optionLabel="expertiseType"
+          optionLabel="jobType"
+          [style]="{ width: '25rem' }"
+          [multiple]="true"
+          [metaKeySelection]="false"
+          [listStyle]="{ 'max-height': '500px' }"
+          [focusOnHover]="true"
+          [checkbox]="true"
+          [selectAll]="false"
+          [showToggleAll]="false"
+          [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+          (onChange)=" updateEmployment($event)"
+          [(ngModel)]="selectedEmployment"
+        />
+      </div>
+  
+      <div class="mt-1 mb-5 mr-5">
+        <button (click)="nextPage()"
+          pButton
+          pRipple
+          label="Submit"
+          class="p-button"
+          [style]="{ width: '100%' }"
+        ></button>
+      </div>
+    </div>
+  </div>
+  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 
 <div class="w-full flex flex-col items-center justify-center mt-3">
     <p-card>
@@ -29,4 +116,4 @@
 
 </p-card>
 </div>
-
+ -->
