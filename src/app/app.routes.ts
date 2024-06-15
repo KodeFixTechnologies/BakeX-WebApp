@@ -22,6 +22,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EducationInfoComponent } from './components/profile/stepper/education-info/education-info.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { OwnerJobsComponent } from './components/owner-view/owner-jobs/owner-jobs.component';
+import { OwnerJobApplicantsComponent } from './components/owner-job-applicants/owner-job-applicants.component';
 
 export const routes: Routes = [
     {
@@ -85,6 +86,10 @@ export const routes: Routes = [
     
     {
         path:'owner-profile',component:OwnerProfileComponent
+    },
+
+    {
+        path:'jobs-applicants' , component:OwnerJobApplicantsComponent
     },
  
 
