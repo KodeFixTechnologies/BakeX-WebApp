@@ -3,6 +3,8 @@ import { Jobpost } from '../../../models/job';
 import { BakeMember } from '../../../models/bakeMember';
 import { jobTypeMap,JobTypeMap } from '../../../models/job-type-mapping'; 
 import { DialogModule } from 'primeng/dialog';
+import { QueryService } from '../../../services/query.service';
+import { JobSeeker } from '../../../models/jobSeeker';
 @Component({
   selector: 'job-card',
   standalone: true,
@@ -15,7 +17,10 @@ export class JobCardComponent   {
   @Input() displayImage: string | undefined;
   @Input() bakeMember: BakeMember | undefined;
   displayDialog:boolean=false;
-  constructor()
+  jobSeekers:JobSeeker[]=[]
+  constructor(
+    private queryService:QueryService
+  )
   {}
   jobTypeMap: { [key: number]: string } = {
     1: 'Full Time',
@@ -39,8 +44,14 @@ export class JobCardComponent   {
   }
 
 
-  seeApplicants()
+  seeApplicants(id:any)
   {
+     
+      this.queryService.getApplicantstByOwner(id).subscribe((data)=>{
+        this.jobSeekers=data;
+        console.log(data)
+      })
+     
       this.displayDialog=true;
   }
 }

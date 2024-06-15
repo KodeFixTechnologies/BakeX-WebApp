@@ -4,6 +4,11 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+const shareData = {
+  title: "Bake Joli",
+  text: "Join Bake Joli",
+  url: "www.bakejoli.com",
+};
 @Component({
   selector: 'user-profile',
   standalone: true,
@@ -11,9 +16,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
+
+
 export class UserProfileComponent implements OnInit {
 
     showLogout:Boolean = false
+
+    
 
    constructor(
     private dataService:DataService,
@@ -43,6 +52,16 @@ export class UserProfileComponent implements OnInit {
   }
   navigatetoPolicy(){
     this.router.navigate(["/privacy-policy"])
+  }
+
+  share()
+  {
+   try{
+        navigator.share(shareData)
+   }
+   catch{
+
+   }
   }
 
 }

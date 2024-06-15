@@ -10,6 +10,7 @@ export interface Job {
 
 
 export interface Jobpost {
+    id:number;
     PostedById: number;
     title: string;
     jobTypeId: number | 0;

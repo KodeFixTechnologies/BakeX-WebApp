@@ -25,7 +25,7 @@
             <p class="text-sm  lea">{{ getJobType() }}</p>
            
           </div>
-          <div (click)="seeApplicants()" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg ">
+          <div (click)="seeApplicants(jobPost?.id)" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg ">
             <span class="pi pi-users " style="font-size: 1.5rem; color: #1d4ed8"></span>
             <p class="text-sm">Applicants</p>
             <!-- <div>
