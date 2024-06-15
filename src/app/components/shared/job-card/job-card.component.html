@@ -12,24 +12,26 @@
             </div>
           </div>
           <div class="pr-4 pt-4">
-            <span class="pi pi-pencil" style="font-size: 1.5rem; color: #1d4ed8"></span>
-            <p> Edit</p>
+            <span class="pi pi-pencil" style="font-size: 1.0rem; color: #1d4ed8"></span>
           </div>
           
         </div>
-        <div class="mt-3 mx-3 flex gap-1 pl-2 items-center">
+        <div class="mt-5 mx-3 flex gap-1 pl-2 items-center">
           <span class="pi pi-map-marker" style="font-size: 1rem; color: #1d4ed8"></span>
           <p class="text-sm font-medium text-primary-black">{{ bakeMember?.district }}</p>
         </div>
-        <div class=" flex justify-between  gap-3 items-center my-4 pr-4">
-          <div  class="p-2 rounded-md bg-gray-200  flex  shadow-lg ml-4 w-20">
-            <p class="text-xs font-medium">{{ getJobType() }}</p>
+        <div class=" flex justify-between  gap-3 items-center my-4 pr-4  ">
+          <div  class="p-2 rounded-md bg-primary-white  flex  shadow-lg ml-4 py-4  px-4">
+            <p class="text-sm  lea">{{ getJobType() }}</p>
            
           </div>
-          <div (click)="seeApplicants()" class="flex flex-col items-center ">
-            <span class="pi pi-users ml-8" style="font-size: 2.0rem; color: #1d4ed8"></span>
-            <p class="text-sm mt-1 ml-7"> <span class="ml-7">View</span> <br class="ml-2">Candidates</p>
-            
+          <div (click)="seeApplicants()" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg ">
+            <span class="pi pi-users " style="font-size: 1.5rem; color: #1d4ed8"></span>
+            <p class="text-sm">Applicants</p>
+            <!-- <div>
+              <p class="text-sm text-justify">view candidates</p>
+            </div> -->
+           
           </div>
           <!-- Add more job types here based on your data -->
         </div>

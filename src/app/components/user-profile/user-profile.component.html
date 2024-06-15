@@ -52,12 +52,30 @@
   </div>
 
   <div
-    (click)="logout()"
+    (click)="logoutPop()"
     class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-eraser"></span>
       <h3 class="font-medium">LogOut</h3>
     </button>
+  </div>
+
+  <div
+    *ngIf="showLogout"
+    id="logoutModal"
+    class="fixed inset-0 px-10 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex justify-center items-center"
+  >
+    <div class="bg-white p-8 rounded-lg">
+      <h2 class="text-xl font-bold mb-4">Are you sure you want to log out?</h2>
+      <div class="flex justify-end">
+        <button (click)="logoutPop()" class="text-blue-600 font-medium mr-4">
+          Cancel
+        </button>
+        <button (click)="logout()" class="text-red-600 font-medium">
+          Log Out
+        </button>
+      </div>
+    </div>
   </div>
 </div>

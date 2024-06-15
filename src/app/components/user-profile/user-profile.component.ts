@@ -2,20 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'user-profile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent implements OnInit {
 
+    showLogout:Boolean = false
+
    constructor(
     private dataService:DataService,
     private authService:AuthService,
     private router:Router
+
    )
    {
  
@@ -24,6 +28,13 @@ export class UserProfileComponent implements OnInit {
     this.dataService.setData(true);
     throw new Error('Method not implemented.');
   }
+
+    logoutPop()
+    { 
+        this.showLogout= !this.showLogout
+        console.log(this.showLogout)
+    }
+
 
   logout()
   {
