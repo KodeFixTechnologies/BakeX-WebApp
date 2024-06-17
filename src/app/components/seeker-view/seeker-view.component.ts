@@ -12,13 +12,14 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { interval, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { SeekerJobCardComponent } from "../shared/seeker-job-card/seeker-job-card.component";
 
 @Component({
-  selector: 'seeker-view',
-  standalone: true,
-  imports: [CardModule, CarouselModule, ButtonModule, DialogModule,CommonModule ],
-  templateUrl: './seeker-view.component.html',
-  styleUrl: './seeker-view.component.scss',
+    selector: 'seeker-view',
+    standalone: true,
+    templateUrl: './seeker-view.component.html',
+    styleUrl: './seeker-view.component.scss',
+    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, CommonModule, SeekerJobCardComponent]
 })
 export class SeekerViewComponent implements OnInit {
 

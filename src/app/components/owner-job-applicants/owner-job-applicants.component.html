@@ -17,15 +17,15 @@
       />
     </div>
     <div class="flex flex-col ml-5">
-      <h2 class="text-lg text-center">Jayakrishnan S</h2>
+      <h2 class="text-lg text-center">{{jobSeeker?.firstName + ''  + jobSeeker?.lastName}}</h2>
       <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
         Chips Maker
       </h2>
       <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
-        1 year
+       {{jobSeeker?.experienceType}}
       </h2>
       <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
-        Btech 
+        {{jobSeeker?.educationLevel}}
       </h2>
     </div>
     <div>
@@ -40,7 +40,7 @@
   </button>
 </div>
 
-<div class="mx-4 mt-5 p-2 bg-primary-white">
+<!-- <div class="mx-4 mt-5 p-2 bg-primary-white">
   <div class="flex gap-4">
     <div>
       <img
@@ -72,4 +72,4 @@
   <button class="rounded-lg p-3 mt-4 w-full bg-blue-600 text-white">
     Call
   </button>
-</div>
+</div> -->

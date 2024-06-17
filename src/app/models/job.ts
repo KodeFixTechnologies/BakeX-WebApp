@@ -18,7 +18,7 @@ export interface Jobpost {
     ExperienceId: number;
     BusinessId: number;
     JobDescription: string;
-    Salary: string;
+    salary: string;
     DistrictId: number | undefined ;
     IsActive: string;
     ProfileImage?: string | null;

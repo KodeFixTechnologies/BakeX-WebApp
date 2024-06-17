@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { JobSeeker } from '../../models/jobSeeker';
 
 @Component({
   selector: 'owner-job-applicants',
@@ -9,5 +10,5 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './owner-job-applicants.component.scss'
 })
 export class OwnerJobApplicantsComponent {
-
+  @Input() jobSeeker: JobSeeker| undefined;
 }

@@ -5,10 +5,12 @@ import { jobTypeMap,JobTypeMap } from '../../../models/job-type-mapping';
 import { DialogModule } from 'primeng/dialog';
 import { QueryService } from '../../../services/query.service';
 import { JobSeeker } from '../../../models/jobSeeker';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'job-card',
   standalone: true,
-  imports: [DialogModule],
+  imports: [DialogModule,FormsModule,CommonModule],
   templateUrl: './job-card.component.html',
   styleUrl: './job-card.component.scss'
 })

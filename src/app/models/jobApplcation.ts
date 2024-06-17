@@ -1,5 +1,5 @@
 export interface JobApplication {
-    profileId: number;
+    profileId: number | undefined;
     jobPostId: number;
     applyDate: Date;
   }

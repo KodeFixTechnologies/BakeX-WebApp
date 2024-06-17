@@ -4,7 +4,7 @@ export interface RecommendedJob {
     title: string;
     jobDescription: string;
     jobType: string;
-    postedById:number;
+    postedById:number ;
     createdDate: Date;
     districtName: string;
     experienceType: string;

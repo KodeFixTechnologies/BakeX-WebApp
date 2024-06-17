@@ -1,164 +1,80 @@
-<!-- <div
-  class="h-dvh bg-center p-2 bg-cover bg-blend-multiply bg-black bg-opacity-80"
-  style="
-    background-image: url(https://plus.unsplash.com/premium_photo-1676234917179-a7b1ca98c984?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D);
-  "
->
-  <img src="" alt="" />
+<div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
+  <div>
+    <p class="text-primary-white text-xs">
+      Welcome,<span class="text-xs"> {{ jobSeeker.firstName }}</span>
+    </p>
+    <h2 class="text-white font-normal text-base mt-1">
+      Find your Perfect Job
+    </h2>
+  </div>
+  <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+    <!-- <img [src]="displayImage" alt="Job Post Image" /> -->
 
-  <div
-    class="flex flex-col  items-center justify-center h-screen w-full  gap-4 count-down-main"
-    *ngIf="timeLeft$ | async as t"
-  >
-    <h2 class=" text-lg font-medium font-poppins-regular  text-white text-center mb-6">Thank You For Registering!</h2>
-    <h2 class="text-white  font-poppins-semibold  font-semibold -mt-4 text-center   text-xl">Our launch is  </h2>
-    <h2 class="text-white  font-poppins-semibold  font-semibold -mt-4 text-center tracking-widest  text-4xl">Coming Soon  </h2>
-
-    <h2 class="text-white text-lg  font-medium font-poppins-regular mb-9 ">Stay tuned for updates!</h2>
-    <div class="flex gap-1.5 mt-10 items-center" >
-      <div class="timer  ">
-        <div
-          class="rounded-xl bg-blue-600 py-3 min-w-[72px] sm:min-w-[80px] flex items-center justify-center flex-col gap-1 aspect-square px-2 sm:px-4"
-        >
-          <h3
-            class="countdown-element days font-manrope font-semibold text-lg sm:text-2xl text-white text-center"
-          >
-            {{ t.daysToDday }}
-          </h3>
-          <p
-            class="text-sm sm:text-lg font-manrope font-normal text-white mt-1 text-center w-full"
-          >
-            days
-          </p>
-        </div>
-      </div>
-      <h3
-        class="font-manrope font-semibold text-lg sm:text-2xl text-gray-900 mx-1 sm:mx-2"
-      >
-        :
-      </h3>
-      <div class="timer">
-        <div
-          class="rounded-xl bg-blue-600 py-3 min-w-[72px] sm:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-2 sm:px-4"
-        >
-          <h3
-            class="countdown-element hours font-manrope font-semibold text-lg sm:text-2xl text-white text-center"
-          >
-            {{ t.hoursToDday }}
-          </h3>
-          <p
-            class="text-sm sm:text-lg font-manrope font-normal text-white mt-1 text-center w-full"
-          >
-            Hour
-          </p>
-        </div>
-      </div>
-      <h3
-        class="font-manrope font-semibold text-lg sm:text-2xl text-gray-900 mx-1 sm:mx-2"
-      >
-        :
-      </h3>
-      <div class="timer">
-        <div
-          class="rounded-xl bg-blue-600 py-3 min-w-[72px] sm:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-2 sm:px-4"
-        >
-          <h3
-            class="countdown-element minutes font-manrope font-semibold text-lg sm:text-2xl text-white text-center"
-          >
-            {{ t.minutesToDday }}
-          </h3>
-          <p
-            class="text-sm sm:text-lg font-manrope font-normal text-white mt-1 text-center w-full"
-          >
-            Minutes
-          </p>
-        </div>
-      </div>
-      <h3
-        class="font-manrope font-semibold text-lg sm:text-2xl text-gray-900 mx-1 sm:mx-2"
-      >
-        :
-      </h3>
-      <div class="timer">
-        <div
-          class="rounded-xl bg-blue-600 py-3 min-w-[72px] sm:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-2 sm:px-4"
-        >
-          <h3
-            class="countdown-element seconds font-manrope font-semibold text-lg sm:text-2xl text-white text-center"
-          >
-            {{ t.secondsToDday }}
-          </h3>
-          <p
-            class="text-sm sm:text-lg font-manrope font-normal text-white mt-1 text-center w-full"
-          >
-            Seconds
-          </p>
-        </div>
-      </div>
-    </div>
+    <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+    </svg>
   </div>
 </div>
+<div class="border-red-500 bg-white border rounded-lg py-8 px-3 mt-2 mx-1">
+  <p class="text-center">We Currently have 5000 Food Industries Onboarded</p>
 
- -->
+  <div class="flex space-x-5">
+    <!-- First Column -->
+    <div class="flex flex-col items-center space-y-5">
+      <img class="w-16 h-25 rounded-full shadow-lg" src="https://www.mangobakers.com/wp-content/uploads/2018/06/MANGO-BAKERS-Logo.png" alt="Mango Bakers Logo"/>
+      
+      
+    </div>
 
+    <!-- Second Column -->
+    <div class="flex flex-col items-center space-y-5">
+      <img class="w-16 h-25 rounded-full shadow-lg" src="../../../../../assets/bake.png" alt="Bake Logo"/>
 
+    </div>
+    <div class="flex flex-col items-center space-y-5">
 
+      <img class="w-16 h-25 mt-3 rounded-full shadow-lg" src="https://static.wixstatic.com/media/563eb9_d10f2f6133c8437195f626209731804d~mv2.png/v1/crop/x_178,y_124,w_609,h_342/fill/w_163,h_91,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/png-transparent-bakery-navya-bakers-cake-navya-bake-house-cake-food-text-orange_edited.png" alt="KR Bakes Logo"/>
+    </div>
 
+    <div class="flex flex-col items-center space-y-3">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <img class="w-16 h-13 mt-0 ms-2 rounded-full shadow-lg" src="../../../../../assets/wolkano.jpg" alt="KR Bakes Logo"/>
+    </div>
+  </div>
 
 
+</div>
 
-
-
+  
 
 
 
 
+<div class="flex justify-between mt-3 mx-3">
+  <p class="text-lg font-medium">Recommended</p>
+  <button class="text-blue-600">See all</button>
+</div>
 
+<div class="relative pb-20">
+  <div class=" flex overflow-auto snap-x snap-mandatory">
+      <ng-container *ngFor="let jobposted of recommendedJobs">
+        <div class="shrink-0 w-11/12 md:w-1/2 lg:w-1/3 px-1">
+        <seeker-job-card
+          [recommendedJob]="jobposted"
+          [businesses]="businesses"
+          [jobSeeker]="jobSeeker"
+        >
+        </seeker-job-card>
+      </div>
+      </ng-container>
+    </div>
+  </div>
 
+<!-- Add a class to target the header -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- Add a class to target the header -->
-
-    <!-- jobs.component.html -->
-<div class="w-full flex flex-col justify-center -mt-1 bg-[#FDFCF8]">
+<!-- jobs.component.html -->
+<!-- <div class="w-full flex flex-col justify-center -mt-1 bg-[#FDFCF8]">
   <div>
     <p-card [style]="{ height: '150px', 'background-color': '#FDFCF8' }">
       <div class="custom-header"> 
@@ -231,11 +147,11 @@
           </button>
         </div>
       </ng-template>
-    </p-carousel>
+    </p-carousel> -->
 
-    <!-- jobs.component.html -->
+<!-- jobs.component.html -->
 
-    <p-dialog
+<!-- <p-dialog
       header="Job Details"
       [(visible)]="displayDialog"
       [modal]="true"
@@ -248,7 +164,7 @@
         <div class="flex flex-col gap-3">
           <div>
             <p class="font-bold text-xl text-teal-700 mt-2">
-              <!-- {{ selectedJob.businessName }} -->
+              {{ selectedJob.businessName }}
             </p>
             <p class="text-xs mt-2">Date : {{ selectedJob.createdDate }}</p>
           </div>
@@ -268,7 +184,7 @@
           <hr />
           <div>
             <h3 class="text-sm font-medium text-slate-950">Address</h3>
-            <!-- <p class="text-xs mt-2">{{ selectedJob.businessAddress }}</p> -->
+            <p class="text-xs mt-2">{{ selectedJob.businessAddress }}</p>
           </div>
           <hr />
 
@@ -299,7 +215,7 @@
               </p>
             </div>
           </div> 
-          <!-- Add other job details here -->
+          Add other job details here
      </div>
       </ng-template>
       <ng-template pTemplate="footer">
@@ -321,5 +237,4 @@
       </ng-template>
     </p-dialog>
   </div>
-</div>
-
+</div> -->
