@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { JobSeeker } from '../../models/jobSeeker';
 
 const shareData = {
   title: "Bake Joli",
@@ -22,7 +23,7 @@ export class UserProfileComponent implements OnInit {
 
     showLogout:Boolean = false
 
-    
+    userProfile:JobSeeker = {} as JobSeeker
 
    constructor(
     private dataService:DataService,
@@ -35,7 +36,8 @@ export class UserProfileComponent implements OnInit {
    }
   ngOnInit(): void {
     this.dataService.setData(true);
-    throw new Error('Method not implemented.');
+    this.userProfile= this.authService.getUserProfileData();
+    
   }
 
     logoutPop()

@@ -3,7 +3,7 @@
       <div class="flex justify-between pt-1">
         <div class="flex pt-2">
           <div>
-            <img [src]="businesses[recommendedJob.postedById].profileImageBase64" alt="" class="w-16 h-16 ml-2" />
+            <img   [src]="businesses[recommendedJob.postedById]?.profileImageBase64 || '../../../../../assets/bake.png'"  class="w-12 h-16 ml-2" />
           </div>
           <div class="ml-3 mt-1">
             <h3 class="text-lg font-medium text-primary-black">{{ recommendedJob?.title }}</h3>
@@ -17,17 +17,17 @@
       </div>
       <div class="mt-5 mx-3 flex gap-1 pl-2 items-center">
         <span class="pi pi-map-marker" style="font-size: 1rem; color: #1d4ed8"></span>
-        <p class="text-sm font-medium text-primary-black">{{ recommendedJob.districtName}}</p>
+        <p class="text-sm font-medium text-primary-black"> {{  businesses[recommendedJob.postedById].districtName }}</p>
       </div>
       <div class=" flex justify-between  gap-3 items-center my-4 pr-4  ">
         <div  class="p-2 rounded-md bg-primary-white  flex  shadow-lg ml-4 py-4  px-4">
           <p class="text-sm  lea">{{ recommendedJob.jobType }}</p> 
          
         </div>
-         <div (click)="viewJob()" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg "> 
+         <div  (click)="viewJob()" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg "> 
           <span class="pi pi-briefcase" style="font-size: 1.5rem; color: #1d4ed8"></span>
-          <p class="text-sm"> View Job</p>
-     
+          <p *ngIf="recommendedJob.appliedStatus!=1" class="text-sm"> View Job</p>
+          <p *ngIf="recommendedJob.appliedStatus==1" class="text-sm"> Applied </p>
          
         </div>
         <!-- Add more job types here based on your data -->
@@ -88,7 +88,7 @@
                 <span class="text-xs font-medium text-slate-950"
                   >District :</span
                 >
-                {{recommendedJob.districtName }}
+                {{  businesses[recommendedJob.postedById].districtName }}
               </p>
             </div>
             <div>

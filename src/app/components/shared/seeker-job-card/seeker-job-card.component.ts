@@ -46,6 +46,10 @@ export class SeekerJobCardComponent {
     this.application.profileId = this.jobSeeker?.profileId ;
 
     this.queryService.applyForJob(this.application).subscribe((response) => {
+      if(response)
+      {
+        this.recommendedJob.appliedStatus=1;
+      }
       this.hideDialog();
       console.log(this.displayDialog);
     });
@@ -61,5 +65,7 @@ export class SeekerJobCardComponent {
 
 
   }
-
+  getProfileImage(profileImageBase64: string | null): string {
+    return profileImageBase64 ? profileImageBase64 : '../../../../../assets/images/BakejoliLogo2.png';
+  }
 }

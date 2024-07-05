@@ -1,7 +1,21 @@
 <div class="max-w-screen-lg mx-auto">
-  <div class="mt-14 bg-blue-600 text-left rounded-xl py-5 mx-3 pl-5">
-    <h1 class="text-primary-white">Hi,</h1>
-    <h1 class="text-primary-white mt-1 font-medium">Profile Name</h1>
+  <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
+    <div>
+      <p class="text-white font-normal text-base">
+        Hi,<span class="text-base"> {{ userProfile.firstName }}</span>
+      </p>
+      <h2 class="text-white font-normal text-base mt-1">
+       Have a Greeat Day!
+      </h2>
+    </div>
+    <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+      <!-- <img [src]="displayImage" alt="Job Post Image" /> -->
+  
+      <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+      </svg>
+    </div>
   </div>
 
   <div
