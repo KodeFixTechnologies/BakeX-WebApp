@@ -42,6 +42,7 @@ export class SeekerJobComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dataService.setData(true);
     const profileId = sessionStorage.getItem('profileId');
     this.profileId = this.authService.getProfileId();
 

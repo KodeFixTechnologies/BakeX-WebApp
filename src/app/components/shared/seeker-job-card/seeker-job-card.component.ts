@@ -5,6 +5,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { JobApplication } from '../../../models/jobApplcation';
 import { QueryService } from '../../../services/query.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'seeker-job-card',
@@ -21,23 +22,10 @@ export class SeekerJobCardComponent {
   displayDialog: boolean = false;
   application: JobApplication = {} as JobApplication;
 
-  constructor(private queryService:QueryService)
+  constructor(private queryService:QueryService,private dataService:DataService)
   {
-
+   this.dataService.setData(true)
   }
-  // jobSeeker: JobSeeker = {} as JobSeeker;
-  // recommendedJobs: RecommendedJob[] = [];
-  // mobileno: string = '';
-  // selectedJob: RecommendedJob =;
-  // business:Business[] = []
-  // businesses: { [key: number]: Business } = {};
-
-  // viewJob(item: RecommendedJob) {
-  //   this.selectedJob = item;
-  //   this.displayDialog = true;
-
-  //   console.log(this.selectedJob);
-  // }
 
   applyJob() {
     console.log(this.jobSeeker?.profileId)

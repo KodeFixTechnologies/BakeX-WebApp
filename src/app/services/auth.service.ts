@@ -93,6 +93,8 @@ AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.businessesKey);
+    sessionStorage.removeItem(this.userProfileKey)
   }
 
 

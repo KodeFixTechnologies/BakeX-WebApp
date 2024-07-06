@@ -80,6 +80,13 @@ export class QueryService {
   
     return this.http.get<any>(`${environment.API_URL}getJobs/${Id}`);
   }
+
+  getAppliedJobForSeeker(Id:number):Observable<any>
+  {
+  
+    return this.http.get<any>(`${environment.API_URL}getAppliedJobs/${Id}`);
+  }
+ 
  
   getApplicantstByOwner(Id:number):Observable<any>
   {
