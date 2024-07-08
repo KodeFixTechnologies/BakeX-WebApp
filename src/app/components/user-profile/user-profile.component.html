@@ -82,13 +82,13 @@
   >
     <div class="bg-white p-8 rounded-lg">
       <h2 class="text-xl font-bold mb-4">Are you sure you want to log out?</h2>
-      <div class="flex justify-end">
-        <button (click)="logoutPop()" class="text-blue-600 font-medium mr-4">
-          Cancel
-        </button>
-        <button (click)="logout()" class="text-red-600 font-medium">
-          Log Out
-        </button>
+      <div class="flex justify-center">
+        <div (click)="logoutPop()" class="bg-blue-600 text-white font-medium mr-4 px-7 py-2 rounded-xl cursor-pointer ">
+          <p>Cancel</p>
+        </div>
+        <div (click)="logout()" class="bg-red-600 text-white font-medium mr-4 px-7  py-2  rounded-xl  cursor-pointer ">
+          <p>Logout</p>
+        </div>
       </div>
     </div>
   </div>
