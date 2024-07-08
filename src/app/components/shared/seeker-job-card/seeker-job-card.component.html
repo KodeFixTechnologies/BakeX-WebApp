@@ -1,123 +1,148 @@
-<div  class="mt-3 ml-6 p-3 bg-primary-white rounded-xl flex-initial flex-nowrap">
-    <div >
-      <div class="flex justify-between pt-1">
-        <div class="flex pt-2">
-          <div>
-            <img [src]="businesses[recommendedJob.postedById].profileImageBase64" alt="" class="w-16 h-16 ml-2" />
-          </div>
-          <div class="ml-3 mt-1">
-            <h3 class="text-lg font-medium text-primary-black">{{ recommendedJob?.title }}</h3>
-            <p class="text-xs text-primary-grey"> {{ businesses[recommendedJob.postedById].businessName }}</p>
-          </div>
+<div
+  class="mt-2 ml-2 p-3 bg-primary-white rounded-3xl flex-initial flex-nowrap"
+>
+  <div>
+    <div class="flex justify-between pt-1">
+      <div class="flex pt-2">
+        <div>
+          <img
+            [src]="businesses[recommendedJob.postedById].profileImageBase64"
+            alt=""
+            class="w-20 h-20 ml-2"
+          />
         </div>
-        <div class="pr-4 pt-4">
-          <span class="pi pi-pencil" style="font-size: 1.0rem; color: #1d4ed8"></span>
-        </div>
-        
-      </div>
-      <div class="mt-5 mx-3 flex gap-1 pl-2 items-center">
-        <span class="pi pi-map-marker" style="font-size: 1rem; color: #1d4ed8"></span>
-        <p class="text-sm font-medium text-primary-black">{{ recommendedJob.districtName}}</p>
-      </div>
-      <div class=" flex justify-between  gap-3 items-center my-4 pr-4  ">
-        <div  class="p-2 rounded-md bg-primary-white  flex  shadow-lg ml-4 py-4  px-4">
-          <p class="text-sm  lea">{{ recommendedJob.jobType }}</p> 
-         
-        </div>
-         <div (click)="viewJob()" class=" flex  gap-4 rounded-lg items-center p-3   bg-primary-white shadow-lg "> 
-          <span class="pi pi-briefcase" style="font-size: 1.5rem; color: #1d4ed8"></span>
-          <p class="text-sm"> View Job</p>
-     
-         
-        </div>
-        <!-- Add more job types here based on your data -->
-      </div>
-
-     
-</div>
-
-<p-dialog
-      header="Job Details"
-      [(visible)]="displayDialog"
-      [modal]="true"
-      [style]="{ width: '85%', height: '100%' }"
-      [maximizable]="true"
-      #dialog
-      (onShow)="dialog.maximize()"
-    >
-      <ng-template pTemplate="content">
-        <div class="flex flex-col gap-3">
-          <div>
-            <p class="font-bold text-xl text-teal-700 mt-2">
-              {{  businesses[recommendedJob.postedById].businessName }}
-            </p>
-            <p class="text-xs mt-2">Date : {{ recommendedJob.createdDate }}</p>
-          </div>
-
-          <hr class="w-full" />
-          <div class="flex flex-col">
-            <h3 class="text-sm font-medium text-slate-950">
-              Job Description :
-            </h3>
-            <p class="text-xs mt-2">{{ recommendedJob.jobDescription }}</p>
-          </div>
-          <hr />
-          <p class="text-sm">
-            <span class="text-slate-900 font-medium">Job Role :</span>
+        <div class="ml-3">
+          <h3 class="text-lg font-medium text-primary-black">
             {{ recommendedJob.title }}
+          </h3>
+          <p class="text-xs mt-1 text-primary-black">
+            {{ businesses[recommendedJob.postedById].businessName }}
           </p>
-          <hr />
-          <div>
-            <h3 class="text-sm font-medium text-slate-950">Address</h3>
-            <p class="text-xs mt-2">{{  businesses[recommendedJob.postedById].businessAddress }}</p>
-          </div>
-          <hr />
+          <p class="text-xs mt-1 text-primary-black">
+            <span
+              class="pi pi-map-marker"
+              style="font-size: 0.6rem; color: #1d4ed8"
+            ></span>
+            {{ recommendedJob.districtName }}
+          </p>
+        </div>
+      </div>
+      <div class="pr-4 pt-4">
+        <span
+          class="pi pi-pencil"
+          style="font-size: 1rem; color: #1d4ed8"
+        ></span>
+      </div>
+    </div>
 
-          <h3 class="text-sm font-medium text-slate-950">Other Details</h3>
-          <div class="flex gap-3 flex-wrap">
-            <div>
-              <p class="p-3 border rounded-2xl shadow-lg text-xs">
-                <span class="text-xs font-medium text-slate-950"
-                  >Job Type :</span
-                >
-                {{ recommendedJob.jobType }}
-              </p>
-            </div>
-            <div>
-              <p class="p-3 border rounded-2xl shadow-lg text-xs">
-                <span class="text-xs font-medium text-slate-950"
-                  >District :</span
-                >
-                {{recommendedJob.districtName }}
-              </p>
-            </div>
-            <div>
-              <p class="p-3 border rounded-2xl shadow-lg text-xs">
-                <span class="text-xs font-medium text-slate-950"
-                  >Experience :</span
-                >
-                {{ recommendedJob.experienceType }}
-              </p>
-            </div>
-          </div> 
- 
-     </div>
-      </ng-template>
-      <ng-template pTemplate="footer">
-        <button
-          (click)="recommendedJob.appliedStatus === 0 ? applyJob() : null"
-          type="button"
-          [disabled]="recommendedJob.appliedStatus === 1"
-          class="py-2.5 px-5 mt-2 me-2 mb-2 text-sm font-medium text-white shadow-lg focus:outline-none bg-blue-500 rounded-lg border border-gray-200 "
-          [ngClass]="{
-            'disabled:opacity-40': recommendedJob.appliedStatus === 1,
-            'hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100':
-              recommendedJob.appliedStatus !== 1
-          }"
-        >
-          {{
-           recommendedJob.appliedStatus === 1 ? "Already Applied" : "Apply Now"
-          }}
-        </button>
-      </ng-template>
-    
+    <div class="flex mt-3 gap-2 items-center">
+      <div class="bg-gray-200 text-slate-950 rounded-lg px-3 py-1">
+        <span class="text-sm "> &#8377;: <span>35,0000</span></span>
+      </div>
+      <div class="bg-gray-200 text-slate-950 rounded-lg px-3 py-1">
+        <span class="text-sm ">Exp: <span>5-6 Years</span></span>
+      </div>
+      <div>
+        <div class="bg-gray-200 text-slate-950 rounded-lg px-2 py-1">
+          <span class="text-sm ">{{ recommendedJob.jobType }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center my-2 mt-5 pr-4">
+      <p-button
+        (click)="viewJob()"
+        class="flex items-center justify-center text-white w-full"
+        [rounded]="true"
+        icon="pi pi-briefcase"
+        label="View Job"
+        [outlined]="true"
+        size="small"
+      >
+      </p-button>
+
+      <!-- Add more job types here based on your data -->
+    </div>
+  </div>
+
+  <p-dialog
+    header="Job Details"
+    [(visible)]="displayDialog"
+    [modal]="true"
+    [style]="{ width: '85%', height: '100%' }"
+    [maximizable]="true"
+    #dialog
+    (onShow)="dialog.maximize()"
+  >
+    <ng-template pTemplate="content">
+      <div class="flex flex-col gap-3">
+        <div>
+          <p class="font-bold text-xl text-teal-700 mt-2">
+            {{ businesses[recommendedJob.postedById].businessName }}
+          </p>
+          <p class="text-xs mt-2">Date : {{ recommendedJob.createdDate }}</p>
+        </div>
+
+        <hr class="w-full" />
+        <div class="flex flex-col">
+          <h3 class="text-sm font-medium text-slate-950">Job Description :</h3>
+          <p class="text-xs mt-2">{{ recommendedJob.jobDescription }}</p>
+        </div>
+        <hr />
+        <p class="text-sm">
+          <span class="text-slate-900 font-medium">Job Role :</span>
+          {{ recommendedJob.title }}
+        </p>
+        <hr />
+        <div>
+          <h3 class="text-sm font-medium text-slate-950">Address</h3>
+          <p class="text-xs mt-2">
+            {{ businesses[recommendedJob.postedById].businessAddress }}
+          </p>
+        </div>
+        <hr />
+
+        <h3 class="text-sm font-medium text-slate-950">Other Details</h3>
+        <div class="flex gap-3 flex-wrap">
+          <div>
+            <p class="p-3 border rounded-2xl shadow-lg text-xs">
+              <span class="text-xs font-medium text-slate-950">Job Type :</span>
+              {{ recommendedJob.jobType }}
+            </p>
+          </div>
+          <div>
+            <p class="p-3 border rounded-2xl shadow-lg text-xs">
+              <span class="text-xs font-medium text-slate-950">District :</span>
+              {{ recommendedJob.districtName }}
+            </p>
+          </div>
+          <div>
+            <p class="p-3 border rounded-2xl shadow-lg text-xs">
+              <span class="text-xs font-medium text-slate-950"
+                >Experience :</span
+              >
+              {{ recommendedJob.experienceType }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button
+        (click)="recommendedJob.appliedStatus === 0 ? applyJob() : null"
+        type="button"
+        [disabled]="recommendedJob.appliedStatus === 1"
+        class="py-2.5 px-5 mt-2 me-2 mb-2 text-sm font-medium text-white shadow-lg focus:outline-none bg-blue-500 rounded-lg border border-gray-200"
+        [ngClass]="{
+          'disabled:opacity-40': recommendedJob.appliedStatus === 1,
+          'hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100':
+            recommendedJob.appliedStatus !== 1
+        }"
+      >
+        {{
+          recommendedJob.appliedStatus === 1 ? "Already Applied" : "Apply Now"
+        }}
+      </button>
+    </ng-template>
+  </p-dialog>
+</div>

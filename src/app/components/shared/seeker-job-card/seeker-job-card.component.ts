@@ -5,11 +5,12 @@ import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { JobApplication } from '../../../models/jobApplcation';
 import { QueryService } from '../../../services/query.service';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'seeker-job-card',
   standalone: true,
-  imports: [DialogModule,CommonModule],
+  imports: [DialogModule,CommonModule,ButtonModule],
   templateUrl: './seeker-job-card.component.html',
   styleUrl: './seeker-job-card.component.scss'
 })
