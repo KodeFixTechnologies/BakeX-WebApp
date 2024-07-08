@@ -1,0 +1,12 @@
+
+<div class="relative pb-20 px-2 sm:px-2">
+    <h2 class=" ms-4 text-lg text-blue-600 font-semibold">Applied Jobs</h2>
+    <div class="flex flex-wrap justify-center ">
+        <ng-container *ngFor="let jobposted of appliedJobs">
+            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-3 me-10">
+                <seeker-job-card [recommendedJob]="jobposted" [businesses]="businesses" [jobSeeker]="userProfile">
+                </seeker-job-card>
+            </div>
+        </ng-container>
+    </div>
+</div>

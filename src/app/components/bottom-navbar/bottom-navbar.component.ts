@@ -43,7 +43,17 @@ export class BottomNavbarComponent implements OnInit{
    {
     this.router.navigate(['/seeker'])
    }
+   goToJobComponent()
+   {
+     this.router.navigate(['allJobs']);
+   }
+   
+   goToAppliedJob()
+   {
+     this.router.navigate(['applied-job']);
+   }
 
+ 
    showDialog() {
     this.dataService.openDialog();
 }

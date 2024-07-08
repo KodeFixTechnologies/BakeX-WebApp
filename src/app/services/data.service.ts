@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Users } from '../models/user';
+import { UserProfile, Users } from '../models/user';
 import { Jobpost } from '../models/job';
 import { BakeMember } from '../models/bakeMember';
+import { RecommendedJob } from '../models/recommendedJobs';
+import { JobSeeker } from '../models/jobSeeker';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +30,46 @@ export class DataService {
 
   private displayImage = new BehaviorSubject<any>(null);
 
+  private seekerJobSubject = new BehaviorSubject<any>(null);
+
+   private businessJobSubject = new BehaviorSubject<any>(null);
+
+   private profileDataSubject = new BehaviorSubject<any>(null);
+
   showDialog$ = this.showDialogSource.asObservable();
 
   openDialog() {
     this.showDialogSource.next();
+  }
+
+  setBusinessData(business:any)
+  {
+    this.businessJobSubject.next(business);
+  }
+ 
+  getBusinessData()
+  {
+    return this.businessJobSubject.asObservable();
+  }
+
+  setProfileData(profile:JobSeeker)
+  {
+    this.profileDataSubject.next(profile)
+  }
+
+  getProfileData()
+  {
+   return this.profileDataSubject.asObservable();
+  }
+ 
+  setSeekerJobData(data:RecommendedJob)
+  {
+    this.seekerJobSubject.next(data);
+  }
+
+  getSeekerJobData()
+  {
+    return this.seekerJobSubject.asObservable();
   }
 
   setJobData(data: boolean) {

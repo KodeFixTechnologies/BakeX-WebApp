@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ExpertiseInfoComponent implements OnInit {
 
- expertise!:Expertise[];
+expertise!:Expertise[];
  education!:Education[];
  selectedEducation!:Education[];
  selectedExpertise!: Expertise[];
