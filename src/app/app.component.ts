@@ -14,13 +14,14 @@ import { BakeryOwnerProfileComponent } from './components/bakery-owner-profile/b
 import { OnboardingComponent } from './components/onboarding/home.component';
 import { LoaderComponent } from "./components/loader/loader.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { SeekerJobCardComponent } from './components/shared/seeker-job-card/seeker-job-card.component';
 declare const google: any;
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [LoginComponent, OnboardingComponent, BottomNavbarComponent, ProfileComponent, BakeryOwnerProfileComponent, RouterOutlet, RouterLink, LoaderComponent, HeaderComponent]
+    imports: [LoginComponent, OnboardingComponent, BottomNavbarComponent, ProfileComponent, BakeryOwnerProfileComponent, RouterOutlet, RouterLink, LoaderComponent, HeaderComponent,SeekerJobCardComponent]
 })
 export class AppComponent implements OnInit {
  googleUser:any;

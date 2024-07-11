@@ -13,13 +13,15 @@ import { CommonModule } from '@angular/common';
 import { interval, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { SeekerJobCardComponent } from "../shared/seeker-job-card/seeker-job-card.component";
+import { Router } from '@angular/router';
+import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.component';
 
 @Component({
     selector: 'seeker-view',
     standalone: true,
     templateUrl: './seeker-view.component.html',
     styleUrl: './seeker-view.component.scss',
-    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, CommonModule, SeekerJobCardComponent]
+    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, CommonModule, SeekerJobCardComponent,SeekerJobComponent]
 })
 export class SeekerViewComponent implements OnInit {
 
@@ -33,7 +35,8 @@ export class SeekerViewComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private queryService: QueryService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.timeLeft$ = interval(1000).pipe(
       map((x) => this.calcDateDiff()),
@@ -114,6 +117,12 @@ export class SeekerViewComponent implements OnInit {
 
   }
 
+  goToJobComponent()
+  {
+    this.router.navigate(['allJobs']);
+   
+  }
+
   getBusinnessDetails()
   {
     this.queryService.getDistinctBusinessDetails().subscribe((data:Business[])=>{
@@ -127,6 +136,9 @@ export class SeekerViewComponent implements OnInit {
         this.business.forEach(business => {
           this.businesses[business.postedById] = business;
         });
+      
+        this.authService.setBusinessData(this.businesses)
+      //  this.dataService.setBusinessData(this.businesses); // dont change it
         console.log(this.business)
         console.log(this.businesses)
     })
@@ -147,9 +159,11 @@ export class SeekerViewComponent implements OnInit {
   {
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
+     // this.dataService.setProfileData(this.jobSeeker) remove later
 
+     this.authService.setUserProfileData(this.jobSeeker);
       console.log(this.jobSeeker);
-
+      this.authService.setProfileId(this.jobSeeker.profileId)
       if (this.jobSeeker.profileId != null) {
         this.queryService
           .getRecommendedJobs(this.jobSeeker.profileId)
@@ -160,6 +174,8 @@ export class SeekerViewComponent implements OnInit {
           });
       }
     });
+
+   
   }
 
   viewJob(item: RecommendedJob) {
