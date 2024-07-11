@@ -68,7 +68,7 @@ profile:any;
    
   this.experience = [
     {
-     name:'No Experince', id:1,
+     name:'No Experience', id:1,
      
     },
     {

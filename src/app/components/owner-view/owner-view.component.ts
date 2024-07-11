@@ -92,7 +92,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
-      { label: 'Experince' },
+      { label: 'Experience' },
       {
          label:'Logo'
        }
@@ -142,7 +142,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
      this.experience= [
       {
-       name:'No Experince', id:1,
+       name:'No Experience', id:1,
        
       },
       {
