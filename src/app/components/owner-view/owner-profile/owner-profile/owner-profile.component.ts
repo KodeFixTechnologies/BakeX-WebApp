@@ -39,13 +39,13 @@ export class OwnerProfileComponent implements OnInit {
           this.phoneno= this.authService.getPhoneNo() || ''
         }
  
-      console.log(data)
+
     })
 
     
    this.queryService.getBakeOwner({ phoneno: this.phoneno}).subscribe((data)=>{
        this.bakeMember=data;
-       console.log(data)
+   
    })
   }
 

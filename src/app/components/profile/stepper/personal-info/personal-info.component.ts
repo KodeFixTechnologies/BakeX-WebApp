@@ -74,7 +74,7 @@ export class PersonalInfoComponent {
           this.googleUser = data;
           this.user.googleId= this.googleUser.sub;
           this.user.authId=1;
-          console.log(this.user)
+   
         }
         else if(this.user.password) {
 
@@ -90,7 +90,7 @@ export class PersonalInfoComponent {
       
       
         this.dataService.getPhoneData().subscribe((data)=>{
-          console.log(data)
+       
           this.updatedPersonalInfo.phoneno=data;
         })
      
@@ -108,11 +108,11 @@ export class PersonalInfoComponent {
     this.updatedPersonalInfo = this.profileService.getProfileInformation().personalInformation;
    
     this.dataService.getPhoneData().subscribe((data)=>{
-      console.log(data)
+      
       this.updatedPersonalInfo.phoneno=data;
     })
     
-    console.log(this.updatedPersonalInfo)
+
     this.dataService.setData(false)
 
   }
@@ -128,7 +128,7 @@ export class PersonalInfoComponent {
       this.user.isMobileVerified='Y';
       this.user.mobileNumber=this.updatedPersonalInfo.phoneno
             this.dataService.setUserData(this.user);
-            console.log(this.user)
+
              // get verified token in response
              this.ngZone.run(() => {
                 this.router.navigate(['profile/location']);
@@ -155,7 +155,7 @@ export class PersonalInfoComponent {
       //       this.user.isMobileVerified='Y';
       //       this.user.mobileNumber=this.updatedPersonalInfo.phoneno
       //       this.dataService.setUserData(this.user);
-      //       console.log(this.user)
+   
       //         // get verified token in response
       //         this.ngZone.run(() => {
       //           this.router.navigate(['profile/location']);
@@ -166,7 +166,7 @@ export class PersonalInfoComponent {
       //     },
       //     failure: (error:any) => {
       //         // handle error
-      //         console.log('failure reason', error);
+     
       //     },
 
       //   };
@@ -176,7 +176,7 @@ export class PersonalInfoComponent {
 
 
       this.script.onerror =(error:any)=> {
-        console.log("script error",error)
+    
       }
       this.render.appendChild(document.body,this.script)
     }

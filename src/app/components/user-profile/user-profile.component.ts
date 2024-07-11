@@ -43,7 +43,7 @@ export class UserProfileComponent implements OnInit {
     logoutPop()
     { 
         this.showLogout= !this.showLogout
-        console.log(this.showLogout)
+      
     }
 
 

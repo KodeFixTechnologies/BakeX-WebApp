@@ -29,7 +29,7 @@ export class SeekerJobCardComponent {
   }
 
   applyJob() {
-    console.log(this.jobSeeker?.profileId)
+   
     this.application.applyDate = new Date();
     this.application.jobPostId = this.recommendedJob.id;
     this.application.profileId = this.jobSeeker?.profileId ;
@@ -40,7 +40,7 @@ export class SeekerJobCardComponent {
         this.recommendedJob.appliedStatus=1;
       }
       this.hideDialog();
-      console.log(this.displayDialog);
+    
     });
   }
 

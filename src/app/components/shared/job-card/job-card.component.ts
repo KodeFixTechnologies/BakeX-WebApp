@@ -32,10 +32,7 @@ export class JobCardComponent   {
     // Add more mappings as needed
   };
 
-  log(data:any)
-  {
-    console.log(data)
-  }
+
 
   getJobType(): string {
     if (this.jobPost && this.jobPost.jobTypeId !== undefined && this.jobTypeMap[this.jobPost.jobTypeId]) {
@@ -51,7 +48,7 @@ export class JobCardComponent   {
      
       this.queryService.getApplicantstByOwner(id).subscribe((data)=>{
         this.jobSeekers=data;
-        console.log(data)
+  
       })
      
       this.displayDialog=true;

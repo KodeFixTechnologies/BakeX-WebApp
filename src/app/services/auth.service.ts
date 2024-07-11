@@ -71,7 +71,7 @@ AuthService {
   setProfileId(profileId:number)
   {
     sessionStorage.setItem('profileId', profileId.toString());
-    console.log(profileId)
+ 
   }
 
    getProfileId(): number | null {
@@ -102,7 +102,7 @@ AuthService {
     const token = this.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
-      console.log(decoded)
+   
       return decoded.UserTypeId || null;
     }
     return null;
@@ -112,7 +112,7 @@ AuthService {
     const token = this.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
-      console.log(decoded)
+    
       return decoded.PhoneNo || null;
     }
     return null;

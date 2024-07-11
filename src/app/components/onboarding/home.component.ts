@@ -51,13 +51,13 @@ export class OnboardingComponent implements OnInit {
             { 
                 this.user.userTypeId=1;
                 this.dataService.setUserData(this.user)
-                console.log("employee clicked")
+         
                 this.router.navigate(['\login']);
             }
         if(category=="owner")
             {   this.user.userTypeId=2;
                 this.dataService.setUserData(this.user)
-                console.log("owner clicked")
+               
                 this.router.navigate(['\login']);
             }    
 

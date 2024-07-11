@@ -52,7 +52,7 @@ export class OwnerInfoComponent implements OnInit{
           this.googleUser = data;
           this.user.googleId= this.googleUser.sub;
           this.user.authId=1;
-          console.log(this.user)
+        
         }
         else if(this.user.password) {
 
@@ -64,7 +64,7 @@ export class OwnerInfoComponent implements OnInit{
         }
         else {
           this.user.authId=3
-          console.log(this.user)
+   
         }
      
     })
@@ -134,7 +134,7 @@ export class OwnerInfoComponent implements OnInit{
           this.dataService.setUserData(this.user);
 
           this.dataService.setPhoneData(this.updatedPersonalInfo.phoneno)
-          console.log(this.user)
+
            // get verified token in response
             this.ngZone.run(() => {
                this.router.navigate(['bakeprofile/business-info']);
@@ -159,7 +159,7 @@ export class OwnerInfoComponent implements OnInit{
     //       this.user.isMobileVerified='Y';
     //       this.user.mobileNumber=this.updatedPersonalInfo.phoneno
     //       this.dataService.setUserData(this.user);
-    //       console.log(this.user)
+    //     
     //         // get verified token in response
     //         this.ngZone.run(() => {
     //           this.router.navigate(['bakeprofile/business-info']);
@@ -169,7 +169,7 @@ export class OwnerInfoComponent implements OnInit{
     //     },
     //     failure: (error:any) => {
     //         // handle error
-    //         console.log('failure reason', error);
+
     //     },
 
     //   };
@@ -179,7 +179,7 @@ export class OwnerInfoComponent implements OnInit{
 
 
     this.script.onerror =(error:any)=> {
-      console.log("script error",error)
+
     }
     this.render.appendChild(document.body,this.script)
   

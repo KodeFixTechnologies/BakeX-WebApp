@@ -29,26 +29,26 @@ export class OwnerlocationInfoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // console.log(this.profileService.profileInformation)
+  
 
     this.dataService.setData(false)
 
     this.updatedlocationInfo = this.profileService.getBakeryOwnerProfileInfo().locationInformation;
-    console.log(this.updatedlocationInfo)
+ 
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 
-      console.log(data.states)
+ 
     })
 
 
     this.queryService.getStateAndDistrict().subscribe((data) => {
-      //console.log(data)
+    
     })
 
     this.dataService.getUserData().subscribe((data) => {
       this.user = data;
-      console.log(data)
+
 
     })
   }
@@ -91,12 +91,12 @@ export class OwnerlocationInfoComponent implements OnInit {
 
 
   onStateChange() {
-    console.log(this.selectedState)
+   
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
 
-    console.log(this.pincodes)
+
     // this.fileService.uploadObject();
 
     if (this.selectedState) {
@@ -120,7 +120,7 @@ export class OwnerlocationInfoComponent implements OnInit {
 
 
       this.queryService.createUser(this.user).subscribe((response => {
-        console.log(response);
+        
      
 
         this.dataService.setUserData(this.user)
