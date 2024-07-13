@@ -57,7 +57,9 @@ export class QueryService {
     // Modify the API call to use query parameters
     return this.http.post<any>(`${environment.API_URL}IsBakeUser?phoneno=${phoneno.phoneno}`, null);
   }
-
+  getPricingData(): Observable<any> {
+    return this.http.get<any>('assets/pricing.json');
+  }
   getBakeOwner(phoneno:any):Observable<any>
   {
   
