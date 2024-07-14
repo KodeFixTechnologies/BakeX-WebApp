@@ -17,3 +17,10 @@
   body {
     font-family: 'CustomFont';
   }
+
+html, body {
+    overflow-x: hidden;
+  }
+body {
+    position: relative
+  }  
