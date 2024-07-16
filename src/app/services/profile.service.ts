@@ -100,7 +100,7 @@ export class ProfileService {
 
   setProfileforBackend(value: IBakerOwnerProfile) {
 
-    console.log(value);
+
     // Assign personal information
 
     this.nonBakeMember.firstname = value.personalInformation.firstname;

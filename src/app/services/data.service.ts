@@ -111,7 +111,7 @@ export class DataService {
 
   setPostedJobData(data:Jobpost[])
   {
-    console.log(data)
+  
     this.jobSubject.next(data);
     this.setSessionStorageItem('jobPosts', data);
   }

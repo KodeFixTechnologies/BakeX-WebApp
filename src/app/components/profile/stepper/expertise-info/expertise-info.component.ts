@@ -41,7 +41,7 @@ expertise!:Expertise[];
   
 
     this.queryService.getExpertiseTypes().subscribe((data)=>{
-      console.log(data)
+    
       this.expertise=data;
     })
 
@@ -71,7 +71,7 @@ expertise!:Expertise[];
 
   this.updatedExpertise = this.profileService.getProfileInformation().expertiseInformation;
   this.updatedEducation =this.profileService.getProfileInformation().educationInformation;
-  console.log(this.updatedExpertise)
+
 
   }
   
@@ -79,7 +79,6 @@ expertise!:Expertise[];
   updateExpertise(event:any)
   {
    this.updatedExpertise.types=event.value;
-   console.log(this.updatedExpertise)
 
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
@@ -90,7 +89,7 @@ expertise!:Expertise[];
   updateEducation(event:any)
   {
   this.updatedEducation.types=event.value;
-    console.log(this.updatedExpertise)
+
 
    this.profileService.setProfileInformation({
      ...this.profileService.getProfileInformation(),

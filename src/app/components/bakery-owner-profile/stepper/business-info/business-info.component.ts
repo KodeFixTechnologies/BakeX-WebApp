@@ -53,7 +53,7 @@ export class BusinessInfoComponent  implements OnInit{
     });
 
 
-    console.log(this.profileService.getBakeryOwnerProfileInfo())
+
     this.router.navigate(['bakeprofile/ownerlocation-info']);
   }
 }

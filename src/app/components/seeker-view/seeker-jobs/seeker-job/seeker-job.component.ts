@@ -49,7 +49,7 @@ export class SeekerJobComponent implements OnInit {
     this.loadInitialData();
     this.loadUserProfileData()
     this.queryService.getExpertiseTypes().subscribe((data)=>{
-      console.log(data)
+   
       this.expertise=data;
     })
   }
@@ -68,7 +68,7 @@ export class SeekerJobComponent implements OnInit {
       this.allJobs = data;
       this.filteredTitles = this.allJobs.map(job => job.experienceType);
       this.applyFilters();
-      console.log(this.allJobs);
+  
     });
   }
  

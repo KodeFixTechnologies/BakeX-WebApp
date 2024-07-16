@@ -139,8 +139,7 @@ export class SeekerViewComponent implements OnInit {
       
         this.authService.setBusinessData(this.businesses)
       //  this.dataService.setBusinessData(this.businesses); // dont change it
-        console.log(this.business)
-        console.log(this.businesses)
+       
     })
   }
 
@@ -162,7 +161,7 @@ export class SeekerViewComponent implements OnInit {
      // this.dataService.setProfileData(this.jobSeeker) remove later
 
      this.authService.setUserProfileData(this.jobSeeker);
-      console.log(this.jobSeeker);
+     
       this.authService.setProfileId(this.jobSeeker.profileId)
       if (this.jobSeeker.profileId != null) {
         this.queryService
@@ -170,7 +169,7 @@ export class SeekerViewComponent implements OnInit {
           .subscribe((recommendedJob: RecommendedJob[]) => {
             this.recommendedJobs = recommendedJob;
 
-            console.log(this.recommendedJobs);
+          
           });
       }
     });
@@ -182,7 +181,7 @@ export class SeekerViewComponent implements OnInit {
     this.selectedJob = item;
     this.displayDialog = true;
 
-    console.log(this.selectedJob);
+  
   }
 
   hideDialog() {
@@ -196,7 +195,7 @@ export class SeekerViewComponent implements OnInit {
 
     this.queryService.applyForJob(this.application).subscribe((response) => {
       this.hideDialog();
-      console.log(this.displayDialog);
+
     });
   }
 }

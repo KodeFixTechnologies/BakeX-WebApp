@@ -46,7 +46,6 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
 
-    console.log(this.selectedState)
   }
 
   updatedlocationInfo = {
@@ -69,21 +68,19 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
   userplace:string=''
 
   ngOnInit(): void {
-    // console.log(this.profileService.profileInformation)
-    
+
 
    
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 
       
-  
-      console.log(data.states)
+
     })
 
    
     this.queryService.getStateAndDistrict().subscribe((data)=>{
-      //console.log(data)
+
     })
 
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
@@ -94,9 +91,9 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
 
 
   onStateChange() {
-    console.log(this.selectedState)
+
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
-    console.log(this.districts)
+   
   }
   nextPage() {
 

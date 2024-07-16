@@ -92,7 +92,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
-      { label: 'Experince' },
+      { label: 'Experience' },
       {
          label:'Logo'
        }
@@ -142,7 +142,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
      this.experience= [
       {
-       name:'No Experince', id:1,
+       name:'No Experience', id:1,
        
       },
       {
@@ -192,18 +192,14 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   
 
-     console.log(this.authService.getToken)
-
-     console.log(this.phoneno)
-
     
      this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
       next: (data) => {
         this.bakeMember = data;
         this.selectedDistrict = this.district?.find(item => item.name === data.district);
-        console.log(this.selectedDistrict);
+      
 
-        console.log(data)
+   
     
         if (this.bakeMember.profileImageBase64) {
           const imageUrl = `data:image/png;base64,${this.bakeMember.profileImageBase64}`; // Adjust the MIME type as per your image type
@@ -215,7 +211,6 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       },
       complete: () => {
         
-        console.log('Request completed');
         this.getJobPostByOwner(this.bakeMember.memberId); // Assuming ownerId is available in bakeMember
       }
     });
@@ -254,18 +249,17 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     const token = this.authService.getToken();
     if (token) {
       this.phoneno = this.authService.getPhoneNo() || '';
-      console.log('Phone number loaded:', this.phoneno);
+     
     } else {
-      console.log('Token not available yet');
+    
       // Optionally, you can retry after some delay or handle the missing token case
     }
   }
   
   ngOnDestroy(): void {
-    console.log(this.showDialogSubscription?.unsubscribe())
+  
    
- 
-    console.log(this.bakeryOwnerProfileInfoSubscription?.unsubscribe());
+
   
 
    
@@ -280,7 +274,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
         this.dataService.setImage(this.displayImage)
         this.top3JobPosts=this.jobPosts.slice(0,3);
 
-        console.log(this.jobPosts)
+
       
         
       },
@@ -288,7 +282,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
         console.error('Error fetching job post data', error);
       },
       complete: () => {
-        console.log(this.jobPosts)
+  
       }
     });
   }
@@ -313,15 +307,15 @@ previousStep() {
 
   
 updateExpertise(event: any) {
-  console.log(event);
+
   // Extract expertiseIds from the event value array
   const expertiseIds: number[] =[];
   expertiseIds.push(event.value.expertiseId)
-  console.log(expertiseIds)
+
 
   // Assign expertiseIds to the ExpertiseIds list in jobPost
   this.jobPost.ExpertiseIds = expertiseIds;
-  console.log(this.jobPost.ExpertiseIds)
+
 }
 
   uploadedFiles:any
@@ -334,7 +328,7 @@ updateExpertise(event: any) {
  
   
     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
-      console.log(response)
+     
       this.visible=false
     })
 
@@ -349,7 +343,6 @@ updateExpertise(event: any) {
     //   skills:this.values
     // });
 
-    // console.log(this.submittedJobs)
 
     // // Clear the form fields after submission
     // this.job.jobTitle = '';
@@ -364,12 +357,12 @@ updateExpertise(event: any) {
 
   onUpload(event: UploadEvent) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-    console.log(event)
+   
 }
 
 myUploader(event: any) {
-  console.log("onUpload() START");
-  console.log(event);
+
+ 
   const file = event.files[0]; // Assuming only one file is uploaded
   const reader = new FileReader();
   reader.onload = () => {
@@ -382,11 +375,11 @@ myUploader(event: any) {
 
 sendToBackend(base64String: string) {
   this.jobPost.ProfileImage=base64String;
-  console.log(base64String)
+
 }
 
 getImageUrl(profileImage: string | null) {
-  console.log(profileImage)
+
   let imageType = '';
   if (profileImage?.startsWith('data:image/png')) {
     imageType = 'png';

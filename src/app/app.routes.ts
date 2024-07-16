@@ -25,6 +25,7 @@ import { OwnerJobsComponent } from './components/owner-view/owner-jobs/owner-job
 import { OwnerJobApplicantsComponent } from './components/owner-job-applicants/owner-job-applicants.component';
 import { SeekerJobComponent } from './components/seeker-view/seeker-jobs/seeker-job/seeker-job.component';
 import { AppliedJobComponent } from './components/seeker-view/applied-job/applied-job/applied-job.component';
+import { PricingComponent } from './components/shared/pricing/pricing.component';
 
 export const routes: Routes = [
     {
@@ -113,7 +114,8 @@ export const routes: Routes = [
     },
     {
         path: 'privacy-policy', component: PrivacyPolicyComponent
-    }
+    },
+    { path: 'pricing',component:PricingComponent}
 
 
 
