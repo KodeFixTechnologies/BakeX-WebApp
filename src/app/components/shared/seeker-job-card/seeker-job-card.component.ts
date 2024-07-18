@@ -44,6 +44,20 @@ export class SeekerJobCardComponent {
     });
   }
 
+  getPostedDate (date : Date ) {
+
+    console.log(date)
+    const postedDay = new Date(date)
+    const currenDate = new Date()
+    const currentDay = currenDate.getDate()
+    
+    const postedDate = currentDay - postedDay.getDate()
+    if(postedDate === 0)
+        return "Posted Today"
+    else
+      return postedDate+" days ago"
+  }
+
   hideDialog() {
     this.displayDialog = false;
   }

@@ -14,7 +14,7 @@ export interface Jobpost {
     PostedById: number;
     title: string;
     jobTypeId: number | 0;
-    CreatedDate: Date;
+    CreatedDate: Date | undefined;
     ExperienceId: number;
     BusinessId: number;
     JobDescription: string;
@@ -24,4 +24,5 @@ export interface Jobpost {
     ProfileImage?: string | null;
     ExpertiseIds: number[];
     ExpertiseId?:number[]
+    applicantsCount?:number;
 }

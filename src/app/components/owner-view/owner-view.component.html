@@ -1,221 +1,209 @@
 
+<div class="  left-0 top-0 z-40 flex justify-between w-full items-center bg-white text-black h-14 p-3 py-5 ">
+  <div class="container">
+    <div class="relative -mx-4 flex items-center justify-between h-12">
+      <div class="w-60 max-w-full px-4 ms-3">
+        <!-- <a href="index.html" class="navbar-logo block w-full py-5">
+          <img
+            src="assets/images/logo/logo-white.svg"
+            alt="logo"
+            class="header-logo w-full"
+          />
+        </a> -->
+
+        <span class="  sm:text-3xl">Bake</span
+          ><span class=" sm:text-3xl">Joli</span>
+      </div>
+      <div class="flex w-720 items-center justify-between px-4 ">
+        <div>
+      
+          <nav
+            id="navbarCollapse"
+            class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg black py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
+          >
+            <ul class="blcok lg:flex 2xl:ml-20">
+       
+              <li class="group relative">
+                <a
+                  href="#about"
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Home
+                </a>
+              </li>
+              <li class="group relative" >
+                <a
+                
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Jobs
+                </a>
+              </li>
+             
+              <li class="group relative"  >
+                <a
+                  
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                 BookMark
+                </a>
+              </li>
+              <li  (click)="profilePageRediretion() " class="group relative" >
+                <a
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Profile
+                </a>
+              </li>
+             
+            </ul>
+          </nav>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  
+</div>
+<div class="bg-white  flex   sm:w-full h-[180px]  border-t-2 border-b-2 shadow-1">
+  
+  <div class="flex flex-col  px-5 py-8 sm:px-10 sm:py-16">
+    <div>
+      <p class="text-2xl ">Find Your Dream Employee</p>
+      </div>
+    
+      <div>
+        <p class="text-base text-gray-600 ">Looking for employee? Post Jobs and find your Employee  </p>
+        </div>
+  </div>
+  
+  <!-- <div>
+    <img class="h-[176px] w-[920px] object-cover" src="https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-halloween-season-celebration_23-2150742523.jpg?t=st=1721332843~exp=1721336443~hmac=499b20c53e77a8a0e73a4a011b12d09aeaa1b0fe5e82dae2ccce38f2766cf2d0&w=1380" alt="">
+  </div> -->
+</div>
+
+
+
+<div class="flex  pb-20 sm:pb-0 ">
+
+  <div class="hidden sm:flex bg-white h-[660px] pb-7 max-h-screen w-[300px] ms-6 mt-10 mb-10 rounded-lg shadow-1">
+
+
+
+  </div>
+
+  
+  
+  <div class="sm:mt-12  sm:ms-10 flex-col  bg-white
+   mx-auto p-3  rounded-2xl pt-3 ">
+   <div class="flex justify-start gap-4">
+   
+    <span  [ngClass]="{'bg-primary text-white': activated === 'allJobs', 'bg-white text-gray-700': activated !== 'allJobs'}"
+    class="p-3     hidden sm:flex  rounded-xl w-20 ring-1 cursor-pointer   ">All Jobs </span >
+
+    <span  [ngClass]="{'bg-primary text-white': activated === 'allJobs', 'bg-white text-gray-700': activated !== 'allJobs'}"
+    class="p-3     hidden sm:flex  rounded-xl w-28 ring-1 cursor-pointer   ">BookMarks</span >
+<!-- 
+       <div>
+        <span (click)="changeJobType(3)"   [ngClass]="{'bg-primary text-white': activated === 'Applied', 'bg-white text-gray-700': activated !== 'Applied'}"
+        class="p-3     hidden sm:flex  rounded-xl w-40  ring-1 cursor-pointer   ">Applied Jobs </span >
+       </div> -->
+   </div>
+  
+
+
+    <div >
+      
+
+ 
+      <div class=" w-[380px] sm:w-[1100px]  sm:mt-4   rounded-xl ">
+
+
+        <div class="sm:p-0 sm:mx-0 mx-auto me-3 hidden sm:block" >
+          
+          <div class="">
+            <img src="  '../../../../../assets/banner.jpg" class="rounded-xl h-64 w-full " alt="">
+          </div>
+          <!-- <ng-container  *ngFor="let jobposted of switchJobs" >
+            <div class="mt-6 ">
+            <seeker-job-card
+              [recommendedJob]="jobposted"
+              [businesses]="businesses"
+              [jobSeeker]="jobSeeker"
+            >
+            </seeker-job-card>
+          </div>
+          </ng-container> -->
+          <ng-container  *ngFor="let jobposted of jobPosts ">
+            <job-card
+              [jobPost]="jobposted"
+              [displayImage]="displayImage"
+              [bakeMember]="bakeMember"
+            >
+            </job-card>
+         
+          </ng-container>
+       
+        </div>
+
+        <div class="sm:p-0 sm:mx-0 mx-auto me-3 sm:hidden block" >
+          
+          <div class="">
+            <img src="  '../../../../../assets/banner.jpg" class="rounded-xl h-64 w-full " alt="">
+          </div>
+          <!-- <ng-container  *ngFor="let jobposted of switchJobs" >
+            <div class="mt-6 ">
+            <seeker-job-card
+              [recommendedJob]="jobposted"
+              [businesses]="businesses"
+              [jobSeeker]="jobSeeker"
+            >
+            </seeker-job-card>
+          </div>
+          </ng-container> -->
+          <ng-container  *ngFor="let jobposted of top3JobPosts">
+            <job-card
+              [jobPost]="jobposted"
+              [displayImage]="displayImage"
+              [bakeMember]="bakeMember"
+            >
+            </job-card>
+         
+          </ng-container>
+       
+        </div>
+    
+
+
+
+
+          </div>
+</div> 
+
+
+  </div>
+
+      
+</div>
+
+<owner-navbar></owner-navbar> 
+
+
+
+
+
 <div class="lg:ms-60 lg:me-60 lg:mt-20 sm:mt-20 md:mt-30">
 
 
-<div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3 ">
-  <div>
-    <p class="text-primary-white text-xs">
-      Welcome,<span class="text-xs"> {{ bakeMember.memberName }}</span>
-    </p>
-    <h2 class="text-white font-normal text-base mt-1">
-      Find your Right Employee
-    </h2>
-  </div>
-  <div
-    class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
-  >
-    <img [src]="displayImage" alt="Job Post Image" />
-
-    <!-- <svg
-      class="absolute w-12 h-12 text-gray-400 -left-1"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-        clip-rule="evenodd"
-      ></path>
-    </svg> -->
-  </div>
-</div>
-
-<div
-  class="border-red-500 bg-primary-white border rounded-lg py-16 px-3 mt-2 mx-1"
->
-  <p class="text-center">You can place your sponsor ads here</p>
-</div>
-
-<div class="flex justify-between mt-3 mx-3">
-  <p class="text-lg font-medium">My Jobs</p>
-  <button (click)="goToAllJobs()" class="text-blue-600">See all</button>
-</div>
-
-<!-- job-posts.component.html -->
-
-<!-- Use ng-container to wrap the ngFor loop -->
-
-<div class="relative pb-20">
-  <div class=" flex-initial snap-x snap-mandatory">
-      <ng-container *ngFor="let jobposted of top3JobPosts">
-        <div class="shrink-0 w-11/12 md:w-1/2 lg:w-1/3 px-1">
-        <job-card
-          [jobPost]="jobposted"
-          [displayImage]="displayImage"
-          [bakeMember]="bakeMember"
-        >
-        </job-card>
-      </div>
-      </ng-container>
-    </div>
-  </div>
 
 
-<!-- <div class=" w-full flex flex-col justify-center -mt-1  bg-[#FDFCF8]  ">
-
-    <div>
-      <p-card  [style]="{ height: '150px','background-color': '#FDFCF8'}"  > -->
-<!-- <div class="custom-header"> Add a class to target the header -->
-<!-- <p class="mt-1 text-sm"> Welcome,<span class="text-sm">{{bakeMember.memberName}}</span> </p> 
-          <div class="flex justify-between">
-          <p class="mt-1 font-semibold">Find your Right Employee</p>
-            <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-              <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                 
-            </div>
-          </div>
-        
-    
-        </div>
-        <p>
-            
-        </p>
-       
-    </p-card> -->
-
-<!-- <div class="mx-auto max-w-screen-md px-4 w-full mt-6">
-  <p class="font-bold">Sponsored Ad</p>
-
-  <div id="carousel-example" class="relative w-full"> -->
-<!-- Carousel wrapper -->
-<!-- <div
-        class="relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96"
-    > -->
-<!-- Item 1 -->
-<!-- <div id="carousel-item-1" class="hidden duration-700 ease-in-out">
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/flutter-web-a6380.appspot.com/o/ad2.jpg?alt=media&token=b9784229-a9be-46c6-8719-1c3dd44ead37"
-                class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
-                alt="..."
-            />
-        </div> -->
-<!-- Item 2 -->
-<!-- <div id="carousel-item-2" class="hidden duration-700 ease-in-out">
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/flutter-web-a6380.appspot.com/o/ad2.jpg?alt=media&token=b9784229-a9be-46c6-8719-1c3dd44ead37"
-                class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
-                alt="..."
-            />
-        </div> -->
-<!-- Item 3 -->
-<!-- <div id="carousel-item-3" class="hidden duration-700 ease-in-out">
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/flutter-web-a6380.appspot.com/o/ad2.jpg?alt=media&token=b9784229-a9be-46c6-8719-1c3dd44ead37"
-                class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
-                alt="..."
-            />
-        </div> -->
-<!-- Item 4 -->
-<!-- </div> -->
-<!-- Slider indicators -->
-<!-- <div
-        class="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse"
-    >
-        <button
-            id="carousel-indicator-1"
-            type="button"
-            class="h-3 w-3 rounded-full"
-            aria-current="true"
-            aria-label="Slide 1"
-        ></button>
-        <button
-            id="carousel-indicator-2"
-            type="button"
-            class="h-3 w-3 rounded-full"
-            aria-current="false"
-            aria-label="Slide 2"
-        ></button>
-        <button
-            id="carousel-indicator-3"
-            type="button"
-            class="h-3 w-3 rounded-full"
-            aria-current="false"
-            aria-label="Slide 3"
-        ></button>
-        <button
-            id="carousel-indicator-4"
-            type="button"
-            class="h-3 w-3 rounded-full"
-            aria-current="false"
-            aria-label="Slide 4"
-        ></button>
-    </div> -->
-<!-- Slider controls -->
-<!-- <button
-        id="data-carousel-prev"
-        type="button"
-        class="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
-    >
-        <span
-            class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
-        >
-            <svg
-                class="h-4 w-4 text-white dark:text-gray-800"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-            >
-                <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 1 1 5l4 4"
-                />
-            </svg>
-            <span class="hidden">Previous</span>
-        </span>
-    </button>
-    <button
-        id="data-carousel-next"
-        type="button"
-        class="group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
-    >
-        <span
-            class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
-        >
-            <svg
-                class="h-4 w-4 text-white dark:text-gray-800"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-            >
-                <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 9 4-4-4-4"
-                />
-            </svg>
-            <span class="hidden">Next</span>
-        </span>
-    </button>
-</div>
-  
 
 
-  </div>
-  
-    
-          
-   
- </div> -->
 
-<!--Job Pop Up Dialog-->
+
 <p-dialog
   class="flex justify-center"
   header="Create new Job"
@@ -392,9 +380,9 @@
 </div>
 </p-dialog> 
 </div>
-<owner-navbar></owner-navbar>
 
-<!-- 
+
+
 <div *ngIf="showImageUpload && activeIndex===3" class="mb-2 flex flex-col items-center ">
   <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
   <p-fileUpload name="myfile[]"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
@@ -406,7 +394,7 @@
   </ul>
 </ng-template>
 </p-fileUpload>
-</div> -->
+</div> 
 <!-- <div *ngIf="displayImage==null">
   <div *ngIf="activeIndex===3">
 

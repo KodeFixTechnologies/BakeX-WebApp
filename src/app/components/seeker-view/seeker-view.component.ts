@@ -52,6 +52,12 @@ export class SeekerViewComponent implements OnInit {
   selectedJob: RecommendedJob = {} as RecommendedJob;
   business:Business[] = []
   businesses: { [key: number]: Business } = {};
+  allJobs : RecommendedJob[] = []
+  switchJobs : RecommendedJob[] = []
+  activated : string = 'recommended'
+  appliedJobs : RecommendedJob[] =[]
+
+
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -114,7 +120,8 @@ export class SeekerViewComponent implements OnInit {
     this.getPhoneDataorTokenData()
     this.getJobSeekerDeatils();
     this.getBusinnessDetails();
-    
+
+   
 
   }
 
@@ -169,9 +176,21 @@ export class SeekerViewComponent implements OnInit {
           .getRecommendedJobs(this.jobSeeker.profileId)
           .subscribe((recommendedJob: RecommendedJob[]) => {
             this.recommendedJobs = recommendedJob;
-
+            this.switchJobs=recommendedJob
           
           });
+
+          this.queryService.getJobForSeeker(this.jobSeeker.profileId).subscribe(data => {
+            this.allJobs = data;
+            console.log(this.allJobs)
+        
+          });
+
+          this.queryService.getAppliedJobForSeeker(this.jobSeeker.profileId).subscribe(data => {
+            this.appliedJobs=data;
+            
+        });
+          
       }
     });
 
@@ -199,4 +218,28 @@ export class SeekerViewComponent implements OnInit {
 
     });
   }
+
+  changeJobType(id : number) {
+    this.switchJobs = []
+    if(id ===1) 
+    {
+      this.switchJobs = this.recommendedJobs
+      this.activated = 'recommended'
+    }
+    else if (id ===2)
+    {
+      this.switchJobs = this.allJobs
+      this.activated = 'allJobs'
+    }
+    else if(id ==3)
+    {
+        this.switchJobs = this.appliedJobs
+      this.activated = 'Applied'
+    }
+  }
+
+  goToProfile() {
+    this.router.navigate(['/user-profile'])
+  }
+
 }

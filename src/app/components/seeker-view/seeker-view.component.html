@@ -1,5 +1,5 @@
 
-<div class="   left-0 top-0 z-40 flex justify-between w-full items-center bg-white text-black h-16 p-3 py-12 ">
+<div class="  left-0 top-0 z-40 flex justify-between w-full items-center bg-white text-black h-14 p-3 py-5 ">
   <div class="container">
     <div class="relative -mx-4 flex items-center justify-between h-12">
       <div class="w-60 max-w-full px-4 ms-3">
@@ -26,32 +26,31 @@
               <li class="group relative">
                 <a
                   href="#about"
-                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
                 >
                   Home
                 </a>
               </li>
-              <li class="group relative">
+              <li class="group relative" (click)="changeJobType(2)">
                 <a
-                  href="#pricing"
-                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
                 >
                   Jobs
                 </a>
               </li>
              
-              <li class="group relative">
+              <li class="group relative" (click)="changeJobType(3)"   >
                 <a
-                  href="#contact"
-                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                  
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
                 >
                  Applied Jobs
                 </a>
               </li>
-              <li class="group relative">
+              <li class="group relative" (click)="goToProfile()">
                 <a
-                  href="blog-grids.html"
-                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
                 >
                   Profile
                 </a>
@@ -66,41 +65,91 @@
   </div>
 </div>
 
-
-
-<div class="flex">
-
-  <div class="flex bg-white h-[720px] max-h-screen w-[320px] ms-6 mt-10  rounded-xl shadow-1">
-
-
-
-  </div>
+<div>
   
-  <div class="flex-col">
-
-    <div class="bg-white  flex-1 sm:w-[1080px] h-[180px] mt-10 ms-20 rounded-2xl shadow-1">
+</div>
+<div class="bg-white  flex   sm:w-full h-[180px]  border-t-2 border-b-2 shadow-1">
   
+  <div class="flex flex-col  px-5 py-8 sm:px-10 sm:py-16">
+    <div>
+      <p class="text-2xl ">Find Your Dream Job</p>
+      </div>
+    
+      <div>
+        <p class="text-base text-gray-600 ">Looking for jobs? Browse our latest openings to view and apply the best jobs today</p>
         </div>
-
-        <div class=" w-[1200px] h-[500px] mt-10 ms-12 rounded-2xl ">
+  </div>
   
-          <div class="grid grid-cols-3 gap-4 ms-10 ">
-            <ng-container *ngFor="let jobposted of recommendedJobs">
-              <div class="">
-              <seeker-job-card
-                [recommendedJob]="jobposted"
-                [businesses]="businesses"
-                [jobSeeker]="jobSeeker"
-              >
-              </seeker-job-card>
-            </div>
-            </ng-container>
-         
-          </div>
+  <!-- <div>
+    <img class="h-[176px] w-[920px] object-cover" src="https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-halloween-season-celebration_23-2150742523.jpg?t=st=1721332843~exp=1721336443~hmac=499b20c53e77a8a0e73a4a011b12d09aeaa1b0fe5e82dae2ccce38f2766cf2d0&w=1380" alt="">
+  </div> -->
+</div>
 
-            </div>
+
+
+<div class="flex  pb-20 sm:pb-0 ">
+
+  <div class="hidden sm:flex bg-white h-[660px] pb-7 max-h-screen w-[300px] ms-6 mt-10 mb-10 rounded-lg shadow-1">
+
+
+
   </div>
 
+  
+  
+  <div class="sm:mt-12  sm:ms-10 flex-col  bg-white
+   mx-auto p-3  rounded-2xl pt-3 ">
+   <div class="flex justify-between">
+    <div class="flex  gap-4 ">
+      <span (click)="changeJobType(1) "   [ngClass]="{'bg-primary text-white': activated === 'recommended', 'bg-white text-gray-700': activated !== 'recommended'}"
+      class="p-3  hidden sm:flex      rounded-xl w-40 ring-1 cursor-pointer   ">Recommend Jobs </span >
+       <span (click)="changeJobType(2)"   [ngClass]="{'bg-primary text-white': activated === 'allJobs', 'bg-white text-gray-700': activated !== 'allJobs'}"
+    class="p-3     hidden sm:flex  rounded-xl w-20 ring-1 cursor-pointer   ">All Jobs </span >
+       </div>
+
+       <div>
+        <span (click)="changeJobType(3)"   [ngClass]="{'bg-primary text-white': activated === 'Applied', 'bg-white text-gray-700': activated !== 'Applied'}"
+        class="p-3     hidden sm:flex  rounded-xl w-40  ring-1 cursor-pointer   ">Applied Jobs </span >
+       </div>
+   </div>
+  
+
+
+    <div >
+      
+
+ 
+      <div class=" w-[380px] sm:w-[1100px]  sm:mt-4   rounded-xl ">
+
+
+
+        <div class="sm:p-0 sm:mx-0 mx-auto me-3" >
+          
+          <div class="">
+            <img src="  '../../../../../assets/banner.jpg" class="rounded-xl h-64 w-full " alt="">
+          </div>
+          <ng-container  *ngFor="let jobposted of switchJobs" >
+            <div class="mt-6 ">
+            <seeker-job-card
+              [recommendedJob]="jobposted"
+              [businesses]="businesses"
+              [jobSeeker]="jobSeeker"
+            >
+            </seeker-job-card>
+          </div>
+          </ng-container>
+       
+        </div>
+    
+
+
+
+
+          </div>
+</div> 
+
+
+  </div>
 
       
 </div>

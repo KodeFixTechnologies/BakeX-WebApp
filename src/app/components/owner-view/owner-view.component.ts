@@ -97,6 +97,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   district:District[]|undefined;
   selectedDistrict:District|undefined;
   activeIndex: number = 0;
+  activated:string='allJobs'
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
@@ -145,6 +146,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   
   ngOnInit(): void {
+
+    this.dataService.setDataforheader(true);
 
     this.backNavigationSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart && this.visible) {
@@ -297,6 +300,13 @@ this.model = genAI.getGenerativeModel({
    
   }
 
+  profilePageRediretion()
+  {
+    this.router.navigate(['/owner-profile'])
+
+  }
+
+  
   getJobPostByOwner(Id: number) {
     this.queryService.getJobPostByOwner(Id).subscribe({
       next: (data) => {
