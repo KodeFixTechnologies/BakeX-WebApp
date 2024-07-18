@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, Renderer2, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../../../../services/profile.service';
 import { Router } from '@angular/router';
@@ -14,11 +14,13 @@ import { ChangeDetectionStrategy } from '@angular/compiler';
 import { FileService } from '../../../../services/file.service';
 import { Users } from '../../../../models/user';
 import { CalendarModule } from 'primeng/calendar';
+import { QueryService } from '../../../../services/query.service';
+import { StepperComponent } from "../../../shared/stepper/stepper.component";
 declare const initSendOTP: any;
 @Component({
   selector: 'personal-info',
   standalone: true,
-  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule,CalendarModule],
+  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule, CalendarModule, StepperComponent],
   templateUrl: './personal-info.component.html',
   styleUrl: './personal-info.component.scss',
   providers: [BrowserAnimationsModule]
@@ -28,6 +30,8 @@ declare const initSendOTP: any;
 export class PersonalInfoComponent {
 
 
+
+  selectedPricing: string = 'Employee';
   updatedPersonalInfo = {
     firstname: '',
     lastname: '',
@@ -47,9 +51,11 @@ export class PersonalInfoComponent {
   submitted: boolean = false;
 
   googleUser: any;
-
+  pricingData: any;
   user:Users = {} as Users;
+  
 
+  
   constructor(
     private profileService: ProfileService,
     private router: Router,
@@ -57,14 +63,16 @@ export class PersonalInfoComponent {
     private cdr: ChangeDetectorRef,
     private render: Renderer2,
     private ngZone: NgZone,
-    private fileService: FileService
+    private fileService: FileService,
+    private queryService:QueryService
   ) { 
 
     
   }
 
   ngOnInit() {
-   
+
+    this.dataService.requestExpand('profile');
     this.user.isMobileVerified='N';
     this.user.userTypeId=1;
  
@@ -95,7 +103,10 @@ export class PersonalInfoComponent {
         })
      
     })
-
+    this.queryService.getPricingData().subscribe(data => {
+      this.pricingData = data;
+      console.log(this.pricingData)
+    });
 
     this.script = this.render.createElement('script');
     this.script.src = "https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
@@ -189,6 +200,10 @@ export class PersonalInfoComponent {
 
 
 
+  }
+  
+  selectPricing(pricingOption: string): void {
+    this.selectedPricing = pricingOption;
   }
 
   setGender(event: any) {

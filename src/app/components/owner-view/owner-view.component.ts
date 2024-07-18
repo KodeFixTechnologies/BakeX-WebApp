@@ -25,6 +25,10 @@ import { ListboxModule } from 'primeng/listbox';
 import { Expertise } from '../../models/expertise';
 import { Jobpost } from '../../models/job';
 import { CarouselModule } from 'primeng/carousel';
+import {
+  GoogleGenerativeAI, HarmBlockThreshold, HarmCategory 
+} from '@google/generative-ai';
+
 import { Carousel } from 'flowbite';
 import type {
     CarouselItem,
@@ -35,6 +39,8 @@ import type { InstanceOptions } from 'flowbite';
 import { AuthService } from '../../services/auth.service';
 import { JobCardComponent } from "../shared/job-card/job-card.component";
 import { Location } from '@angular/common';
+import { environment } from '../../../environments/environment.development';
+
 
 
 @Component({
@@ -50,6 +56,8 @@ import { Location } from '@angular/common';
 
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
+
+  
   
   @ViewChild('dialog', { static: false }) dialog: Dialog | undefined;
   private backNavigationSubscription: Subscription | undefined;
@@ -132,6 +140,10 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   maxSize:number=10000;
   selectedExpertise!: Expertise[];
   displayImage:any;
+
+  model:any
+
+  
   ngOnInit(): void {
 
     this.backNavigationSubscription = this.router.events.subscribe(event => {
@@ -158,6 +170,26 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
    
     ];
+
+    const genAI = new GoogleGenerativeAI(environment.API_KEY);
+const generationConfig = {
+  safetySettings: [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    },
+  ],
+  temperature: 0.9,
+  top_p: 1,
+  top_k: 32,
+  maxOutputTokens: 100, // limit output
+};
+this.model = genAI.getGenerativeModel({
+  model: 'gemini-pro', // or 'gemini-pro-vision'
+  ...generationConfig,
+});
+
+
 
 
     this.district = [
@@ -298,6 +330,10 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   nextStep() {
     this.activeIndex++;
+    if(this.activeIndex==3)
+    {
+      this.TestGeminiPro();
+    }
 }
 
 previousStep() {
@@ -305,7 +341,22 @@ previousStep() {
 }
 
 
-  
+async TestGeminiPro() {
+  // Model initialisation missing for brevity
+
+  const prompt = `Generate a minimal and simple list of job responsibilities for a job in the food industry.
+  Company: ${this.bakeMember.businessName}, Role: ${this.selectedExpertise}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
+  The response should only include job responsibilities in a sentence`;
+  const result = await this.model.generateContent(prompt);
+  console.log(result)
+  const response = await result.response;
+
+  if (response.candidates && response.candidates.length > 0) {
+    const jobDesc = response.candidates[0].content.parts[0].text;
+    this.jobPost.JobDescription = jobDesc;
+  }
+
+}
 updateExpertise(event: any) {
 
   // Extract expertiseIds from the event value array
@@ -325,12 +376,13 @@ updateExpertise(event: any) {
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
     this.jobPost.jobTypeId = parseInt(this.jobTypes)
- 
   
-    this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
+    console.log(this.jobPost.JobDescription)
+  
+    // this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
      
-      this.visible=false
-    })
+    //   this.visible=false
+    // })
 
     // Push the submitted job to the list of submitted jobs
     // this.submittedJobs.push({

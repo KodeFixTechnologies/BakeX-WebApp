@@ -1,0 +1,78 @@
+<div class="mx-auto bg-white sm:w-720 py-16 sm:h-[740px]">
+    <div class="flex flex-col justify-center mt-10 ml-5">
+    
+  
+      <div>
+        <h1 class="text-xl font-medium">Preffered Employment Type ?</h1>
+        <p class="mt-1 ml-2 text-xs text-primary-grey">
+          Please select your field of experience!
+        </p>
+      </div>
+  
+      <div class="my-5">
+        <p-listbox
+          [options]="employment"
+          optionLabel="expertiseType"
+          optionLabel="jobType"
+          [style]="{ width: '25rem' }"
+          [multiple]="true"
+          [metaKeySelection]="false"
+          [listStyle]="{ 'max-height': '500px' }"
+          [focusOnHover]="true"
+          [checkbox]="true"
+          [selectAll]="false"
+          [showToggleAll]="false"
+          [style]="{ width: '95%', backgroundColor: '#f6f6f6', color: '#242424' }"
+          (onChange)=" updateEmployment($event)"
+          [(ngModel)]="selectedEmployment"
+        />
+
+        
+      </div>
+  
+      <div class="mt-1 mb-5 mr-5">
+        <button
+          pButton
+          pRipple
+          label="Continue"
+          class="p-button"
+          [style]="{ width: '100%' }"
+          (click)="nextPage()" 
+        ></button>
+
+        
+      </div>
+
+      
+      </div>
+    </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -32,7 +32,18 @@ module.exports = {
       },
 
       width:{
-        '720':'720px'
+        '720':'720px',
+        '340':'340px'
+        
+      },
+
+      height: {
+   '720':'720px',
+   '540':'540px'
+      },
+
+      fontSize: {
+       xs:'0.7rem'
       },
 
       colors: {

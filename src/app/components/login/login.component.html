@@ -1,4 +1,91 @@
-<section *ngIf="!isLogin">
+<div *ngIf="!isLogin" class="w-full px-4 lg:w-2/12 xl:w-4/12 mx-auto mt-24 ">
+  <div
+    class="wow h-720 max-h-screen fadeInUp rounded-lg bg-white px-8 py-10 shadow-testimonial dark:bg-dark-2 dark:shadow-none sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px]"
+    data-wow-delay=".2s
+    ">
+    <h3 class="mb-8  flex justify-center text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
+      Create Account
+    </h3>
+    <form>
+      <div class="mb-[22px] flex flex-col items-center ">
+        <label for="fullName" class="mb-4   text-body-color dark:text-dark-6 text-lg">Mobile Number</label>
+        <input type="text" name="Mobile Number" [(ngModel)]="user.mobileNumber" 
+          class="flex justify-center  items-center  ring-1 rounded-xl border-0 border-b 
+          border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6" />
+      </div>
+     
+      
+     
+      <div class="mb-0 flex justify-center">
+        <button type="submit" (click)="gotoOtp()"
+          class="inline-flex items-center h-10 w-52 justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-blue-dark">
+          Verify
+        </button>
+      </div>
+
+      <p class="text-center text-primary-black mt-4">
+        Already have a Account?
+       <span>
+         <a (click)="signupClick()"  class="underline text-primary-blue "> Login </a>
+       </span>
+     </p>
+
+     <div class="py-6 md:order-1 hidden md:block ">
+      <img src="../../../../../assets/chef3.png " alt="Astronaut in the air" sizes="(max-width: 1000px) 200vw, 620px"
+        loading="eager" format="avif" class="w-720" />
+    </div>
+    
+    </form>
+  </div>
+</div>
+
+
+<div *ngIf="isLogin" class="w-full px-4 lg:w-2/12 xl:w-4/12 mx-auto mt-24 ">
+  
+  
+  <div
+    class="wow h-720 max-h-screen fadeInUp rounded-lg bg-white px-8 py-10 shadow-testimonial dark:bg-dark-2 dark:shadow-none sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px]"
+    data-wow-delay=".2s
+    ">
+    <h3 class="mb-8  flex justify-center text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
+      Login
+    </h3>
+    <form>
+      <div class="mb-[22px] flex flex-col items-center ">
+        <label for="fullName" class="mb-4   text-body-color dark:text-dark-6 text-lg">Mobile Number</label>
+        <input type="text" name="Mobile Number" [(ngModel)]="user.mobileNumber" 
+          class="flex justify-center  items-center  ring-1 rounded-xl border-0 border-b 
+          border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6" />
+      </div>
+     
+   
+      <div class="mb-0 flex justify-center">
+        <button type="submit" (click)="gotoOtp()"
+          class="inline-flex items-center h-10 w-52 justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-blue-dark">
+          Verify
+        </button>
+      </div>
+
+      <p class="text-center text-primary-black mt-4">
+        Don't Have an Account?
+       <span>
+         <a (click)="signupClick()"  class="underline text-primary-blue "> Create One </a>
+       </span>
+     </p>
+    </form>
+
+    <div class="py-6 md:order-1 hidden md:block ">
+      <img src="../../../../../assets/chef3.png " alt="Astronaut in the air" sizes="(max-width: 1000px) 200vw, 620px"
+        loading="eager" format="avif" class="w-720" />
+    </div>
+   
+  </div>
+
+  
+</div>
+
+
+<!-- <section *ngIf="!isLogin">
   <div class="max-w-screen-lg mx-auto">
     <div class="flex flex-col justify-center items-center mt-10">
       <h1 class="text-2xl font-medium text-center">Create Account</h1>
@@ -58,7 +145,7 @@
     </p>
   </div>
 
-</section>
+</section> -->
 
 
 

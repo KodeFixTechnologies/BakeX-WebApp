@@ -7,6 +7,7 @@ import { Expertise,Education } from '../../../../models/expertise';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'expertise-info',
   standalone: true,
@@ -31,6 +32,7 @@ expertise!:Expertise[];
     private queryService:QueryService,
     private profileService: ProfileService,
     private  router:Router,
+    private dataService:DataService
   )
   {
 
@@ -38,7 +40,7 @@ expertise!:Expertise[];
 
   
   ngOnInit(): void {
-  
+    this.dataService.requestExpand('expertise');
 
     this.queryService.getExpertiseTypes().subscribe((data)=>{
     

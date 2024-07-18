@@ -25,6 +25,7 @@ import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.componen
 })
 export class SeekerViewComponent implements OnInit {
 
+
   public timeLeft$: Observable<{
     secondsToDday: number;
     minutesToDday: number;
@@ -108,7 +109,7 @@ export class SeekerViewComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.setData(true);
 
-
+    this.dataService.setDataforheader(true);
 
     this.getPhoneDataorTokenData()
     this.getJobSeekerDeatils();

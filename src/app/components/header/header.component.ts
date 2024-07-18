@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'headers',
@@ -13,7 +14,23 @@ import { RouterLink } from '@angular/router';
 
 
 export class HeaderComponent implements OnInit  {
+ 
+
+  constructor(
+    private dataService:DataService
+  )
+  {
+  
+  }
+  isEnable:boolean=true;
   ngOnInit(): void {
+
+
+    this.dataService.getDataforHeader().subscribe((data)=>{
+      console.log(data)
+      this.isEnable=data;
+    })
+
     // Toggle button and menu collapse logic
     const navbarToggler = document.querySelector("#navbarToggler");
     const navbarCollapse = document.querySelector("#navbarCollapse");

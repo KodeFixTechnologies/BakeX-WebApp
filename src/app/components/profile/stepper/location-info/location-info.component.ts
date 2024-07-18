@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../../../services/profile.service';
 import { QueryService } from '../../../../services/query.service';
 import { ButtonModule } from 'primeng/button'
@@ -13,6 +13,8 @@ import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
 import { InputOtpModule } from 'primeng/inputotp';
+import { StepperComponent } from '../../../shared/stepper/stepper.component';
+import { DataService } from '../../../../services/data.service';
 
 interface State {
   state: string;
@@ -32,14 +34,15 @@ interface StatesData {
 
 
 export class LocationInfoComponent implements OnInit, AfterViewInit {
-
+  @ViewChild(StepperComponent) stepperComponent!: StepperComponent;
 
   constructor(
     private profileService: ProfileService,
     private queryService: QueryService,
     private router:Router,
     private fileService:FileService,
-    private ref:ChangeDetectorRef
+    private ref:ChangeDetectorRef,
+    private dataService:DataService
   ) {
 
   }
@@ -70,7 +73,7 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
 
-   
+    this.dataService.requestExpand('location');
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 

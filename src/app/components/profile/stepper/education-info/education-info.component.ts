@@ -5,6 +5,7 @@ import { ProfileService } from '../../../../services/profile.service';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'education-info',
@@ -17,13 +18,16 @@ export class EducationInfoComponent  implements OnInit{
   selectedEducation!:Education[];
   constructor(
     private profileService:ProfileService,
-    private router:Router
+    private router:Router,
+    private dataService:DataService
   )
   {
 
   }
 
   ngOnInit(): void {
+
+    this.dataService.requestExpand('education');
     this.education = [
       {
        EducationLevel:'Less Than High School', EducationId:1,

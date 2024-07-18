@@ -37,13 +37,13 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.setData(true);
     this.userProfile= this.authService.getUserProfileData();
-    
+    this.dataService.setDataforheader(true);
   }
 
     logoutPop()
     { 
         this.showLogout= !this.showLogout
-      
+       console.log("hello")
     }
 
 

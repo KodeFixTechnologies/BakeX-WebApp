@@ -1,3 +1,113 @@
+
+<div class="   left-0 top-0 z-40 flex justify-between w-full items-center bg-white text-black h-16 p-3 py-12 ">
+  <div class="container">
+    <div class="relative -mx-4 flex items-center justify-between h-12">
+      <div class="w-60 max-w-full px-4 ms-3">
+        <!-- <a href="index.html" class="navbar-logo block w-full py-5">
+          <img
+            src="assets/images/logo/logo-white.svg"
+            alt="logo"
+            class="header-logo w-full"
+          />
+        </a> -->
+
+        <span class="  sm:text-3xl">Bake</span
+          ><span class=" sm:text-3xl">Joli</span>
+      </div>
+      <div class="flex w-720 items-center justify-between px-4 ">
+        <div>
+      
+          <nav
+            id="navbarCollapse"
+            class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg black py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
+          >
+            <ul class="blcok lg:flex 2xl:ml-20">
+       
+              <li class="group relative">
+                <a
+                  href="#about"
+                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Home
+                </a>
+              </li>
+              <li class="group relative">
+                <a
+                  href="#pricing"
+                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Jobs
+                </a>
+              </li>
+             
+              <li class="group relative">
+                <a
+                  href="#contact"
+                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                 Applied Jobs
+                </a>
+              </li>
+              <li class="group relative">
+                <a
+                  href="blog-grids.html"
+                  class="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6  lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Profile
+                </a>
+              </li>
+             
+            </ul>
+          </nav>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="flex">
+
+  <div class="flex bg-white h-[720px] max-h-screen w-[320px] ms-6 mt-10  rounded-xl shadow-1">
+
+
+
+  </div>
+  
+  <div class="flex-col">
+
+    <div class="bg-white  flex-1 sm:w-[1080px] h-[180px] mt-10 ms-20 rounded-2xl shadow-1">
+  
+        </div>
+
+        <div class=" w-[1200px] h-[500px] mt-10 ms-12 rounded-2xl ">
+  
+          <div class="grid grid-cols-3 gap-4 ms-10 ">
+            <ng-container *ngFor="let jobposted of recommendedJobs">
+              <div class="">
+              <seeker-job-card
+                [recommendedJob]="jobposted"
+                [businesses]="businesses"
+                [jobSeeker]="jobSeeker"
+              >
+              </seeker-job-card>
+            </div>
+            </ng-container>
+         
+          </div>
+
+            </div>
+  </div>
+
+
+      
+</div>
+
+
+
+<!-- 
 <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
   <div>
     <p class="text-primary-white text-xs">
@@ -8,7 +118,7 @@
     </h2>
   </div>
   <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-    <!-- <img [src]="displayImage" alt="Job Post Image" /> -->
+
 
     <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg">
@@ -20,14 +130,14 @@
   <p class="text-center">We Currently have 5000 Food Industries Onboarded</p>
 
   <div class="flex space-x-5">
-    <!-- First Column -->
+
     <div class="flex flex-col items-center space-y-5">
       <img class="w-16 h-25 rounded-full shadow-lg" src="https://www.mangobakers.com/wp-content/uploads/2018/06/MANGO-BAKERS-Logo.png" alt="Mango Bakers Logo"/>
       
       
     </div>
 
-    <!-- Second Column -->
+ 
     <div class="flex flex-col items-center space-y-5">
       <img class="w-16 h-25 rounded-full shadow-lg" src="../../../../../assets/bake.png" alt="Bake Logo"/>
 
@@ -45,14 +155,14 @@
 
 
 </div>
-
+ -->
 
   
 
 
 
 
-<div class="flex justify-between mt-3 mx-3">
+<!-- <div class="flex justify-between mt-32 mx-3">
   <p class="text-lg font-medium">Recommended</p>
   <button class="text-blue-600" (click)="goToJobComponent()">See all</button>
 </div>
@@ -70,7 +180,7 @@
       </div>
       </ng-container>
     </div>
-  </div>
+  </div> -->
 
 <!-- Add a class to target the header -->
 

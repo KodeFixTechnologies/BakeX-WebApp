@@ -6,6 +6,7 @@ import { SeekerJobCardComponent } from '../../../shared/seeker-job-card/seeker-j
 import { JobSeeker } from '../../../../models/jobSeeker';
 import { QueryService } from '../../../../services/query.service';
 import { AuthService } from '../../../../services/auth.service';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'applied-job',
@@ -19,7 +20,8 @@ export class AppliedJobComponent implements OnInit {
 
   constructor(
     private queryService:QueryService,
-    private authService:AuthService
+    private authService:AuthService,
+    private dataService:DataService
   )
   {
 
@@ -29,6 +31,7 @@ export class AppliedJobComponent implements OnInit {
   userProfile: JobSeeker = {} as JobSeeker;
   profileId:any;
   ngOnInit(): void {
+    this.dataService.setDataforheader(true);
       this.profileId=this.authService.getProfileId();
     this.queryService.getAppliedJobForSeeker(this.profileId).subscribe(data => {
         this.appliedJobs=data;

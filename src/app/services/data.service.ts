@@ -12,7 +12,7 @@ import { JobSeeker } from '../models/jobSeeker';
 export class DataService {
   private dataSubject = new BehaviorSubject<boolean>(false);
  
-
+  private dataheaderSubject = new BehaviorSubject<boolean>(false);
   private createJobSubject = new BehaviorSubject<boolean>(false);
 
   private phoneData = new BehaviorSubject<string>('');
@@ -37,6 +37,15 @@ export class DataService {
    private profileDataSubject = new BehaviorSubject<any>(null);
 
   showDialog$ = this.showDialogSource.asObservable();
+
+  
+  private toggleExpandSource = new Subject<string>();
+  toggleExpand$ = this.toggleExpandSource.asObservable();
+
+  requestExpand(data: string) {
+    this.toggleExpandSource.next(data);
+  }
+
 
   openDialog() {
     this.showDialogSource.next();
@@ -86,6 +95,16 @@ export class DataService {
 
   getData() {
     return this.dataSubject.asObservable();
+  }
+
+
+  
+  setDataforheader(data: boolean) {
+    this.dataheaderSubject.next(data);
+  }
+
+  getDataforHeader() {
+    return this.dataheaderSubject.asObservable();
   }
 
   

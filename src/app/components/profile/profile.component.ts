@@ -12,11 +12,12 @@ import { MessageService } from 'primeng/api';
 import { PersonalInfoComponent } from './stepper/personal-info/personal-info.component';
 import { PrimeIcons } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StepperComponent } from "../shared/stepper/stepper.component";
 
 @Component({
   selector: 'profile',
   standalone: true,
-  imports: [PersonalInfoComponent,StepperModule,AnimateModule,ToastModule,StepsModule,RouterOutlet,RouterLink],
+  imports: [PersonalInfoComponent, StepperModule, AnimateModule, ToastModule, StepsModule, RouterOutlet, RouterLink, StepperComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

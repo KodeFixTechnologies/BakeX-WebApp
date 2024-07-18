@@ -26,6 +26,7 @@ import { OwnerJobApplicantsComponent } from './components/owner-job-applicants/o
 import { SeekerJobComponent } from './components/seeker-view/seeker-jobs/seeker-job/seeker-job.component';
 import { AppliedJobComponent } from './components/seeker-view/applied-job/applied-job/applied-job.component';
 import { PricingComponent } from './components/shared/pricing/pricing.component';
+import { EmployementTypeComponent } from './components/profile/stepper/employement-type/employement-type.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,9 @@ export const routes: Routes = [
             },
             {
                 path: 'resume', component: ResumeComponent,
+            },
+            {
+                path:'employment',component:EmployementTypeComponent
             }
         ],
     },
