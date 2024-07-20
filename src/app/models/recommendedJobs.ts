@@ -4,11 +4,14 @@ export interface RecommendedJob {
     title: string;
     jobDescription: string;
     jobType: string;
-    postedById:number;
+    postedById:number ;
     createdDate: Date;
-    districtName: string;
+    districtName:string
+    salary:string
     experienceType: string;
+    expertiseType:string;
     appliedStatus : number;
+    jobDescriptionLines?: string[];
   }
   
 
@@ -19,4 +22,7 @@ export interface Business {
   profileImage: string | null;
   businessName: string;
   profileImageBase64:string;
+  stateName:string;
+  districtName:string;
+
 }

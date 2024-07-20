@@ -25,6 +25,10 @@ import { ListboxModule } from 'primeng/listbox';
 import { Expertise } from '../../models/expertise';
 import { Jobpost } from '../../models/job';
 import { CarouselModule } from 'primeng/carousel';
+import {
+  GoogleGenerativeAI, HarmBlockThreshold, HarmCategory 
+} from '@google/generative-ai';
+
 import { Carousel } from 'flowbite';
 import type {
     CarouselItem,
@@ -35,6 +39,8 @@ import type { InstanceOptions } from 'flowbite';
 import { AuthService } from '../../services/auth.service';
 import { JobCardComponent } from "../shared/job-card/job-card.component";
 import { Location } from '@angular/common';
+import { environment } from '../../../environments/environment.development';
+
 
 
 @Component({
@@ -50,6 +56,8 @@ import { Location } from '@angular/common';
 
 
 export class OwnerViewComponent implements OnInit, OnDestroy{
+
+  
   
   @ViewChild('dialog', { static: false }) dialog: Dialog | undefined;
   private backNavigationSubscription: Subscription | undefined;
@@ -89,10 +97,11 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   district:District[]|undefined;
   selectedDistrict:District|undefined;
   activeIndex: number = 0;
+  activated:string='allJobs'
   steps: any[] = [
       { label: 'Job Details' },
       { label: 'Skills' },
-      { label: 'Experince' },
+      { label: 'Experience' },
       {
          label:'Logo'
        }
@@ -105,7 +114,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   jobPosts:Jobpost[]=[];
   top3JobPosts:Jobpost[]=[];
-
+  expertiseTypeforGemini:string=''
 
 
   jobTypes:any;
@@ -130,9 +139,15 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
 
   maxSize:number=10000;
-  selectedExpertise!: Expertise[];
+  selectedExpertise: Expertise[]=[];
   displayImage:any;
+
+  model:any
+
+  
   ngOnInit(): void {
+
+    this.dataService.setDataforheader(true);
 
     this.backNavigationSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart && this.visible) {
@@ -142,7 +157,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
      this.experience= [
       {
-       name:'No Experince', id:1,
+       name:'No Experience', id:1,
        
       },
       {
@@ -158,6 +173,26 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
   
    
     ];
+
+    const genAI = new GoogleGenerativeAI(environment.API_KEY);
+const generationConfig = {
+  safetySettings: [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    },
+  ],
+  temperature: 0.9,
+  top_p: 1,
+  top_k: 32,
+  maxOutputTokens: 100, // limit output
+};
+this.model = genAI.getGenerativeModel({
+  model: 'gemini-pro', // or 'gemini-pro-vision'
+  ...generationConfig,
+});
+
+
 
 
     this.district = [
@@ -192,18 +227,14 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   
 
-     console.log(this.authService.getToken)
-
-     console.log(this.phoneno)
-
     
      this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
       next: (data) => {
         this.bakeMember = data;
         this.selectedDistrict = this.district?.find(item => item.name === data.district);
-        console.log(this.selectedDistrict);
+      
 
-        console.log(data)
+   
     
         if (this.bakeMember.profileImageBase64) {
           const imageUrl = `data:image/png;base64,${this.bakeMember.profileImageBase64}`; // Adjust the MIME type as per your image type
@@ -215,7 +246,6 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       },
       complete: () => {
         
-        console.log('Request completed');
         this.getJobPostByOwner(this.bakeMember.memberId); // Assuming ownerId is available in bakeMember
       }
     });
@@ -254,23 +284,29 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     const token = this.authService.getToken();
     if (token) {
       this.phoneno = this.authService.getPhoneNo() || '';
-      console.log('Phone number loaded:', this.phoneno);
+     
     } else {
-      console.log('Token not available yet');
+    
       // Optionally, you can retry after some delay or handle the missing token case
     }
   }
   
   ngOnDestroy(): void {
-    console.log(this.showDialogSubscription?.unsubscribe())
+  
    
- 
-    console.log(this.bakeryOwnerProfileInfoSubscription?.unsubscribe());
+
   
 
    
   }
 
+  profilePageRediretion()
+  {
+    this.router.navigate(['/owner-profile'])
+
+  }
+
+  
   getJobPostByOwner(Id: number) {
     this.queryService.getJobPostByOwner(Id).subscribe({
       next: (data) => {
@@ -280,7 +316,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
         this.dataService.setImage(this.displayImage)
         this.top3JobPosts=this.jobPosts.slice(0,3);
 
-        console.log(this.jobPosts)
+
       
         
       },
@@ -288,7 +324,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
         console.error('Error fetching job post data', error);
       },
       complete: () => {
-        console.log(this.jobPosts)
+  
       }
     });
   }
@@ -304,6 +340,10 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   nextStep() {
     this.activeIndex++;
+    if(this.activeIndex==3)
+    {
+      this.TestGeminiPro();
+    }
 }
 
 previousStep() {
@@ -311,17 +351,33 @@ previousStep() {
 }
 
 
-  
+async TestGeminiPro() {
+  // Model initialisation missing for brevity
+console.log(this.selectedExpertise)
+
+  const prompt = `Generate a minimal and simple list of job responsibilities for a job Role: ${this.expertiseTypeforGemini} in the food industry for this  
+  Company: ${this.bakeMember.businessName}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
+  The response should only include job responsibilities in a sentence,sepearte each sentence with comma`;
+  const result = await this.model.generateContent(prompt);
+  console.log(result)
+  const response = await result.response;
+
+  if (response.candidates && response.candidates.length > 0) {
+    const jobDesc = response.candidates[0].content.parts[0].text;
+    this.jobPost.JobDescription = jobDesc;
+  }
+
+}
 updateExpertise(event: any) {
-  console.log(event);
+
   // Extract expertiseIds from the event value array
   const expertiseIds: number[] =[];
   expertiseIds.push(event.value.expertiseId)
-  console.log(expertiseIds)
+ this.expertiseTypeforGemini = event.value.expertiseType;
 
   // Assign expertiseIds to the ExpertiseIds list in jobPost
   this.jobPost.ExpertiseIds = expertiseIds;
-  console.log(this.jobPost.ExpertiseIds)
+
 }
 
   uploadedFiles:any
@@ -331,45 +387,45 @@ updateExpertise(event: any) {
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
     this.jobPost.jobTypeId = parseInt(this.jobTypes)
- 
   
-    this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
-      console.log(response)
-      this.visible=false
-    })
+    console.log(this.jobPost.JobDescription)
+  
+     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
+     
+       this.visible=false
+     })
 
-    // Push the submitted job to the list of submitted jobs
-    // this.submittedJobs.push({
-    //   jobTitle: this.job.jobTitle,
-    //   company: this.bakeMember.businessName,
-    //   location: this.job.location,
-    //   jobType: this.job.jobType,
-    //   salary: this.job.salary,
-    //   jobDescription: this.job.jobDescription,
-    //   skills:this.values
-    // });
+     //ush the submitted job to the list of submitted jobs
+     this.submittedJobs.push({
+    jobTitle: this.job.jobTitle,
+      company: this.bakeMember.businessName,
+      location: this.job.location,
+      jobType: this.job.jobType,
+      salary: this.job.salary,
+      jobDescription: this.job.jobDescription,
+       skills:this.values
+     });
 
-    // console.log(this.submittedJobs)
 
     // // Clear the form fields after submission
-    // this.job.jobTitle = '';
-    // this.job.location = '';
-    // this.job.jobType = '';
-    // this.job.salary = '';
-    // this.job.jobDescription = '';
+    this.job.jobTitle = '';
+    this.job.location = '';
+     this.job.jobType = '';
+     this.job.salary = '';
+     this.job.jobDescription = '';
 
-    // this.visible=false;
-    // this.cdr.detectChanges()
+     this.visible=false;
+     this.cdr.detectChanges()
   }
 
   onUpload(event: UploadEvent) {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-    console.log(event)
+   
 }
 
 myUploader(event: any) {
-  console.log("onUpload() START");
-  console.log(event);
+
+ 
   const file = event.files[0]; // Assuming only one file is uploaded
   const reader = new FileReader();
   reader.onload = () => {
@@ -382,11 +438,11 @@ myUploader(event: any) {
 
 sendToBackend(base64String: string) {
   this.jobPost.ProfileImage=base64String;
-  console.log(base64String)
+
 }
 
 getImageUrl(profileImage: string | null) {
-  console.log(profileImage)
+
   let imageType = '';
   if (profileImage?.startsWith('data:image/png')) {
     imageType = 'png';

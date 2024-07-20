@@ -21,6 +21,29 @@ AuthService {
 
   private tokenKey = 'authToken';
 
+
+  private businessesKey = 'businesses';
+  private userProfileKey = 'userProfile';
+
+
+  setUserProfileData(data: any) {
+    sessionStorage.setItem(this.userProfileKey, JSON.stringify(data));
+  }
+
+  getUserProfileData(): any {
+    const data = sessionStorage.getItem(this.userProfileKey);
+    return data ? JSON.parse(data) : null;
+  }
+
+
+  setBusinessData(data: any) {
+    sessionStorage.setItem(this.businessesKey, JSON.stringify(data));
+  }
+
+  getBusinessData(): any {
+    const data = sessionStorage.getItem(this.businessesKey);
+    return data ? JSON.parse(data) : null;
+  }
   //this function will authenticate Using GoogleAuth Class From Capacitor Plugin
   async googleAuthentication() {
     await GoogleAuth.initialize();
@@ -45,6 +68,19 @@ AuthService {
     
   }
 
+  setProfileId(profileId:number)
+  {
+    sessionStorage.setItem('profileId', profileId.toString());
+ 
+  }
+
+   getProfileId(): number | null {
+    const profileId = sessionStorage.getItem('profileId');
+    return profileId ? parseInt(profileId, 10) : null;
+  }
+  
+
+
   setToken(token: string) {
     localStorage.setItem('authToken', token); // You can directly set the token here
   }
@@ -57,6 +93,8 @@ AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.businessesKey);
+    sessionStorage.removeItem(this.userProfileKey)
   }
 
 
@@ -64,7 +102,7 @@ AuthService {
     const token = this.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
-      console.log(decoded)
+   
       return decoded.UserTypeId || null;
     }
     return null;
@@ -74,7 +112,7 @@ AuthService {
     const token = this.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
-      console.log(decoded)
+    
       return decoded.PhoneNo || null;
     }
     return null;

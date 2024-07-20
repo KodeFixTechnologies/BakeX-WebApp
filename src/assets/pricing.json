@@ -1,0 +1,75 @@
+{
+    "Employee": {
+      "Basic": {
+        "text1":"Basic",
+        "text2":"Premium",
+        "text3":"Ideal for individual job seekers",
+        "text4":"Enhanced features for serious job seekers",
+        "price": 99,
+        "features": [
+          "Unlimited Apply",
+          "Whatsapp Job Recommendation",
+          "Search and filter options for job listings",
+          "Customer Support"
+        ]
+      },
+      "Premium": {
+        "price": 199,
+        "features": [
+          "Individual configuration",
+          "No setup, or hidden fees",
+          "Workforce",
+          "Customer Support"
+        ]
+      }
+    },
+    "Bakery Owner": {
+      "Basic": {
+        "text1":"Bake Member",
+        "text2":"Non Bake Member",
+        "text3":"Essential features for Non Bake Association Kerala Members",
+        "text4":"Essential features for Non Bake Association Kerala Bake Members",
+        "price": 299,
+        "features": [
+          "Unlimited Job Post",
+          "Employee Bookmark",
+          "Inventory Market Place",
+          "Whatsapp Recommendation"
+        ]
+      },
+      "Premium": {
+        "price": 599,
+        "features": [
+          "Unlimited Job Post",
+          "Employee Bookmark",
+          "Inventory Market Place",
+          "Whatsapp Recommendation"
+        ]
+      }
+    },
+    "Production": {
+      "Basic": {
+        "text1":"Bake Member",
+        "text2":"Non Bake Member",
+        "text3":"Essential features for Non Bake Association Kerala Members",
+        "text4":"Essential features for Non Bake Association Kerala Bake Members",
+        "price": 499,
+        "features": [
+          "Feature 1 for Production Basic",
+          "Feature 2 for Production Basic",
+          "Feature 3 for Production Basic",
+          "Feature 4 for Production Basic"
+        ]
+      },
+      "Premium": {
+        "price": 999,
+        "features": [
+          "Feature 1 for Production Premium",
+          "Feature 2 for Production Premium",
+          "Feature 3 for Production Premium",
+          "Feature 4 for Production Premium"
+        ]
+      }
+    }
+  }
+  

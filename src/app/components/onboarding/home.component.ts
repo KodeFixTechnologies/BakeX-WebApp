@@ -5,27 +5,39 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Users } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { QueryService } from '../../services/query.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'home',
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
-    imports: [CommonModule,RouterOutlet, BottomNavbarComponent]
+    imports: [CommonModule,RouterOutlet, BottomNavbarComponent,FormsModule]
 })
 export class OnboardingComponent implements OnInit {
+    private pricingDataUrl = 'assets/pricing.json';
     isLogin:any;
     user:Users = { } as Users
+    pricingData: any;
+    selectedPricing: string = 'Employee';
     constructor(private route: ActivatedRoute,
         private router:Router,
         private cdr: ChangeDetectorRef,
         private dataService:DataService,
         private authService:AuthService,
+        private queryService:QueryService
       
     ) { }
 
     ngOnInit(): void {
       
+        this.queryService.getPricingData().subscribe(data => {
+            this.pricingData = data;
+            console.log(this.pricingData)
+          });
+
+
         this.dataService.setData(false)
         
         let userTypeid = this.authService.getUserTypeId();
@@ -51,15 +63,19 @@ export class OnboardingComponent implements OnInit {
             { 
                 this.user.userTypeId=1;
                 this.dataService.setUserData(this.user)
-                console.log("employee clicked")
+         
                 this.router.navigate(['\login']);
             }
         if(category=="owner")
             {   this.user.userTypeId=2;
                 this.dataService.setUserData(this.user)
-                console.log("owner clicked")
+               
                 this.router.navigate(['\login']);
             }    
 
+      }
+
+      selectPricing(pricingOption: string): void {
+        this.selectedPricing = pricingOption;
       }
 }

@@ -50,8 +50,6 @@ profile:any;
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
 
-      console.log(this.user)
-
     })
 
    
@@ -59,8 +57,6 @@ profile:any;
     this.queryService.getEmploymentTypes().subscribe((data)=>{
 
       this.employment=data;
-
-      console.log(this.employment)
       
     })
 
@@ -68,7 +64,7 @@ profile:any;
    
   this.experience = [
     {
-     name:'No Experince', id:1,
+     name:'No Experience', id:1,
      
     },
     {
@@ -87,7 +83,6 @@ profile:any;
 
   this.updatedExperience = this.profileService.getProfileInformation().experienceInformation;
   this.updatedEmployment =this.profileService.getProfileInformation().employmentInformation;
-  console.log(this.updatedExperience)
 
   }
   
@@ -95,9 +90,8 @@ profile:any;
 
   updateExperience(event:any)
   {
-    console.log(event)
+
    this.updatedExperience.types=event.value;
-   console.log(this.updatedExperience)
 
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
@@ -108,7 +102,7 @@ profile:any;
   updateEmployment(event:any)
   {
   this.updatedEmployment.types=event.value;
-    console.log(this.updatedExperience)
+
 
    this.profileService.setProfileInformation({
      ...this.profileService.getProfileInformation(),
@@ -121,7 +115,7 @@ profile:any;
   {
     this.profile= this.profileService.getProfileInformation();
    
-    console.log(this.profile)
+
   this.userProfile.FirstName = this.profile.personalInformation.firstname;
   this.userProfile.LastName = this.profile.personalInformation.lastname;
   this.userProfile.Age = this.profile.personalInformation.age;
@@ -137,24 +131,24 @@ profile:any;
   this.userProfile.JobTypeIds = this.profile.employmentInformation.types.map((job: { jobTypeId: any; }) => job.jobTypeId);
   this.userProfile.Pincode = this.profile.locationInformation.pincode;
 
-  console.log(this.userProfile)
+  
   }
 
 
   nextPage() {
 
     this.profile= this.profileService.getProfileInformation();
-    console.log(this.user)
+  
   
     this.queryService.createUser(this.user).subscribe((response=>{
-      console.log(response);
+  
 
 
       if(response==true)
         {
 
           this.queryService.insertProfile(this.userProfile).subscribe((response)=>{
-            console.log(response)
+
             if(response==200)
               {
                 this.router.navigate(['/seeker'])

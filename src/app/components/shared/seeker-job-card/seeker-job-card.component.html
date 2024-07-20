@@ -1,0 +1,187 @@
+<div (click)="viewJob()"
+  class="mt-3 border-2 sm:min-w-80  mx-auto bg-white rounded-xl flex flex-col"
+>
+  <div class="flex py-2 w-full justify-between">
+    <div class="flex">
+      <div>
+        <img
+          [src]="
+            businesses[recommendedJob.postedById].profileImageBase64 ||
+            '../../../../../assets/bake.png'
+          "
+          class="w-16 h-16 ml-2 rounded-lg"
+        />
+      </div>
+      <div class="py-1 ms-3">
+        <h2 class="text-base sm:text-2xl">{{ recommendedJob.title }}</h2>
+        <div class="flex mt-1 gap-4">
+          <h6 class="text-sm text-dark-5 font-poppins-regular">
+            {{ businesses[recommendedJob.postedById].businessName }}
+          </h6>
+
+          <div
+            class="hidden sm:block bg-orange-50 rounded-xl px-3 shadow-sm text-black"
+          >
+            <h3 class="text-sm whitespace-nowrap text-orange-500">
+              {{ recommendedJob.jobType }}
+            </h3>
+          </div>
+          <div
+            class="hidden sm:block bg-red-50 rounded-xl px-3 shadow-sm text-black"
+          >
+            <h3 class="text-sm whitespace-nowrap text-red-500">
+              {{ recommendedJob.experienceType }}
+            </h3>
+          </div>
+          <div
+          *ngIf="recommendedJob.appliedStatus == 1"
+          class="hidden sm:block bg-blue-50 rounded-xl px-3 shadow-sm text-black"
+        >
+          <h3 class="text-sm whitespace-nowrap text-blue-500">Applied</h3>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col mr-3 mt-2">
+      <div class="flex gap-1">
+        <span
+          class="pi pi-map-marker"
+          style="font-size: 1.3rem; color: #1d4ed8"
+        ></span>
+        <h6 class="text-sm sm:text-lg ml-1 text-black">
+          {{businesses[recommendedJob.postedById].districtName  }}
+        </h6>
+      </div>
+
+      <p class="mt-1 ml-1 text-xs sm:text-sm font-poppins-regular">
+        <span>Posted</span> {{ getPostedDate(recommendedJob.createdDate) }}
+      </p>
+    </div>
+  </div>
+
+  <div class="flex flex-nowrap gap-4 mt-1 mb-2 ml-3"></div>
+  <!-- <div
+    (click)="viewJob()"
+    class="bg-blue-600 flex gap-4 my-2 mx-3 p-2 rounded-xl justify-center items-center"
+  >
+    <span
+      class="pi pi-briefcase"
+      style="font-size: 1.5rem; color: #d1d9e0"
+    ></span>
+    <p
+      *ngIf="recommendedJob.appliedStatus != 1"
+      class="text-sm text-white"
+    >
+      View Job
+    </p>
+    <p
+      *ngIf="recommendedJob.appliedStatus == 1"
+      class="text-sm text-primary-white"
+    >
+      Applied
+    </p>
+  </div> -->
+
+  <div class="bg-white rounded-xl px-1 py-2 shadow-sm flex gap-2 pb-5">
+    <div
+      class="sm:hidden block bg-green-50 rounded-xl px-3 shadow-sm text-black"
+    >
+      <h3 class="text-sm whitespace-nowrap text-green-500">
+        {{ recommendedJob.salary }}
+      </h3>
+    </div>
+    <div
+      class="sm:hidden block bg-orange-50 rounded-xl px-3 shadow-sm text-black"
+    >
+      <h3 class="text-sm whitespace-nowrap text-orange-500">
+        {{ recommendedJob.jobType }}
+      </h3>
+    </div>
+    <div class="sm:hidden block bg-red-50 rounded-xl px-3 shadow-sm text-black">
+      <h3 class="text-sm whitespace-nowrap text-red-500">
+        {{ recommendedJob.experienceType }}
+      </h3>
+    </div>
+
+    <div
+      *ngIf="recommendedJob.appliedStatus == 1"
+      class="sm:hidden block bg-blue-50 rounded-xl px-3 shadow-sm text-black"
+    >
+      <h3 class="text-sm whitespace-nowrap text-blue-500">Applied</h3>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="Job Details"
+  [(visible)]="displayDialog"
+  [modal]="true"
+  [style]="{ width: '85%', height: '100%' }"
+  [maximizable]="true"
+  #dialog
+
+>
+  <ng-template pTemplate="content">
+    <div class="flex flex-col gap-3  sm:px-44 ">
+      <div class="text-sm  sm:text-xl">
+        <p class="font-bold  text-teal-700 mt-2">
+          {{ businesses[recommendedJob.postedById].businessName }}
+        </p>
+        <p class=" mt-2">Posted {{ getPostedDate(recommendedJob.createdDate) }}</p>
+      </div>
+
+      <hr class="w-full" />
+      <div class="flex flex-col text-sm  sm:text-lg">
+        <h3 class=" font-medium text-slate-950">Job Description :</h3>
+        <div *ngFor="let line of recommendedJob.jobDescriptionLines">
+          {{ line.trim() }}
+        </div>
+      </div>
+      <hr />
+      <p class="text-sm  sm:text-xl">
+        <span class="text-slate-900 font-medium">Job Role :</span>
+        {{ recommendedJob.title }}
+      </p>
+      <hr />
+      <div class="text-sm  sm:text-xl">
+        <h3 class=" font-medium text-slate-950">Address</h3>
+        <p class=" mt-2">
+          {{ businesses[recommendedJob.postedById].businessAddress }}
+        </p>
+      </div>
+      <hr />
+
+      <h3 class="text-sm  sm:text-xl font-medium text-slate-950">Other Details</h3>
+      <div class="flex gap-3 flex-wrap">
+        <div class="text-sm  sm:text-xl">
+          <p class="p-3 border rounded-2xl shadow-lg ">
+            <span class=" font-medium text-slate-950">Job Type :</span>
+            {{ recommendedJob.jobType }}
+          </p>
+        </div>
+        <div class="text-sm  sm:text-xl">
+          <p class="p-3 border rounded-2xl shadow-lg ">
+            <span class=" font-medium text-slate-950">District :</span>
+            {{ businesses[recommendedJob.postedById].districtName }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      (click)="recommendedJob.appliedStatus === 0 ? applyJob() : null"
+      type="button"
+      [disabled]="recommendedJob.appliedStatus === 1"
+      class="py-2.5 px-5 mt-2 me-2 mb-2 text-sm font-medium text-white shadow-lg focus:outline-none bg-blue-500 rounded-lg border border-gray-200"
+      [ngClass]="{
+        'disabled:opacity-40': recommendedJob.appliedStatus === 1,
+        'hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100':
+          recommendedJob.appliedStatus !== 1
+      }"
+    >
+      {{ recommendedJob.appliedStatus === 1 ? "Already Applied" : "Apply Now" }}
+    </button>
+  </ng-template>
+</p-dialog>

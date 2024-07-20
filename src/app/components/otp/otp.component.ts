@@ -34,7 +34,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
         exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
         success: (data:any) => {
             // get verified token in response
-            console.log('success response', data);
+           
 
             if(data)
               {
@@ -58,7 +58,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
         },
         failure: (error:any) => {
             // handle error
-            console.log('failure reason', error);
+          
         },
       
       };
@@ -66,7 +66,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
       initSendOTP(configuration)
     }
     this.script.onerror =(error:any)=> {
-      console.log("script error",error)
+
     }
     this.render.appendChild(document.body,this.script)
   }
@@ -83,7 +83,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
     
     this.dataService.getPhoneData().subscribe((data)=>{
       this.phoneno=data;
-      console.log(data)
+  
     })
 
     this.dataService.setPhoneData(this.phoneno);
@@ -91,7 +91,7 @@ export class OtpComponent implements OnInit, AfterViewInit {
 
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
-      console.log(this.user.authId)
+
     })
    
    

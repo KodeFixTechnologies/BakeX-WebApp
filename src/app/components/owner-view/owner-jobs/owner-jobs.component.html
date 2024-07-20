@@ -1,23 +1,26 @@
 
+<div class="min-h-screen ">
 
-<div class="mt-4">
-  <h2 class="ml-6 text-lg text-blue-600 font-semibold">Your Jobs</h2>
-</div>
-
-<div class="relative pb-20">
-  <div class=" flex-initial snap-x snap-mandatory">
-      <ng-container *ngFor="let jobposted of jobPost">
-        <div class="shrink-0 w-11/12 md:w-1/2 lg:w-1/3 px-1">
-        <job-card
-          [jobPost]="jobposted"
-          [displayImage]="displayImage"
-          [bakeMember]="bakeMember"
-        >
-        </job-card>
-      </div>
-      </ng-container>
-    </div>
+  <div class="mt-4">
+    <h2 class="ml-6 text-lg text-blue-600 font-semibold">Your Jobs</h2>
   </div>
+  
+  <div class="relative pb-20 ">
+    <div class="">
+        <ng-container *ngFor="let jobposted of jobPost">
+          <div class=" shrink-0 w-11/12 md:w-1/2 lg:w-1/3 mx-auto">
+          <job-card
+            [jobPost]="jobposted"
+            [displayImage]="displayImage"
+            [bakeMember]="bakeMember"
+          >
+          </job-card>
+        </div>
+        </ng-container>
+      </div>
+    </div>
+  
+</div>
 
 
 

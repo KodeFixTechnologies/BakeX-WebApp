@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Users } from '../models/user';
+import { UserProfile, Users } from '../models/user';
 import { Jobpost } from '../models/job';
 import { BakeMember } from '../models/bakeMember';
+import { RecommendedJob } from '../models/recommendedJobs';
+import { JobSeeker } from '../models/jobSeeker';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { BakeMember } from '../models/bakeMember';
 export class DataService {
   private dataSubject = new BehaviorSubject<boolean>(false);
  
-
+  private dataheaderSubject = new BehaviorSubject<boolean>(false);
   private createJobSubject = new BehaviorSubject<boolean>(false);
 
   private phoneData = new BehaviorSubject<string>('');
@@ -28,10 +30,55 @@ export class DataService {
 
   private displayImage = new BehaviorSubject<any>(null);
 
+  private seekerJobSubject = new BehaviorSubject<any>(null);
+
+   private businessJobSubject = new BehaviorSubject<any>(null);
+
+   private profileDataSubject = new BehaviorSubject<any>(null);
+
   showDialog$ = this.showDialogSource.asObservable();
+
+  
+  private toggleExpandSource = new Subject<string>();
+  toggleExpand$ = this.toggleExpandSource.asObservable();
+
+  requestExpand(data: string) {
+    this.toggleExpandSource.next(data);
+  }
+
 
   openDialog() {
     this.showDialogSource.next();
+  }
+
+  setBusinessData(business:any)
+  {
+    this.businessJobSubject.next(business);
+  }
+ 
+  getBusinessData()
+  {
+    return this.businessJobSubject.asObservable();
+  }
+
+  setProfileData(profile:JobSeeker)
+  {
+    this.profileDataSubject.next(profile)
+  }
+
+  getProfileData()
+  {
+   return this.profileDataSubject.asObservable();
+  }
+ 
+  setSeekerJobData(data:RecommendedJob)
+  {
+    this.seekerJobSubject.next(data);
+  }
+
+  getSeekerJobData()
+  {
+    return this.seekerJobSubject.asObservable();
   }
 
   setJobData(data: boolean) {
@@ -48,6 +95,16 @@ export class DataService {
 
   getData() {
     return this.dataSubject.asObservable();
+  }
+
+
+  
+  setDataforheader(data: boolean) {
+    this.dataheaderSubject.next(data);
+  }
+
+  getDataforHeader() {
+    return this.dataheaderSubject.asObservable();
   }
 
   
@@ -73,7 +130,7 @@ export class DataService {
 
   setPostedJobData(data:Jobpost[])
   {
-    console.log(data)
+  
     this.jobSubject.next(data);
     this.setSessionStorageItem('jobPosts', data);
   }

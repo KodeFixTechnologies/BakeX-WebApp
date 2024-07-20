@@ -3,3 +3,60 @@
   ::ng-deep .p-inputtext {
     background-color: #f6f6f6;
   }
+
+
+  .profileexpanded {
+    width: 160px;
+  }
+
+  .locationexpanded {
+    width: 160px;
+  }
+
+  
+  .expertiseexpanded {
+    width: 160px;
+  }
+
+    
+  .educationexpanded {
+    width: 160px;
+  }
+
+  .employementexpanded {
+    width: 160px;
+  }
+
+  
+  .experienceexpanded {
+    width: 160px;
+  }
+
+  @media (max-width: 767px) {
+
+    .profileexpanded {
+      width: auto;
+    }
+
+    .locationexpanded {
+      width: auto; /* or any default width you want on small screens */
+    }
+
+    .expertiseexpanded {
+      width: auto;
+    }
+  
+      
+    .educationexpanded {
+      width: auto;
+    }
+  
+    .employementexpanded {
+      width: auto;
+    }
+  
+    
+    .experienceexpanded {
+      width: auto;
+    }
+  }

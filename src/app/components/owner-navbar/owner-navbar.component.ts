@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ export class OwnerNavbarComponent {
   lastScrollTop: number = 0;
   delta: number = 5;
   navbarHeight: number = 56; // Adjust this value according to your actual navbar height
+  currentSelection  : String = 'home'
 
   
   @HostListener('window:scroll', ['$event'])
@@ -47,15 +48,25 @@ export class OwnerNavbarComponent {
   
     }
 
+
+    ngOnInit(): void {
+      // Retrieve currentSelection from local storage on component initialization
+      this.currentSelection = localStorage.getItem('currentSelection') || 'home';
+    }
+  
+
   
   profilePageRediretion()
   {
     this.router.navigate(['/owner-profile'])
+    this.updateSelection('profile')
+
   }
 
   goToHome()
   {
    this.router.navigate(['/ownerview'])
+   this.updateSelection('home')
   }
 
   showDialog() {
@@ -65,5 +76,11 @@ export class OwnerNavbarComponent {
 goToJobPage()
 {
   this.router.navigate(['/owner-jobs'])
+  this.updateSelection('job')
 }
+updateSelection(selection: string) {
+  this.currentSelection = selection;
+  localStorage.setItem('currentSelection', selection);
+}
+
 }

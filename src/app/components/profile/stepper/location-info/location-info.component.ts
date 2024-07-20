@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../../../services/profile.service';
 import { QueryService } from '../../../../services/query.service';
 import { ButtonModule } from 'primeng/button'
@@ -13,6 +13,8 @@ import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FileService } from '../../../../services/file.service';
 import { InputOtpModule } from 'primeng/inputotp';
+import { StepperComponent } from '../../../shared/stepper/stepper.component';
+import { DataService } from '../../../../services/data.service';
 
 interface State {
   state: string;
@@ -32,21 +34,21 @@ interface StatesData {
 
 
 export class LocationInfoComponent implements OnInit, AfterViewInit {
-
+  @ViewChild(StepperComponent) stepperComponent!: StepperComponent;
 
   constructor(
     private profileService: ProfileService,
     private queryService: QueryService,
     private router:Router,
     private fileService:FileService,
-    private ref:ChangeDetectorRef
+    private ref:ChangeDetectorRef,
+    private dataService:DataService
   ) {
 
   }
   ngAfterViewInit(): void {
 
 
-    console.log(this.selectedState)
   }
 
   updatedlocationInfo = {
@@ -69,21 +71,19 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
   userplace:string=''
 
   ngOnInit(): void {
-    // console.log(this.profileService.profileInformation)
-    
 
-   
+
+    this.dataService.requestExpand('location');
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 
       
-  
-      console.log(data.states)
+
     })
 
    
     this.queryService.getStateAndDistrict().subscribe((data)=>{
-      //console.log(data)
+
     })
 
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
@@ -94,9 +94,9 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
 
 
   onStateChange() {
-    console.log(this.selectedState)
+
     this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
-    console.log(this.districts)
+   
   }
   nextPage() {
 

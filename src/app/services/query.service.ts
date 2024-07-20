@@ -57,7 +57,9 @@ export class QueryService {
     // Modify the API call to use query parameters
     return this.http.post<any>(`${environment.API_URL}IsBakeUser?phoneno=${phoneno.phoneno}`, null);
   }
-
+  getPricingData(): Observable<any> {
+    return this.http.get<any>('assets/pricing.json');
+  }
   getBakeOwner(phoneno:any):Observable<any>
   {
   
@@ -72,6 +74,26 @@ export class QueryService {
   {
   
     return this.http.get<any>(`${environment.API_URL}getJobPostByOwner/${Id}`);
+  }
+
+  
+  getJobForSeeker(Id:number):Observable<any>
+  {
+  
+    return this.http.get<any>(`${environment.API_URL}getJobs/${Id}`);
+  }
+
+  getAppliedJobForSeeker(Id:number):Observable<any>
+  {
+  
+    return this.http.get<any>(`${environment.API_URL}getAppliedJobs/${Id}`);
+  }
+ 
+ 
+  getApplicantstByOwner(Id:number):Observable<any>
+  {
+  
+    return this.http.get<any>(`${environment.API_URL}getApplicantsByOwner/${Id}`);
   }
 
 

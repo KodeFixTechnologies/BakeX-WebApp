@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     const script = this.render.createElement('script');
     script.src = "https://accounts.google.com/gsi/client"
     script.onload = () => {
-      console.log("Script loaded")
+
     }
     script.onerror = (error: any) => {
-      console.log("script error", error)
+   
     }
     this.render.appendChild(document.body, script)
 
@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       const responseObj = response as any;
       if (responseObj && responseObj.credential) {
         const responsePayload = this.decodeJWTToken(responseObj.credential);
-        console.log(responsePayload)
         this.googleUser = responsePayload;
         this.dataService.setGoogleData(this.googleUser);
         if (this.googleUser) {
@@ -85,7 +84,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.ngZone.run(() => {
 
             this.queryService.checkUserExist(this.user).subscribe((response) => {
-              console.log("response: ",response);
+       
               if (response == true) {
                   // Wrap the navigation inside NgZone.run()
                   this.ngZone.run(() => {
@@ -160,7 +159,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         },
         failure: (error: any) => {
           // handle error
-          console.log('failure reason', error);
+   
         },
 
       };
@@ -170,7 +169,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
 
     this.script.onerror = (error: any) => {
-      console.log("script error", error)
+    
     }
     this.render.appendChild(document.body, this.script)
   }
@@ -187,7 +186,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.dataService.setUserData(this.user)
   
     this.queryService.checkUserExist(this.user).subscribe((response) => {
-      console.log("response: ",response);
+
       if (response == true) {
           // Wrap the navigation inside NgZone.run()
           this.ngZone.run(() => {
@@ -218,16 +217,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.user.userTypeId=data.userTypeId;
   })
   
-  console.log(this.user)
+
   this.authService.checkUserExist(this.user).subscribe((response) => {
-    console.log("response: ",response);
+
     if (response.token) {
       this.authService.setToken(response.token);
      let profileId =  this.authService.getUserIdFromToken()
       let userTypeId = this.authService.getUserTypeId() 
       this.user.mobileNumber = this.authService.getPhoneNo() || '';
      
-      console.log(this.user.mobileNumber)
+
 
       this.dataService.setPhoneData(this.user.mobileNumber)
       if(userTypeId==1)
@@ -280,7 +279,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
      
 
     this.authService.checkUserExist(this.user).subscribe((response) => {
-      console.log("response: ",response);
+  
       if (response.token) {
         this.authService.setToken(response.token);
        let profileId =  this.authService.getUserIdFromToken()

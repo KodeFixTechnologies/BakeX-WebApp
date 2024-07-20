@@ -7,6 +7,7 @@ import { Expertise,Education } from '../../../../models/expertise';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'expertise-info',
   standalone: true,
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class ExpertiseInfoComponent implements OnInit {
 
- expertise!:Expertise[];
+expertise!:Expertise[];
  education!:Education[];
  selectedEducation!:Education[];
  selectedExpertise!: Expertise[];
@@ -31,6 +32,7 @@ export class ExpertiseInfoComponent implements OnInit {
     private queryService:QueryService,
     private profileService: ProfileService,
     private  router:Router,
+    private dataService:DataService
   )
   {
 
@@ -38,10 +40,10 @@ export class ExpertiseInfoComponent implements OnInit {
 
   
   ngOnInit(): void {
-  
+    this.dataService.requestExpand('expertise');
 
     this.queryService.getExpertiseTypes().subscribe((data)=>{
-      console.log(data)
+    
       this.expertise=data;
     })
 
@@ -71,7 +73,7 @@ export class ExpertiseInfoComponent implements OnInit {
 
   this.updatedExpertise = this.profileService.getProfileInformation().expertiseInformation;
   this.updatedEducation =this.profileService.getProfileInformation().educationInformation;
-  console.log(this.updatedExpertise)
+
 
   }
   
@@ -79,7 +81,6 @@ export class ExpertiseInfoComponent implements OnInit {
   updateExpertise(event:any)
   {
    this.updatedExpertise.types=event.value;
-   console.log(this.updatedExpertise)
 
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
@@ -90,7 +91,7 @@ export class ExpertiseInfoComponent implements OnInit {
   updateEducation(event:any)
   {
   this.updatedEducation.types=event.value;
-    console.log(this.updatedExpertise)
+
 
    this.profileService.setProfileInformation({
      ...this.profileService.getProfileInformation(),

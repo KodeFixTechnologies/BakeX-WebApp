@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import {  OnboardingComponent } from './components/onboarding/home.component';
+import { OnboardingComponent } from './components/onboarding/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PersonalInfoComponent } from './components/profile/stepper/personal-info/personal-info.component';
@@ -22,6 +22,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EducationInfoComponent } from './components/profile/stepper/education-info/education-info.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { OwnerJobsComponent } from './components/owner-view/owner-jobs/owner-jobs.component';
+import { OwnerJobApplicantsComponent } from './components/owner-job-applicants/owner-job-applicants.component';
+import { SeekerJobComponent } from './components/seeker-view/seeker-jobs/seeker-job/seeker-job.component';
+import { AppliedJobComponent } from './components/seeker-view/applied-job/applied-job/applied-job.component';
+import { PricingComponent } from './components/shared/pricing/pricing.component';
+import { EmployementTypeComponent } from './components/profile/stepper/employement-type/employement-type.component';
 
 export const routes: Routes = [
     {
@@ -47,10 +52,13 @@ export const routes: Routes = [
                 path: 'education', component: EducationInfoComponent,
             },
             {
-                path: 'experience', component:ExperinceInfoComponent,
+                path: 'experience', component: ExperinceInfoComponent,
             },
             {
-                path: 'resume', component:ResumeComponent,
+                path: 'resume', component: ResumeComponent,
+            },
+            {
+                path:'employment',component:EmployementTypeComponent
             }
         ],
     },
@@ -62,47 +70,58 @@ export const routes: Routes = [
             { path: '', redirectTo: 'owner', pathMatch: 'full' },
             { path: 'owner', component: OwnerInfoComponent },
             {
-                path:'ownerlocation-info',component:OwnerlocationInfoComponent
+                path: 'ownerlocation-info', component: OwnerlocationInfoComponent
             },
             {
-                path:'business-info', component:BusinessInfoComponent
-            },  
-          
+                path: 'business-info', component: BusinessInfoComponent
+            },
+
         ],
     },
 
     {
-        path:'otp',component:OtpComponent
+        path: 'otp', component: OtpComponent
     },
 
     {
-        path:'ownerview',component:OwnerViewComponent
+        path: 'ownerview', component: OwnerViewComponent
     },
 
     {
-        path:'owner-jobs', component:OwnerJobsComponent
-    },
-    
-    {
-        path:'owner-profile',component:OwnerProfileComponent
-    },
- 
-
-    {
-        path:'seeker',component:SeekerViewComponent
-    },
-    {
-        path:'jobview', component:JobViewComponent
+        path: 'owner-jobs', component: OwnerJobsComponent
     },
 
     {
-        path:'user-profile', component:UserProfileComponent
+        path: 'owner-profile', component: OwnerProfileComponent
     },
-     {
-        path : 'privacy-policy', component:PrivacyPolicyComponent
-     }
+
+    {
+        path: 'jobs-applicants', component: OwnerJobApplicantsComponent
+    },
 
 
- 
+    {
+        path: 'seeker', component: SeekerViewComponent,
+
+    },
+
+
+    {
+        path: 'allJobs', component: SeekerJobComponent
+    },
+    {
+        path: 'applied-job', component: AppliedJobComponent
+    },
+
+    {
+        path: 'user-profile', component: UserProfileComponent
+    },
+    {
+        path: 'privacy-policy', component: PrivacyPolicyComponent
+    },
+    { path: 'pricing',component:PricingComponent}
+
+
+
 
 ];
