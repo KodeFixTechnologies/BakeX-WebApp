@@ -114,7 +114,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
   jobPosts:Jobpost[]=[];
   top3JobPosts:Jobpost[]=[];
-
+  expertiseTypeforGemini:string=''
 
 
   jobTypes:any;
@@ -139,7 +139,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
 
 
   maxSize:number=10000;
-  selectedExpertise!: Expertise[];
+  selectedExpertise: Expertise[]=[];
   displayImage:any;
 
   model:any
@@ -353,10 +353,11 @@ previousStep() {
 
 async TestGeminiPro() {
   // Model initialisation missing for brevity
+console.log(this.selectedExpertise)
 
-  const prompt = `Generate a minimal and simple list of job responsibilities for a job in the food industry.
-  Company: ${this.bakeMember.businessName}, Role: ${this.selectedExpertise}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
-  The response should only include job responsibilities in a sentence`;
+  const prompt = `Generate a minimal and simple list of job responsibilities for a job Role: ${this.expertiseTypeforGemini} in the food industry for this  
+  Company: ${this.bakeMember.businessName}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
+  The response should only include job responsibilities in a sentence,sepearte each sentence with comma`;
   const result = await this.model.generateContent(prompt);
   console.log(result)
   const response = await result.response;
@@ -372,7 +373,7 @@ updateExpertise(event: any) {
   // Extract expertiseIds from the event value array
   const expertiseIds: number[] =[];
   expertiseIds.push(event.value.expertiseId)
-
+ this.expertiseTypeforGemini = event.value.expertiseType;
 
   // Assign expertiseIds to the ExpertiseIds list in jobPost
   this.jobPost.ExpertiseIds = expertiseIds;
@@ -389,32 +390,32 @@ updateExpertise(event: any) {
   
     console.log(this.jobPost.JobDescription)
   
-    // this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
+     this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
      
-    //   this.visible=false
-    // })
+       this.visible=false
+     })
 
-    // Push the submitted job to the list of submitted jobs
-    // this.submittedJobs.push({
-    //   jobTitle: this.job.jobTitle,
-    //   company: this.bakeMember.businessName,
-    //   location: this.job.location,
-    //   jobType: this.job.jobType,
-    //   salary: this.job.salary,
-    //   jobDescription: this.job.jobDescription,
-    //   skills:this.values
-    // });
+     //ush the submitted job to the list of submitted jobs
+     this.submittedJobs.push({
+    jobTitle: this.job.jobTitle,
+      company: this.bakeMember.businessName,
+      location: this.job.location,
+      jobType: this.job.jobType,
+      salary: this.job.salary,
+      jobDescription: this.job.jobDescription,
+       skills:this.values
+     });
 
 
     // // Clear the form fields after submission
-    // this.job.jobTitle = '';
-    // this.job.location = '';
-    // this.job.jobType = '';
-    // this.job.salary = '';
-    // this.job.jobDescription = '';
+    this.job.jobTitle = '';
+    this.job.location = '';
+     this.job.jobType = '';
+     this.job.salary = '';
+     this.job.jobDescription = '';
 
-    // this.visible=false;
-    // this.cdr.detectChanges()
+     this.visible=false;
+     this.cdr.detectChanges()
   }
 
   onUpload(event: UploadEvent) {

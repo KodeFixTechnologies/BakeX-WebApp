@@ -11,6 +11,7 @@ export interface RecommendedJob {
     experienceType: string;
     expertiseType:string;
     appliedStatus : number;
+    jobDescriptionLines?: string[];
   }
   
 

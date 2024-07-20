@@ -15,13 +15,15 @@ import { map, shareReplay } from 'rxjs/operators';
 import { SeekerJobCardComponent } from "../shared/seeker-job-card/seeker-job-card.component";
 import { Router } from '@angular/router';
 import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'seeker-view',
     standalone: true,
     templateUrl: './seeker-view.component.html',
     styleUrl: './seeker-view.component.scss',
-    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, CommonModule, SeekerJobCardComponent,SeekerJobComponent]
+    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, AutoCompleteModule,CommonModule,FormsModule, SeekerJobCardComponent,SeekerJobComponent]
 })
 export class SeekerViewComponent implements OnInit {
 
@@ -56,8 +58,27 @@ export class SeekerViewComponent implements OnInit {
   switchJobs : RecommendedJob[] = []
   activated : string = 'recommended'
   appliedJobs : RecommendedJob[] =[]
+  selectedBusiness: Business | null = null;
+  selectedDistrict: Business | null = null;
+  searchText: string = '';
+  selectedSalary: number | null = null;
+  selectedJobType: string = '';
+  selectedJobTypes: string[] = [];
+  filteredJobs: RecommendedJob[] = [];
+  filteredTitles: string[] = [];
+  filteredBusinesses: Business[] = [];
+  filteredBusinessesDistrict: Business[] = [];
+  selectedSalaryRange: string = '';
+  customSalary: number = 0;
 
 
+
+  jobTypes: { [key: string]: boolean } = {
+    'Full Time': false,
+    'Part Time': false,
+    'Contract': false,
+  };
+  
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -177,11 +198,16 @@ export class SeekerViewComponent implements OnInit {
           .subscribe((recommendedJob: RecommendedJob[]) => {
             this.recommendedJobs = recommendedJob;
             this.switchJobs=recommendedJob
-          
+            this.applyFilters();
           });
 
-          this.queryService.getJobForSeeker(this.jobSeeker.profileId).subscribe(data => {
-            this.allJobs = data;
+          this.queryService.getJobForSeeker(this.jobSeeker.profileId).subscribe((data:RecommendedJob[]) => {
+            // data.forEach(item=>item.jobDescription.slice(','))
+            this.allJobs = data.map(item => ({
+              ...item,
+              jobDescriptionLines: item.jobDescription.split(',')
+            }));
+            
             console.log(this.allJobs)
         
           });
@@ -190,9 +216,12 @@ export class SeekerViewComponent implements OnInit {
             this.appliedJobs=data;
             
         });
+
+       
           
       }
     });
+
 
    
   }
@@ -220,26 +249,156 @@ export class SeekerViewComponent implements OnInit {
   }
 
   changeJobType(id : number) {
-    this.switchJobs = []
+    this.switchJobs = [];
+    
     if(id ===1) 
     {
       this.switchJobs = this.recommendedJobs
       this.activated = 'recommended'
+      this.clearFilters();
     }
     else if (id ===2)
     {
       this.switchJobs = this.allJobs
       this.activated = 'allJobs'
+      this.clearFilters();
     }
     else if(id ==3)
     {
         this.switchJobs = this.appliedJobs
       this.activated = 'Applied'
+      this.clearFilters();
     }
   }
 
   goToProfile() {
     this.router.navigate(['/user-profile'])
+  }
+
+  //Filter
+
+  applyFilters() {
+    this.filteredJobs = this.switchJobs.filter(job => {
+      let passFilter = true;
+
+      // Filter by job title (searchText)
+      if (this.searchText && !job.expertiseType.toLowerCase().includes(this.searchText.toLowerCase())) {
+        passFilter = false;
+      }
+
+  
+      // Filter by salary (using selectedSalary range)
+      // if (this.selectedSalary !== null && job.salary !== null) {
+      //   const jobSalary = parseFloat(job.salary.replace(',', '')); // Assuming salary format like "1,000"
+      //   if (jobSalary > this.selectedSalary) {
+      //     passFilter = false;
+      //   }
+      // }
+
+      if (this.selectedSalaryRange) {
+        const jobSalary = job.salary ? parseFloat(job.salary.replace(',', '')) : 0;
+
+        if (this.selectedSalaryRange === 'under10000' && jobSalary >= 10000) {
+            passFilter = false;
+        } else if (this.selectedSalaryRange === '10000-15000' && (jobSalary < 10000 || jobSalary > 15000)) {
+            passFilter = false;
+        } else if (this.selectedSalaryRange === '15000-30000' && (jobSalary < 15000 || jobSalary > 30000)) {
+            passFilter = false;
+        } else if (this.selectedSalaryRange === 'custom' && jobSalary > this.customSalary) {
+            passFilter = false;
+        }
+    }
+
+      // Filter by business name (selectedBusiness)
+      if (this.selectedBusiness) {
+        if (this.selectedBusiness.postedById !== job.postedById) {
+          passFilter = false;
+        }
+      }
+
+      if (this.selectedDistrict) {
+        if (this.selectedDistrict.districtName !== job.districtName) {
+          passFilter = false;
+        }
+      }
+
+
+     //  Filter by job type
+      //  if (this.selectedJobType && job.jobType.toLowerCase() !== this.selectedJobType.toLowerCase()) {
+      //    passFilter = false;
+      //  }
+
+      const selectedJobTypes = Object.keys(this.jobTypes).filter(jobType => this.jobTypes[jobType]);
+      if (selectedJobTypes.length > 0 && !selectedJobTypes.includes(job.jobType)) {
+          passFilter = false;
+      }
+  
+      return passFilter;
+    });
+
+
+ 
+  }
+
+  onCheckboxChange(event: any) {
+    const value = event.target.value;
+    if (event.target.checked) {
+        this.selectedJobTypes.push(value);
+    } else {
+        this.selectedJobTypes = this.selectedJobTypes.filter(type => type !== value);
+    }
+    this.applyFilters();
+}
+
+  clearFilters() {
+    this.searchText = '';
+    this.selectedSalaryRange ='';
+    this.selectedBusiness = null;
+    this.selectedDistrict=null
+    this.selectedJobType = '';
+    this.filteredBusinesses = Object.values(this.businesses);
+    this.filteredBusinessesDistrict = Object.values(this.businesses);
+    this.applyFilters(); // Optionally, apply filters after clearing
+
+  }
+
+  searchBusiness(event: any) {
+    const query = event.query.toLowerCase();
+    this.filteredBusinesses = Object.values(this.businesses).filter(business =>
+      business.businessName.toLowerCase().includes(query)
+    );
+  }
+
+  searchDistrict(event: any) {
+    const query = event.query.toLowerCase();
+    const uniqueDistricts = new Set<string>();
+    const filteredBusinesses = Object.values(this.businesses).filter(business => {
+        const districtName = business.districtName.toLowerCase();
+        if (districtName.includes(query) && !uniqueDistricts.has(districtName)) {
+            uniqueDistricts.add(districtName);
+            return true;
+        }
+        return false;
+    });
+
+    this.filteredBusinessesDistrict = filteredBusinesses;
+    console.log(this.filteredJobs)
+
+}
+
+  searchJobs(event: any) {
+    const query = event.query.toLowerCase();
+    this.filteredTitles = [...new Set(
+      this.switchJobs
+        .map(job => job.expertiseType)
+        .filter(expertiseType => expertiseType.toLowerCase().includes(query))
+    )];
+    console.log(this.filteredTitles)
+  }
+
+  applyFiltersAndCloseDialog() {
+    this.applyFilters();
+  // Close the dialog after applying filters
   }
 
 }

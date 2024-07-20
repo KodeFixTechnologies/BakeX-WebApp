@@ -68,8 +68,15 @@ export class EmployementTypeComponent implements OnInit {
    });
   }
 
-  nextPage()
-  {
+ 
+ 
+  nextPage() {
 
+  
+    if(this.updatedEmployment.types!=null)
+      {
+          this.router.navigate(['profile/experience'])
+      }
+    
   }
 }

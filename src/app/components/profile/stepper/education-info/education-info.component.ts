@@ -76,7 +76,7 @@ export class EducationInfoComponent  implements OnInit{
   
     if(this.updatedEducation.types!=null)
       {
-          this.router.navigate(['profile/experience'])
+          this.router.navigate(['profile/employment'])
       }
     
   }

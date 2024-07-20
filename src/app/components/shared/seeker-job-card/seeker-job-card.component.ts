@@ -1,4 +1,4 @@
-import { Component, Input, Query } from '@angular/core';
+import { Component, Input, OnInit, Query, ViewChild } from '@angular/core';
 import { JobSeeker } from '../../../models/jobSeeker';
 import { Business, RecommendedJob } from '../../../models/recommendedJobs';
 import { DialogModule } from 'primeng/dialog';
@@ -15,19 +15,30 @@ import { DataService } from '../../../services/data.service';
   templateUrl: './seeker-job-card.component.html',
   styleUrl: './seeker-job-card.component.scss'
 })
-export class SeekerJobCardComponent {
+export class SeekerJobCardComponent implements OnInit {
   @Input() jobSeeker:JobSeeker |undefined;
   @Input()  business:Business[] = []
   @Input()  businesses: { [key: number]: Business } = {}
   @Input()  recommendedJob: RecommendedJob=  {} as RecommendedJob
   displayDialog: boolean = false;
   application: JobApplication = {} as JobApplication;
-
+  @ViewChild('dialog') dialog: any;
   constructor(private queryService:QueryService,private dataService:DataService)
   {
    this.dataService.setData(true)
   }
+  ngOnInit(): void {
 
+  }
+
+  checkScreenSize() {
+    if (window.innerWidth <= 768) { // Define your mobile width threshold
+      this.displayDialog = true;
+
+        this.dialog.maximize();
+      
+    }
+  }
   applyJob() {
    
     this.application.applyDate = new Date();
@@ -46,14 +57,13 @@ export class SeekerJobCardComponent {
 
   getPostedDate (date : Date ) {
 
-    console.log(date)
     const postedDay = new Date(date)
     const currenDate = new Date()
     const currentDay = currenDate.getDate()
     
     const postedDate = currentDay - postedDay.getDate()
     if(postedDate === 0)
-        return "Posted Today"
+        return "Today"
     else
       return postedDate+" days ago"
   }
@@ -63,7 +73,7 @@ export class SeekerJobCardComponent {
   }
   
   viewJob() {
-
+    this.checkScreenSize();
     this.displayDialog = true;
 
 
