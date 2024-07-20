@@ -16,7 +16,6 @@ import { FormsModule } from '@angular/forms';
     imports: [CommonModule,RouterOutlet, BottomNavbarComponent,FormsModule]
 })
 export class OnboardingComponent implements OnInit {
-    private pricingDataUrl = 'assets/pricing.json';
     isLogin:any;
     user:Users = { } as Users
     pricingData: any;

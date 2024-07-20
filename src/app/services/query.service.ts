@@ -44,12 +44,12 @@ export class QueryService {
 
   getLocationData():Observable<any>
   {
-    return this.http.get('assets/location-info.json')
+    return this.http.get('../../../../../assets/location-info.json')
   }
 
   getExpertiseData():Observable<any>
   {
-    return this.http.get('assets/expertise-info.json')
+    return this.http.get('../../../../../assets/expertise-info.json')
   }
 
 
@@ -58,7 +58,7 @@ export class QueryService {
     return this.http.post<any>(`${environment.API_URL}IsBakeUser?phoneno=${phoneno.phoneno}`, null);
   }
   getPricingData(): Observable<any> {
-    return this.http.get<any>('assets/pricing.json');
+    return this.http.get<any>('../../../../../assets/pricing.json');
   }
   getBakeOwner(phoneno:any):Observable<any>
   {
