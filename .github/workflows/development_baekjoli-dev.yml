@@ -25,7 +25,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Compress build artifacts
-        run: zip -r build-artifacts.zip dist/bake-joli-web-app/browser  # Compress the correct directory
+        run: zip -r build-artifacts.zip dist/bake-joli-web-app  # Compress the correct directory
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
