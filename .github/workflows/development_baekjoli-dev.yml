@@ -56,4 +56,4 @@ jobs:
           app-name: 'baekjoli-dev'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A7309342402440BEB18850119EACAA50 }}
-          package: build-output/browser  # Adjust path to where the extracted files are located
+          package: build-output/dist/bake-joli-web-app/browser  # Adjust path to where the extracted files are located
