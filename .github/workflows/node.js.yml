@@ -1,4 +1,4 @@
-name: Build and deploy Angular app to Azure Web App - baekjoli-dev
+name: Deployment of dev - baekjoli-dev
 
 on:
   push:
