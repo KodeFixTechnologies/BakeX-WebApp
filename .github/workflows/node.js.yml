@@ -1,4 +1,4 @@
-name: Build and deploy Angular app to Azure Web App - baekjoli-dev
+name: Build and deploy Angular app to Azure Web App - bakejoli-dev
 
 on:
   push:
@@ -39,6 +39,8 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -49,11 +51,17 @@ jobs:
       - name: Extract build artifacts
         run: unzip build-artifacts.zip -d build-output
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0F6C4D2244894A0A8821CC514E645AB6 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A9266CD4E75E4BFA973EC173F6A55413 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_57521A0AC30E499BA144215C2AB9AFCD }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'baekjoli-dev'
+          app-name: 'bakejoli-dev'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A7309342402440BEB18850119EACAA50 }}
           package: build-output/dist/bake-joli-web-app/browser  # Adjust path to where the extracted files are located
