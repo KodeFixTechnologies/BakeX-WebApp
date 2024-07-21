@@ -9,7 +9,9 @@
 
  
 
-
+body.loading {
+  overflow: hidden;
+}
 
 @font-face {
     font-family: 'CustomFont';

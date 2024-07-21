@@ -10,10 +10,12 @@ import { Router } from '@angular/router';
 import { Msg91Service } from '../../../../services/msg91.service';
 import { DataService } from '../../../../services/data.service';
 import { UserProfile, Users } from '../../../../models/user';
+import { CommonModule } from '@angular/common';
+import { WorkHistory } from '../../../../models/workhistory';
 @Component({
    selector: 'experince-info',
   standalone: true,
-  imports: [ListboxModule,FormsModule,CardModule,ButtonModule],
+  imports: [ListboxModule,FormsModule,CardModule,ButtonModule,CommonModule],
  templateUrl: './experince-info.component.html',
   styleUrl: './experince-info.component.scss'
 })
@@ -26,7 +28,7 @@ profile:any;
  experience!:Experience[];
  employment!:Employment[];
  selectedEmployment!:Employment[];
- selectedExperience!: Experience[];
+ selectedExperience!: Experience;
  updatedExperience={
   types:null
  };
@@ -34,6 +36,8 @@ profile:any;
  updatedEmployment={
   types:null
  }
+
+ isExperienceSelected = false;
   constructor(
     private queryService:QueryService,
     private profileService: ProfileService,
@@ -43,10 +47,36 @@ profile:any;
   {
 
   }
+  workHistory: WorkHistory[] = [];
+  addWorkHistory() {
+    this.workHistory.push({
+      employer: '',
+      startDate: '',
+      endDate: '',
+      jobRole: '',
+      editing:true
+    });
+  }
 
-  
+  removeWorkHistory(index: number) {
+    this.workHistory.splice(index, 1);
+  }
+
+  toggleEdit(index: number) {
+    this.workHistory[index].editing = !this.workHistory[index].editing;
+  }
+
+  cancelEdit(index: number) {
+    this.workHistory[index].editing = false; // Exit edit mode without saving changes
+  }
+
+  updateWorkHistory(index: number) {
+    // Implement update logic if needed
+    this.workHistory[index].editing = false; // Exit edit mode after saving changes
+  }
+
   ngOnInit(): void {
-
+    this.dataService.requestExpand('experience');
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
 
@@ -93,6 +123,8 @@ profile:any;
 
    this.updatedExperience.types=event.value;
 
+
+
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
     experienceInformation: this.updatedExperience
@@ -131,14 +163,21 @@ profile:any;
   this.userProfile.JobTypeIds = this.profile.employmentInformation.types.map((job: { jobTypeId: any; }) => job.jobTypeId);
   this.userProfile.Pincode = this.profile.locationInformation.pincode;
 
-  
+  this.userProfile.WorkHistory = this.workHistory.map(history => ({
+    Employer: history.employer,
+    StartDate: history.startDate, // Convert Date to string
+    EndDate: history.endDate, // Convert Date to string
+    JobRole: history.jobRole
+  }));
+
+  console.log(this.userProfile.WorkHistory)
   }
 
 
   nextPage() {
 
     this.profile= this.profileService.getProfileInformation();
-  
+    this.mapProfileInfoToAPI()
   
     this.queryService.createUser(this.user).subscribe((response=>{
   
@@ -151,6 +190,7 @@ profile:any;
 
             if(response==200)
               {
+                this.dataService.setPhoneData(this.userProfile.MobileNo);
                 this.router.navigate(['/seeker'])
               }
           })
@@ -158,7 +198,7 @@ profile:any;
 
     }))
   
-  this.mapProfileInfoToAPI()
+
 
 
    

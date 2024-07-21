@@ -1,4 +1,4 @@
-<div class="mx-auto bg-white sm:w-720 py-10 sm:h-[740px]">
+<div class="mx-auto bg-white sm:w-720 py-10 min-h-screen">
     <div class="flex flex-col justify-center mt-10 ml-5">
       <div>
         <h1 class="text-xl font-medium">What is your Experience ?</h1>
@@ -20,8 +20,60 @@
       </div>
   
 
-  
-  
+      <div *ngIf="selectedExperience && selectedExperience.id !== 1" class="mb-8">
+        <h2 class="text-lg font-medium mt-5">Enter Previous Experience Details</h2>
+      
+        <!-- Add work history entry -->
+        <div *ngFor="let history of workHistory; let i = index" class="border-2 me-6 mb-4 p-4 font-poppins-regular text-sm">
+          <div *ngIf="!history.editing">
+            <!-- Display mode -->
+            <div class="my-3">
+              <strong class="font-bold">Employer:</strong> {{ history.employer }}
+            </div>
+            <div class="my-3 flex justify-between">
+              <!-- Toggle edit button -->
+              <button type="button" class="btn btn-edit" (click)="toggleEdit(i)">Edit</button>
+              <!-- Remove button -->
+              <button type="button" class="btn btn-remove" (click)="removeWorkHistory(i)">Remove</button>
+            </div>
+          </div>
+      
+          <div *ngIf="history.editing">
+            <!-- Edit mode -->
+            <div class="my-3">
+              <label class="block">Employer:</label>
+              <input type="text" [(ngModel)]="history.employer" class=" w-full rounded-md">
+            </div>
+            <div class="flex-col sm:flex sm:flex-row gap-2">
+              <div class="my-3 ">
+                <label class="block">Start Date:</label>
+                <input type="date" [(ngModel)]="history.startDate" class=" w-full sm:w-[320px] rounded-md">
+              </div>
+              <div class="my-3">
+                <label class="block">End Date:</label>
+                <input type="date" [(ngModel)]="history.endDate" class="w-full sm:w-[310px] rounded-md">
+              </div>
+            </div>
+           
+            <div class="my-3">
+              <label class="block">Job Role:</label>
+              <input type="text" [(ngModel)]="history.jobRole" class="w-full rounded-md">
+            </div>
+            <div class="my-3 flex justify-between">
+              <!-- Update and cancel buttons -->
+              <button type="button" class="  bg-primary text-white rounded-lg w-28 h-10" (click)="updateWorkHistory(i)">Update</button>
+              <button type="button" class="bg-red-500 text-white rounded-lg w-28 h-10" (click)="cancelEdit(i)">Cancel</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Button to add new work history entry -->
+        <button type="button" class="border-2 w-10 hover:cursor mt-2  h-10" (click)="addWorkHistory()"> <span class="pi pi-plus"> </span></button>
+       
+      </div>
+      
+
+
       <div class="mt-1 mb-5 mr-5">
         <button (click)="nextPage()"
           pButton
@@ -29,6 +81,7 @@
           label="Submit"
           class="p-button"
           [style]="{ width: '100%' }"
+          [disabled]="!selectedExperience"
         ></button>
       </div>
     </div>

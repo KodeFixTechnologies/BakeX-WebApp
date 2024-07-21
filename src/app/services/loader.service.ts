@@ -16,7 +16,8 @@ export class LoaderService {
     if (!this.loaderTimeout) {
       this.loaderTimeout = setTimeout(() => {
         this.loaderSubject.next(true);
-      }, 1000); // Delay of 2 second
+        document.body.classList.add('loading');
+      }, 1000); // Delay of 1 second
     }
   }
 
@@ -28,6 +29,7 @@ export class LoaderService {
       clearTimeout(this.loaderTimeout);
       this.loaderTimeout = null;
       this.loaderSubject.next(false);
+      document.body.classList.remove('loading');
     }
   }
 }
