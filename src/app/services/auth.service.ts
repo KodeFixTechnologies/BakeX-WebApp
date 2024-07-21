@@ -84,12 +84,20 @@ AuthService {
   setToken(token: string) {
     localStorage.setItem('authToken', token); // You can directly set the token here
   }
-
   getToken(): string | null {
     const token = localStorage.getItem('authToken');
-    return token !== null ? token : ''; // Return an empty string if token is null
+    if (!token) {
+      return null;
+    }
+    const decoded: any = jwtDecode(token);
+    const exp = decoded.exp; // Assuming 'exp' is the claim containing expiry time
+    const now = Date.now() / 1000; // Convert to seconds
+    if (now > exp) {
+      localStorage.removeItem('authToken'); // Token expired, remove it
+      return null;
+    }
+    return token;
   }
-  
 
   logout() {
     localStorage.removeItem(this.tokenKey);

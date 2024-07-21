@@ -36,7 +36,7 @@ export class EmployementTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.dataService.requestExpand('employment');
     this.dataService.getUserData().subscribe((data)=>{
       this.user=data;
 
