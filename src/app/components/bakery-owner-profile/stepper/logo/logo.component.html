@@ -1,0 +1,21 @@
+   <div class="mb-2 flex flex-col items-center">
+      <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label>
+      <p-fileUpload name="myfile[]" [auto]="true"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000">
+  
+       
+  <ng-template pTemplate="content">
+      <ul *ngIf="uploadedFiles.length">
+          <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+      </ul>
+  </ng-template>
+  </p-fileUpload>
+
+
+ 
+  <button (click)="submit()"
+  class="py-3 px-32 bg-blue-500 mt-5 border-none rounded-2xl text-primary-white"
+>
+   <span class="text-white"> Submit</span>
+</button>
+
+  </div>

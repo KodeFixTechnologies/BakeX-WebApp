@@ -20,6 +20,7 @@ export class OnboardingComponent implements OnInit {
     user:Users = { } as Users
     pricingData: any;
     selectedPricing: string = 'Employee';
+    isLoading = true; 
     constructor(private route: ActivatedRoute,
         private router:Router,
         private cdr: ChangeDetectorRef,
@@ -33,6 +34,7 @@ export class OnboardingComponent implements OnInit {
       
         this.queryService.getPricingData().subscribe(data => {
             this.pricingData = data;
+            this.isLoading = false; 
             console.log(this.pricingData)
           });
 

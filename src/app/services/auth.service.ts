@@ -25,6 +25,17 @@ AuthService {
   private businessesKey = 'businesses';
   private userProfileKey = 'userProfile';
 
+  private ownerPhone = 'phone'
+
+  setPhoneNo(mobile:string)
+  {
+    sessionStorage.setItem(this.ownerPhone,mobile)
+  }
+
+  getUserMobile(): any {
+    const data = sessionStorage.getItem(this.ownerPhone);
+    return data ? JSON.parse(data) : null;
+  }
 
   setUserProfileData(data: any) {
     sessionStorage.setItem(this.userProfileKey, JSON.stringify(data));

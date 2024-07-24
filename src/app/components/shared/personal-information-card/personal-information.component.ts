@@ -18,7 +18,7 @@ export class PersonalInformationComponent implements OnInit {
   
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
-    this.userProfileData = this.authService.getUserProfileData();
+  //  this.userProfileData = this.authService.getUserProfileData();
     console.log(this.userProfileData);
   }
 

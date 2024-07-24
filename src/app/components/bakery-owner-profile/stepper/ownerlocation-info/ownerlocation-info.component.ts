@@ -112,38 +112,17 @@ export class OwnerlocationInfoComponent implements OnInit {
         otherInformation: this.updatedOtherInfo,
       });
 
-      this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
+      // this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
 
-      this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
-
-
+      // this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
 
 
-      this.queryService.createUser(this.user).subscribe((response => {
-        
-     
-
-        this.dataService.setUserData(this.user)
-
-        if (response == true) {
 
 
-          this.queryService.createNonBakeryowner(this.NonBakeMember).subscribe((response) => {
-            if (response == true) {
+      this.router.navigate([
 
-
-              this.router.navigate([
-
-                '/ownerview'
-              ])
-            }
-
-          })
-
-
-        }
-
-      }));
+                   'bakeprofile/logo'
+                ])
 
 
     }

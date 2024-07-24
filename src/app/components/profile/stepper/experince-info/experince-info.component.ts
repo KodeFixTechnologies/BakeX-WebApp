@@ -12,6 +12,7 @@ import { DataService } from '../../../../services/data.service';
 import { UserProfile, Users } from '../../../../models/user';
 import { CommonModule } from '@angular/common';
 import { WorkHistory } from '../../../../models/workhistory';
+import { AuthService } from '../../../../services/auth.service';
 @Component({
    selector: 'experince-info',
   standalone: true,
@@ -42,7 +43,8 @@ profile:any;
     private queryService:QueryService,
     private profileService: ProfileService,
     private  router:Router,
-    private dataService:DataService
+    private dataService:DataService,
+    private authService:AuthService
   )
   {
 
@@ -190,6 +192,8 @@ profile:any;
 
             if(response==200)
               {
+                this.authService.setPhoneNo(this.userProfile.MobileNo);
+                this.authService.setUserProfileData(this.userProfile);
                 this.dataService.setPhoneData(this.userProfile.MobileNo);
                 this.router.navigate(['/seeker'])
               }

@@ -7,10 +7,11 @@ import { QueryService } from '../../../services/query.service';
 import { JobSeeker } from '../../../models/jobSeeker';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PersonalInformationComponent } from "../personal-information-card/personal-information.component";
 @Component({
   selector: 'job-card',
   standalone: true,
-  imports: [DialogModule, FormsModule, CommonModule],
+  imports: [DialogModule, FormsModule, CommonModule, PersonalInformationComponent],
   templateUrl: './job-card.component.html',
   styleUrl: './job-card.component.scss',
 })
@@ -19,7 +20,11 @@ export class JobCardComponent {
   @Input() displayImage: string | undefined;
   @Input() bakeMember: BakeMember | undefined;
   displayDialog: boolean = false;
+  profileDialog: boolean = false;
   jobSeekers: JobSeeker[] = [];
+
+
+  jobSeekerProfile:JobSeeker={} as JobSeeker;
   constructor(private queryService: QueryService) {}
   jobTypeMap: { [key: number]: string } = {
     1: 'Full Time',
@@ -28,6 +33,15 @@ export class JobCardComponent {
     4: 'Part Time',
     // Add more mappings as needed
   };
+
+
+  viewProfile(jobSeeker:JobSeeker)
+  {
+    console.log(jobSeeker)
+    this.jobSeekerProfile=jobSeeker;
+    console.log(this.jobSeekerProfile)
+    this.profileDialog=!this.profileDialog
+  }
 
   getJobType(): string {
     if (
@@ -52,7 +66,6 @@ export class JobCardComponent {
   getPostedDate(date: Date | undefined) {
     var postedDay;
     var postedDate
-    console.log(date);
     if (date != undefined) {
       postedDay = new Date(date);
     }

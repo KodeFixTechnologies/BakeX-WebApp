@@ -9,7 +9,7 @@ export interface JobSeeker {
     experienceType: string;
     educationLevel: string;
     pinCode: string;
-    mobileNo: string;
+    mobileNumber: string;
     birthDate: Date;
     workHistory:WorkHistory[]
 }

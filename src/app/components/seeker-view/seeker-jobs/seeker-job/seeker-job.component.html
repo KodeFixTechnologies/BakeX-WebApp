@@ -74,7 +74,7 @@
         <div class="mb-2">
             <p-autoComplete [size]="30" class="flex justify-center mb-2" [(ngModel)]="selectedDistrict"
                 [suggestions]="filteredBusinessesDistrict" field="districtName" (completeMethod)="searchDistrict($event)"
-                placeholder="Filter by Business Name..." (onSelect)="applyFilters()">
+                placeholder="Filter by District Name..." (onSelect)="applyFilters()">
                 <ng-template let-business pTemplate="item">
                     <div>{{ business.districtName }}</div>
                 </ng-template>

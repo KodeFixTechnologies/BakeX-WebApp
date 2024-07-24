@@ -22,6 +22,7 @@ export interface IBakerOwnerProfile {
     };
     otherInformation:{
         profileCreateDate:Date|null;
+        ProfileImage : string | null;
     }
 
     
@@ -52,6 +53,6 @@ export interface IBakerOwnerProfileRequest {
 
     profileCreateDate: Date | null;
 
-
+    creationProfileImage : string | null;
 
 }

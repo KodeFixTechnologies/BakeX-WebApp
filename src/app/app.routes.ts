@@ -28,6 +28,7 @@ import { AppliedJobComponent } from './components/seeker-view/applied-job/applie
 import { PricingComponent } from './components/shared/pricing/pricing.component';
 import { EmployementTypeComponent } from './components/profile/stepper/employement-type/employement-type.component';
 import { PersonalInformationComponent } from './components/shared/personal-information-card/personal-information.component';
+import { LogoComponent } from './components/bakery-owner-profile/stepper/logo/logo.component';
 
 
 export const routes: Routes = [
@@ -84,6 +85,10 @@ export const routes: Routes = [
         path: 'business-info',
         component: BusinessInfoComponent,
       },
+      {
+        path:'logo',
+        component:LogoComponent
+      }
     ],
   },
 

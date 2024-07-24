@@ -14,7 +14,7 @@ export interface Jobpost {
     PostedById: number;
     title: string;
     jobTypeId: number | 0;
-    CreatedDate: Date | undefined;
+    createdDate: Date | undefined;
     ExperienceId: number;
     BusinessId: number;
     JobDescription: string;

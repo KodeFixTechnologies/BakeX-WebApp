@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
+import { UserProfile } from '../../models/user';
 
 @Component({
     selector: 'seeker-view',
@@ -71,7 +72,7 @@ export class SeekerViewComponent implements OnInit {
   selectedSalaryRange: string = '';
   customSalary: number = 0;
 
-
+  userProfile:UserProfile= {} as UserProfile
 
   jobTypes: { [key: string]: boolean } = {
     'Full Time': false,
@@ -121,7 +122,7 @@ export class SeekerViewComponent implements OnInit {
 
     this.dataService.setDataforheader(true);
 
-    if(this.authService.getToken())
+    if(this.authService.getToken() || this.authService.getUserProfileData())
     {
 
       this.getPhoneDataorTokenData()
@@ -131,7 +132,6 @@ export class SeekerViewComponent implements OnInit {
     }
     else 
     {
-      console.log("hi")
       this.authService.logout();
       this.router.navigate([""])
     }
@@ -187,6 +187,10 @@ export class SeekerViewComponent implements OnInit {
         console.log('2341')
         this.authService.logout();
       }
+
+      this.userProfile = this.authService.getUserProfileData();
+
+      this.mobileno=this.userProfile.MobileNo
   }
 
   getJobSeekerDeatils()
@@ -206,8 +210,12 @@ export class SeekerViewComponent implements OnInit {
         this.queryService
           .getRecommendedJobs(this.jobSeeker.profileId)
           .subscribe((recommendedJob: RecommendedJob[]) => {
-            this.recommendedJobs = recommendedJob;
-            this.switchJobs=recommendedJob
+            this.recommendedJobs = recommendedJob.map(item => ({
+              ...item,
+              jobDescriptionLines: item.jobDescription.split(',')
+            }));
+            ;
+            this.switchJobs=this.recommendedJobs
             this.applyFilters();
           });
 
