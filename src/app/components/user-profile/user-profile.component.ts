@@ -4,16 +4,20 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { JobSeeker } from '../../models/jobSeeker';
+import { PersonalInformationComponent } from "../shared/personal-information-card/personal-information.component";
 
 const shareData = {
   title: "Bake Joli",
   text: "Join Bake Joli",
   url: "www.bakejoli.com",
 };
+
+
+
 @Component({
   selector: 'user-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PersonalInformationComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
@@ -22,6 +26,9 @@ const shareData = {
 export class UserProfileComponent implements OnInit {
 
     showLogout:Boolean = false
+
+    visible:boolean=false;
+
 
     userProfile:JobSeeker = {} as JobSeeker
 
@@ -40,11 +47,11 @@ export class UserProfileComponent implements OnInit {
     this.dataService.setDataforheader(true);
   }
 
-    logoutPop()
-    { 
-        this.showLogout= !this.showLogout
-       console.log("hello")
-    }
+  logoutPop()
+  { 
+      this.showLogout= !this.showLogout
+    
+  }
 
 
   logout()
@@ -56,13 +63,19 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(["/privacy-policy"])
   }
 
+  goToProfileInformation()
+  {
+    console.log("clicked")
+    this.visible=!this.visible;
+    // this.router.navigate(["/employee-personalDetails"])
+  }
+
   share()
   {
    try{
         navigator.share(shareData)
    }
    catch{
-
    }
   }
 

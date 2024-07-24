@@ -79,23 +79,6 @@ export class SeekerViewComponent implements OnInit {
     'Contract': false,
   };
   
-  responsiveOptions: any[] = [
-    {
-      breakpoint: '1024px',
-      numVisible: 4,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '560px',
-      numVisible: 1,
-      numScroll: 1,
-    },
-  ];
 
   calcDateDiff(endDay: Date = new Date(2024, 5, 27)): any {
     const dDay = endDay.valueOf();
@@ -138,12 +121,25 @@ export class SeekerViewComponent implements OnInit {
 
     this.dataService.setDataforheader(true);
 
-    this.getPhoneDataorTokenData()
-    this.getJobSeekerDeatils();
-    this.getBusinnessDetails();
+    if(this.authService.getToken())
+    {
 
-   
+      this.getPhoneDataorTokenData()
+      this.getJobSeekerDeatils();
+      this.getBusinnessDetails();
 
+    }
+    else 
+    {
+      console.log("hi")
+      this.authService.logout();
+      this.router.navigate([""])
+    }
+
+
+   console.log( this.authService.getPhoneNo())
+  console.log(this.authService.getToken())
+ 
   }
 
   goToJobComponent()
@@ -175,20 +171,34 @@ export class SeekerViewComponent implements OnInit {
   getPhoneDataorTokenData()
   {
     this.dataService.getPhoneData().subscribe((data) => {
+
+      console.log(this.mobileno)
       if (data) {
         this.mobileno = data;
       } else {
         this.mobileno = this.authService.getPhoneNo() || '';
       }
+
+     
     });
+
+    if(this.mobileno===undefined)
+      {
+        console.log('2341')
+        this.authService.logout();
+      }
   }
 
   getJobSeekerDeatils()
   {
+    if(this.mobileno==='')
+    {
+      this.authService.logout();
+    }
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
+      console.log(this.jobSeeker)
      // this.dataService.setProfileData(this.jobSeeker) remove later
-
      this.authService.setUserProfileData(this.jobSeeker);
      
       this.authService.setProfileId(this.jobSeeker.profileId)

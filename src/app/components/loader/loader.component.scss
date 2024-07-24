@@ -1,20 +1,32 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
 .loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Adjust this if needed */
-  }
-  
-  .panWrapper {
-    width: 200px;
-    height: fit-content;
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    flex-direction: column;
-    gap: 20px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panWrapper {
+  width: 200px;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
 
 .pan {
   display: flex;
@@ -24,6 +36,7 @@
   height: fit-content;
   animation: cooking 1.7s infinite;
 }
+
 @keyframes cooking {
   0% {
     transform: rotate(0deg);
@@ -51,6 +64,7 @@
   animation: flip 1.7s infinite;
   z-index: 2;
 }
+
 @keyframes flip {
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -62,6 +76,7 @@
     transform: translateY(0px) rotate(360deg);
   }
 }
+
 .panBase {
   z-index: 3;
   width: 50%;
@@ -70,12 +85,14 @@
   border-bottom-right-radius: 40px;
   background: linear-gradient(to top, #1d4fd9, #1d4fd9);
 }
+
 .panHandle {
   width: 40%;
   background: linear-gradient(to bottom, rgb(0, 2, 2), rgb(74, 74, 74));
   height: 10px;
   border-radius: 10px;
 }
+
 .panShadow {
   width: 70px;
   height: 8px;
@@ -85,6 +102,7 @@
   animation: shadow 1.7s infinite;
   filter: blur(5px);
 }
+
 @keyframes shadow {
   0% {
     transform: scaleX(0.7);
