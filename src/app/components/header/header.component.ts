@@ -23,11 +23,21 @@ export class HeaderComponent implements OnInit  {
   
   }
   isEnable:boolean=true;
+  isNavbarCollapsed: boolean = true;
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  closeNavbar(): void {
+    this.isNavbarCollapsed = true; // Collapse the menu
+  }
+  
   ngOnInit(): void {
 
 
     this.dataService.getDataforHeader().subscribe((data)=>{
-      console.log(data)
+
       this.isEnable=data;
     })
 

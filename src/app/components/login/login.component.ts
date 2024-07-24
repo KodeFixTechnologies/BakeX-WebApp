@@ -48,15 +48,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   loadGoogle() {
-    const script = this.render.createElement('script');
-    script.src = "https://accounts.google.com/gsi/client"
-    script.onload = () => {
+    // const script = this.render.createElement('script');
+    // script.src = "https://accounts.google.com/gsi/client"
+    // script.onload = () => {
 
-    }
-    script.onerror = (error: any) => {
+    // }
+    // script.onerror = (error: any) => {
    
-    }
-    this.render.appendChild(document.body, script)
+    // }
+    // this.render.appendChild(document.body, script)
 
   }
 
@@ -119,20 +119,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     if (this.mobileNumber.length === 10) {
       this.checkingMobileNumber = true;
 
-      // this.queryService.verifyBakeUser({ phoneno: this.mobileNumber }).subscribe((response => {
-      //   if (response == true) {
-      //     this.checkingMobileNumber = false;
-      //     this.otpVerification()
-      //   }
 
-      // }))
 
     }
   }
 
   signupClick() {
     this.isLogin = !this.isLogin;
-   // this.loadGoogle()
+
   }
 
   decodeJWTToken(token: string) {
@@ -219,7 +213,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   
 
   this.authService.checkUserExist(this.user).subscribe((response) => {
-    console.log(this.user)
 
     if (response.token) {
       this.authService.setToken(response.token);

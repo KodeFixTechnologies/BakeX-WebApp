@@ -172,7 +172,7 @@ profile:any;
     jobRole: history.jobRole
   }));
 
-  console.log(this.userProfile.WorkHistory)
+
   }
 
 

@@ -54,7 +54,7 @@ export class OwnerProfileComponent implements OnInit {
 
   logoutPop() {
     this.showLogout = !this.showLogout;
-    console.log('hello');
+  
   }
 
   navigatetoPolicy() {
@@ -64,7 +64,7 @@ export class OwnerProfileComponent implements OnInit {
   share() {
     try {
       navigator.share(shareData);
-      console.log("Navigator")
+   
     } catch{
     }
   }

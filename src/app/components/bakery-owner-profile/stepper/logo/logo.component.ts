@@ -42,7 +42,6 @@ export class LogoComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
   myUploader(event: any) {
 
-  console.log("Hi")
     const file = event.files[0]; // Assuming only one file is uploaded
     const reader = new FileReader();
     reader.onload = () => {
@@ -70,7 +69,7 @@ export class LogoComponent implements OnInit {
   submit()
   {
 
-    console.log(this.NonBakeMember)
+  
     this.queryService.createUser(this.user).subscribe((response => {
         
      

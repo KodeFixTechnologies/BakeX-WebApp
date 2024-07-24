@@ -37,9 +37,9 @@ export class JobCardComponent {
 
   viewProfile(jobSeeker:JobSeeker)
   {
-    console.log(jobSeeker)
+  
     this.jobSeekerProfile=jobSeeker;
-    console.log(this.jobSeekerProfile)
+    
     this.profileDialog=!this.profileDialog
   }
 

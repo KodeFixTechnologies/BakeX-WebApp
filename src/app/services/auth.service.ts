@@ -6,6 +6,7 @@ import { Users } from '../models/user';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { DataService } from './data.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,8 @@ AuthService {
 
   constructor(
     private http: HttpClient,
-    private router:Router
+    private router:Router,
+    private dataService:DataService
   ) {
 
   }
@@ -113,6 +115,7 @@ AuthService {
   }
 
   logout() {
+    this.dataService.setDataforheader(false);
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem('currentSelection')
     sessionStorage.removeItem(this.businessesKey);

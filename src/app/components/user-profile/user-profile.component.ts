@@ -65,7 +65,7 @@ export class UserProfileComponent implements OnInit {
 
   goToProfileInformation()
   {
-    console.log("clicked")
+  
     this.visible=!this.visible;
     // this.router.navigate(["/employee-personalDetails"])
   }

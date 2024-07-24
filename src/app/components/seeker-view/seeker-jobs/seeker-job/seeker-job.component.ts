@@ -162,7 +162,7 @@ export class SeekerJobComponent implements OnInit {
     });
 
     this.filteredBusinessesDistrict = filteredBusinesses;
-    console.log(this.filteredJobs)
+
 
 }
 

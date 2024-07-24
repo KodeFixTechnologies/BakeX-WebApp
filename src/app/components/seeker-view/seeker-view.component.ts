@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { JobApplication } from '../../models/jobApplcation';
 import { AuthService } from '../../services/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, PlatformLocation } from '@angular/common';
 import { interval, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { SeekerJobCardComponent } from "../shared/seeker-job-card/seeker-job-card.component";
@@ -40,8 +40,19 @@ export class SeekerViewComponent implements OnInit {
     private dataService: DataService,
     private queryService: QueryService,
     private authService: AuthService,
-    private router: Router
-  ) {
+    private router: Router,
+    private platFormLocation:PlatformLocation
+
+  )
+  
+  {
+
+
+    history.pushState(null,'',location.href);
+    this.platFormLocation.onPopState(()=>{
+     history.pushState(null,'',location.href)
+    })
+
     this.timeLeft$ = interval(1000).pipe(
       map((x) => this.calcDateDiff()),
       shareReplay(1)
@@ -119,7 +130,7 @@ export class SeekerViewComponent implements OnInit {
   displayDialog: boolean = false;
   ngOnInit(): void {
     this.dataService.setData(true);
-
+    window.history.replaceState({}, '', '/seeker');
     this.dataService.setDataforheader(true);
 
     if(this.authService.getToken() || this.authService.getUserProfileData())
@@ -137,8 +148,7 @@ export class SeekerViewComponent implements OnInit {
     }
 
 
-   console.log( this.authService.getPhoneNo())
-  console.log(this.authService.getToken())
+
  
   }
 
@@ -172,7 +182,7 @@ export class SeekerViewComponent implements OnInit {
   {
     this.dataService.getPhoneData().subscribe((data) => {
 
-      console.log(this.mobileno)
+    
       if (data) {
         this.mobileno = data;
       } else {
@@ -188,7 +198,7 @@ export class SeekerViewComponent implements OnInit {
     if(this.mobileno===undefined)
       {
         
-        console.log('2341')
+
         this.authService.logout();
       }
 
@@ -202,7 +212,7 @@ export class SeekerViewComponent implements OnInit {
     }
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
-      console.log(this.jobSeeker)
+
      // this.dataService.setProfileData(this.jobSeeker) remove later
      this.authService.setUserProfileData(this.jobSeeker);
      
@@ -227,7 +237,7 @@ export class SeekerViewComponent implements OnInit {
               jobDescriptionLines: item.jobDescription.split(',')
             }));
             
-            console.log(this.allJobs)
+
         
           });
 
@@ -401,7 +411,7 @@ export class SeekerViewComponent implements OnInit {
     });
 
     this.filteredBusinessesDistrict = filteredBusinesses;
-    console.log(this.filteredJobs)
+
 
 }
 
@@ -412,7 +422,7 @@ export class SeekerViewComponent implements OnInit {
         .map(job => job.expertiseType)
         .filter(expertiseType => expertiseType.toLowerCase().includes(query))
     )];
-    console.log(this.filteredTitles)
+
   }
 
   applyFiltersAndCloseDialog() {

@@ -105,7 +105,7 @@ export class PersonalInfoComponent {
     })
     this.queryService.getPricingData().subscribe(data => {
       this.pricingData = data;
-      console.log(this.pricingData)
+
     });
 
     this.script = this.render.createElement('script');
