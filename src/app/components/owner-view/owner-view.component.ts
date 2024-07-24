@@ -269,6 +269,11 @@ this.model = genAI.getGenerativeModel({
 
   }
 
+  postAJob()
+  {
+    this.visible=true;
+  }
+
   closeDialog(): void {
     this.visible = false;
     history.back();
