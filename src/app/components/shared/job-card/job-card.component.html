@@ -1,6 +1,7 @@
 <div
-  class="mt-3 border-2 sm:min-w-80  mx-auto bg-white rounded-xl flex flex-col"
-  (click)="seeApplicants(jobPost?.id)">
+  class="mt-3 border-2 sm:min-w-80 mx-auto bg-white rounded-xl flex flex-col"
+  (click)="seeApplicants(jobPost?.id)"
+>
   <div class="flex py-2 w-full justify-between">
     <div class="flex">
       <div>
@@ -225,10 +226,9 @@
   #dialog
   (onShow)="dialog.maximize()"
 >
-  <ng-template pTemplate="content" >
-   
-    <div class="mt-3 border-2 sm:w-[740px] w-full me-2 bg-white rounded-xl ">
-      <div class="flex py-2  justify-between">
+  <ng-template pTemplate="content">
+    <div class="mt-3 border-2 sm:w-[740px] w-full me-2 bg-white rounded-xl">
+      <div class="flex py-2 justify-between">
         <div class="flex">
           <div>
             <img
@@ -242,7 +242,7 @@
               <h6 class="text-sm text-dark-5 font-poppins-regular">
                 {{ bakeMember?.businessName }}
               </h6>
-    
+
               <div
                 class="hidden sm:block bg-orange-50 rounded-xl px-3 shadow-sm text-black"
               >
@@ -260,7 +260,7 @@
             </div>
           </div>
         </div>
-    
+
         <div class="flex flex-col mr-3 mt-2">
           <div class="flex gap-1 ml-10 sm:ml-0">
             <span
@@ -271,79 +271,96 @@
               {{ "Thrissur" }}
             </h6>
           </div>
-    
+
           <p class="mt-1 ml-1 text-xs sm:text-sm font-poppins-regular">
             <span>Posted</span> {{ getPostedDate(jobPost?.CreatedDate) }}
           </p>
         </div>
       </div>
-    
-      
-  <div class="bg-white rounded-xl px-1 py-2 shadow-sm flex gap-2 pb-5">
-    <div
-      class="sm:hidden block bg-green-50 rounded-xl px-3 shadow-sm text-black"
-    >
-      <h3 class="text-sm whitespace-nowrap text-green-500">
-        {{ jobPost?.salary }}
-      </h3>
-    </div>
-    <div
-      class="sm:hidden block bg-orange-50 rounded-xl px-3 shadow-sm text-black"
-    >
-      <h3 class="text-sm whitespace-nowrap text-orange-500">
-        {{ getJobType() }}
-      </h3>
-    </div>
-    <div
-      class="sm:hidden block bg-blue-50 rounded-xl px-3 shadow-sm text-black"
-    >
-      <h3 class="text-sm whitespace-nowrap text-blue-500">
-        No of Applicants : {{ jobPost?.applicantsCount }}
-      </h3>
-    </div>
-  </div>
-    </div>
- 
 
-    <div
-      *ngFor="let jobSeeker of jobSeekers"
-      class="mt-3 p-2  grid grid-cols-2 bg-primary-white w-full rounded-lg" >
-      <div class="flex gap-4">
-        <div>
-          <img
-            src="https://pbs.twimg.com/media/F26EJS0bYAAH-5M.jpg"
-            class="h-20 w-20 my-1 border-2 rounded-full"
-            alt="Job Seeker Image"
-            srcset=""
-          />
+      <div class="bg-white rounded-xl px-1 py-2 shadow-sm flex gap-2 pb-5">
+        <div
+          class="sm:hidden block bg-green-50 rounded-xl px-3 shadow-sm text-black"
+        >
+          <h3 class="text-sm whitespace-nowrap text-green-500">
+            {{ jobPost?.salary }}
+          </h3>
         </div>
-        <div class="flex flex-col ml-5">
-          <h2 class="text-lg text-center">
-            {{ jobSeeker?.firstName + " " + jobSeeker?.lastName }}
-          </h2>
-          <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
-            Chips Maker
-          </h2>
-          <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
-            {{ jobSeeker?.experienceType }}
-          </h2>
-          <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
-            {{ jobSeeker?.educationLevel }}
-          </h2>
+        <div
+          class="sm:hidden block bg-orange-50 rounded-xl px-3 shadow-sm text-black"
+        >
+          <h3 class="text-sm whitespace-nowrap text-orange-500">
+            {{ getJobType() }}
+          </h3>
         </div>
-        <div>
-          <span
-            class="pi pi-bookmark ml-10 mt-2"
-            style="font-size: 1.5rem; color: #4f7af0"
-          ></span>
+        <div
+          class="sm:hidden block bg-blue-50 rounded-xl px-3 shadow-sm text-black"
+        >
+          <h3 class="text-sm whitespace-nowrap text-blue-500">
+            No of Applicants : {{ jobPost?.applicantsCount }}
+          </h3>
         </div>
       </div>
-      <a
-        [href]="'tel:' + jobSeeker?.mobileNo"
-        class="p-2 mt-4 w-full block text-center rounded-lg bg-blue-600 text-white"
-      >
-        Call
-      </a>
     </div>
+
+    <div class="grid gap-4 lg:grid-cols-4 mt-4">
+      <div
+        *ngFor="let jobSeeker of jobSeekers"
+        class="mt-3 p-2 bg-primary-white w-full rounded-lg"
+      >
+        <div>
+          <div class="flex gap-4">
+            <div>
+              <img
+                src="https://pbs.twimg.com/media/F26EJS0bYAAH-5M.jpg"
+                class="h-20 w-20 my-1 border-2 rounded-full"
+                alt="Job Seeker Image"
+                srcset=""
+              />
+            </div>
+            <div class="flex flex-col ml-5">
+              <h2 class="text-lg font-semibold">
+                {{ jobSeeker?.firstName + " " + jobSeeker?.lastName }}
+              </h2>
+              <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
+                {{ jobPost?.title }}
+              </h2>
+              <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
+                {{ jobSeeker?.experienceType }}
+              </h2>
+              <h2 class="text-sm font-poppins-regular mt-1 text-primary-grey">
+                {{ jobSeeker?.educationLevel }}
+              </h2>
+            </div>
+            <div>
+              <span
+                class="pi pi-bookmark ml-10 mt-2"
+                style="font-size: 1.5rem; color: #4f7af0"
+              ></span>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex  justify-between sm:justify-normal gap-2"
+            >
+              <div
+                class="p-2 w-full mt-4 text-center rounded-lg bg-blue-600 ring-1 hover:bg-blue-300 text-white"
+              >
+                <a [href]="'tel:' + jobSeeker?.mobileNo">
+                  <div>Call</div>
+                </a>
+              </div>
+    
+              <div
+                class="p-2 mt-4 w-full text-center rounded-lg ring-1 bg-gray-50 text-black hover:bg-blue-300"
+              >
+                View Profile
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </ng-template>
 </p-dialog>
