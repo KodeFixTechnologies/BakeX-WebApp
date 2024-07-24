@@ -148,12 +148,25 @@ export class SeekerJobComponent implements OnInit {
     );
   }
 
+
   searchDistrict(event: any) {
     const query = event.query.toLowerCase();
-    this.filteredBusinessesDistrict = Object.values(this.businesses).filter(business =>
-      business.districtName.toLowerCase().includes(query)
-    );
-  }
+    const uniqueDistricts = new Set<string>();
+    const filteredBusinesses = Object.values(this.businesses).filter(business => {
+        const districtName = business.districtName.toLowerCase();
+        if (districtName.includes(query) && !uniqueDistricts.has(districtName)) {
+            uniqueDistricts.add(districtName);
+            return true;
+        }
+        return false;
+    });
+
+    this.filteredBusinessesDistrict = filteredBusinesses;
+    console.log(this.filteredJobs)
+
+}
+
+
 
 
   searchJobs(event: any) {

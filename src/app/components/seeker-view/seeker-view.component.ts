@@ -133,7 +133,7 @@ export class SeekerViewComponent implements OnInit {
     else 
     {
       this.authService.logout();
-      this.router.navigate([""])
+     
     }
 
 
@@ -178,19 +178,20 @@ export class SeekerViewComponent implements OnInit {
       } else {
         this.mobileno = this.authService.getPhoneNo() || '';
       }
+  
 
      
     });
 
+
+
     if(this.mobileno===undefined)
       {
+        
         console.log('2341')
         this.authService.logout();
       }
 
-      this.userProfile = this.authService.getUserProfileData();
-
-      this.mobileno=this.userProfile.MobileNo
   }
 
   getJobSeekerDeatils()
