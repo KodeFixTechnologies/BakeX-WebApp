@@ -77,6 +77,8 @@ export class JobCardComponent {
        postedDate = currentDay - postedDay.getDate();
     }
     if (postedDate === 0) return 'Posted Today';
-    else return postedDate + ' days ago';
+    else return 'Posted'+ postedDate + ' days ago';
   }
 }
+
+
