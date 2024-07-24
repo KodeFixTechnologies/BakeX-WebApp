@@ -40,11 +40,11 @@ export class UserProfileComponent implements OnInit {
     this.dataService.setDataforheader(true);
   }
 
-    logoutPop()
-    { 
-        this.showLogout= !this.showLogout
-       console.log("hello")
-    }
+  logoutPop()
+  { 
+      this.showLogout= !this.showLogout
+    
+  }
 
 
   logout()
@@ -56,13 +56,18 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(["/privacy-policy"])
   }
 
+  goToProfileInformation()
+  {
+    console.log("clicked")
+    this.router.navigate(["/employee-personalDetails"])
+  }
+
   share()
   {
    try{
         navigator.share(shareData)
    }
    catch{
-
    }
   }
 

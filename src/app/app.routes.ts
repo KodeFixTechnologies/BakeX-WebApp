@@ -27,101 +27,115 @@ import { SeekerJobComponent } from './components/seeker-view/seeker-jobs/seeker-
 import { AppliedJobComponent } from './components/seeker-view/applied-job/applied-job/applied-job.component';
 import { PricingComponent } from './components/shared/pricing/pricing.component';
 import { EmployementTypeComponent } from './components/profile/stepper/employement-type/employement-type.component';
+import { EmployePersonalInformationComponent } from './components/employe-personal-information/employe-personal-information.component';
 
 export const routes: Routes = [
-    {
-        path: '', component: OnboardingComponent,
+  {
+    path: '',
+    component: OnboardingComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
-    },
-    {
-        path: 'login', component: LoginComponent,
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    children: [
+      { path: '', redirectTo: 'personal', pathMatch: 'full' },
+      { path: 'personal', component: PersonalInfoComponent },
+      { path: 'location', component: LocationInfoComponent },
+      {
+        path: 'expertise',
+        component: ExpertiseInfoComponent,
+      },
+      {
+        path: 'education',
+        component: EducationInfoComponent,
+      },
+      {
+        path: 'experience',
+        component: ExperinceInfoComponent,
+      },
+      {
+        path: 'resume',
+        component: ResumeComponent,
+      },
+      {
+        path: 'employment',
+        component: EmployementTypeComponent,
+      },
+    ],
+  },
 
-    },
+  {
+    path: 'bakeprofile',
+    component: BakeryOwnerProfileComponent,
+    children: [
+      { path: '', redirectTo: 'owner', pathMatch: 'full' },
+      { path: 'owner', component: OwnerInfoComponent },
+      {
+        path: 'ownerlocation-info',
+        component: OwnerlocationInfoComponent,
+      },
+      {
+        path: 'business-info',
+        component: BusinessInfoComponent,
+      },
+    ],
+  },
 
-    {
-        path: 'profile', component: ProfileComponent,
-        children: [
+  {
+    path: 'otp',
+    component: OtpComponent,
+  },
 
-            { path: '', redirectTo: 'personal', pathMatch: 'full' },
-            { path: 'personal', component: PersonalInfoComponent },
-            { path: 'location', component: LocationInfoComponent },
-            {
-                path: 'expertise', component: ExpertiseInfoComponent,
-            },
-            {
-                path: 'education', component: EducationInfoComponent,
-            },
-            {
-                path: 'experience', component: ExperinceInfoComponent,
-            },
-            {
-                path: 'resume', component: ResumeComponent,
-            },
-            {
-                path:'employment',component:EmployementTypeComponent
-            }
-        ],
-    },
+  {
+    path: 'ownerview',
+    component: OwnerViewComponent,
+  },
 
-    {
-        path: 'bakeprofile', component: BakeryOwnerProfileComponent,
-        children: [
+  {
+    path: 'owner-jobs',
+    component: OwnerJobsComponent,
+  },
 
-            { path: '', redirectTo: 'owner', pathMatch: 'full' },
-            { path: 'owner', component: OwnerInfoComponent },
-            {
-                path: 'ownerlocation-info', component: OwnerlocationInfoComponent
-            },
-            {
-                path: 'business-info', component: BusinessInfoComponent
-            },
+  {
+    path: 'owner-profile',
+    component: OwnerProfileComponent,
+  },
 
-        ],
-    },
+  {
+    path: 'jobs-applicants',
+    component: OwnerJobApplicantsComponent,
+  },
 
-    {
-        path: 'otp', component: OtpComponent
-    },
+  {
+    path: 'seeker',
+    component: SeekerViewComponent,
+  },
 
-    {
-        path: 'ownerview', component: OwnerViewComponent
-    },
+  {
+    path: 'allJobs',
+    component: SeekerJobComponent,
+  },
+  {
+    path: 'applied-job',
+    component: AppliedJobComponent,
+  },
 
-    {
-        path: 'owner-jobs', component: OwnerJobsComponent
-    },
-
-    {
-        path: 'owner-profile', component: OwnerProfileComponent
-    },
-
-    {
-        path: 'jobs-applicants', component: OwnerJobApplicantsComponent
-    },
-
-
-    {
-        path: 'seeker', component: SeekerViewComponent,
-
-    },
-
-
-    {
-        path: 'allJobs', component: SeekerJobComponent
-    },
-    {
-        path: 'applied-job', component: AppliedJobComponent
-    },
-
-    {
-        path: 'user-profile', component: UserProfileComponent
-    },
-    {
-        path: 'privacy-policy', component: PrivacyPolicyComponent
-    },
-    { path: 'pricing',component:PricingComponent}
-
-
-
-
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+  },
+  { path: 'pricing', component: PricingComponent },
+  {
+    path: 'employee-personalDetails',
+    component: EmployePersonalInformationComponent,
+  },
 ];

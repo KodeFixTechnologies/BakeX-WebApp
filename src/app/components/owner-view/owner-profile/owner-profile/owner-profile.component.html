@@ -1,41 +1,155 @@
-
-<div class=" w-full flex flex-col justify-center  items-center mt-10">
-
-    <div class="w-full max-w-sm   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex justify- px-4 pt-4">
-            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
-                <span class="sr-only">Open dropdown</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2" aria-labelledby="dropdownButton">
-                <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                </li>
-                <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
-                </li>
-                <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="w-20 h-25 mb-5 rounded-full shadow-lg" src="../../../../../assets/bake.png" alt="Bonnie image"/>
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{bakeMember.memberName}}</h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{bakeMember.designation}}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Membership-Id: {{bakeMember.memberId}}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Business Name: {{bakeMember.businessName}}</span>
-            <div class="flex  mt-40 ">
-                <a (click)="logout()" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
-                <a  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Subscribed</a>
-            </div>
-        </div>
+<div class="max-w-screen-lg min-h-screen mx-auto mt-20">
+  <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
+    <div>
+      <p class="text-white font-normal text-base">
+        Hi,<span class="text-base "> {{ bakeMember.memberName }}</span>
+      </p>
+      <div class="mt-2    sm:flex sm:gap-4    ">
+        <h2 class="text-white font-normal text-base"><span>BusinessName : </span>{{bakeMember.businessName}}</h2>
+        <h2 class="text-white"><span>Membership-Id : </span>{{bakeMember.memberId}}</h2>
+      </div>
+    
+      <h2 class="text-white font-normal text-base mt-1">Have a Greeat Day!</h2>
     </div>
+    <div
+      class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+    >
+      <!-- <img [src]="displayImage" alt="Job Post Image" /> -->
+
+      <svg
+        class="absolute w-12 h-12 text-gray-400 -left-1"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+  >
+    <button
+      class="flex gap-3 p-4 rounded-xl hover:border-1 hover:border-blue-600"
+    >
+      <span class="pi pi-user mt-1"></span>
+      <h3 class="font-medium">Personal information</h3>
+    </button>
+  </div>
+
+  <!-- <div
+      class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border  hover:border-blue-600"
+    >
+      <button class="flex gap-3 p-4 rounded-xl">
+        <span class="pi pi-cog mt-1"></span>
+        <h3 class="font-medium">Settings</h3>
+      </button>
+    </div> -->
+
+  <div
+    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+  >
+    <button (click)="navigatetoPolicy()" class="flex gap-3 p-4 rounded-xl">
+      <span class="pi pi-lock mt-1"></span>
+      <h3 class="font-medium">Privacy policy</h3>
+    </button>
+  </div>
+
+  <div
+    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+  >
+    <button class="flex gap-3 p-4 rounded-xl">
+      <span class="pi pi-info-circle mt-1"></span>
+      <h3 class="font-medium">Help center</h3>
+    </button>
+  </div>
+
+  <div
+    (click)="share()"
+    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+  >
+    <button class="flex gap-3 p-4 rounded-xl">
+      <span class="pi pi-share-alt mt-1"></span>
+      <h3 class="font-medium">Invite friends</h3>
+    </button>
+  </div>
+
+  <div
+    (click)="logoutPop()"
+    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+  >
+    <button class="flex gap-3 p-4 rounded-xl">
+      <span class="pi pi-eraser"></span>
+      <h3 class="font-medium">LogOut</h3>
+    </button>
+  </div>
+
+  <div
+    *ngIf="showLogout"
+    id="logoutModal"
+    class="fixed inset-0 px-10 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex justify-center items-center"
+  >
+    <div class="bg-white p-8 rounded-lg">
+      <h2 class="text-xl font-bold mb-4">Are you sure you want to log out?</h2>
+      <div class="flex justify-center">
+        <div
+          (click)="logoutPop()"
+          class="bg-blue-600 text-white font-medium mr-4 px-7 py-2 rounded-xl cursor-pointer"
+        >
+          <p>Cancel</p>
+        </div>
+        <div
+          (click)="logout()"
+          class="bg-red-600 text-white font-medium mr-4 px-7 py-2 rounded-xl cursor-pointer"
+        >
+          <p>Logout</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <owner-navbar></owner-navbar>
+
+<!-- 
+<div class="w-full max-w-sm   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex justify- px-4 pt-4">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </svg>
+        </button>
+    
+        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2" aria-labelledby="dropdownButton">
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-20 h-25 mb-5 rounded-full shadow-lg" src="../../../../../assets/bake.png" alt="Bonnie image"/>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{bakeMember.memberName}}</h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{{bakeMember.designation}}</span>
+        <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Membership-Id: {{bakeMember.memberId}}</span>
+        <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Business Name: {{bakeMember.businessName}}</span>
+        <div class="flex  mt-40 ">
+            <a (click)="logout()" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
+            <a  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Subscribed</a>
+        </div>
+    </div>
+</div>
+</div> -->

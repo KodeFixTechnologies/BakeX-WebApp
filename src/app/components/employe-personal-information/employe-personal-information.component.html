@@ -1,0 +1,156 @@
+<div class="h-full bg-gray-200 p-8 mt-10">
+  <div class="bg-white rounded-lg shadow-xl pb-8">
+    <div class="w-full h-[250px]">
+      <img
+        src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
+        class="w-full h-full rounded-tl-lg rounded-tr-lg"
+      />
+    </div>
+    <div class="flex flex-col items-center -mt-20">
+      <div>
+        <img
+          src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+          class="w-36  h-36   rounded-full "
+        />
+      </div>
+
+      <div class="flex items-center space-x-2 mt-2">
+        <p class="text-2xl sm:text-3xl">
+          {{ userProfileData.firstName }} {{ userProfileData.lastName }}
+        </p>
+       
+      </div>
+      <p class="text-sm text-gray-500">{{ userProfileData.districtName }}</p>
+    </div>
+    <div
+      class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2 "
+    >
+      <a [href]="'tel:' + userProfileData.mobileNo"
+        ><div class="flex items-center space-x-4 mt-2">
+          <button
+            class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="white"
+                d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3"
+              />
+            </svg>
+            <span>Call</span>
+          </button>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4"
+  >
+    <div class="w-full flex flex-col">
+      <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+        <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+        <ul class="mt-2 text-gray-700">
+          <li class="flex border-y py-2">
+            <span class="font-bold w-24">Full name:</span>
+            <span class="text-gray-700"
+              >{{ userProfileData.firstName }}
+              {{ userProfileData.lastName }}</span
+            >
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Birthday:</span>
+            <span class="text-gray-700">{{
+              formatDate(userProfileData.birthDate)
+            }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Age:</span>
+            <span class="text-gray-700">{{
+              findAge(userProfileData.birthDate)
+            }}</span>
+          </li>
+
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Phone : </span>
+            <span class="text-gray-700">{{ userProfileData.mobileNo }}</span>
+          </li>
+
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Location:</span>
+            <span class="text-gray-700"
+              >{{ userProfileData.districtName }},
+              {{ userProfileData.stateName }}</span
+            >
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Work History:</span>
+            <span class="text-gray-700"></span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Education</span>
+            <span class="text-gray-700">{{
+              userProfileData.educationLevel
+            }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Experience</span>
+            <span class="text-gray-700">{{
+              userProfileData.experienceType
+            }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- <div class="bg-gray-100 mt-10 min-h-screen flex flex-col font-poppins-regular">
+    <div
+      class="flex flex-col mt-10 lg:mt-20 bg-white h-[500px] w-[340px] lg:h-[700px] lg:w-[850px] mx-auto shadow-xl rounded-2xl overflow-auto  "
+    >
+      <div
+        class="relative bg-primary w-full h-20 lg:h-40 flex justify-center items-end"
+      >
+        <img
+          src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
+          class="w-24 h-24 rounded-full border-4 border-white transform translate-y-1/2"
+        />
+      </div>
+      <h2
+        class="mt-12 text-center font-poppins-regular font-semibold text-xl lg:text-2xl"
+      >
+        {{ userProfileData.firstName }} {{ userProfileData.lastName }}
+      </h2>
+      <h4 class="ml-5 mt-4 font-poppins-regular ">Information </h4>
+      <hr class="my-1 b-primary">
+      <div class="flex flex-col mt-3 ml-5">
+              <div class="flex justify-between ">
+                  <h2 class=" text-sm lg:text-xl opacity-65">Date of Birth</h2>
+                  <h2 class="mr-4 text-sm lg:text-xl">{{formatDate(userProfileData.birthDate)}}</h2>
+              </div>
+              <div class="flex justify-between  mt-2">
+                  <h2 class=" text-sm lg:text-xl opacity-65">Age</h2>
+                  <h2 class="mr-4 text-sm lg:text-xl">{{findAge(userProfileData.birthDate)}}</h2>
+              </div>
+              <div class="flex justify-between  mt-2">
+                  <h2 class=" text-sm lg:text-xl opacity-65">Education</h2>
+                  <h2 class="mr-4 text-sm lg:text-xl">{{userProfileData.educationLevel}}</h2>
+              </div>
+              <div class="flex justify-between  mt-2 ">
+                  <h2 class=" text-sm lg:text-xl opacity-65" >District</h2>
+                  <h2 class="mr-4 text-sm lg:text-xl">{{userProfileData.districtName}}</h2>
+              </div>
+              <div>
+  
+              </div>
+            
+      </div>
+    </div>
+  </div>
+  
+   -->
+    </div>
+  </div>
+</div>
