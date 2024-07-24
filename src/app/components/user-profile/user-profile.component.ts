@@ -57,7 +57,7 @@ export class UserProfileComponent implements OnInit {
   logout()
   {
     this.authService.logout();
-    this.router.navigate([""])
+   
   }
   navigatetoPolicy(){
     this.router.navigate(["/privacy-policy"])

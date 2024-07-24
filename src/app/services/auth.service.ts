@@ -114,9 +114,10 @@ AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('currentSelection')
     sessionStorage.removeItem(this.businessesKey);
     sessionStorage.removeItem(this.userProfileKey);
-    this.router.navigate([""])
+    this.router.navigate(['/'], { replaceUrl: true });
   }
 
 

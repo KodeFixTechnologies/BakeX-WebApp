@@ -219,6 +219,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   
 
   this.authService.checkUserExist(this.user).subscribe((response) => {
+    console.log(this.user)
 
     if (response.token) {
       this.authService.setToken(response.token);
