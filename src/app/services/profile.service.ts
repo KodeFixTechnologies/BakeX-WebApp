@@ -124,6 +124,7 @@ export class ProfileService {
 
     // Assign other information
     this.nonBakeMember.profileCreateDate = value.otherInformation.profileCreateDate;
+    this.nonBakeMember.creationProfileImage = value.otherInformation.ProfileImage
 
     return this.nonBakeMember;
 }

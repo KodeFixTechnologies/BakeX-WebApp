@@ -7,7 +7,7 @@
     <div class=" sm:bg-inherit bg-slate-50 ">
       <h1
       class="ms-3 text-4xl lg:text-6xl xl:text-6xl font-bold lg:tracking-tight xl:tracking-wider whitespace-nowrap text-center sm:text-start">
-      Welcome to BakeJoli.com
+      Welcome to BakeJoli
     </h1>
     <p class="hidden lg:block  sm:text-2xl ms-4 mt-4 text-gray-600 ">
       Your Hub for Food Industry Jobs in Kerala. Connect with top employers, find job opportunities, and post job
@@ -369,7 +369,7 @@
 
 <!--Pricing-->
 
-<section id="pricing" class="bg-white dark:bg-gray-900 ">
+<section id="pricing" class="bg-white dark:bg-gray-900 " *ngIf="!isLoading">
 
   <div class="py-8 px-4 mx-auto max-w-screen-2xl lg:py-16 lg:px-6">
     <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
@@ -413,8 +413,8 @@
       <!-- Pricing Card for Basic -->
       <div *ngIf="selectedPricing"
         class="flex flex-col p-6 mx-auto sm:me-10 max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-        <h3 class="mb-4 text-2xl font-semibold">{{pricingData[selectedPricing].Basic.text1}}</h3>
-        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{pricingData[selectedPricing].Basic.text3}}</p>
+        <h3 class="mb-4 text-2xl font-semibold">{{pricingData[selectedPricing]?.Basic?.text1 || 'Default Text'}}</h3>
+        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{pricingData[selectedPricing]?.Basic?.text3 || 'Default Text'}}</p>
         <div  *ngIf="selectedPricing !== 'Production'" class="flex justify-center items-baseline my-8">
           <span class="mr-2 text-5xl font-extrabold">&#8377; {{ pricingData[selectedPricing].Basic.price }}</span>
           <span class="text-gray-500 dark:text-gray-400">/month</span>
@@ -442,13 +442,13 @@
       </div>
       <!-- Pricing Card -->
       <div *ngIf="selectedPricing"
-    class="flex flex-col p-6 sm:ms-10 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-    <h3 class="mb-4 text-2xl font-semibold">{{pricingData[selectedPricing].Basic.text2}}</h3>
-    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{pricingData[selectedPricing].Basic.text4}}.</p>
-    <div  *ngIf="selectedPricing!='Employee'&& selectedPricing !== 'Production'" class="flex justify-center items-baseline my-8">
+     class="flex flex-col p-6 sm:ms-10 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+     <h3 class="mb-4 text-2xl font-semibold">{{pricingData[selectedPricing].Basic.text2}}</h3>
+     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{pricingData[selectedPricing].Basic.text4}}.</p>
+     <div  *ngIf="selectedPricing!='Employee'&& selectedPricing !== 'Production'" class="flex justify-center items-baseline my-8">
       <span class="mr-2 text-5xl font-extrabold">&#8377; {{ pricingData[selectedPricing].Premium.price }}</span>
       <span class="text-gray-500 dark:text-gray-400">/month</span>
-    </div> 
+     </div> 
        <div *ngIf="selectedPricing === 'Employee' || selectedPricing === 'Production'"  class="flex justify-center items-baseline my-8">
       <span class="mr-2 text-5xl font-extrabold"> Coming Soon</span>
 
@@ -470,7 +470,7 @@
     <a *ngIf="selectedPricing!='Employee'" href="#"
       class="text-black bg-primary-600 ring-1 ring-black hover:bg-black hover:text-white focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Get
       started</a> 
-  </div>
+   </div>
 
     </div>
   </div>

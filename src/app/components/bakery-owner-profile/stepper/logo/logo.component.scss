@@ -1,0 +1,9 @@
+.image-preview {
+    margin-top: 10px;
+    img {
+      max-width: 100%;
+      max-height: 300px; // Adjust the height as needed
+      object-fit: contain; // Ensure the image scales properly
+    }
+  }
+  

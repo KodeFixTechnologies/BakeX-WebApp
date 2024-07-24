@@ -49,6 +49,13 @@ export class BakeryOwnerProfileComponent implements OnInit {
         label: 'Location Info',
         routerLink: 'ownerlocation-info',
       },
+
+      {
+      label:'Logo',
+      routerLink:'logo'
+      }
+
+      
     ];
   }
 
