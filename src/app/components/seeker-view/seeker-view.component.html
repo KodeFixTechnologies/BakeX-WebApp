@@ -142,7 +142,7 @@
             [(ngModel)]="jobTypes['Full Time']"
             (change)="applyFilters()"
           />
-          Full Time
+           <span class="whitespace-nowrap">Full Time</span>
         </label>
         <label>
           <input
@@ -150,18 +150,37 @@
             [(ngModel)]="jobTypes['Part Time']"
             (change)="applyFilters()"
           />
-          Part Time
+          <span class="whitespace-nowrap">Part Time</span>
         </label>
+
+        
       </div>
 
-      <label>
-        <input
-          type="checkbox"
-          [(ngModel)]="jobTypes['Contract']"
-          (change)="applyFilters()"
-        />
-        Contract
-      </label>
+
+      <div>
+
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="jobTypes['Contract']"
+            (change)="applyFilters()"
+          />
+          Contract
+        </label>
+
+
+        <label >
+          <input
+            type="checkbox"
+            [(ngModel)]="jobTypes['Temporary']"
+            (change)="applyFilters()"
+          />
+          Temporary
+        </label>
+      </div>
+   
+
+   
     </div>
 
     <span class="ms-5 mb-2 mt-2">Salary</span>
@@ -312,19 +331,22 @@
         </span>
       </div>
     </div>
-         <span class="flex sm:hidden">Recommned Jobs</span>
-    <div>
+      
+    <div class="pb-2 mb-2">
       <div class="mx-auto sm:w-[1200px] sm:mt-4 rounded-xl">
         <div class="sm:p-0 sm:mx-0">
           <div class="">
             <img
-              src="  '../../../../../assets/banner.jpg"
-              class="rounded-xl h-64 w-full"
+              src="  '../../../../../assets/banner3.jpg"
+              class="rounded-xl  w-full"
               alt=""
             />
+            <span class="flex sm:hidden mt-2">Recommended Jobs</span>
           </div>
+       
           <ng-container *ngFor="let jobposted of filteredJobs">
-            <div class="mt-6">
+            <div class="mt-1">
+            
               <seeker-job-card
                 [recommendedJob]="jobposted"
                 [businesses]="businesses"
