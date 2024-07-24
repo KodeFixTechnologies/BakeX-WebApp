@@ -27,7 +27,8 @@ import { SeekerJobComponent } from './components/seeker-view/seeker-jobs/seeker-
 import { AppliedJobComponent } from './components/seeker-view/applied-job/applied-job/applied-job.component';
 import { PricingComponent } from './components/shared/pricing/pricing.component';
 import { EmployementTypeComponent } from './components/profile/stepper/employement-type/employement-type.component';
-import { EmployePersonalInformationComponent } from './components/employe-personal-information/employe-personal-information.component';
+import { PersonalInformationComponent } from './components/shared/personal-information-card/personal-information.component';
+
 
 export const routes: Routes = [
   {
@@ -136,6 +137,6 @@ export const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   {
     path: 'employee-personalDetails',
-    component: EmployePersonalInformationComponent,
+    component: PersonalInformationComponent,
   },
 ];

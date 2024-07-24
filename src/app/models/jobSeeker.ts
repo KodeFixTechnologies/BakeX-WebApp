@@ -1,3 +1,5 @@
+import { WorkHistory } from "./user";
+
 export interface JobSeeker {
     profileId: number;
     firstName: string;
@@ -9,4 +11,5 @@ export interface JobSeeker {
     pinCode: string;
     mobileNo: string;
     birthDate: Date;
+    workHistory:WorkHistory[]
 }

@@ -31,8 +31,8 @@ export interface Users {
   
   export interface WorkHistory {
     WorkHistoryId?: number; // Assuming this is optional since it's generated on the server side
-    Employer: string;
-    StartDate: string; // You may consider using Date type instead of string if possible
-    EndDate: string;   // You may consider using Date type instead of string if possible
-    JobRole: string;
+    employer: string;
+    startDate: string; // You may consider using Date type instead of string if possible
+    endDate: string;   // You may consider using Date type instead of string if possible
+    jobRole: string;
   }

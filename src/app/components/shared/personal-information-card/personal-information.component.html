@@ -88,9 +88,29 @@
             >
           </li>
           <li class="flex border-b py-2">
-            <span class="font-bold w-24">Work History:</span>
+            <span class="font-bold w-24 whitespace-nowrap">Work History</span>
             <span class="text-gray-700"></span>
-          </li>
+        </li>
+        
+        <!-- Iterate over workHistories and display each work history entry -->
+        <li *ngFor="let workHistory of userProfileData.workHistory" class="flex flex-col border-b py-2">
+            <div>
+                <span class="font-bold">Employer:</span>
+                <span class="text-gray-700">{{ workHistory.employer }}</span>
+            </div>
+            <div>
+                <span class="font-bold">Role:</span>
+                <span class="text-gray-700">{{ workHistory.jobRole }}</span>
+            </div>
+            <div>
+                <span class="font-bold">Start Date:</span>
+                <span class="text-gray-700">{{ workHistory.startDate | date }}</span>
+            </div>
+            <div>
+                <span class="font-bold">End Date:</span>
+                <span class="text-gray-700">{{ workHistory.endDate | date }}</span>
+            </div>
+        </li>
           <li class="flex border-b py-2">
             <span class="font-bold w-24">Education</span>
             <span class="text-gray-700">{{
