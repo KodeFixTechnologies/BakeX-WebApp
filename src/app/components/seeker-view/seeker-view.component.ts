@@ -197,6 +197,7 @@ export class SeekerViewComponent implements OnInit {
     }
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
+      console.log(this.jobSeeker)
      // this.dataService.setProfileData(this.jobSeeker) remove later
      this.authService.setUserProfileData(this.jobSeeker);
      

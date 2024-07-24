@@ -30,6 +30,11 @@
     </button>
   </div>
 
+
+  <div *ngIf="visible">
+    <personal-information [userProfileData]="userProfile"></personal-information>
+  </div>
+
   <!-- <div
     class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border  hover:border-blue-600"
   >
@@ -39,10 +44,10 @@
     </button>
   </div> -->
 
-  <div
+  <div (click)="navigatetoPolicy()"
     class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
-    <button (click)="navigatetoPolicy()" class="flex gap-3 p-4 rounded-xl">
+    <button  class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-lock mt-1"></span>
       <h3 class="font-medium">Privacy policy</h3>
     </button>
@@ -57,10 +62,10 @@
     </button>
   </div>
 
-  <div
+  <div (click)="share()"
     class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
-    <button (click)="share()" class="flex gap-3 p-4 rounded-xl">
+    <button  class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-share-alt mt-1"></span>
       <h3 class="font-medium">Invite friends</h3>
     </button>

@@ -164,10 +164,10 @@ profile:any;
   this.userProfile.Pincode = this.profile.locationInformation.pincode;
 
   this.userProfile.WorkHistory = this.workHistory.map(history => ({
-    Employer: history.employer,
-    StartDate: history.startDate, // Convert Date to string
-    EndDate: history.endDate, // Convert Date to string
-    JobRole: history.jobRole
+    employer: history.employer,
+    startDate: history.startDate, // Convert Date to string
+    endDate: history.endDate, // Convert Date to string
+    jobRole: history.jobRole
   }));
 
   console.log(this.userProfile.WorkHistory)

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { JobSeeker } from '../../models/jobSeeker';
+import { Component, Input, OnInit } from '@angular/core';
+import { JobSeeker } from '../../../models/jobSeeker';
+import { AuthService } from '../../../services/auth.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'employe-personal-information',
+  selector: 'personal-information',
   standalone: true,
-  imports: [],
-  templateUrl: './employe-personal-information.component.html',
-  styleUrl: './employe-personal-information.component.scss',
+  imports: [CommonModule],
+  templateUrl: './personal-information.component.html',
+  styleUrl: './personal-information.component.scss',
 })
-export class EmployePersonalInformationComponent implements OnInit {
+export class PersonalInformationComponent implements OnInit {
   userAge: number = 0;
+  @Input() userProfileData: JobSeeker = {} as JobSeeker;
 
-  userProfileData: JobSeeker = {} as JobSeeker;
+  
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     this.userProfileData = this.authService.getUserProfileData();
