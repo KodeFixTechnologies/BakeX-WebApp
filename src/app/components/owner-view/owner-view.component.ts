@@ -103,7 +103,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       { label: 'Skills' },
       { label: 'Experience' },
       {
-         label:'Logo'
+         label:'Description'
        }
       // Add more steps as needed
   ];

@@ -350,29 +350,31 @@
       
 
 
-<div class="flex justify-center items-center mb-5 ms-10" *ngIf="activeIndex===3">
+<div class=" mb-5 " *ngIf="activeIndex===3 ">
 
-<div class="mb-2 flex flex-col justify-center">
-  <label class="label-width mb-1" for="jobDescription"
-    >Job Description:</label
-  >
-  <textarea
-    id="jobDescription"
-    [(ngModel)]="jobPost.JobDescription"
-    class="w-96 h-20"
-  ></textarea>
-
-
-              
-  <div class="flex flex-row items-start">
+  <div class="flex flex-row items-start mt-3" >
     <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
     
 </div>
 
 
+<div class="mb-2 flex flex-col justify-center mx-auto mt-5">
+  <label class="label-width mb-1 font-medium" for="jobDescription">Job Description:</label>
 
+  <ng-container *ngIf="jobPost.JobDescription; else loading">
+    <textarea
+      id="jobDescription"
+      [(ngModel)]="jobPost.JobDescription"
+      class="w-[500px] h-56 rounded-2xl border-none bg-gray-50 ring-2"
+    ></textarea>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="flex justify-center items-center h-56">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+    </div>
+  </ng-template>
 </div>
-
   
 </div>
 
@@ -387,7 +389,7 @@
 
     <!-- <button type="button" class="mt-3 ml-3 p-3 rounded-2xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="nextStep()" *ngIf="activeIndex !== steps.length - 1">Next</button> -->
     <div class="mt-3  p-3 rounded-2xl w-full lg:flex lg:justify-center lg:items-center md:w-80 lg:w-auto cursor-pointer bg-primary text-white text-center"  (click)="nextStep()" *ngIf="activeIndex !== steps.length-1">
-        <p>next</p>
+        <p>Next</p>
     </div>
 
 </div>
