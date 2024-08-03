@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BottomNavbarComponent } from "../bottom-navbar/bottom-navbar.component";
-import { CommonModule } from '@angular/common';
+import { CommonModule, PlatformLocation } from '@angular/common';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Users } from '../../models/user';
@@ -26,16 +26,23 @@ export class OnboardingComponent implements OnInit {
         private cdr: ChangeDetectorRef,
         private dataService:DataService,
         private authService:AuthService,
-        private queryService:QueryService
-      
-    ) { }
+        private queryService:QueryService,
+        private platFormLocation:PlatformLocation
+    ) { 
+
+            //prevent backward navigationcode
+    history.pushState(null,'',location.href);
+    this.platFormLocation.onPopState(()=>{
+     history.pushState(null,'',location.href)
+    })
+    }
 
     ngOnInit(): void {
       
         this.queryService.getPricingData().subscribe(data => {
             this.pricingData = data;
             this.isLoading = false; 
-            console.log(this.pricingData)
+       
           });
 
 

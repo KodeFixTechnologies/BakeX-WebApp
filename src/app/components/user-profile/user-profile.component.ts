@@ -57,7 +57,7 @@ export class UserProfileComponent implements OnInit {
   logout()
   {
     this.authService.logout();
-    this.router.navigate([""])
+   
   }
   navigatetoPolicy(){
     this.router.navigate(["/privacy-policy"])
@@ -65,9 +65,14 @@ export class UserProfileComponent implements OnInit {
 
   goToProfileInformation()
   {
-    console.log("clicked")
+  
     this.visible=!this.visible;
     // this.router.navigate(["/employee-personalDetails"])
+  }
+
+  navigatetoHelpCenter()
+  {
+    this.router.navigate(["/help-center"])
   }
 
   share()

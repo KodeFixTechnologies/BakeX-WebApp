@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { JobSeeker } from '../../../models/jobSeeker';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { BakeMember } from '../../../models/bakeMember';
 
 @Component({
   selector: 'personal-information',
@@ -14,12 +14,26 @@ import { CommonModule } from '@angular/common';
 export class PersonalInformationComponent implements OnInit {
   userAge: number = 0;
   @Input() userProfileData: JobSeeker = {} as JobSeeker;
+  @Input() bakeMemberProfile:BakeMember={} as BakeMember;
 
-  
+  active: String = '';
+
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
-  //  this.userProfileData = this.authService.getUserProfileData();
-    console.log(this.userProfileData);
+    //  this.userProfileData = this.authService.getUserProfileData();
+    if (this.userProfileData && Object.keys(this.userProfileData).length > 0) {
+      this.active = 'jobSeeker';
+    } else if (
+      this.bakeMemberProfile &&
+      Object.keys(this.bakeMemberProfile).length > 0
+    ) {
+      this.active = 'bakeMember';
+    } else {
+      this.active = 'unknown'; // Optional: handle case where both are empty
+    }
+
+    console.log(this.active);
+
   }
 
   formatDate(date: Date | string): string {

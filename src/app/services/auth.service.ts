@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { Users } from '../models/user';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
+import { DataService } from './data.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,9 @@ export class
 AuthService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router:Router,
+    private dataService:DataService
   ) {
 
   }
@@ -111,9 +115,12 @@ AuthService {
   }
 
   logout() {
+    this.dataService.setDataforheader(false);
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('currentSelection')
     sessionStorage.removeItem(this.businessesKey);
-    sessionStorage.removeItem(this.userProfileKey)
+    sessionStorage.removeItem(this.userProfileKey);
+    this.router.navigate(['/'], { replaceUrl: true });
   }
 
 

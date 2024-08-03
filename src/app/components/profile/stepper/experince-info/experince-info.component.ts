@@ -172,7 +172,7 @@ profile:any;
     jobRole: history.jobRole
   }));
 
-  console.log(this.userProfile.WorkHistory)
+
   }
 
 
@@ -193,6 +193,7 @@ profile:any;
             if(response==200)
               {
                 this.authService.setPhoneNo(this.userProfile.MobileNo);
+
                 this.authService.setUserProfileData(this.userProfile);
                 this.dataService.setPhoneData(this.userProfile.MobileNo);
                 this.router.navigate(['/seeker'])

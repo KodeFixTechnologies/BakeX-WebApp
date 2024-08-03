@@ -12,7 +12,7 @@ import { JobSeeker } from '../models/jobSeeker';
 export class DataService {
   private dataSubject = new BehaviorSubject<boolean>(false);
  
-  private dataheaderSubject = new BehaviorSubject<boolean>(false);
+  public dataheaderSubject = new BehaviorSubject<boolean>(false);
   private createJobSubject = new BehaviorSubject<boolean>(false);
 
   private phoneData = new BehaviorSubject<string>('');

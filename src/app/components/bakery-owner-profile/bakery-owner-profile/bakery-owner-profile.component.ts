@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Stepper, StepperModule } from 'primeng/stepper';
+import { Stepper, StepperContent, StepperModule } from 'primeng/stepper';
 import { AnimateModule } from 'primeng/animate';
 
 import { MenuItem } from 'primeng/api';
@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 
 import { PrimeIcons } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StepperComponent } from '../../shared/stepper/stepper.component';
 
 
 
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StepsModule,
     RouterOutlet,
     RouterLink,
+    StepperComponent
   ],
   templateUrl: './bakery-owner-profile.component.html',
   styleUrl: './bakery-owner-profile.component.scss',

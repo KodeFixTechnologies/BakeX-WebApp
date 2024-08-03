@@ -1,6 +1,6 @@
-<div class="min-h-screen   mt-10">
+<div *ngIf="active === 'jobSeeker'" class="min-h-screen mt-10">
   <div class="bg-white rounded-lg shadow-xl pb-8">
-    <div class="w-ful h-[250px]">
+    <div class="w-full h-[250px]">
       <img
         src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
         class="w-[320px] mx-auto h-20 rounded-tl-lg rounded-tr-lg"
@@ -10,20 +10,19 @@
       <div>
         <img
           src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
-          class="w-10  h-10   rounded-full "
+          class="w-10 h-10 rounded-full"
         />
       </div>
 
       <div class="flex items-center space-x-2 mt-2">
         <p class="text-2xl sm:text-3xl">
-          {{ userProfileData?.firstName }} {{ userProfileData?.lastName }}
+          {{ userProfileData.firstName }} {{ userProfileData.lastName }}
         </p>
-       
       </div>
       <p class="text-sm text-gray-500">{{ userProfileData.districtName }}</p>
     </div>
     <div
-      class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2 "
+      class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2"
     >
       <a [href]="'tel:' + userProfileData.mobileNumber"
         ><div class="flex items-center space-x-4 mt-2">
@@ -77,7 +76,9 @@
 
           <li class="flex border-b py-2">
             <span class="font-bold w-24">Phone : </span>
-            <span class="text-gray-700">{{ userProfileData.mobileNumber }}</span>
+            <span class="text-gray-700">{{
+              userProfileData.mobileNumber
+            }}</span>
           </li>
 
           <li class="flex border-b py-2">
@@ -90,27 +91,34 @@
           <li class="flex border-b py-2">
             <span class="font-bold w-24 whitespace-nowrap">Work History</span>
             <span class="text-gray-700"></span>
-        </li>
-        
-        <!-- Iterate over workHistories and display each work history entry -->
-        <li *ngFor="let workHistory of userProfileData.workHistory" class="flex flex-col border-b py-2">
+          </li>
+
+          <!-- Iterate over workHistories and display each work history entry -->
+          <li
+            *ngFor="let workHistory of userProfileData.workHistory"
+            class="flex flex-col border-b py-2"
+          >
             <div>
-                <span class="font-bold">Employer:</span>
-                <span class="text-gray-700">{{ workHistory.employer }}</span>
+              <span class="font-bold">Employer:</span>
+              <span class="text-gray-700">{{ workHistory.employer }}</span>
             </div>
             <div>
-                <span class="font-bold">Role:</span>
-                <span class="text-gray-700">{{ workHistory.jobRole }}</span>
+              <span class="font-bold">Role:</span>
+              <span class="text-gray-700">{{ workHistory.jobRole }}</span>
             </div>
             <div>
-                <span class="font-bold">Start Date:</span>
-                <span class="text-gray-700">{{ workHistory.startDate | date }}</span>
+              <span class="font-bold">Start Date:</span>
+              <span class="text-gray-700">{{
+                workHistory.startDate | date
+              }}</span>
             </div>
             <div>
-                <span class="font-bold">End Date:</span>
-                <span class="text-gray-700">{{ workHistory.endDate | date }}</span>
+              <span class="font-bold">End Date:</span>
+              <span class="text-gray-700">{{
+                workHistory.endDate | date
+              }}</span>
             </div>
-        </li>
+          </li>
           <li class="flex border-b py-2">
             <span class="font-bold w-24">Education</span>
             <span class="text-gray-700">{{
@@ -171,6 +179,69 @@
   </div>
   
    -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="active === 'bakeMember'" class="min-h-96 mt-10">
+  <div class="bg-white rounded-lg shadow-xl pb-8">
+    <div class="w-full h-[250px]">
+      <img
+        src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
+        class="w-[320px] mx-auto h-20 rounded-tl-lg rounded-tr-lg"
+      />
+    </div>
+    <div class="flex flex-col items-center -mt-20">
+      <div>
+        <img
+          src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+          class="w-10 h-10 rounded-full"
+        />
+      </div>
+
+      <div class="flex items-center space-x-2 mt-2">
+        <p class="text-2xl sm:text-3xl">
+          {{ bakeMemberProfile.businessName }}
+        </p>
+      </div>
+      <p class="text-sm text-gray-500">{{ userProfileData.districtName }}</p>
+    </div>
+  </div>
+
+  <div
+    class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4"
+  >
+    <div class="w-full flex flex-col">
+      <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+        <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+        <ul class="mt-2 text-gray-700">
+      
+          <li class="flex border-y py-2">
+            <span class="font-bold w-24">Member name : </span>
+            <span class="text-gray-700">
+              {{ " " + bakeMemberProfile.memberName }}
+            </span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">Address :</span>
+            <span class="text-gray-700">
+              {{ bakeMemberProfile.businessAddress }}
+            </span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">district:</span>
+            <span class="text-gray-700">{{ bakeMemberProfile.district }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">phone :</span>
+            <span class="text-gray-700">{{ bakeMemberProfile.phoneNo }}</span>
+          </li>
+          <li class="flex border-b py-2">
+            <span class="font-bold w-24">plac :</span>
+            <span class="text-gray-700">{{ bakeMemberProfile.place }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

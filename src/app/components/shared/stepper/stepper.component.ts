@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../../services/data.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'stepper',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss'
 })
 export class StepperComponent {
 
+  @Input() switch:string='';
  
   ngOnInit() {
     this.dataService.toggleExpand$.subscribe(data => {
@@ -98,5 +100,27 @@ export class StepperComponent {
   {
     this.toggleExpand('profile');
     this.router.navigate(['profile/personal']);
+  }
+
+
+  //Stepper for Bake Owners
+
+  goToOwnerPersonal()
+  {
+    this.router.navigate(['bakeprofile/owner'])
+  }
+
+  goToBusiness() {
+    this.router.navigate(['bakeprofile/business-info'])
+  }
+
+  goToOwnerLocation()
+  {
+    this.router.navigate(['bakeprofile/ownerlocation-info'])
+  }
+
+  goToOwnerLogo()
+  {
+    this.router.navigate(['bakeprofile/ownerlogo'])
   }
 }

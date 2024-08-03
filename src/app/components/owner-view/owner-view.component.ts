@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { BakeMember } from '../../models/bakeMember';
 import { FormsModule } from '@angular/forms';
 import { Job } from '../../models/job';
-import { CommonModule } from '@angular/common';
+import { CommonModule, PlatformLocation } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { Button, ButtonModule } from 'primeng/button';
 import { OwnerNavbarComponent } from '../owner-navbar/owner-navbar.component';
@@ -103,7 +103,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
       { label: 'Skills' },
       { label: 'Experience' },
       {
-         label:'Logo'
+         label:'Description'
        }
       // Add more steps as needed
   ];
@@ -131,9 +131,17 @@ export class OwnerViewComponent implements OnInit, OnDestroy{
     private messageService:MessageService,
     private profileService:ProfileService,
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private platFormLocation:PlatformLocation
   )
   {
+    //prevent backward navigationcode
+    history.pushState(null,'',location.href);
+    this.platFormLocation.onPopState(()=>{
+     history.pushState(null,'',location.href)
+    })
+
+    
     this.bakeryOwnerProfileInfoSubscription = this.profileService.bakeryOwnerProfileInfo$.subscribe();
   }
 
@@ -269,6 +277,11 @@ this.model = genAI.getGenerativeModel({
 
   }
 
+  postAJob()
+  {
+    this.visible=true;
+  }
+
   closeDialog(): void {
     this.visible = false;
     history.back();
@@ -353,13 +366,12 @@ previousStep() {
 
 async TestGeminiPro() {
   // Model initialisation missing for brevity
-console.log(this.selectedExpertise)
 
   const prompt = `Generate a minimal and simple list of job responsibilities for a job Role: ${this.expertiseTypeforGemini} in the food industry for this  
   Company: ${this.bakeMember.businessName}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
   The response should only include job responsibilities in a sentence,sepearte each sentence with comma`;
   const result = await this.model.generateContent(prompt);
-  console.log(result)
+
   const response = await result.response;
 
   if (response.candidates && response.candidates.length > 0) {
@@ -387,8 +399,7 @@ updateExpertise(event: any) {
     this.jobPost.BusinessId=this.bakeMember.businessId
     this.jobPost.DistrictId = this.selectedDistrict?.id
     this.jobPost.jobTypeId = parseInt(this.jobTypes)
-  
-    console.log(this.jobPost.JobDescription)
+
   
      this.queryService.createJobPost(this.jobPost).subscribe((response)=>{
      

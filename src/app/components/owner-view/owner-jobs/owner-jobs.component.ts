@@ -47,6 +47,7 @@ export class OwnerJobsComponent implements OnInit {
     this.dataService.getPostedJobData().subscribe((data)=>{
 
       this.jobPost=data;
+      console.log(this.jobPost)
     })
    
   }

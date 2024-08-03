@@ -55,6 +55,14 @@
                   Profile
                 </a>
               </li>
+
+              <li class="group relative" (click)="postAJob()">
+                <a
+                  class="cursor-pointer ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:text-primary lg:group-hover:opacity-70 xl:ml-10"
+                >
+                  Post a Job
+                </a>
+              </li>
              
             </ul>
           </nav>
@@ -68,7 +76,7 @@
 <div>
   
 </div>
-<div class="bg-white  flex   sm:w-full h-[180px]  border-t-2 border-b-2 shadow-1">
+<div  class="bg-white  flex   sm:w-full h-[150px]  border-t-2 border-b-2 shadow-1">
   
   <div class="flex flex-col  px-5 py-8 sm:px-10 sm:py-16">
     <div>
@@ -78,7 +86,7 @@
       <div>
         <p class="text-base text-gray-600 ">Looking for employee? Post Jobs and find your Employee  </p>
         </div>
-  </div>
+  </div >
   
   <!-- <div>
     <img class="h-[176px] w-[920px] object-cover" src="https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-halloween-season-celebration_23-2150742523.jpg?t=st=1721332843~exp=1721336443~hmac=499b20c53e77a8a0e73a4a011b12d09aeaa1b0fe5e82dae2ccce38f2766cf2d0&w=1380" alt="">
@@ -104,7 +112,7 @@
     <span  [ngClass]="{'bg-primary text-white': activated === 'allJobs', 'bg-white text-gray-700': activated !== 'allJobs'}"
     class="p-3     hidden sm:flex  rounded-xl w-20 ring-1 cursor-pointer   ">All Jobs </span >
 
-    <span  [ngClass]="{'bg-primary text-white': activated === 'allJobs', 'bg-white text-gray-700': activated !== 'allJobs'}"
+    <span  [ngClass]="{'bg-primary text-white': activated === 'bookmark', 'bg-white text-gray-700': activated !== '!bookmark'}"
     class="p-3     hidden sm:flex  rounded-xl w-28 ring-1 cursor-pointer   ">BookMarks</span >
 <!-- 
        <div>
@@ -124,8 +132,8 @@
 
         <div class="sm:mx-0   hidden sm:block" >
           
-          <div>
-            <img src="  '../../../../../assets/banner.jpg" class="rounded-xl h-64 w-full " alt="">
+          <div class="animate-pulse">
+            <img src="  '../../../../../assets/banner3.jpg" class="rounded-xl w-full " alt="">
           </div>
           <!-- <ng-container  *ngFor="let jobposted of switchJobs" >
             <div class="mt-6 ">
@@ -151,8 +159,8 @@
 
         <div class="sm:p-0 sm:mx-0 mx-auto  sm:hidden block" >
           
-          <div class="">
-            <img src="  '../../../../../assets/banner.jpg" class="rounded-xl h-64 w-full " alt="">
+          <div class="animate-pulse">
+            <img src="  '../../../../../assets/banner3.jpg" class="rounded-xl w-full " alt="">
           </div>
           <!-- <ng-container  *ngFor="let jobposted of switchJobs" >
             <div class="mt-6 ">
@@ -342,29 +350,31 @@
       
 
 
-<div class="flex justify-center items-center mb-5 ms-10" *ngIf="activeIndex===3">
+<div class=" mb-5 " *ngIf="activeIndex===3 ">
 
-<div class="mb-2 flex flex-col justify-center">
-  <label class="label-width mb-1" for="jobDescription"
-    >Job Description:</label
-  >
-  <textarea
-    id="jobDescription"
-    [(ngModel)]="jobPost.JobDescription"
-    class="w-96 h-20"
-  ></textarea>
-
-
-              
-  <div class="flex flex-row items-start">
+  <div class="flex flex-row items-start mt-3" >
     <p class="pi pi-angle-left" (click)="previousStep()"  > <b class="text-lg"> Back </b></p>
     
 </div>
 
 
+<div class="mb-2 flex flex-col justify-center mx-auto mt-5">
+  <label class="label-width mb-1 font-medium" for="jobDescription">Job Description:</label>
 
+  <ng-container *ngIf="jobPost.JobDescription; else loading">
+    <textarea
+      id="jobDescription"
+      [(ngModel)]="jobPost.JobDescription"
+      class="w-[500px] h-56 rounded-2xl border-none bg-gray-50 ring-2"
+    ></textarea>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="flex justify-center items-center h-56">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+    </div>
+  </ng-template>
 </div>
-
   
 </div>
 
@@ -372,8 +382,15 @@
 <div class="flex flex-col justify-center" >
 
        
-  <button  class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="submitJob()" *ngIf="activeIndex === steps.length - 1">Submit</button>
-    <button type="button" class="mt-3 ml-3 p-3 rounded-2xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="nextStep()" *ngIf="activeIndex !== steps.length - 1">Next</button>
+  <!-- <button  class="mt-3 ml-3 p-3 rounded-3xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="submitJob()" *ngIf="activeIndex === steps.length - 1">Submit</button> -->
+  <div class="mt-3  p-3 rounded-2xl w-full  lg:flex lg:justify-center lg:items-center md:w-80 lg:w-auto  bg-primary cursor-pointer text-white text-center" (click)="submitJob()" *ngIf="activeIndex === steps.length-1">
+    <p>Submit</p>
+</div>
+
+    <!-- <button type="button" class="mt-3 ml-3 p-3 rounded-2xl w-11/12 md:w-80 bg-primary-blue text-primary-white" type="button" (click)="nextStep()" *ngIf="activeIndex !== steps.length - 1">Next</button> -->
+    <div class="mt-3  p-3 rounded-2xl w-full lg:flex lg:justify-center lg:items-center md:w-80 lg:w-auto cursor-pointer bg-primary text-white text-center"  (click)="nextStep()" *ngIf="activeIndex !== steps.length-1">
+        <p>Next</p>
+    </div>
 
 </div>
 

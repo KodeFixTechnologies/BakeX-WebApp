@@ -30,6 +30,10 @@ import { EmployementTypeComponent } from './components/profile/stepper/employeme
 import { PersonalInformationComponent } from './components/shared/personal-information-card/personal-information.component';
 import { LogoComponent } from './components/bakery-owner-profile/stepper/logo/logo.component';
 
+import { authGuard } from './auth.guard';
+import { HelpCenterComponent } from './components/help-center/help-center.component';
+import { OwnerBookmarkComponent } from './components/owner-view/owner-bookmark/owner-bookmark.component';
+
 
 export const routes: Routes = [
   {
@@ -99,40 +103,53 @@ export const routes: Routes = [
 
   {
     path: 'ownerview',
+    canActivate: [authGuard],  
     component: OwnerViewComponent,
   },
 
   {
     path: 'owner-jobs',
+    canActivate: [authGuard], 
     component: OwnerJobsComponent,
   },
 
   {
+    path:'bookmark',
+    component:OwnerBookmarkComponent
+  },
+
+  {
     path: 'owner-profile',
+    canActivate: [authGuard], 
     component: OwnerProfileComponent,
   },
 
   {
     path: 'jobs-applicants',
+    canActivate: [authGuard], 
     component: OwnerJobApplicantsComponent,
   },
 
   {
     path: 'seeker',
+    canActivate: [authGuard],  
     component: SeekerViewComponent,
   },
 
   {
     path: 'allJobs',
+    canActivate: [authGuard], 
     component: SeekerJobComponent,
   },
   {
     path: 'applied-job',
+    canActivate: [authGuard], 
     component: AppliedJobComponent,
   },
 
   {
     path: 'user-profile',
+    canActivate: [authGuard],  
     component: UserProfileComponent,
   },
   {
@@ -144,4 +161,8 @@ export const routes: Routes = [
     path: 'employee-personalDetails',
     component: PersonalInformationComponent,
   },
+  {
+    path: 'help-center',
+    component:HelpCenterComponent
+  }
 ];

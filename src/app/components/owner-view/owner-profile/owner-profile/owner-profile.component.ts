@@ -6,7 +6,7 @@ import { BakeMember } from '../../../../models/bakeMember';
 import { OwnerNavbarComponent } from '../../../owner-navbar/owner-navbar.component';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { PersonalInformationComponent } from '../../../shared/personal-information-card/personal-information.component';
 const shareData = {
   title: 'Bake Joli',
   text: 'Join Bake Joli',
@@ -18,13 +18,15 @@ const shareData = {
   standalone: true,
   templateUrl: './owner-profile.component.html',
   styleUrl: './owner-profile.component.scss',
-  imports: [OwnerNavbarComponent,CommonModule],
+  imports: [OwnerNavbarComponent, CommonModule, PersonalInformationComponent],
 })
 export class OwnerProfileComponent implements OnInit {
   showLogout: Boolean = false;
+  visible: Boolean = false;
 
   phoneno: string = '';
   bakeMember: BakeMember = {} as BakeMember;
+ 
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -44,7 +46,11 @@ export class OwnerProfileComponent implements OnInit {
       .getBakeOwner({ phoneno: this.phoneno })
       .subscribe((data) => {
         this.bakeMember = data;
+        console.log(data)
+      
+  
       });
+
   }
 
   logout() {
@@ -54,7 +60,10 @@ export class OwnerProfileComponent implements OnInit {
 
   logoutPop() {
     this.showLogout = !this.showLogout;
-    console.log('hello');
+  }
+
+  gotoProfilePage() {
+    this.visible = !this.visible;
   }
 
   navigatetoPolicy() {
@@ -64,8 +73,6 @@ export class OwnerProfileComponent implements OnInit {
   share() {
     try {
       navigator.share(shareData);
-      console.log("Navigator")
-    } catch{
-    }
+    } catch {}
   }
 }

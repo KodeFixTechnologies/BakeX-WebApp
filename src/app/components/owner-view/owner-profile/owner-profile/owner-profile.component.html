@@ -2,17 +2,21 @@
   <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
     <div>
       <p class="text-white font-normal text-base">
-        Hi,<span class="text-base "> {{ bakeMember.memberName }}</span>
+        Hi,<span class="text-base"> {{ bakeMember.memberName }}</span>
       </p>
-      <div class="mt-2    sm:flex sm:gap-4    ">
-        <h2 class="text-white font-normal text-base"><span>BusinessName : </span>{{bakeMember.businessName}}</h2>
-        <h2 class="text-white"><span>Membership-Id : </span>{{bakeMember.memberId}}</h2>
+      <div class="mt-2 sm:flex sm:gap-4">
+        <h2 class="text-white font-normal text-base">
+          <span>BusinessName : </span>{{ bakeMember.businessName }}
+        </h2>
+        <h2 class="text-white">
+          <span>Membership-Id : </span>{{ bakeMember.memberId }}
+        </h2>
       </div>
-    
+
       <h2 class="text-white font-normal text-base mt-1">Have a Greeat Day!</h2>
     </div>
     <div
-      class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+      class="relative w-10 h-10 overflow-hidden rounded-full dark:bg-gray-600"
     >
       <!-- <img [src]="displayImage" alt="Job Post Image" /> -->
 
@@ -32,7 +36,8 @@
   </div>
 
   <div
-    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    (click)="gotoProfilePage()"
+    class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button
       class="flex gap-3 p-4 rounded-xl hover:border-1 hover:border-blue-600"
@@ -42,8 +47,12 @@
     </button>
   </div>
 
+  <div *ngIf="visible">
+    <personal-information [bakeMemberProfile]="bakeMember"></personal-information>
+  </div>
+
   <!-- <div
-      class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border  hover:border-blue-600"
+      class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border  hover:border-blue-600"
     >
       <button class="flex gap-3 p-4 rounded-xl">
         <span class="pi pi-cog mt-1"></span>
@@ -52,7 +61,7 @@
     </div> -->
 
   <div
-    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button (click)="navigatetoPolicy()" class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-lock mt-1"></span>
@@ -61,7 +70,7 @@
   </div>
 
   <div
-    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-info-circle mt-1"></span>
@@ -71,7 +80,7 @@
 
   <div
     (click)="share()"
-    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-share-alt mt-1"></span>
@@ -81,11 +90,11 @@
 
   <div
     (click)="logoutPop()"
-    class="flex flex-col justify-center items-start bg-gray-100 rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-eraser"></span>
-      <h3 class="font-medium">LogOut</h3>
+      <h3 class="font-medium">Logout</h3>
     </button>
   </div>
 
@@ -119,7 +128,7 @@
 <!-- 
 <div class="w-full max-w-sm   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify- px-4 pt-4">
-        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
             <span class="sr-only">Open dropdown</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                 <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
@@ -129,13 +138,13 @@
         <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2" aria-labelledby="dropdownButton">
             <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
             </li>
             <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
             </li>
             <li>
-                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
             </li>
             </ul>
         </div>
@@ -148,7 +157,7 @@
         <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Business Name: {{bakeMember.businessName}}</span>
         <div class="flex  mt-40 ">
             <a (click)="logout()" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
-            <a  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Subscribed</a>
+            <a  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Subscribed</a>
         </div>
     </div>
 </div>

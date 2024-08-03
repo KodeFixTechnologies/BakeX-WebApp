@@ -8,6 +8,7 @@ import { JobSeeker } from '../../../models/jobSeeker';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PersonalInformationComponent } from "../personal-information-card/personal-information.component";
+import { BookMark } from '../../../models/bookmark';
 @Component({
   selector: 'job-card',
   standalone: true,
@@ -22,6 +23,7 @@ export class JobCardComponent {
   displayDialog: boolean = false;
   profileDialog: boolean = false;
   jobSeekers: JobSeeker[] = [];
+  bookMark:BookMark = {} as BookMark
 
 
   jobSeekerProfile:JobSeeker={} as JobSeeker;
@@ -37,10 +39,17 @@ export class JobCardComponent {
 
   viewProfile(jobSeeker:JobSeeker)
   {
-    console.log(jobSeeker)
+  
     this.jobSeekerProfile=jobSeeker;
-    console.log(this.jobSeekerProfile)
+    
     this.profileDialog=!this.profileDialog
+  }
+
+  passDatatoBookmark(profileId:number|undefined,ownerId:number|undefined)
+  {
+       this.bookMark.ProfileId = profileId;
+       this.bookMark.OwnerId = ownerId;
+    console.log(this.bookMark)
   }
 
   getJobType(): string {
@@ -75,8 +84,12 @@ export class JobCardComponent {
 
     if (postedDay) {
        postedDate = currentDay - postedDay.getDate();
+ 
     }
     if (postedDate === 0) return 'Posted Today';
-    else return postedDate + ' days ago';
+    else return 'Posted'+ postedDate + ' days ago';
+    
   }
 }
+
+
