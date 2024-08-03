@@ -158,11 +158,11 @@ profile:any;
   this.userProfile.State = this.profile.locationInformation.state;
   this.userProfile.Place = this.profile.locationInformation.place;
   this.userProfile.ProfileCreatedDate = new Date().toISOString(); // Assuming you want current date/time
-  this.userProfile.EducationId = this.profile.educationInformation.types.EducationId;
+  this.userProfile.EducationId = this.profile.educationInformation.EducationId;
   this.userProfile.ExperienceId = this.profile.experienceInformation.types.id;
   this.userProfile.District = this.profile.locationInformation.district;
   this.userProfile.ExpertiseIds = this.profile.expertiseInformation.map((expertise: { expertiseId: any; }) => expertise.expertiseId);
-  this.userProfile.JobTypeIds = this.profile.employmentInformation.types.map((job: { jobTypeId: any; }) => job.jobTypeId);
+  this.userProfile.JobTypeIds = this.profile.employmentInformation.map((job: { jobTypeId: any; }) => job.jobTypeId);
   this.userProfile.Pincode = this.profile.locationInformation.pincode;
 
   this.userProfile.WorkHistory = this.workHistory.map(history => ({
@@ -180,6 +180,8 @@ profile:any;
 
     this.profile= this.profileService.getProfileInformation();
     this.mapProfileInfoToAPI()
+
+    console.log(this.userProfile)
   
     this.queryService.createUser(this.user).subscribe((response=>{
   
@@ -196,7 +198,22 @@ profile:any;
 
                 this.authService.setUserProfileData(this.userProfile);
                 this.dataService.setPhoneData(this.userProfile.MobileNo);
-                this.router.navigate(['/seeker'])
+
+                this.authService.checkUserExist(this.user).subscribe((response) => {
+
+                  if (response.token) {
+                    this.authService.setToken(response.token);
+                    let userTypeId = this.authService.getUserTypeId() 
+                    this.user.mobileNumber = this.authService.getPhoneNo() || '';
+                   
+              
+                    if(userTypeId==1)
+                      this.router.navigate(['/seeker']);
+                    this.dataService.setData(true);
+                    }
+                      
+                  
+                })
               }
           })
         }

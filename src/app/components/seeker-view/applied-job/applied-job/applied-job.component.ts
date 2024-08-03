@@ -33,8 +33,11 @@ export class AppliedJobComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.setDataforheader(true);
       this.profileId=this.authService.getProfileId();
-    this.queryService.getAppliedJobForSeeker(this.profileId).subscribe(data => {
-        this.appliedJobs=data;
+    this.queryService.getAppliedJobForSeeker(this.profileId).subscribe( (data:RecommendedJob[]) => {
+        this.appliedJobs=data.map(item => ({
+          ...item,
+          jobDescriptionLines: item.jobDescription.split(',')
+        }));;
     });
 
     this.loadBusinessData()

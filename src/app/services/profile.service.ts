@@ -1,13 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
+import { Education, Expertise } from '../models/expertise';
+import { Employment, Experience } from '../models/experience';
+
+export interface ProfileInformation {
+  personalInformation: {
+    firstname: string;
+    lastname: string;
+    age: number | null;
+    gender: string;
+    phoneno: string;
+  };
+  locationInformation: {
+    state: string;
+    district: string;
+    place: string;
+    pincode: string;
+  };
+  expertiseInformation: Expertise[]; // Changed to Expertise[]
+  educationInformation: Education[]
+  employmentInformation: Employment[]
+  experienceInformation: Experience[]
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  private profileInformationSubject = new BehaviorSubject<any>({
+  private profileInformationSubject = new BehaviorSubject<ProfileInformation>({
     personalInformation: {
       firstname: '',
       lastname: '',
@@ -21,18 +44,10 @@ export class ProfileService {
       place: '',
       pincode:''
     },
-    expertiseInformation: {
-      types: null,
-    },
-    educationInformation:{
-      types:null,
-    },
-    employmentInformation: {
-      types: null
-    },
-    experienceInformation:{
-      types:null
-    }
+    expertiseInformation: [],
+    educationInformation:[],
+    employmentInformation: [],
+    experienceInformation:[]
   });
 
 

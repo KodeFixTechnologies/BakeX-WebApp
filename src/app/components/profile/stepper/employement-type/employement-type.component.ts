@@ -19,9 +19,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class EmployementTypeComponent implements OnInit {
   
- updatedEmployment={
-  types:null
- }
+ updatedEmployment!:Employment[]
  employment!:Employment[];
  selectedEmployment!:Employment[];
  user:Users= {} as Users;
@@ -54,12 +52,17 @@ export class EmployementTypeComponent implements OnInit {
 
 
   this.updatedEmployment =this.profileService.getProfileInformation().employmentInformation;
+  console.log(this.updatedEmployment)
+  if(this.updatedEmployment && this.updatedEmployment.length>0)
+  {
+    this.selectedEmployment=this.profileService.getProfileInformation().employmentInformation;
+  }
 
   }
 
   updateEmployment(event:any)
   {
-  this.updatedEmployment.types=event.value;
+  this.updatedEmployment=event.value;
 
 
    this.profileService.setProfileInformation({
@@ -73,7 +76,7 @@ export class EmployementTypeComponent implements OnInit {
   nextPage() {
 
   
-    if(this.updatedEmployment.types!=null)
+    if(this.updatedEmployment!=null)
       {
           this.router.navigate(['profile/experience'])
       }

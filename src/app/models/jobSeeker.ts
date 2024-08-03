@@ -1,3 +1,4 @@
+import { Expertise } from "./expertise";
 import { WorkHistory } from "./user";
 
 export interface JobSeeker {
@@ -12,4 +13,5 @@ export interface JobSeeker {
     mobileNumber: string;
     birthDate: Date;
     workHistory:WorkHistory[]
+    expertiseInformation:Expertise[]
 }

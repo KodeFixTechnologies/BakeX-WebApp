@@ -1,4 +1,4 @@
-<div class="mx-auto bg-white sm:w-720 py-16 sm:h-[740px]">
+<div class="mx-auto bg-white sm:w-720  sm:h-[740px]">
     <div class="flex flex-col justify-center mt-10 ml-5">
     
   
@@ -12,7 +12,6 @@
       <div class="my-5">
         <p-listbox
           [options]="employment"
-          optionLabel="expertiseType"
           optionLabel="jobType"
           [style]="{ width: '25rem' }"
           [multiple]="true"
@@ -23,7 +22,7 @@
           [selectAll]="false"
           [showToggleAll]="false"
           [style]="{ width: '95%', backgroundColor: '#ffffff', color: '#242424' }"
-          (onChange)=" updateEmployment($event)"
+          (onChange)="updateEmployment($event)"
           [(ngModel)]="selectedEmployment"
         />
 

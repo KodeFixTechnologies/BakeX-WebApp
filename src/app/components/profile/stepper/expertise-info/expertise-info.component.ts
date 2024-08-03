@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { QueryService } from '../../../../services/query.service';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
@@ -8,23 +8,22 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../services/data.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'expertise-info',
   standalone: true,
-  imports: [ListboxModule,FormsModule,CardModule,ButtonModule],
+  imports: [ListboxModule,FormsModule,CardModule,ButtonModule,CommonModule],
   templateUrl: './expertise-info.component.html',
   styleUrl: './expertise-info.component.scss'
 })
 export class ExpertiseInfoComponent implements OnInit {
 
+  @Input() sharedUpdateFlag = false; // this is a variable passing from userprofilecomponent
 expertise!:Expertise[];
  education!:Education[];
  selectedEducation!:Education[];
  selectedExpertise!: Expertise[];
- updatedExpertise={
-  types:null
- };
-
+ updatedExpertise!: Expertise[];
  updatedEducation={
   types:null
  }
@@ -72,7 +71,16 @@ expertise!:Expertise[];
   ]
 
   this.updatedExpertise = this.profileService.getProfileInformation().expertiseInformation;
-  this.updatedEducation =this.profileService.getProfileInformation().educationInformation;
+  
+  if (this.updatedExpertise && this.updatedExpertise.length > 0) {
+    this.selectedExpertise = this.updatedExpertise;
+  } else {
+    // Handle the case where expertiseInformation is null or empty if needed
+    this.selectedExpertise = [];
+  }
+
+  console.log(this.updatedExpertise)
+  console.log("hi")
 
 
   }
@@ -80,31 +88,22 @@ expertise!:Expertise[];
 
   updateExpertise(event:any)
   {
-   this.updatedExpertise.types=event.value;
 
+   this.updatedExpertise=event.value;
+   console.log(this.updatedExpertise)
    this.profileService.setProfileInformation({
     ...this.profileService.getProfileInformation(),
-    expertiseInformation: this.updatedExpertise.types
+    expertiseInformation: this.updatedExpertise
   });
   }
 
-  updateEducation(event:any)
-  {
-  this.updatedEducation.types=event.value;
-
-
-   this.profileService.setProfileInformation({
-     ...this.profileService.getProfileInformation(),
-     educationInformation: this.updatedEducation
-   });
-  }
-
+  
 
 
   nextPage() {
 
   
-    if(this.updatedExpertise.types!=null)
+    if(this.updatedExpertise!=null)
       {
           this.router.navigate(['profile/education'])
       }

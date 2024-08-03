@@ -23,6 +23,10 @@ interface State {
 interface StatesData {
   states: State[];
 }
+interface DistrictsData {
+  state: string;
+  districts: string[];
+}
 
 @Component({
   selector: 'location-info',
@@ -31,6 +35,7 @@ interface StatesData {
   templateUrl: './location-info.component.html',
   styleUrl: './location-info.component.scss'
 })
+
 
 
 export class LocationInfoComponent implements OnInit, AfterViewInit {
@@ -63,10 +68,10 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
 
   // to get the location info from profie service
   value:any;
-  states: any;
+  states: DistrictsData[]=[];
   submitted: boolean = false;
   districts: any;
-  selectedState: any;
+  selectedState: DistrictsData | null = null;
   selectedDistrict: any;
   userplace:string=''
 
@@ -76,17 +81,31 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
     this.dataService.requestExpand('location');
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
+      console.log(this.states)
 
       
-
-    })
-
-   
-    this.queryService.getStateAndDistrict().subscribe((data)=>{
-
-    })
-
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
+
+    console.log(this.updatedlocationInfo)
+    
+    if(this.updatedlocationInfo)
+    {
+     
+      this.selectedState = this.states.find((state) => state.state === this.updatedlocationInfo.state) || null;
+      this.onStateChange()
+      this.selectedDistrict=this.updatedlocationInfo.district
+      console.log(this.selectedState)
+     
+      this.pincodes=this.updatedlocationInfo.pincode;
+      this.userplace=this.updatedlocationInfo.place
+    }
+
+
+    })
+
+
+
+
    
   }
 
@@ -95,12 +114,14 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
 
   onStateChange() {
 
-    this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
+    this.districts = this.selectedState?.districts.map((district: string) => ({ label: district, value: district }));
    
   }
   nextPage() {
 
    // this.fileService.uploadObject();
+   console.log(this.selectedState)
+   console.log(this.selectedDistrict)
 
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;
