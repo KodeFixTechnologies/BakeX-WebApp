@@ -65,6 +65,7 @@ export class SeekerJobCardComponent implements OnInit {
     if(postedDate === 0)
         return "Today"
     else
+    console.log(postedDate)
       return postedDate+" days ago"
   }
 

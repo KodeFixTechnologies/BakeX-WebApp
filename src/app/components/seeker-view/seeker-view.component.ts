@@ -213,6 +213,11 @@ export class SeekerViewComponent implements OnInit {
     this.queryService.getJobSeekerDetails(this.mobileno).subscribe((data) => {
       this.jobSeeker = data;
 
+      if(data==null)
+      {
+        this.authService.logout();
+      }
+
      // this.dataService.setProfileData(this.jobSeeker) remove later
      this.authService.setUserProfileData(this.jobSeeker);
      

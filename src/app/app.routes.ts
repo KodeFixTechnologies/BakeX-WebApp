@@ -31,6 +31,7 @@ import { PersonalInformationComponent } from './components/shared/personal-infor
 import { LogoComponent } from './components/bakery-owner-profile/stepper/logo/logo.component';
 
 import { authGuard } from './auth.guard';
+import { OwnerBookmarkComponent } from './components/owner-view/owner-bookmark/owner-bookmark.component';
 
 
 export const routes: Routes = [
@@ -109,6 +110,11 @@ export const routes: Routes = [
     path: 'owner-jobs',
     canActivate: [authGuard], 
     component: OwnerJobsComponent,
+  },
+
+  {
+    path:'bookmark',
+    component:OwnerBookmarkComponent
   },
 
   {

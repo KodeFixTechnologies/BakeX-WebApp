@@ -63,6 +63,12 @@ export class OwnerNavbarComponent {
 
   }
 
+  goToBookmark()
+  {
+    this.router.navigate(['/bookmark'])
+    this.updateSelection('bookmark')
+  }
+
   goToHome()
   {
    this.router.navigate(['/ownerview'])
