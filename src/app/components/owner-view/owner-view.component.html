@@ -358,14 +358,14 @@
 </div>
 
 
-<div class="mb-2 flex flex-col justify-center mx-auto mt-5">
+<div class="mb-2 flex flex-col justify-center mt-5 ">
   <label class="label-width mb-1 font-medium" for="jobDescription">Job Description:</label>
 
   <ng-container *ngIf="jobPost.JobDescription; else loading">
     <textarea
       id="jobDescription"
       [(ngModel)]="jobPost.JobDescription"
-      class="w-[500px] h-56 rounded-2xl border-none bg-gray-50 ring-2"
+      class="w-[320px] lg:w-[500px] h-56 rounded-2xl border-none bg-gray-50 ring-2 "
     ></textarea>
   </ng-container>
 
