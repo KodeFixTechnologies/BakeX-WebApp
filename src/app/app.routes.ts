@@ -31,6 +31,7 @@ import { PersonalInformationComponent } from './components/shared/personal-infor
 import { LogoComponent } from './components/bakery-owner-profile/stepper/logo/logo.component';
 
 import { authGuard } from './auth.guard';
+import { HelpCenterComponent } from './components/help-center/help-center.component';
 
 
 export const routes: Routes = [
@@ -154,4 +155,8 @@ export const routes: Routes = [
     path: 'employee-personalDetails',
     component: PersonalInformationComponent,
   },
+  {
+    path: 'help-center',
+    component:HelpCenterComponent
+  }
 ];
