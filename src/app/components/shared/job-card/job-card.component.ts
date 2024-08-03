@@ -45,7 +45,7 @@ export class JobCardComponent {
     this.profileDialog=!this.profileDialog
   }
 
-  passDatatoBookmark(profileId:number,ownerId:number)
+  passDatatoBookmark(profileId:number|undefined,ownerId:number|undefined)
   {
        this.bookMark.ProfileId = profileId;
        this.bookMark.OwnerId = ownerId;

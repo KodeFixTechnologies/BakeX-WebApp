@@ -1,5 +1,5 @@
 export interface BookMark {
- OwnerId:number
- ProfileId:number
+ OwnerId:number | undefined
+ ProfileId:number | undefined
 
 }
