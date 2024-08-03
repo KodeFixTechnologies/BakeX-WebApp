@@ -70,6 +70,11 @@ export class UserProfileComponent implements OnInit {
     // this.router.navigate(["/employee-personalDetails"])
   }
 
+  navigatetoHelpCenter()
+  {
+    this.router.navigate(["/help-center"])
+  }
+
   share()
   {
    try{

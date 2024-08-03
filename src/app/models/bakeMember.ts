@@ -2,7 +2,7 @@ export interface BakeMember
 {
     memberId: number;
     memberName?: string;
-    phone: string;
+    phoneNo: string;
     businessId:number
     businessName: string;
     businessPhone: string;
@@ -15,6 +15,7 @@ export interface BakeMember
     profileImage: string | null;
     membershipExpiry: Date | null;
     age: Date;
+    place: String
     profileImageBase64:string | null;
     district?:string;
 }

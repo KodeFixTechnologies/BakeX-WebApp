@@ -1,14 +1,18 @@
-<div class="max-w-screen-lg min-h-screen mx-auto mt-10">
+<div class="max-w-screen-lg min-h-screen mx-auto mt-20">
   <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
     <div>
       <p class="text-white font-normal text-base">
-        Hi,<span class="text-base "> {{ bakeMember.memberName }}</span>
+        Hi,<span class="text-base"> {{ bakeMember.memberName }}</span>
       </p>
-      <div class="mt-2    sm:flex sm:gap-4    ">
-        <h2 class="text-white font-normal text-base"><span>BusinessName : </span>{{bakeMember.businessName}}</h2>
-        <h2 class="text-white"><span>Membership-Id : </span>{{bakeMember.memberId}}</h2>
+      <div class="mt-2 sm:flex sm:gap-4">
+        <h2 class="text-white font-normal text-base">
+          <span>BusinessName : </span>{{ bakeMember.businessName }}
+        </h2>
+        <h2 class="text-white">
+          <span>Membership-Id : </span>{{ bakeMember.memberId }}
+        </h2>
       </div>
-    
+
       <h2 class="text-white font-normal text-base mt-1">Have a Greeat Day!</h2>
     </div>
     <div
@@ -32,6 +36,7 @@
   </div>
 
   <div
+    (click)="gotoProfilePage()"
     class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button
@@ -40,6 +45,10 @@
       <span class="pi pi-user mt-1"></span>
       <h3 class="font-medium">Personal information</h3>
     </button>
+  </div>
+
+  <div *ngIf="visible">
+    <personal-information [bakeMemberProfile]="bakeMember"></personal-information>
   </div>
 
   <!-- <div
