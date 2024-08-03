@@ -130,6 +130,7 @@ export class OwnerInfoComponent implements OnInit{
     });
 
     this.user.isMobileVerified='Y';
+
           this.user.mobileNumber=this.updatedPersonalInfo.phoneno
           this.dataService.setUserData(this.user);
 

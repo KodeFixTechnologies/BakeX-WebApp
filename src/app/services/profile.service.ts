@@ -99,7 +99,7 @@ export class ProfileService {
   }
 
   setProfileforBackend(value: IBakerOwnerProfile) {
-
+ 
 
     // Assign personal information
 

@@ -53,7 +53,7 @@ export class LogoComponent implements OnInit {
   }
 
 
-  sendToBackend(base64String: string) {
+  sendToBackend(base64String: string|null) {
     
     this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
     this.INonBakeMember.otherInformation.ProfileImage=base64String;
@@ -69,6 +69,7 @@ export class LogoComponent implements OnInit {
   submit()
   {
 
+    this.sendToBackend(null);
   
     this.queryService.createUser(this.user).subscribe((response => {
         
@@ -83,10 +84,24 @@ export class LogoComponent implements OnInit {
           if (response == true) {
 
              this.authService.setPhoneNo(this.NonBakeMember.phoneno);
-            this.router.navigate([
+            
+             this.authService.checkUserExist(this.user).subscribe((response) => {
 
-              '/ownerview'
-            ])
+              if (response.token) {
+                this.authService.setToken(response.token);
+                let userTypeId = this.authService.getUserTypeId() 
+                this.user.mobileNumber = this.authService.getPhoneNo() || '';
+               
+          
+                if(userTypeId==2)
+                  this.router.navigate(['/ownerview']);
+                this.dataService.setData(true);
+                }
+                  
+              
+            })
+
+
           }
 
         })
