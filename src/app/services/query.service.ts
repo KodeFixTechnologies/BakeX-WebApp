@@ -49,6 +49,11 @@ export class QueryService {
     return this.http.get('../../../../../assets/location-info.json')
   }
 
+  getDistrictData():Observable<any>
+  {
+    return this.http.get('../../../../../assets/districts.json')
+  }
+
   getExpertiseData():Observable<any>
   {
     return this.http.get('../../../../../assets/expertise-info.json')

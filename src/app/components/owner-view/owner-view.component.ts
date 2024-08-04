@@ -209,23 +209,12 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       ...generationConfig,
     });
 
-    this.district = [
-      { id: 257, name: 'Alappuzha' },
-      { id: 258, name: 'Ernakulam' },
-      { id: 259, name: 'Idukki' },
-      { id: 260, name: 'Kannur' },
-      { id: 261, name: 'Kasaragod' },
-      { id: 262, name: 'Kollam' },
-      { id: 263, name: 'Kottayam' },
-      { id: 264, name: 'Kozhikode' },
-      { id: 265, name: 'Malappuram' },
-      { id: 266, name: 'Palakkad' },
-      { id: 267, name: 'Pathanamthitta' },
-      { id: 268, name: 'Thiruvananthapuram' },
-      { id: 269, name: 'Thrissur' },
-      { id: 270, name: 'Wayanad' },
-    ];
-
+   this.queryService.getDistrictData().subscribe((data)=>{
+    this.district=data;
+    this.selectedDistrict = this.district?.find(
+      (item) => item.id === this.bakeMember.districtId
+    );
+   })
     this.loadPhoneNumber();
 
     this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
@@ -263,9 +252,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     this.dataService.setData(false);
 
-    this.selectedDistrict = this.district.find(
-      (item) => item.id === this.bakeMember.districtId
-    );
+
   }
 
   postAJob() {

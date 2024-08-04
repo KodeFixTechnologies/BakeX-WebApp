@@ -141,9 +141,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
           else if(this.user.userTypeId == 2) {
 
             this.ngZone.run(() => {
-              this.router.navigate(['/ownerview']);
-              this.dataService.setData(true);
-            });
+              this.dataService.setPhoneData(this.user.mobileNumber);
+              this.router.navigate(['/bakeprofile/owner']);
+          });
       
           }
           else 
