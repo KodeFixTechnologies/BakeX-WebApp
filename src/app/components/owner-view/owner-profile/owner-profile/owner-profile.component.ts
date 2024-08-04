@@ -7,6 +7,7 @@ import { OwnerNavbarComponent } from '../../../owner-navbar/owner-navbar.compone
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { PersonalInformationComponent } from '../../../shared/personal-information-card/personal-information.component';
+import { DialogModule } from 'primeng/dialog';
 const shareData = {
   title: 'Bake Joli',
   text: 'Join Bake Joli',
@@ -18,7 +19,7 @@ const shareData = {
   standalone: true,
   templateUrl: './owner-profile.component.html',
   styleUrl: './owner-profile.component.scss',
-  imports: [OwnerNavbarComponent, CommonModule, PersonalInformationComponent],
+  imports: [OwnerNavbarComponent, CommonModule, PersonalInformationComponent,DialogModule],
 })
 export class OwnerProfileComponent implements OnInit {
   showLogout: Boolean = false;
@@ -27,6 +28,25 @@ export class OwnerProfileComponent implements OnInit {
   phoneno: string = '';
   bakeMember: BakeMember = {} as BakeMember;
  
+  displayPrivacyPolicyDialog: boolean = false;
+
+    showPrivacyPolicyDialog() {
+        this.displayPrivacyPolicyDialog = true;
+    }
+
+    hidePrivacyPolicyDialog() {
+        this.displayPrivacyPolicyDialog = false;
+    }
+
+    displayHelpCenter: boolean = false;
+
+    showHelpCenter() {
+        this.displayHelpCenter = true;
+    }
+
+    hideHelpCenter() {
+        this.displayHelpCenter = false;
+    }
   constructor(
     private dataService: DataService,
     private router: Router,
