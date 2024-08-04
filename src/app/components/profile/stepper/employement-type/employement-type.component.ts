@@ -52,7 +52,7 @@ export class EmployementTypeComponent implements OnInit {
 
 
   this.updatedEmployment =this.profileService.getProfileInformation().employmentInformation;
-  console.log(this.updatedEmployment)
+ 
   if(this.updatedEmployment && this.updatedEmployment.length>0)
   {
     this.selectedEmployment=this.profileService.getProfileInformation().employmentInformation;

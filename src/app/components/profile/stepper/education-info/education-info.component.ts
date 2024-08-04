@@ -50,11 +50,11 @@ export class EducationInfoComponent  implements OnInit{
     ]
 
     this.updatedEducation =this.profileService.getProfileInformation().educationInformation;
-    console.log(this.updatedEducation)
+ 
     if(this.updatedEducation)
     {
       this.selectedEducation=this.profileService.getProfileInformation().educationInformation;
-      console.log(this.selectedEducation)
+   
     }
     else {
       this.selectedEducation = [];

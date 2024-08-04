@@ -310,7 +310,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching job post data', error);
       },
-      complete: () => {},
+      complete: () => {
+        this.cdr.detectChanges();
+      },
     });
   }
 
@@ -363,6 +365,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     this.queryService.createJobPost(this.jobPost).subscribe((response) => {
       this.visible = false;
+      this.getJobPostByOwner(this.bakeMember.memberId); 
     });
 
     //ush the submitted job to the list of submitted jobs
@@ -384,7 +387,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
     this.job.jobDescription = '';
 
     this.visible = false;
-    this.cdr.detectChanges();
+ 
+  
   }
 
   onUpload(event: UploadEvent) {

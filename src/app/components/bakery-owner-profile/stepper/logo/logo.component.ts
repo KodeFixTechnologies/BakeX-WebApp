@@ -6,8 +6,9 @@ import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../model
 import { QueryService } from '../../../../services/query.service';
 import { Users } from '../../../../models/user';
 import { DataService } from '../../../../services/data.service';
-import { Router } from '@angular/router';
+
 import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'logo',

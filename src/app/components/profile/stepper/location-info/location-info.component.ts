@@ -81,12 +81,12 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
     this.dataService.requestExpand('location');
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
-      console.log(this.states)
+   
 
       
     this.updatedlocationInfo = this.profileService.getProfileInformation().locationInformation;
 
-    console.log(this.updatedlocationInfo)
+
     
     if(this.updatedlocationInfo)
     {
@@ -94,7 +94,7 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
       this.selectedState = this.states.find((state) => state.state === this.updatedlocationInfo.state) || null;
       this.onStateChange()
       this.selectedDistrict=this.updatedlocationInfo.district
-      console.log(this.selectedState)
+    
      
       this.pincodes=this.updatedlocationInfo.pincode;
       this.userplace=this.updatedlocationInfo.place
@@ -120,8 +120,7 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
   nextPage() {
 
    // this.fileService.uploadObject();
-   console.log(this.selectedState)
-   console.log(this.selectedDistrict)
+
 
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;

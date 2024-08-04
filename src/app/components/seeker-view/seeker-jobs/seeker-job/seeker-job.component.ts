@@ -67,7 +67,7 @@ export class SeekerJobComponent implements OnInit {
     this.queryService.getJobForSeeker(this.profileId).subscribe((data:RecommendedJob[]) => {
       this.allJobs = data.map(item => ({
         ...item,
-        jobDescriptionLines: item.jobDescription.split(',')
+        jobDescriptionLines: item.jobDescription.split(/[\n]/).map(line => line.trim())
       }));
       this.filteredTitles = this.allJobs.map(job => job.experienceType);
       this.applyFilters();

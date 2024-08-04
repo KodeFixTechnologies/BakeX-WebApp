@@ -116,11 +116,13 @@
 
 
 
-<p-dialog header="Edit Preference" [modal]="true" [(visible)]="preferenceVisible" [style]="{ width: '25rem' }">
-  <div *ng  *ngIf="preferenceVisible" class="flex justify-start">
+<p-dialog header="Edit Preference" [modal]="true" [(visible)]="preferenceVisible" [style]="{ width: '100%' }">
+  <div   *ngIf="preferenceVisible" class="flex flex-col justify-center">
 
-    {{vi}}
-    <expertise-info [sharedUpdateFlag]="true"></expertise-info>
+
+    <expertise-info [sharedUpdateFlag]="true" [userProfile]="userProfile"></expertise-info>
+
+    
   </div>
 
 

@@ -181,7 +181,6 @@ profile:any;
     this.profile= this.profileService.getProfileInformation();
     this.mapProfileInfoToAPI()
 
-    console.log(this.userProfile)
   
     this.queryService.createUser(this.user).subscribe((response=>{
   

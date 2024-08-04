@@ -46,7 +46,7 @@ export class OwnerProfileComponent implements OnInit {
       .getBakeOwner({ phoneno: this.phoneno })
       .subscribe((data) => {
         this.bakeMember = data;
-        console.log(data)
+   
       
   
       });

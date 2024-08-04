@@ -228,7 +228,7 @@ export class SeekerViewComponent implements OnInit {
           .subscribe((recommendedJob: RecommendedJob[]) => {
             this.recommendedJobs = recommendedJob.map(item => ({
               ...item,
-              jobDescriptionLines: item.jobDescription.split(',')
+              jobDescriptionLines: item.jobDescription.split(/[\n]/).map(line => line.trim())
             }));
             ;
             this.switchJobs=this.recommendedJobs

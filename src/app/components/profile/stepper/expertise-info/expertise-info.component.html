@@ -58,13 +58,23 @@
     </div>
 
 
-
+    <div *ngIf="sharedUpdateFlag" class="mt-1 mb-5 mr-5">
+      <button
+        pButton
+        pRipple
+        label="Update"
+        class="p-button"
+        [style]="{ width: '100%' }"
+        (click)="updateExpertiseFromProfile()" 
+      ></button>
+    </div>
 
 
   </div>
 
   
 </div>
+<p-toast />
 
 <!-- 
 

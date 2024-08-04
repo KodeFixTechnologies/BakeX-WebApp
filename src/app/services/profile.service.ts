@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
 import { Education, Expertise } from '../models/expertise';
 import { Employment, Experience } from '../models/experience';
+import { Injectable } from '@angular/core';
 
 export interface ProfileInformation {
   personalInformation: {

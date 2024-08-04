@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { JobSeeker } from '../../models/jobSeeker';
 import { PersonalInformationComponent } from "../shared/personal-information-card/personal-information.component";
 import { Button, ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ExpertiseInfoComponent } from '../profile/stepper/expertise-info/expertise-info.component';
 import { ProfileService } from '../../services/profile.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 const shareData = {
   title: "Bake Joli",
@@ -67,7 +68,7 @@ export class UserProfileComponent implements OnInit {
     expertiseInformation: this.userProfile.expertiseInformation
   });
 
-  console.log()
+
   }
 
 
@@ -101,4 +102,11 @@ export class UserProfileComponent implements OnInit {
    }
   }
 
+
+  updateExpertiseFromProfile()
+  {
+   
+  }
+
+  
 }

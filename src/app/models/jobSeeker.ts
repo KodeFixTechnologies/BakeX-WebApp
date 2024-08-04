@@ -14,4 +14,5 @@ export interface JobSeeker {
     birthDate: Date;
     workHistory:WorkHistory[]
     expertiseInformation:Expertise[]
+    isBookmarked?:boolean
 }

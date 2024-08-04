@@ -35,7 +35,7 @@ export class OwnerlocationInfoComponent implements OnInit {
 
     this.updatedlocationInfo = this.profileService.getBakeryOwnerProfileInfo().locationInformation;
 
-    console.log(this.updatedlocationInfo)
+
  
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
@@ -51,7 +51,7 @@ export class OwnerlocationInfoComponent implements OnInit {
     this.dataService.getUserData().subscribe((data) => {
       this.user = data;
 
-        console.log(this.user)
+
     })
   }
 
