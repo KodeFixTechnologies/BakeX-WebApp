@@ -28,12 +28,47 @@ export class StepperComponent {
   {
  
   }
+  isOwnerProfileExpanded=false;
+  isOwnerLocationExpanded=false;
+  isOwnerBusinessExpanded=false;
+  isOwnerLogoExpanded=false;
+
+
   isProfileExpanded = false;
   isLocationExpanded = false;
   isExpertiseExpanded = false;
   isEducationExpanded = false;
   isEmploymentExpanded = false;
   isExperienceExpanded = false;
+ 
+  toggleOwnerExpand(data:string)
+  {
+    this.isOwnerProfileExpanded=false;
+    this.isOwnerLocationExpanded=false;
+    this.isOwnerBusinessExpanded=false;
+    this.isOwnerLogoExpanded=false;
+
+     switch(data)
+     {
+      case 'profile':
+        this.isOwnerProfileExpanded = !this.isOwnerProfileExpanded;
+        break;
+      case 'location':
+        this.isOwnerLocationExpanded = !this.isOwnerLocationExpanded;
+        break;
+      case 'business':
+        this.isOwnerBusinessExpanded = !this.isOwnerBusinessExpanded;
+        break;
+      case 'logo':
+        this.isOwnerLogoExpanded = !this.isOwnerLogoExpanded;
+        break;
+
+        default:
+          console.warn(`Unknown expand type: ${data}`);
+     }
+  }
+
+
   toggleExpand(data: string) {
     this.isProfileExpanded = false;
     this.isLocationExpanded = false;
@@ -121,6 +156,6 @@ export class StepperComponent {
 
   goToOwnerLogo()
   {
-    this.router.navigate(['bakeprofile/ownerlogo'])
+    this.router.navigate(['bakeprofile/logo'])
   }
 }

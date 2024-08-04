@@ -23,7 +23,7 @@ interface State {
 interface StatesData {
   states: State[];
 }
-interface DistrictsData {
+export interface DistrictsData {
   state: string;
   districts: string[];
 }
