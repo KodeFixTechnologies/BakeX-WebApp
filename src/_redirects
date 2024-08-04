@@ -1,1 +1,2 @@
 /* /index.html 200
+/api/*  https://api.msg91.com/api/v5/otp/:splat  200

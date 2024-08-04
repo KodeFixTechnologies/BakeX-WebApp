@@ -8,6 +8,7 @@ import { NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '@codetrix-studio/capacitor-google-auth';
+import msg91 from "msg91";
 declare const initSendOTP: any;
 const googleAuthId = 1;
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   googleUser: any;
   user: Users = {} as Users;
   isLogin: boolean = true;
-
+  otp:any
   constructor(
     private ngZone: NgZone,
     private authService: AuthService,
@@ -30,7 +31,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private router: Router,
     private dataService: DataService
   ) // this is used to send the data from one component to another using rxjs
-  {}
+  {
+
+
+  }
 
   otpverified: boolean = false;
 
@@ -40,6 +44,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   checkingMobileNumber: boolean = false;
 
   ngOnInit() {
+
     this.loadGoogle();
     this.script = this.render.createElement('script');
     this.script.src =
@@ -118,20 +123,32 @@ export class LoginComponent implements OnInit, AfterViewInit {
   otpVerification() {
     this.script.onload = () => {
       var configuration = {
-        widgetId: '3464636a4a73333635343731',
+        widgetId: '346864717445393337383933',
         tokenAuth: '418358TX3IFaCp66af9bc3P1',
-        identifier:   this.user.mobileNumber,
+        identifier:   '+91'+this.user.mobileNumber,
         exposeMethods: '<true | false> (optional)', // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
         success: (data: any) => {
           this.otpverified = true;
           if (this.user.userTypeId == 1) {
-            this.dataService.setPhoneData(this.user.mobileNumber);
-            this.router.navigate(['/profile/personal']);
+
+            this.ngZone.run(() => {
+              this.dataService.setPhoneData(this.user.mobileNumber);
+              this.router.navigate(['/profile/personal']);
+            });
+  
             
           }
           else if(this.user.userTypeId == 2) {
-            this.router.navigate(['/ownerview']);
-            this.dataService.setData(true);
+
+            this.ngZone.run(() => {
+              this.router.navigate(['/ownerview']);
+              this.dataService.setData(true);
+            });
+      
+          }
+          else 
+          {
+            this.authService.logout()
           }
 
 
