@@ -1,5 +1,5 @@
 
 export interface District {
-    name: string;
-    id: number;
+  DistrictName: string;
+    DistrictID: number;
   }

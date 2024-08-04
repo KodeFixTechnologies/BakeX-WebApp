@@ -212,7 +212,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
    this.queryService.getDistrictData().subscribe((data)=>{
     this.district=data;
     this.selectedDistrict = this.district?.find(
-      (item) => item.id === this.bakeMember.districtId
+      (item) => item.DistrictID === this.bakeMember.districtId
     );
    })
     this.loadPhoneNumber();
@@ -221,7 +221,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.bakeMember = data;
         this.selectedDistrict = this.district?.find(
-          (item) => item.name === data.district
+          (item) => item.DistrictName === data.district
         );
 
         if (this.bakeMember.profileImageBase64) {
@@ -230,7 +230,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
         }
         else 
         {
-          this.displayImage='../../../../../assets/bakery.png'
+          this.displayImage='../../../../../assets/pan.png'
         }
       },
       error: (error) => {
@@ -323,7 +323,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     const prompt = `Generate a minimal and simple list of job responsibilities for a job Role: ${this.expertiseTypeforGemini} in the food industry for this  
   Company: ${this.bakeMember.businessName}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
-  The response should only include job responsibilities in a sentence,sepearte each sentence with comma`;
+  The response should only include job responsibilities in a sentence,sepearte each sentence with comma,Avoid using any symbols or special characters.`;
+
+
     const result = await this.model.generateContent(prompt);
 
     const response = await result.response;
@@ -347,7 +349,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
   submitJob() {
     this.jobPost.PostedById = this.bakeMember.memberId;
     this.jobPost.BusinessId = this.bakeMember.businessId;
-    this.jobPost.DistrictId = this.selectedDistrict?.id;
+    this.jobPost.DistrictId = this.selectedDistrict?.DistrictID;
     this.jobPost.jobTypeId = parseInt(this.jobTypes);
 
     this.queryService.createJobPost(this.jobPost).subscribe((response) => {
