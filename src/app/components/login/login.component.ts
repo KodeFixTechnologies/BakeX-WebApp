@@ -124,6 +124,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
         exposeMethods: '<true | false> (optional)', // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
         success: (data: any) => {
           this.otpverified = true;
+          if (this.user.userTypeId == 1) {
+            this.dataService.setPhoneData(this.user.mobileNumber);
+            this.router.navigate(['/profile/personal']);
+            
+          }
+          else if(this.user.userTypeId == 2) {
+            this.router.navigate(['/ownerview']);
+            this.dataService.setData(true);
+          }
+
+
         },
         failure: (error: any) => {
           // handle error
@@ -194,29 +205,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
           });
         }
       } else if (response.mobileNumber == null && this.user.userTypeId == 1) {
-        this.ngZone.run(() => {
+       
           this.otpVerification();
-          if (this.otpverified == true) {
-            this.dataService.setPhoneData(this.user.mobileNumber);
-            this.router.navigate(['/profile/personal']);
-            
-          }
-          else {
-            this.router.navigate(['home'])
-          }
-        });
+         
+     
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
-        this.ngZone.run(() => {
+       
           this.otpVerification();
-          if (this.otpverified == true) {
-            this.dataService.setPhoneData(this.user.mobileNumber);
-            this.router.navigate(['/bakeprofile/owner']);
-          }
-          else {
-            this.router.navigate(['home'])
-          }
-        });
-      }
+        }
+      
     });
   }
 
