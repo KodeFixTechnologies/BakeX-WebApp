@@ -41,17 +41,19 @@ export class LogoComponent implements OnInit {
   NonBakeMember: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
   uploadedFiles:any
   imagePreview: string | ArrayBuffer | null = null;
-  myUploader(event: any) {
+  imageUrl: any
 
-    const file = event.files[0]; // Assuming only one file is uploaded
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64String = reader.result as string;
-      // Now you can send this base64String to your .NET Web API
-     this.sendToBackend(base64String);
-    };
-    reader.readAsDataURL(file);
-  }
+  // myUploader(event: any) {
+
+  //   const file = event.files[0]; // Assuming only one file is uploaded
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     const base64String = reader.result as string;
+  //     // Now you can send this base64String to your .NET Web API
+  //    this.sendToBackend(base64String);
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
 
 
   sendToBackend(base64String: string|null) {
@@ -60,6 +62,9 @@ export class LogoComponent implements OnInit {
     this.INonBakeMember.otherInformation.ProfileImage=base64String;
     this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
  //   this.jobPost.ProfileImage=base64String;
+
+    console.log(this.NonBakeMember)
+    console.log(this.INonBakeMember)
   
   }
   
@@ -113,7 +118,36 @@ export class LogoComponent implements OnInit {
     }));
   }
 
-   
+
+  
+
+ 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+  
+      // Handle file preview
+      reader.onload = (e) => {
+        this.imageUrl = e.target?.result as string; // Set the image URL for preview
+        console.log(this.imageUrl)
+        // Handle file upload
+        const base64String = e.target?.result as string;
+        console.log(base64String)
+        this.sendToBackend(base64String); // Send to backend
+        console.log(this.NonBakeMember)
+      };
+  
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
+
+ 
+  }
+
+
+
 }
 
 
