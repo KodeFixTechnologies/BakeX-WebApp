@@ -19,13 +19,14 @@
    accept="image/*"
    (change)="onFileSelected($event)"
 />
-  <div (click)="uploadImage()" class="px-2 py-3 cursor-pointer rounded-xl flex flex-col sm:flex text-white text-sm bg-green-400 hover:bg-green-200  ">
-    upload
-  </div>
+ 
   </div>
   
-
-  <div (click)="submit()" class="cursor-pointer py-3 px-32 w-full lg:w-96 bg-blue-500  mt-5  lg:mt-10 border-none rounded-lg text-center text-primary-white">
+  <!-- <div (click)="uploadImage()" class="px-2 py-3 cursor-pointer rounded-xl flex flex-col sm:flex text-white text-sm bg-green-400 hover:bg-green-200  ">
+   Click to Upload
+  </div> -->
+  
+  <div *ngIf="!hideSubmit" (click)="submit()" class="cursor-pointer py-3 px-32 w-full lg:w-96 bg-blue-500  mt-5  lg:mt-10 border-none rounded-lg text-center text-primary-white">
     <span class="text-white"> Submit</span>
   </div>
  

@@ -41,6 +41,7 @@ export class LogoComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
   imageUrl: any =''
+  hideSubmit:boolean=false
 
   // myUploader(event: any) {
 
@@ -107,16 +108,23 @@ export class LogoComponent implements OnInit {
       const newFileName = this.user.mobileNumber+originalFile.name.substring(originalFile.name.lastIndexOf('.'));
       
       this.selectedFile = new File([originalFile], newFileName, { type: originalFile.type });
-
+      this.uploadImage()
     } 
   
   }
 
   uploadImage()
   {
-    
+    this.hideSubmit=true;
+    this.imageUrl=null
     this.imageUpload.uploadFile(this.selectedFile).subscribe((data) =>{
-      this.imageUrl = data.url
+      if(data)
+      {
+        this.imageUrl = data.url
+        this.hideSubmit=false
+      }
+     
+  
     })
    
   }
