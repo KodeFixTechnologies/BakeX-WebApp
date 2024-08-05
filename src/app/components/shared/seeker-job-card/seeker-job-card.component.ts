@@ -76,19 +76,24 @@ export class SeekerJobCardComponent implements OnInit {
     });
   }
 
-  getPostedDate (date : Date ) {
+  getPostedDate(date: Date): string {
+    const postedDate = new Date(date);
+    const currentDate = new Date();
 
-    const postedDay = new Date(date)
-    const currenDate = new Date()
-    const currentDay = currenDate.getDate()
-    
-    const postedDate = currentDay - postedDay.getDate()
-    if(postedDate === 0)
-        return "Today"
-    else
+    // Calculate the difference in milliseconds
+    const diffTime = Math.abs(currentDate.getTime() - postedDate.getTime());
 
-      return postedDate+" days ago"
-  }
+    // Convert milliseconds to days
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    // Return the formatted string
+    if (diffDays === 0) {
+        return "Today";
+    } 
+    else {
+        return `${diffDays} days ago`;
+    }
+}
 
   hideDialog() {
     this.displayDialog = false;

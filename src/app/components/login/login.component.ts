@@ -123,6 +123,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   otpVerification() {
+
+    if (this.script) {
+      this.render.removeChild(document.body, this.script);
+    }
+    this.script = this.render.createElement('script');
+    this.script.src = 'https://control.msg91.com/app/assets/otp-provider/otp-provider.js';
+
+
     this.script.onload = () => {
       var configuration = {
         widgetId: '346864717445393337383933',
@@ -225,23 +233,23 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       } else if (response.mobileNumber == null && this.user.userTypeId == 1) {
        
-        //  this.otpVerification();
+          this.otpVerification();
 
         this.analyticsService.trackEvent('Seeker Clicked',response.mobileNumber,'Seeker')
     
-        this.ngZone.run(() => {
-          this.dataService.setPhoneData(this.user.mobileNumber);
-          this.router.navigate(['/profile/personal']);
-        });
+        // this.ngZone.run(() => {
+        //   this.dataService.setPhoneData(this.user.mobileNumber);
+        //   this.router.navigate(['/profile/personal']);
+        // });
      
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
        
-      //    this.otpVerification();
+          this.otpVerification();
       this.analyticsService.trackEvent('Owner Clicked',response.mobileNumber,'Owner')
-      this.ngZone.run(() => {
-        this.dataService.setPhoneData(this.user.mobileNumber);
-        this.router.navigate(['/bakeprofile/owner']);
-    });
+    //   this.ngZone.run(() => {
+    //     this.dataService.setPhoneData(this.user.mobileNumber);
+    //     this.router.navigate(['/bakeprofile/owner']);
+    // });
         }
       
     });
