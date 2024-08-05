@@ -17,11 +17,12 @@ export interface IBakerOwnerProfile {
         businessName: string;
         businessAddress: string;
         businessPhone:string;
-        fssaiNo: string;
+        fssaiLicenseNo: string;
         fssaiExpiryDate: Date | null;
     };
     otherInformation:{
         profileCreateDate:Date|null;
+        ProfileImage : string | null;
     }
 
     
@@ -46,12 +47,12 @@ export interface IBakerOwnerProfileRequest {
     businessName: string;
     businessAddress: string;
     businessPhone:string,
-    fssaiNo: string;
+    fssaiLicenseNo: string;
     fssaiExpiryDate: Date | null;
 
 
     profileCreateDate: Date | null;
 
-
+    creationProfileImage : string | null;
 
 }

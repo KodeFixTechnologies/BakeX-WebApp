@@ -1,8 +1,9 @@
 export interface BakeMember
 {
-    membershipId: number;
-    memberName: string;
-    phone: string;
+    memberId: number;
+    memberName?: string;
+    phoneNo: string;
+    businessId:number
     businessName: string;
     businessPhone: string;
     businessAddress: string;
@@ -14,4 +15,7 @@ export interface BakeMember
     profileImage: string | null;
     membershipExpiry: Date | null;
     age: Date;
+    place: String
+    profileImageBase64:string | null;
+    district?:string;
 }

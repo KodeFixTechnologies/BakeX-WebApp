@@ -26,8 +26,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/_redirects",
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/favicon.png",
+              "src/web.config"
             ],
             "styles": [
               "src/styles.scss"
@@ -43,7 +46,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "3mb"
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -68,6 +71,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -95,8 +101,12 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/_redirects",
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
+
+
             ],
             "styles": [
               "src/styles.scss"

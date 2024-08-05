@@ -1,11 +1,11 @@
 export interface Experience {
     name: string,
-    code: string
+    id: number
   }
   
 export interface Employment {
-    employmentId:number
-    employmentType: string,
+    jobTypeId:number
+    jobType: string,
     
   
 }

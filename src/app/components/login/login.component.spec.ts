@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuthService } from '../../services/auth.service';
+import { QueryService } from '../../services/query.service';
+import { NgZone } from '@angular/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -8,12 +13,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent]
+      imports: [LoginComponent,HttpClientTestingModule],
+       providers: [ AuthService, QueryService, NgZone ]
     })
     .compileComponents();
     
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+    
     fixture.detectChanges();
   });
 

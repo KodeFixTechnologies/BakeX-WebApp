@@ -1,0 +1,50 @@
+<h1 class="text-center text-xl lg:text-2xl ">Upload Your Bakery Logo</h1>
+<div class="mb-2 flex flex-col items-center min-h-dvh  mt-3 lg:mt-8 max-w-lg mx-auto p-3">
+  <img
+    *ngIf="imageUrl"
+    [src]="imageUrl"
+    alt="Image Preview"
+    class="mb-3 h-24  object-contain  rounded-full"
+  />
+  <div class="flex  w-full  my-2 lg:ml-24  gap-2 ">
+
+  <input
+   type="file"
+   className="text-sm text-stone-500
+   file:mr-5 file:py-1 file:px-3 file:border-[1px]
+   file:text-xs file:font-medium
+   file:bg-stone-50 file:text-stone-700
+   hover:file:cursor-pointer hover:file:bg-blue-50
+   hover:file:text-blue-700"
+   accept="image/*"
+   (change)="onFileSelected($event)"
+/>
+  <div (click)="uploadImage()" class="px-2 py-3 cursor-pointer rounded-xl  text-white text-sm bg-green-400 hover:bg-green-200  ">
+    upload
+  </div>
+  </div>
+  
+
+  <div (click)="submit()" class="cursor-pointer py-3 px-32 w-full lg:w-96 bg-blue-500  mt-5  lg:mt-10 border-none rounded-lg text-center text-primary-white">
+    <span class="text-white"> Submit</span>
+  </div>
+ 
+
+</div>
+
+<!-- <div class="mb-2 flex flex-col items-center min-h-dvh  pt-20">
+      <label class="label-width mb-1 " for="location"> Please Upload Company Logo:</label> -->
+     <!-- <p-fileUpload name="myfile[]" [auto]="true"  mode="basic"  [customUpload]="true" (uploadHandler)="myUploader($event)" accept="image/*" [maxFileSize]="1000000"> 
+  
+       
+  <ng-template pTemplate="content">
+      <ul *ngIf="uploadedFiles.length">
+          <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+      </ul>
+  </ng-template>
+  </p-fileUpload> -->
+
+
+ 
+  
+  <!-- </div> -->

@@ -14,6 +14,8 @@ import { DialogModule } from 'primeng/dialog';
 export class BottomNavbarComponent implements OnInit{
   isLogin: boolean = false;
   visible=false;
+  currentSelection  : String = 'home'
+
 
   constructor(
   private cdr:ChangeDetectorRef,
@@ -31,21 +33,42 @@ export class BottomNavbarComponent implements OnInit{
       this.isLogin=data;
     })
     this.cdr.detectChanges();
+    this.currentSelection = localStorage.getItem('currentSelection') || 'home';
+
   }
 
 
    profilePageRediretion()
    {
-     this.router.navigate(['/owner-profile'])
+     this.router.navigate(['/user-profile'])
+     this.updateSelection("profile")
    }
 
    goToHome()
    {
-    this.router.navigate(['/ownerview'])
+    this.router.navigate(['/seeker'])
+    this.updateSelection("home")
+   }
+   goToJobComponent()
+   {
+     this.router.navigate(['allJobs']);
+     this.updateSelection('allJobs')
+   }
+   
+   goToAppliedJob()
+   {
+     this.router.navigate(['applied-job']);
+     this.updateSelection("appliedJobs")
    }
 
+ 
    showDialog() {
     this.dataService.openDialog();
+}
+
+updateSelection(selection: string) {
+  this.currentSelection = selection;
+  localStorage.setItem('currentSelection', selection);
 }
 
 }

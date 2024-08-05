@@ -1,13 +1,37 @@
-import { Injectable } from '@angular/core';
+
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../models/request/BakeOwnerProfileRequest';
+import { Education, Expertise } from '../models/expertise';
+import { Employment, Experience } from '../models/experience';
+import { Injectable } from '@angular/core';
+
+export interface ProfileInformation {
+  personalInformation: {
+    firstname: string;
+    lastname: string;
+    age: number | null;
+    gender: string;
+    phoneno: string;
+  };
+  locationInformation: {
+    state: string;
+    district: string;
+    place: string;
+    pincode: string;
+  };
+  expertiseInformation: Expertise[]; // Changed to Expertise[]
+  educationInformation: Education[]
+  employmentInformation: Employment[]
+  experienceInformation: Experience[]
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  private profileInformationSubject = new BehaviorSubject<any>({
+  private profileInformationSubject = new BehaviorSubject<ProfileInformation>({
     personalInformation: {
       firstname: '',
       lastname: '',
@@ -19,19 +43,12 @@ export class ProfileService {
       state: '',
       district: '',
       place: '',
+      pincode:''
     },
-    expertiseInformation: {
-      types: null,
-    },
-    educationInformation:{
-      types:null,
-    },
-    employmentInformation: {
-      types: null
-    },
-    experienceInformation:{
-      types:null
-    }
+    expertiseInformation: [],
+    educationInformation:[],
+    employmentInformation: [],
+    experienceInformation:[]
   });
 
 
@@ -73,7 +90,7 @@ export class ProfileService {
       businessName:'',
       businessAddress:'',
       businessPhone:'',
-      fssaiNo:'',
+      fssaiLicenseNo:'',
       fssaiExpiry:null
     },
     otherInformation:{
@@ -98,8 +115,8 @@ export class ProfileService {
   }
 
   setProfileforBackend(value: IBakerOwnerProfile) {
+ 
 
-    console.log(value);
     // Assign personal information
 
     this.nonBakeMember.firstname = value.personalInformation.firstname;
@@ -117,12 +134,13 @@ export class ProfileService {
     // Assign business information
     this.nonBakeMember.businessName = value.businessInformation.businessName;
     this.nonBakeMember.businessAddress = value.businessInformation.businessAddress;
-    this.nonBakeMember.fssaiNo = value.businessInformation.fssaiNo;
+    this.nonBakeMember.fssaiLicenseNo = value.businessInformation.fssaiLicenseNo;
     this.nonBakeMember.fssaiExpiryDate = value.businessInformation.fssaiExpiryDate;
     this.nonBakeMember.businessPhone = value.businessInformation.businessPhone;
 
     // Assign other information
     this.nonBakeMember.profileCreateDate = value.otherInformation.profileCreateDate;
+    this.nonBakeMember.creationProfileImage = value.otherInformation.ProfileImage
 
     return this.nonBakeMember;
 }

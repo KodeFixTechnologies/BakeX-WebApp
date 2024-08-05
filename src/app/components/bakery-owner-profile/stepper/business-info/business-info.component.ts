@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { CalendarModule } from 'primeng/calendar';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../../../services/profile.service';
+import { DataService } from '../../../../services/data.service';
+import { Users } from '../../../../models/user';
 @Component({
   selector: 'business-info',
   standalone: true,
@@ -18,7 +20,8 @@ export class BusinessInfoComponent  implements OnInit{
 
   constructor(
     private router:Router,
-    private profileService:ProfileService
+    private profileService:ProfileService,
+    private dataService:DataService
   )
   {
 
@@ -26,6 +29,7 @@ export class BusinessInfoComponent  implements OnInit{
   ngOnInit(): void {
 
     this.updatedBusinessInfo=this.profileService.getBakeryOwnerProfileInfo().businessInformation
+    this.dataService.setData(false)
   
   }
   submitted: boolean = false;
@@ -33,9 +37,11 @@ export class BusinessInfoComponent  implements OnInit{
     businessName: '',
     businessAddress: '',
     businessPhone:'',
-    fssaiNo:'',
+    fssaiLicenseNo:'',
     fssaiExpiryDate:null
   };
+
+
 
 
 
@@ -47,7 +53,7 @@ export class BusinessInfoComponent  implements OnInit{
     });
 
 
-    console.log(this.profileService.getBakeryOwnerProfileInfo())
+
     this.router.navigate(['bakeprofile/ownerlocation-info']);
   }
 }

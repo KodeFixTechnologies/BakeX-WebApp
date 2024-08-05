@@ -1,10 +1,10 @@
 export interface Expertise {
-    exertiseId: string,
+    expertiseId: string,
     expertiseType: string
   }
   
 export interface Education {
-    name: string,
-    code: string
+    EducationLevel: string,
+    EducationId: number
   
 }

@@ -1,0 +1,105 @@
+<div class="mt-4 px-2 sm:px-24 bg-white">
+    <h2 class=" ms-4 text-lg text-blue-600 font-semibold">Search Jobs</h2>
+
+    <!-- Search by Title -->
+    <div class="flex justify-center mt-2 ">
+        <p-autoComplete [size]="30" class=" mb-2  " [(ngModel)]="searchText" [suggestions]="filteredTitles"
+            (completeMethod)="searchJobs($event)" placeholder="Search by Category" (onSelect)="applyFilters()">
+            <ng-template let-title pTemplate="item">
+                <div>{{ title }}</div>
+            </ng-template>
+           
+        </p-autoComplete>
+      
+    </div>
+    <div class="flex justify-between mt-2 ms-4 bg-white">
+    
+         
+                <p-button (click)="showFilter()" icon="pi 
+                pi-arrow-right-arrow-left" size="small" label="Filter" [style]="{ height: '20%', backgroundColor: '#ffffff', color: '#000000' }"></p-button>
+             
+           
+      
+            <p-button (click)="clearFilters()" icon="pi 
+            pi-ban" size="small" label="Clear Filters" [style]="{ height: '20%', backgroundColor: '#ffffff', color: '#000000' }"></p-button>
+
+    </div>
+    <!-- Filter by Business Name -->
+    <!-- <div class="mb-2">
+        <p-autoComplete [size]="30" class="flex justify-center mb-2" [(ngModel)]="selectedBusiness"
+            [suggestions]="filteredBusinesses" field="businessName" (completeMethod)="searchBusiness($event)"
+            placeholder="Filter by Business Name..." (onSelect)="applyFilters()">
+            <ng-template let-business pTemplate="item">
+                <div>{{ business.businessName }}</div>
+            </ng-template>
+        </p-autoComplete>
+    </div> -->
+
+
+
+
+</div>
+
+<div class="relative pb-20 px-2 sm:px-2 bg-white">
+    <div class="flex flex-wrap justify-center ">
+        <ng-container *ngFor="let jobposted of filteredJobs">
+            <div class="w-full    ">
+                <seeker-job-card [recommendedJob]="jobposted" [businesses]="businesses" [jobSeeker]="userProfile">
+                </seeker-job-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+
+<p-dialog
+      header="Apply Filter"
+      [(visible)]="display"
+      [modal]="true"
+      [style]="{ width: '100%', height: '100%' }"
+      [maximizable]="true"
+     
+    >
+    <ng-template pTemplate="content">
+        <div class="mb-2">
+            <p-autoComplete [size]="30" class="flex justify-center mb-2" [(ngModel)]="selectedBusiness"
+                [suggestions]="filteredBusinesses" field="businessName" (completeMethod)="searchBusiness($event)"
+                placeholder="Filter by Business Name..." (onSelect)="applyFilters()">
+                <ng-template let-business pTemplate="item">
+                    <div>{{ business.businessName }}</div>
+                </ng-template>
+            </p-autoComplete>
+        </div>
+
+        <div class="mb-2">
+            <p-autoComplete [size]="30" class="flex justify-center mb-2" [(ngModel)]="selectedDistrict"
+                [suggestions]="filteredBusinessesDistrict" field="districtName" (completeMethod)="searchDistrict($event)"
+                placeholder="Filter by District Name..." (onSelect)="applyFilters()">
+                <ng-template let-business pTemplate="item">
+                    <div>{{ business.districtName }}</div>
+                </ng-template>
+            </p-autoComplete>
+        </div>
+
+            <!-- Filter by Job Type -->
+    <select class="mb-2 px-4 py-2 border rounded-md w-full md:w-64" [(ngModel)]="selectedJobType"
+    (change)="applyFilters()">
+    <option value="">Select Job Type</option>
+    <option value="Full Time">Full Time</option>
+    <option value="Part Time">Part Time</option>
+    <option value="Contract">Contract</option>
+    <option value="Contract">Temporary</option>
+</select>
+
+
+            <!-- Apply Filters Button -->
+    <div class="flex justify-center sm:justify-between">
+        <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg  sm:w-auto"
+            (click)="applyFiltersAndCloseDialog()">Apply Filters</button>
+
+        <button class="mt-2 ml-2 px-3 py-2 bg-gray-500 text-white rounded-lg   sm:w-auto"
+            (click)="clearFilters()">Clear Filters</button>
+    </div>
+    </ng-template>
+    
+</p-dialog>
