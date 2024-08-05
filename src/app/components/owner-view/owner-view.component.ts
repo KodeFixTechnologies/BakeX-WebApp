@@ -213,20 +213,18 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       ...generationConfig,
     });
 
-   this.queryService.getDistrictData().subscribe((data)=>{
-    this.district=data;
-    this.selectedDistrict = this.district?.find(
-      (item) => item.DistrictID === this.bakeMember.districtId
-    );
-   })
+   
     this.loadPhoneNumber();
 
     this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
       next: (data) => {
         this.bakeMember = data;
-        this.selectedDistrict = this.district?.find(
-          (item) => item.DistrictName === data.district
-        );
+        this.queryService.getDistrictData().subscribe((data)=>{
+          this.district=data;
+          this.selectedDistrict = this.district?.find(
+            (item) => item.DistrictName === this.bakeMember.district
+          );
+         })
 
         if (this.bakeMember.profileImageBase64) {
           const imageUrl = this.bakeMember.profileImageBase64; // Adjust the MIME type as per your image type
