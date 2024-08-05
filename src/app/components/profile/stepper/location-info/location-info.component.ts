@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { FileService } from '../../../../services/file.service';
+
 import { InputOtpModule } from 'primeng/inputotp';
 import { StepperComponent } from '../../../shared/stepper/stepper.component';
 import { DataService } from '../../../../services/data.service';
@@ -45,8 +45,7 @@ export class LocationInfoComponent implements OnInit, AfterViewInit {
     private profileService: ProfileService,
     private queryService: QueryService,
     private router:Router,
-    private fileService:FileService,
-    private ref:ChangeDetectorRef,
+   private ref:ChangeDetectorRef,
     private dataService:DataService
   ) {
 

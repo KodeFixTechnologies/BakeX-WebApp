@@ -7,7 +7,7 @@ import { DataService } from '../../services/data.service';
 import { NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { User } from '@codetrix-studio/capacitor-google-auth';
+
 import msg91 from "msg91";
 import { AnalyticsService } from '../../services/analytics.service';
 declare const initSendOTP: any;
