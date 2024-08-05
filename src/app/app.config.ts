@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './components/interceptor/jwt.interceptor';
 import { LoaderInterceptor } from './components/interceptor/loader.interceptor';
+import { myCustomLoader } from './services/custom-loader';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -22,6 +24,7 @@ export const appConfig: ApplicationConfig = {
         useClass:LoaderInterceptor,
         multi:true
     },
+
 
     MessageService,provideAnimations()]
 };

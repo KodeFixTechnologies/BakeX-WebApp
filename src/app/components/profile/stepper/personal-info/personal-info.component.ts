@@ -11,7 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from '../../../../services/data.service';
 import { ChangeDetectionStrategy } from '@angular/compiler';
-import { FileService } from '../../../../services/file.service';
+
 import { Users } from '../../../../models/user';
 import { CalendarModule } from 'primeng/calendar';
 import { QueryService } from '../../../../services/query.service';
@@ -63,7 +63,7 @@ export class PersonalInfoComponent {
     private cdr: ChangeDetectorRef,
     private render: Renderer2,
     private ngZone: NgZone,
-    private fileService: FileService,
+
     private queryService:QueryService
   ) { 
 

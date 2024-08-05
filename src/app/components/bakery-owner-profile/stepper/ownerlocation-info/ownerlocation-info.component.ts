@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { FileService } from '../../../../services/file.service';
+
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
 import { DataService } from '../../../../services/data.service';
 import { Users } from '../../../../models/user';
@@ -74,7 +74,7 @@ export class OwnerlocationInfoComponent implements OnInit {
     private profileService: ProfileService,
     private queryService: QueryService,
     private router: Router,
-    private fileService: FileService,
+
     private dataService: DataService
   ) {
     this.currentDate = new Date();

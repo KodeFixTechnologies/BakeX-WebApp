@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { JobApplication } from '../../models/jobApplcation';
 import { AuthService } from '../../services/auth.service';
-import { CommonModule, PlatformLocation } from '@angular/common';
+import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, PlatformLocation } from '@angular/common';
 import { interval, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { SeekerJobCardComponent } from "../shared/seeker-job-card/seeker-job-card.component";
@@ -18,17 +18,33 @@ import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.componen
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { UserProfile } from '../../models/user';
+import { NgOptimizedImage } from '@angular/common'
+import { ImageLoader } from '@angular/common';
+
+
 
 @Component({
     selector: 'seeker-view',
     standalone: true,
     templateUrl: './seeker-view.component.html',
     styleUrl: './seeker-view.component.scss',
-    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, AutoCompleteModule,CommonModule,FormsModule, SeekerJobCardComponent,SeekerJobComponent]
+    imports: [CardModule, NgOptimizedImage,
+      
+      CarouselModule, ButtonModule, DialogModule, AutoCompleteModule,CommonModule,FormsModule, SeekerJobCardComponent,SeekerJobComponent],
+      providers:[
+        {
+          provide: IMAGE_LOADER,
+          useValue: (config: ImageLoaderConfig) => {
+            return `https://bakejoli.blob.core.windows.net/bakecontainer/${config.src}?`;
+          },
+        },
+      ]
 })
+
+
 export class SeekerViewComponent implements OnInit {
 
-
+  customLoader:any;
   public timeLeft$: Observable<{
     secondsToDday: number;
     minutesToDday: number;
@@ -58,6 +74,10 @@ export class SeekerViewComponent implements OnInit {
       shareReplay(1)
     );
   }
+
+  
+
+
 
   application: JobApplication = {} as JobApplication;
   jobSeeker: JobSeeker = {} as JobSeeker;
@@ -129,6 +149,8 @@ export class SeekerViewComponent implements OnInit {
 
   displayDialog: boolean = false;
   ngOnInit(): void {
+
+
     this.dataService.setData(true);
     window.history.replaceState({}, '', '/seeker');
     this.dataService.setDataforheader(true);
@@ -165,7 +187,7 @@ export class SeekerViewComponent implements OnInit {
         this.business.forEach(business=>{
           if(business.profileImageBase64)
             {
-              business.profileImageBase64 = `data:image/png;base64,${business.profileImageBase64}`;
+              business.profileImageBase64 = business.profileImageBase64;
             }
         })
         this.business.forEach(business => {
@@ -436,3 +458,4 @@ export class SeekerViewComponent implements OnInit {
   }
 
 }
+

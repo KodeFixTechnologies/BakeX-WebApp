@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { LoginComponent } from './components/login/login.component';
-import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
+
 import { QueryService } from './services/query.service';
 import { Users } from './models/user';
 

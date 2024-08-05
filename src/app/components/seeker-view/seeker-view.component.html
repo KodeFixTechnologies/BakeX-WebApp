@@ -13,7 +13,7 @@
         </a> -->
         <div >
           <div class="flex sm:hidden">
-            <img src="../../../../../assets/images/BakejoliLogo2.png" class=" w-[320px]   h-18  lg:w-7/12 h-23  md:w-1/12 h-34">
+            <img src="../../../../../assets/images/BakejoliLogo2.png" class=" w-[320px]   h-18  lg:w-7/12 h-23  md:w-1/12 h-34" alt="bakejoli">
           </div>
          
         </div>
@@ -340,12 +340,19 @@
     <div class="pb-2 mb-2 ">
       <div class="sm:mt-4 rounded-xl">
         <div class=" sm:mx-0">
-          <div class="">
-            <img
-              src="  '../../../../../assets/banner3.jpg"
-              class="rounded-xl  object-cover"
-              alt=""
-            />
+          <div class="mt-5 flex flex-col justify-center">
+            <img class="block sm:hidden "
+            ngSrc="banner3.webp"
+              class="rounded-xl"
+            [loaderParams]="{roundedCorners: true}"
+            fetchpriority
+            alt="Banner Image"
+            priority
+            width="400"
+            height="132"
+            ngSrcset="100w, 200w, 300w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
             <span class="flex lg:hidden mt-2 ">Recommended Jobs</span>
           </div>
        

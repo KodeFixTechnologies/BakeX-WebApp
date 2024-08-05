@@ -7,8 +7,9 @@ import { DataService } from '../../services/data.service';
 import { NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { User } from '@codetrix-studio/capacitor-google-auth';
+
 import msg91 from "msg91";
+import { AnalyticsService } from '../../services/analytics.service';
 declare const initSendOTP: any;
 const googleAuthId = 1;
 @Component({
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private render: Renderer2,
     private queryService: QueryService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private analyticsService:AnalyticsService
   ) // this is used to send the data from one component to another using rxjs
   {
 
@@ -224,6 +226,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       } else if (response.mobileNumber == null && this.user.userTypeId == 1) {
        
         //  this.otpVerification();
+
+        this.analyticsService.trackEvent('Seeker Clicked',response.mobileNumber,'Seeker')
     
         this.ngZone.run(() => {
           this.dataService.setPhoneData(this.user.mobileNumber);
@@ -233,7 +237,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
        
       //    this.otpVerification();
-
+      this.analyticsService.trackEvent('Owner Clicked',response.mobileNumber,'Owner')
       this.ngZone.run(() => {
         this.dataService.setPhoneData(this.user.mobileNumber);
         this.router.navigate(['/bakeprofile/owner']);
