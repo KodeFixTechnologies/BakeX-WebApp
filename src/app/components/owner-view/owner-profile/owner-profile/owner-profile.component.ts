@@ -90,6 +90,10 @@ export class OwnerProfileComponent implements OnInit {
     this.router.navigate(['/privacy-policy']);
   }
 
+  goToHelpCenter()
+  {
+    this.router.navigate(['/help-center']);
+  }
   share() {
     try {
       navigator.share(shareData);

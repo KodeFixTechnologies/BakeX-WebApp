@@ -113,7 +113,6 @@ export class OwnerlocationInfoComponent implements OnInit {
 
 
     // this.fileService.uploadObject();
-
     if (this.selectedState) {
       this.updatedlocationInfo.state = this.selectedState.state;
       this.updatedlocationInfo.district = this.selectedDistrict;
