@@ -11,7 +11,7 @@ import { JobSeeker } from '../models/jobSeeker';
 })
 export class DataService {
   private dataSubject = new BehaviorSubject<boolean>(false);
- 
+  private errorSubject= new BehaviorSubject<boolean>(false);
   public dataheaderSubject = new BehaviorSubject<boolean>(false);
   private createJobSubject = new BehaviorSubject<boolean>(false);
 
@@ -27,6 +27,8 @@ export class DataService {
   private jobSubject = new BehaviorSubject<any>(null);
 
   private bakeOwnersubject = new BehaviorSubject<any>(null);
+
+  private bakeOwnerSessionsubject = new BehaviorSubject<any>(null);
 
   private displayImage = new BehaviorSubject<any>(null);
 
@@ -97,7 +99,15 @@ export class DataService {
     return this.dataSubject.asObservable();
   }
 
+ setError(data: boolean)
+ {
+  this.errorSubject.next(data);
+ }
 
+ getError()
+ {
+  return this.errorSubject.asObservable();
+ }
   
   setDataforheader(data: boolean) {
     this.dataheaderSubject.next(data);
@@ -140,6 +150,11 @@ export class DataService {
     return this.jobSubject.asObservable();
   }
 
+  setOwnerSessionData(data:Users)
+  {
+       this.bakeOwnerSessionsubject.next(data);
+       this.setSessionStorageItem('ownerSession',data);
+  }
   
   setBakeryOwnerData(data:BakeMember)
   {
@@ -176,11 +191,11 @@ export class DataService {
   {
     return this.userSubject.asObservable();
   }
-  private setSessionStorageItem(key: string, data: any): void {
+  public setSessionStorageItem(key: string, data: any): void {
     sessionStorage.setItem(key, JSON.stringify(data));
   }
 
-  private getSessionStorageItem(key: string): any {
+  public getSessionStorageItem(key: string): any {
     const data = sessionStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   }

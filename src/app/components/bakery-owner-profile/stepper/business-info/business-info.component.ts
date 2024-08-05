@@ -27,7 +27,7 @@ export class BusinessInfoComponent  implements OnInit{
 
   }
   ngOnInit(): void {
-
+    this.dataService.requestExpand('business')
     this.updatedBusinessInfo=this.profileService.getBakeryOwnerProfileInfo().businessInformation
     this.dataService.setData(false)
   
@@ -52,7 +52,7 @@ export class BusinessInfoComponent  implements OnInit{
       businessInformation: this.updatedBusinessInfo
     });
 
-
+    this.dataService.setSessionStorageItem('businessPage',true)
 
     this.router.navigate(['bakeprofile/ownerlocation-info']);
   }

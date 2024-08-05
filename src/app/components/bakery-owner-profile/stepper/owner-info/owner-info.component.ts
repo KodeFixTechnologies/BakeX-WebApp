@@ -12,11 +12,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { ProfileService } from '../../../../services/profile.service';
 import { Users } from '../../../../models/user';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 declare const initSendOTP: any;
 @Component({
   selector: 'owner-info',
   standalone: true,
-  imports: [CardModule,ButtonModule,CommonModule,InputTextModule,FormsModule,DialogModule,DropdownModule,CalendarModule],
+  imports: [CardModule,ButtonModule,CommonModule,InputTextModule,FormsModule,DialogModule,DropdownModule,CalendarModule,ToastModule],
   templateUrl: './owner-info.component.html',
   styleUrl: './owner-info.component.scss',
 })
@@ -29,19 +31,42 @@ export class OwnerInfoComponent implements OnInit{
     private ngZone:NgZone,
     private router:Router,
     private dataService:DataService,
-    private profileService:ProfileService
+    private profileService:ProfileService,
+    private messageService:MessageService,
   )
   {
-   
+  
   }
   googleUser: any;
   date:any;
   user:Users = {} as Users;
-  
-
+  isComeback:boolean=true;
+  updatedPersonalInfo = {
+    firstname: '',
+    lastname: '',
+    age: '',
+    gender: '',
+    phoneno:''
+  };
+  selectedDate:any;
+calenderAge:any;
   genders:any;
   ngOnInit(): void {
+
+    console.log(this.calenderAge)
+    this.dataService.requestExpand('profile')
    
+    this.dataService.getError().subscribe((data)=>{
+      this.isComeback=data;
+      if(this.isComeback)
+      {
+        this.show()
+      }
+    })
+   
+     
+     
+
 
     this.user.isMobileVerified='N';
     this.user.userTypeId=2;
@@ -64,23 +89,44 @@ export class OwnerInfoComponent implements OnInit{
         }
         else {
           this.user.authId=3
-   
+        
         }
      
     })
-    this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
-
     
-    this.dataService.getPhoneData().subscribe((data)=>{
-      this.updatedPersonalInfo.phoneno = data
-    })
- 
+  
+
+    console.log(this.updatedPersonalInfo)
+    this.user= this.dataService.getSessionStorageItem('ownerData');
+    if(this.user.mobileNumber!=null)
+    {
+      this.updatedPersonalInfo.phoneno=this.user.mobileNumber;
+    }
+    else 
+    {
+      this.router.navigate(['/'])
+    }
+    console.log(this.user)
+  
+
+
+       
+      
+
+
 
     this.genders = [
       { name: 'Male', code: 'M', factor: 1 },
       { name: 'Female', code: 'F', factor: 2 },
       { name: 'Other', code: 'O', factor: 3 }
   ];
+
+
+  this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
+  if(this.updatedPersonalInfo.gender!='')
+    {
+      this.setGender(this.updatedPersonalInfo.gender)
+    }
 
   this.dataService.setData(false);
 
@@ -91,13 +137,10 @@ export class OwnerInfoComponent implements OnInit{
 
   gender:string=''
   
-  updatedPersonalInfo = {
-    firstname: '',
-    lastname: '',
-    age: null,
-    gender: '',
-    phoneno:''
-  };
+
+  show() {
+    this.messageService.add({ key:'tc', severity: 'error', summary: 'Error', detail: 'Please Start Agian' });
+}
 
   submitted:boolean=false;
   script:any;
@@ -112,21 +155,11 @@ export class OwnerInfoComponent implements OnInit{
 
 
 
-  // setGender(event: any)
-  // {
-
-  //   // this.gender=event.value.name;
-  //   // this.updatedPersonalInfo.gender=event.value.name
-  //   console.log('Selected gender:', this.updatedPersonalInfo.gender);
-
-  // //  this.profileService.setProfileInformation = this.personalInformation;
-  
-  // }
 
 
   nextPage()
   {
-    
+    console.log(this.calenderAge)
     this.profileService.setBakeryOwnerProfileInfo({
       ...this.profileService.getBakeryOwnerProfileInfo(),
       personalInformation: this.updatedPersonalInfo
@@ -134,52 +167,15 @@ export class OwnerInfoComponent implements OnInit{
 
     this.user.isMobileVerified='Y';
 
-          this.user.mobileNumber=this.updatedPersonalInfo.phoneno
-          this.dataService.setUserData(this.user);
-
-          this.dataService.setPhoneData(this.updatedPersonalInfo.phoneno)
-
+          this.dataService.setSessionStorageItem('ownerData',this.user);
+       
            // get verified token in response
             this.ngZone.run(() => {
                this.router.navigate(['bakeprofile/business-info']);
 
               });
 
-    // if (this.script) {
-    //   this.render.removeChild(document.body, this.script);
-    // }
 
-    // this.script = this.render.createElement('script');
-    // this.script.src = "https://control.msg91.com/app/assets/otp-provider/otp-provider.js";
-
-    //  this.script.onload=()=>{
-
-    //  var configuration= {
-    //     widgetId: "3464636a4a73333635343731",
-    //     tokenAuth: "418358TlbdIOJ67q660d315aP1",
-    //     identifier: '+91'+ this.updatedPersonalInfo.phoneno,
-    //     exposeMethods: "<true | false> (optional)",  // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
-    //     success: (data:any) => {
-    //       this.user.isMobileVerified='Y';
-    //       this.user.mobileNumber=this.updatedPersonalInfo.phoneno
-    //       this.dataService.setUserData(this.user);
-    //     
-    //         // get verified token in response
-    //         this.ngZone.run(() => {
-    //           this.router.navigate(['bakeprofile/business-info']);
-
-    //       });
-
-    //     },
-    //     failure: (error:any) => {
-    //         // handle error
-
-    //     },
-
-    //   };
-
-    //   initSendOTP(configuration)
-    // }
 
 
     this.script.onerror =(error:any)=> {
@@ -192,12 +188,19 @@ export class OwnerInfoComponent implements OnInit{
     
   }
 
+  setGender(data:string)
+  {
+    this.gender = this.genders.find((g:any) => g.name === data);
+    
+ 
+  
+  }
+
   seeGender(event: any) {
     // event.value contains the selected value
     const selectedGender = this.genders.find((g:any) => g.name === event.value.name);
     this.updatedPersonalInfo.gender = selectedGender?selectedGender.name : '';
-    console.log('Updated personal info:', this.updatedPersonalInfo);
-    console.log('Selected gender:', event.value); // or this.updatedPersonalInfo.gender
+ 
     
   }
   

@@ -32,10 +32,8 @@ export class LogoComponent implements OnInit {
     private imageUpload : ImageuploadService
   ) {}
   ngOnInit(): void {
-    this.dataService.getUserData().subscribe((data) => {
-      this.user = data;
-    });
-    console.log(this.user)
+    this.dataService.requestExpand('logo')
+    this.user= this.dataService.getSessionStorageItem('ownerData');
   }
   user: Users = {} as Users;
   NonBakeMember: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;

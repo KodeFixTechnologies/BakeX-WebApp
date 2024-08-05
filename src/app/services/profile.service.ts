@@ -25,6 +25,33 @@ export interface ProfileInformation {
   experienceInformation: Experience[]
 }
 
+export interface OwnerInformation {
+  personalInformation: {
+    firstname: string;
+    lastname: string;
+    age: number | null;
+    gender: string;
+    phoneno: string;
+  };
+  locationInformation: {
+    state: string;
+    district: string;
+    place: string;
+    pincode: string;
+  };
+  businessInformation:{
+    businessName:string,
+    businessAddress:string,
+    businessPhone:string,
+    fssaiLicenseNo:string,
+    fssaiExpiry:null
+  };
+  otherInformation:{
+    profileCreateDate:null
+  };
+
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +99,7 @@ export class ProfileService {
 
 
   //Bakery Owner Profile Information Subject
-  private bakeryOwnerProfileInfoSubject = new BehaviorSubject<any>({
+  private bakeryOwnerProfileInfoSubject = new BehaviorSubject<OwnerInformation>({
     personalInformation: {
       firstname: '',
       lastname: '',

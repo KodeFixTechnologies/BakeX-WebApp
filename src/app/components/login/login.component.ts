@@ -236,23 +236,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       } else if (response.mobileNumber == null && this.user.userTypeId == 1) {
        
-          this.otpVerification();
+        this.dataService.setSessionStorageItem('seekerData',this.user);
+          //this.otpVerification();
 
           this.analyticsService.trackEvent('Login Success', 'New User Intitated', 'Authentication');
     
-        // this.ngZone.run(() => {
-        //   this.dataService.setPhoneData(this.user.mobileNumber);
-        //   this.router.navigate(['/profile/personal']);
-        // });
+        this.ngZone.run(() => {
+          this.dataService.setPhoneData(this.user.mobileNumber);
+          this.router.navigate(['/profile/personal']);
+        });
      
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
-       
-          this.otpVerification();
+        this.dataService.setSessionStorageItem('ownerData',this.user);
+         // this.otpVerification();
           this.analyticsService.trackEvent('Login Success', ' New Owner Intitated', 'Authentication');
-    //   this.ngZone.run(() => {
-    //     this.dataService.setPhoneData(this.user.mobileNumber);
-    //     this.router.navigate(['/bakeprofile/owner']);
-    // });
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/bakeprofile/owner']);
+    });
         }
       
     });

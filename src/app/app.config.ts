@@ -8,6 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './components/interceptor/jwt.interceptor';
 import { LoaderInterceptor } from './components/interceptor/loader.interceptor';
 import { myCustomLoader } from './services/custom-loader';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +25,9 @@ export const appConfig: ApplicationConfig = {
         useClass:LoaderInterceptor,
         multi:true
     },
+
+    provideAnimations(), // required animations providers
+    provideToastr(), 
 
 
     MessageService,provideAnimations()]

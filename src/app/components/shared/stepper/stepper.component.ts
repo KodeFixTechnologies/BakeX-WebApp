@@ -18,6 +18,7 @@ export class StepperComponent {
   ngOnInit() {
     this.dataService.toggleExpand$.subscribe(data => {
       this.toggleExpand(data);
+      this.toggleOwnerExpand(data);
     });
   }
 
@@ -142,22 +143,23 @@ export class StepperComponent {
 
   goToOwnerPersonal()
   {
-
+    this.toggleOwnerExpand('profile');
     this.router.navigate(['bakeprofile/owner'])
   }
 
  goToBusiness() {
-
+  this.toggleOwnerExpand('businesss');
     this.router.navigate(['bakeprofile/business-info'])
   }
 
   goToOwnerLocation()
-  {
+  {  this.toggleOwnerExpand('location');
     this.router.navigate(['bakeprofile/ownerlocation-info'])
   }
 
   goToOwnerLogo()
   {
+    this.toggleOwnerExpand('logo');
     this.router.navigate(['bakeprofile/logo'])
   }
 }
