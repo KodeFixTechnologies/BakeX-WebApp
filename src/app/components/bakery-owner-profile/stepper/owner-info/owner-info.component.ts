@@ -98,14 +98,7 @@ calenderAge:any;
 
     console.log(this.updatedPersonalInfo)
     this.user= this.dataService.getSessionStorageItem('ownerData');
-    if(this.user.mobileNumber!=null)
-    {
-      this.updatedPersonalInfo.phoneno=this.user.mobileNumber;
-    }
-    else 
-    {
-      this.router.navigate(['/'])
-    }
+ 
     console.log(this.user)
   
 
@@ -123,6 +116,7 @@ calenderAge:any;
 
 
   this.updatedPersonalInfo=this.profileService.getBakeryOwnerProfileInfo().personalInformation
+  this.updatedPersonalInfo.phoneno=this.user.mobileNumber;
   if(this.updatedPersonalInfo.gender!='')
     {
       this.setGender(this.updatedPersonalInfo.gender)
