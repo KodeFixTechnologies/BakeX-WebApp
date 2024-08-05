@@ -105,7 +105,7 @@ export class LogoComponent implements OnInit {
     if (target.files && target.files.length > 0) {
       const originalFile = target.files[0]; // Access the first file
       const newFileName = this.user.mobileNumber+originalFile.name.substring(originalFile.name.lastIndexOf('.'));
-      console.log(newFileName)
+      
       this.selectedFile = new File([originalFile], newFileName, { type: originalFile.type });
 
     } 

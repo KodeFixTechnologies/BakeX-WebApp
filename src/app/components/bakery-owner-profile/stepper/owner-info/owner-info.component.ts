@@ -53,7 +53,7 @@ calenderAge:any;
   genders:any;
   ngOnInit(): void {
 
-    console.log(this.calenderAge)
+
     this.dataService.requestExpand('profile')
    
     this.dataService.getError().subscribe((data)=>{
@@ -96,10 +96,10 @@ calenderAge:any;
     
   
 
-    console.log(this.updatedPersonalInfo)
+   
     this.user= this.dataService.getSessionStorageItem('ownerData');
  
-    console.log(this.user)
+ 
   
 
 
@@ -153,7 +153,7 @@ calenderAge:any;
 
   nextPage()
   {
-    console.log(this.calenderAge)
+
     this.profileService.setBakeryOwnerProfileInfo({
       ...this.profileService.getBakeryOwnerProfileInfo(),
       personalInformation: this.updatedPersonalInfo
