@@ -165,32 +165,32 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.render.appendChild(document.body, this.script);
   }
 
-  SignUp() {
-    this.user.authId = 2;
-    this.user.isMobileVerified = '';
-    this.user.id = 0;
-    this.user.createdAt = new Date();
-    this.user.userTypeId = 1;
-    this.user.mobileNumber = this.user.mobileNumber;
-    this.dataService.setUserData(this.user);
+  // SignUp() {
+  //   this.user.authId = 2;
+  //   this.user.isMobileVerified = '';
+  //   this.user.id = 0;
+  //   this.user.createdAt = new Date();
+  //   this.user.userTypeId = 1;
+  //   this.user.mobileNumber = this.user.mobileNumber;
+  //   this.dataService.setUserData(this.user);
 
-    this.queryService.checkUserExist(this.user).subscribe((response) => {
-      if (response == true) {
-        // Wrap the navigation inside NgZone.run()
-        this.ngZone.run(() => {
-          this.router.navigate(['/seeker']);
-          this.dataService.setData(true);
-        });
-      } else {
-        // Wrap the navigation inside NgZone.run()
-        this.ngZone.run(() => {
-          this.dataService.setPhoneData(this.user.mobileNumber);
-          this.router.navigate(['/home']);
-          this.dataService.setData(true);
-        });
-      }
-    });
-  }
+  //   this.queryService.checkUserExist(this.user).subscribe((response) => {
+  //     if (response == true) {
+  //       // Wrap the navigation inside NgZone.run()
+  //       this.ngZone.run(() => {
+  //         this.router.navigate(['/seeker']);
+  //         this.dataService.setData(true);
+  //       });
+  //     } else {
+  //       // Wrap the navigation inside NgZone.run()
+  //       this.ngZone.run(() => {
+  //         this.dataService.setPhoneData(this.user.mobileNumber);
+  //         this.router.navigate(['/home']);
+  //         this.dataService.setData(true);
+  //       });
+  //     }
+  //   });
+  // }
 
   gotoOtp() {
     this.user.authId = 3;
@@ -223,42 +223,51 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       } else if (response.mobileNumber == null && this.user.userTypeId == 1) {
        
-          this.otpVerification();
-         
+        //  this.otpVerification();
+    
+        this.ngZone.run(() => {
+          this.dataService.setPhoneData(this.user.mobileNumber);
+          this.router.navigate(['/profile/personal']);
+        });
      
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
        
-          this.otpVerification();
+      //    this.otpVerification();
+
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/bakeprofile/owner']);
+    });
         }
       
     });
   }
 
-  logIn() {
-    this.user.authId = 2;
-    this.user.isMobileVerified = '';
-    this.user.id = 0;
-    this.user.createdAt = new Date();
-    this.user.userTypeId = 0;
-    this.dataService.setUserData(this.user);
+  // logIn() {
+  //   this.user.authId = 2;
+  //   this.user.isMobileVerified = '';
+  //   this.user.id = 0;
+  //   this.user.createdAt = new Date();
+  //   this.user.userTypeId = 0;
+  //   this.dataService.setUserData(this.user);
 
-    this.authService.checkUserExist(this.user).subscribe((response) => {
-      if (response.token) {
-        this.authService.setToken(response.token);
-        let profileId = this.authService.getUserIdFromToken();
-        let userTypeId = this.authService.getUserTypeId();
+  //   this.authService.checkUserExist(this.user).subscribe((response) => {
+  //     if (response.token) {
+  //       this.authService.setToken(response.token);
+  //       let profileId = this.authService.getUserIdFromToken();
+  //       let userTypeId = this.authService.getUserTypeId();
 
-        if (userTypeId == 1) {
-          this.ngZone.run(() => {
-            this.router.navigate(['/seeker']);
-            this.dataService.setData(true);
-          });
-        }
-        // Wrap the navigation inside NgZone.run()
-        else {
-          this.router.navigate(['/ownerview']);
-        }
-      }
-    });
-  }
+  //       if (userTypeId == 1) {
+  //         this.ngZone.run(() => {
+  //           this.router.navigate(['/seeker']);
+  //           this.dataService.setData(true);
+  //         });
+  //       }
+  //       // Wrap the navigation inside NgZone.run()
+  //       else {
+  //         this.router.navigate(['/ownerview']);
+  //       }
+  //     }
+  //   });
+  // }
 }
