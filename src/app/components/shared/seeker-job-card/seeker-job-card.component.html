@@ -4,7 +4,7 @@
 >
   <div class="flex py-2 w-full justify-between ">
     <div class="flex">
-      <div>
+      <div *ngIf="recommendedJob.title!=null">
         <img
           [src]="
             businesses[recommendedJob.postedById].profileImageBase64 ||

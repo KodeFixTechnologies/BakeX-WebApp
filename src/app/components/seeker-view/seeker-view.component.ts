@@ -18,13 +18,13 @@ import { SeekerJobComponent } from './seeker-jobs/seeker-job/seeker-job.componen
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { UserProfile } from '../../models/user';
-
+import { NgOptimizedImage } from '@angular/common'
 @Component({
     selector: 'seeker-view',
     standalone: true,
     templateUrl: './seeker-view.component.html',
     styleUrl: './seeker-view.component.scss',
-    imports: [CardModule, CarouselModule, ButtonModule, DialogModule, AutoCompleteModule,CommonModule,FormsModule, SeekerJobCardComponent,SeekerJobComponent]
+    imports: [CardModule, NgOptimizedImage,CarouselModule, ButtonModule, DialogModule, AutoCompleteModule,CommonModule,FormsModule, SeekerJobCardComponent,SeekerJobComponent]
 })
 export class SeekerViewComponent implements OnInit {
 
