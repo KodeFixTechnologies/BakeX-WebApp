@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { UserProfile } from '../../models/user';
 import { NgOptimizedImage } from '@angular/common'
 import { ImageLoader } from '@angular/common';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -57,7 +58,8 @@ export class SeekerViewComponent implements OnInit {
     private queryService: QueryService,
     private authService: AuthService,
     private router: Router,
-    private platFormLocation:PlatformLocation
+    private platFormLocation:PlatformLocation,
+    private analyticsService:AnalyticsService
 
   )
   
@@ -154,7 +156,7 @@ export class SeekerViewComponent implements OnInit {
     this.dataService.setData(true);
     window.history.replaceState({}, '', '/seeker');
     this.dataService.setDataforheader(true);
-
+    this.analyticsService.trackEvent('Login Success', 'Seeker logged in successfully', 'SeekerActions');
     if(this.authService.getToken() || this.authService.getUserProfileData())
     {
 
@@ -177,7 +179,7 @@ export class SeekerViewComponent implements OnInit {
   goToJobComponent()
   {
     this.router.navigate(['allJobs']);
-   
+    this.analyticsService.trackEvent('Login Success', 'Seeker Clicked Job Page', 'SeekerActions');
   }
 
   getBusinnessDetails()
@@ -299,6 +301,7 @@ export class SeekerViewComponent implements OnInit {
     this.application.profileId = this.jobSeeker.profileId;
 
     this.queryService.applyForJob(this.application).subscribe((response) => {
+      this.analyticsService.trackEvent('Login Success', 'Seeker Applied Job', 'SeekerActions');
       this.hideDialog();
 
     });

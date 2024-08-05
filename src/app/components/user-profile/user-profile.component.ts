@@ -10,6 +10,7 @@ import { ExpertiseInfoComponent } from '../profile/stepper/expertise-info/expert
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AnalyticsService } from '../../services/analytics.service';
 
 const shareData = {
   title: "Bake Joli",
@@ -42,7 +43,8 @@ export class UserProfileComponent implements OnInit {
     private dataService:DataService,
     private authService:AuthService,
     private router:Router,
-    private profileService:ProfileService
+    private profileService:ProfileService,
+    private analyticsService:AnalyticsService
 
    )
    {

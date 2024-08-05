@@ -12,7 +12,7 @@ export class AnalyticsService {
     // the label that will show up in the dashboard as the events name
     'event_label': eventName,
     // a short description of what happened
-    'value': eventDetails
+    'value':  eventDetails
     })
   }
 }

@@ -139,8 +139,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         exposeMethods: '<true | false> (optional)', // When true will expose the methods for OTP verification. Refer 'How it works?' for more details
         success: (data: any) => {
           this.otpverified = true;
+          
           if (this.user.userTypeId == 1) {
-
+            this.analyticsService.trackEvent('Login Success', 'User OTP Intitated', 'Authentication');
             this.ngZone.run(() => {
               this.dataService.setPhoneData(this.user.mobileNumber);
               this.router.navigate(['/profile/personal']);
@@ -149,7 +150,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             
           }
           else if(this.user.userTypeId == 2) {
-
+            this.analyticsService.trackEvent('Otp Verified', 'Owner OTP Verified',  'Authentication');
             this.ngZone.run(() => {
               this.dataService.setPhoneData(this.user.mobileNumber);
               this.router.navigate(['/bakeprofile/owner']);
@@ -220,6 +221,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.dataService.setPhoneData(this.user.mobileNumber);
         if (userTypeId == 1) {
           this.ngZone.run(() => {
+            this.analyticsService.trackEvent('Login Success', 'User successfully logged in', 'UserAuthentication');
             this.router.navigate(['/seeker']);
             this.dataService.setData(true);
           });
@@ -227,6 +229,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         // Wrap the navigation inside NgZone.run()
         else if (userTypeId == 2) {
           this.ngZone.run(() => {
+            this.analyticsService.trackEvent('Login Success', 'Owner successfully logged in', 'UserAuthentication');
             this.router.navigate(['/ownerview']);
             this.dataService.setData(true);
           });
@@ -235,7 +238,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
        
           this.otpVerification();
 
-        this.analyticsService.trackEvent('Seeker Clicked',response.mobileNumber,'Seeker')
+          this.analyticsService.trackEvent('Login Success', 'New User Intitated', 'Authentication');
     
         // this.ngZone.run(() => {
         //   this.dataService.setPhoneData(this.user.mobileNumber);
@@ -245,7 +248,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
        
           this.otpVerification();
-      this.analyticsService.trackEvent('Owner Clicked',response.mobileNumber,'Owner')
+          this.analyticsService.trackEvent('Login Success', ' New Owner Intitated', 'Authentication');
     //   this.ngZone.run(() => {
     //     this.dataService.setPhoneData(this.user.mobileNumber);
     //     this.router.navigate(['/bakeprofile/owner']);

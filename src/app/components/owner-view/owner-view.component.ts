@@ -49,6 +49,7 @@ import { AuthService } from '../../services/auth.service';
 import { JobCardComponent } from '../shared/job-card/job-card.component';
 import { Location } from '@angular/common';
 import { environment } from '../../../environments/environment.development';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'owner-view',
@@ -144,7 +145,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
     private profileService: ProfileService,
     private authService: AuthService,
     private router: Router,
-    private platFormLocation: PlatformLocation
+    private platFormLocation: PlatformLocation,
+    private analyticsService:AnalyticsService
   ) {
     //prevent backward navigationcode
     history.pushState(null, '', location.href);
@@ -163,6 +165,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
   model: any;
 
   ngOnInit(): void {
+
+    this.analyticsService.trackEvent('Login Success', 'Owner Home Page Loaded', 'OwnerActions');
     this.dataService.setDataforheader(true);
 
     this.backNavigationSubscription = this.router.events.subscribe((event) => {
@@ -354,6 +358,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     this.queryService.createJobPost(this.jobPost).subscribe((response) => {
       this.visible = false;
+      this.analyticsService.trackEvent('Login Success', 'Owner Posted Job', 'OwnerActions');
       this.getJobPostByOwner(this.bakeMember.memberId); 
     });
 

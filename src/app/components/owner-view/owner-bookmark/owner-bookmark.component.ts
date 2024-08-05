@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { PersonalInfoComponent } from '../../profile/stepper/personal-info/personal-info.component';
 import { PersonalInformationComponent } from '../../shared/personal-information-card/personal-information.component';
+import { AnalyticsService } from '../../../services/analytics.service';
 
 @Component({
   selector: 'owner-bookmark',
@@ -23,7 +24,8 @@ export class OwnerBookmarkComponent  implements OnInit{
   jobSeekerProfile:JobSeeker={} as JobSeeker;
   constructor(
     private  dataService:DataService,
-    private queryService:QueryService
+    private queryService:QueryService,
+    
   )
   {
     
