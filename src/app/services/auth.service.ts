@@ -120,6 +120,8 @@ AuthService {
     localStorage.removeItem('currentSelection')
     sessionStorage.removeItem(this.businessesKey);
     sessionStorage.removeItem(this.userProfileKey);
+    sessionStorage.removeItem('ownerData');
+    sessionStorage.removeItem('seekerData');
     this.router.navigate(['/'], { replaceUrl: true });
   }
 

@@ -110,7 +110,7 @@ export class OwnerlocationInfoComponent implements OnInit {
     this.districts = this.selectedState?.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
-    this.dataService.setSessionStorageItem('locationPage',true)
+   
 
     // this.fileService.uploadObject();
     if (this.selectedState) {
