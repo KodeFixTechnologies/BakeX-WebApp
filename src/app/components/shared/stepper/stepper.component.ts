@@ -142,10 +142,12 @@ export class StepperComponent {
 
   goToOwnerPersonal()
   {
+
     this.router.navigate(['bakeprofile/owner'])
   }
 
-  goToBusiness() {
+ goToBusiness() {
+
     this.router.navigate(['bakeprofile/business-info'])
   }
 

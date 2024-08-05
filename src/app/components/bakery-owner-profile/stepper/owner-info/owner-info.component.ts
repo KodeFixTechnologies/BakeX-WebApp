@@ -111,15 +111,18 @@ export class OwnerInfoComponent implements OnInit{
 
 
 
-  setGender(event:any)
-  {
 
-    this.gender=event.value;
-    this.updatedPersonalInfo.gender=event.value.name
-   
-  //  this.profileService.setProfileInformation = this.personalInformation;
+  // setGender(event: any)
+  // {
+
+  //   // this.gender=event.value.name;
+  //   // this.updatedPersonalInfo.gender=event.value.name
+  //   console.log('Selected gender:', this.updatedPersonalInfo.gender);
+
+  // //  this.profileService.setProfileInformation = this.personalInformation;
   
-  }
+  // }
+
 
   nextPage()
   {
@@ -186,6 +189,15 @@ export class OwnerInfoComponent implements OnInit{
   
 
 
+    
+  }
+
+  seeGender(event: any) {
+    // event.value contains the selected value
+    const selectedGender = this.genders.find((g:any) => g.name === event.value.name);
+    this.updatedPersonalInfo.gender = selectedGender?selectedGender.name : '';
+    console.log('Updated personal info:', this.updatedPersonalInfo);
+    console.log('Selected gender:', event.value); // or this.updatedPersonalInfo.gender
     
   }
   
