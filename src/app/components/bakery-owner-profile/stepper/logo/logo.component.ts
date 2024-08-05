@@ -57,7 +57,7 @@ export class LogoComponent implements OnInit {
   sendToBackend(base64String: string|null) {
     
     this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
-    this.INonBakeMember.otherInformation.ProfileImage=base64String;
+    this.INonBakeMember.otherInformation.ProfileImage="https://bakejoli.blob.core.windows.net/bakecontainer/MANGO-BAKERS-Logo.png";
     this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
  //   this.jobPost.ProfileImage=base64String;
   

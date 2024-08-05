@@ -165,7 +165,7 @@ export class SeekerViewComponent implements OnInit {
         this.business.forEach(business=>{
           if(business.profileImageBase64)
             {
-              business.profileImageBase64 = `data:image/png;base64,${business.profileImageBase64}`;
+              business.profileImageBase64 = business.profileImageBase64;
             }
         })
         this.business.forEach(business => {

@@ -225,7 +225,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
         );
 
         if (this.bakeMember.profileImageBase64) {
-          const imageUrl = `data:image/png;base64,${this.bakeMember.profileImageBase64}`; // Adjust the MIME type as per your image type
+          const imageUrl = this.bakeMember.profileImageBase64; // Adjust the MIME type as per your image type
           this.displayImage = imageUrl;
         }
         else 
