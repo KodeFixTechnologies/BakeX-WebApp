@@ -209,30 +209,19 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       ...generationConfig,
     });
 
-    this.district = [
-      { id: 257, name: 'Alappuzha' },
-      { id: 258, name: 'Ernakulam' },
-      { id: 259, name: 'Idukki' },
-      { id: 260, name: 'Kannur' },
-      { id: 261, name: 'Kasaragod' },
-      { id: 262, name: 'Kollam' },
-      { id: 263, name: 'Kottayam' },
-      { id: 264, name: 'Kozhikode' },
-      { id: 265, name: 'Malappuram' },
-      { id: 266, name: 'Palakkad' },
-      { id: 267, name: 'Pathanamthitta' },
-      { id: 268, name: 'Thiruvananthapuram' },
-      { id: 269, name: 'Thrissur' },
-      { id: 270, name: 'Wayanad' },
-    ];
-
+   this.queryService.getDistrictData().subscribe((data)=>{
+    this.district=data;
+    this.selectedDistrict = this.district?.find(
+      (item) => item.DistrictID === this.bakeMember.districtId
+    );
+   })
     this.loadPhoneNumber();
 
     this.queryService.getBakeOwner({ phoneno: this.phoneno }).subscribe({
       next: (data) => {
         this.bakeMember = data;
         this.selectedDistrict = this.district?.find(
-          (item) => item.name === data.district
+          (item) => item.DistrictName === data.district
         );
 
         if (this.bakeMember.profileImageBase64) {
@@ -241,7 +230,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
         }
         else 
         {
-          this.displayImage='../../../../../assets/bakery.png'
+          this.displayImage='../../../../../assets/pan.png'
         }
       },
       error: (error) => {
@@ -263,9 +252,7 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     this.dataService.setData(false);
 
-    this.selectedDistrict = this.district.find(
-      (item) => item.id === this.bakeMember.districtId
-    );
+
   }
 
   postAJob() {
@@ -310,7 +297,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching job post data', error);
       },
-      complete: () => {},
+      complete: () => {
+        this.cdr.detectChanges();
+      },
     });
   }
 
@@ -334,7 +323,9 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
 
     const prompt = `Generate a minimal and simple list of job responsibilities for a job Role: ${this.expertiseTypeforGemini} in the food industry for this  
   Company: ${this.bakeMember.businessName}, Salary: ${this.jobPost.salary}, Job Type: ${this.jobTypes}. 
-  The response should only include job responsibilities in a sentence,sepearte each sentence with comma`;
+  The response should only include job responsibilities in a sentence,sepearte each sentence with comma,Avoid using any symbols or special characters.`;
+
+
     const result = await this.model.generateContent(prompt);
 
     const response = await result.response;
@@ -358,11 +349,12 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
   submitJob() {
     this.jobPost.PostedById = this.bakeMember.memberId;
     this.jobPost.BusinessId = this.bakeMember.businessId;
-    this.jobPost.DistrictId = this.selectedDistrict?.id;
+    this.jobPost.DistrictId = this.selectedDistrict?.DistrictID;
     this.jobPost.jobTypeId = parseInt(this.jobTypes);
 
     this.queryService.createJobPost(this.jobPost).subscribe((response) => {
       this.visible = false;
+      this.getJobPostByOwner(this.bakeMember.memberId); 
     });
 
     //ush the submitted job to the list of submitted jobs
@@ -384,7 +376,8 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
     this.job.jobDescription = '';
 
     this.visible = false;
-    this.cdr.detectChanges();
+ 
+  
   }
 
   onUpload(event: UploadEvent) {

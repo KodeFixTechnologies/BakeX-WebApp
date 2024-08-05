@@ -1,7 +1,7 @@
 <div class="max-w-screen-lg min-h-screen mx-auto">
-  <div class="flex bg-blue-600 justify-between rounded-lg py-8 px-3 mx-1 mt-3">
+  <div class="flex bg-transparent justify-between rounded-lg py-8 px-3 mx-1 mt-3">
     <div>
-      <p class="text-white font-normal text-base">
+      <p class="text-black font-normal text-base">
         Hi,<span class="text-base"> {{ userProfile.firstName }}</span>
       </p>
       <h2 class="text-white font-normal text-base mt-1">
@@ -26,7 +26,7 @@
       class="flex gap-3 p-4 rounded-xl hover:border-1 hover:border-blue-600"
     >
       <span class="pi pi-user mt-1"></span>
-      <h3 class="font-medium">Personal information</h3>
+      <h3 class="font-medium">Profile</h3>
     </button>
   </div>
 
@@ -43,13 +43,25 @@
       <h3 class="font-medium">Settings</h3>
     </button>
   </div> -->
-
+<!-- 
   <div (click)="navigatetoPolicy()"
     class="flex flex-col justify-center items-start  rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button  class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-lock mt-1"></span>
       <h3 class="font-medium">Privacy policy</h3>
+    </button>
+  </div> -->
+
+
+  <div
+    (click)="showDialog()"
+    class="flex flex-col justify-center items-start  rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
+    
+  >
+    <button class="flex gap-3 p-4 rounded-xl">
+      <span class="pi pi-pencil mt-1"></span>
+      <h3 class="font-medium">Edit preference</h3>
     </button>
   </div>
 
@@ -101,3 +113,17 @@
     </div>
   </div>
 </div>
+
+
+
+<p-dialog header="Edit Preference" [modal]="true" [(visible)]="preferenceVisible" [style]="{ width: '100%' }">
+  <div   *ngIf="preferenceVisible" class="flex flex-col justify-center">
+
+
+    <expertise-info [sharedUpdateFlag]="true" [userProfile]="userProfile"></expertise-info>
+
+    
+  </div>
+
+
+</p-dialog>

@@ -48,19 +48,29 @@ export class EducationInfoComponent  implements OnInit{
         EducationLevel:'Master\'s Degree', EducationId:5
       }
     ]
+
+    this.updatedEducation =this.profileService.getProfileInformation().educationInformation;
+ 
+    if(this.updatedEducation)
+    {
+      this.selectedEducation=this.profileService.getProfileInformation().educationInformation;
+   
+    }
+    else {
+      this.selectedEducation = [];
+    }
+  
   }
 
   
   education!:Education[];
 
-  updatedEducation={
-    types:null
-   }
+  updatedEducation:Education = {} as Education;
 
 
   updateEducation(event:any)
   {
-  this.updatedEducation.types=event.value;
+  this.updatedEducation=event.value;
   
 
    this.profileService.setProfileInformation({
@@ -74,7 +84,7 @@ export class EducationInfoComponent  implements OnInit{
   nextPage() {
 
   
-    if(this.updatedEducation.types!=null)
+    if(this.updatedEducation!=null)
       {
           this.router.navigate(['profile/employment'])
       }

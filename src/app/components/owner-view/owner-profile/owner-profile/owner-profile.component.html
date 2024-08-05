@@ -60,17 +60,16 @@
       </button>
     </div> -->
 
-  <div
+  <div (click)="showPrivacyPolicyDialog()"
     class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
-    <button (click)="navigatetoPolicy()" class="flex gap-3 p-4 rounded-xl">
+    <button  class="flex gap-3 p-4 rounded-xl">
       <span class="pi pi-lock mt-1"></span>
       <h3 class="font-medium">Privacy policy</h3>
     </button>
   </div>
 
-  <div
-    (click)="goToHelpCenter()"
+  <div (click)="showHelpCenter()"
     class="flex flex-col justify-center items-start rounded-lg w-11/12 ml-4 mt-5 border hover:border-blue-600"
   >
     <button class="flex gap-3 p-4 rounded-xl">
@@ -126,40 +125,96 @@
 
 <owner-navbar></owner-navbar>
 
-<!-- 
-<div class="w-full max-w-sm   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex justify- px-4 pt-4">
-        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
-            <span class="sr-only">Open dropdown</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-            </svg>
-        </button>
-    
-        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-            <ul class="py-2" aria-labelledby="dropdownButton">
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-            </li>
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
-            </li>
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-            </li>
-            </ul>
-        </div>
+<p-dialog
+  header="Privacy Policy"
+  [(visible)]="displayPrivacyPolicyDialog"
+  [modal]="true"
+  [responsive]="true"
+  [maximizable]="true"
+  [style]="{  }"
+
+
+>
+  <!-- Include your Privacy Policy content here -->
+  <div class="p-dialog-content">
+    <!-- Replace with your actual Privacy Policy content -->
+    <p>
+      This Privacy Policy is an electronic record in the form of an electronic
+      contract formed under the Information Technology Act, 2000 and the rules
+      made thereunder and the amended provisions pertaining to electronic
+      documents/records in various statutes as amended by the Information
+      Technology Act,2000. This Privacy Policy does not require any physical,
+      electronic or digital signature. This Privacy Policy is a legally binding
+      document between you and bakekerala.com (both terms defined below). The
+      terms of this Privacy Policy will be effective upon your acceptance of the
+      same (directly or indirectly in electronic form, by clicking on the I
+      accept tab or by use of the website or by other means) and will govern the
+      relationship between you and bakekerala.com for your use of the website.
+      This document is published and shall be construed in accordance with the
+      provisions of the Information Technology (reasonable security practices
+      and procedures and sensitive personal data or information) rules, 2011
+      under Information Technology Act, 2000; that require publishing of the
+      Privacy Policy for collection, use, storage and transfer of sensitive
+      personal data or information. Please read this Privacy Policy carefully by
+      using the Website, you indicate that you understand, agree and consent to
+      this Privacy Policy. If you do not agree with the terms of this Privacy
+      Policy, please do not use this Website. By providing us with your
+      Information or by making use of the facilities provided by the Website,
+      you hereby consent to the collection, storage, processing and transfer of
+      any or all of Your Personal Information and Non-Personal Information by us
+      as specified under this Privacy Policy. You further agree that such
+      collection, use, storage and transfer of Your Information shall not cause
+      any loss or wrongful gain to you or any other person.
+    </p>
+    <!-- You can style and format your Privacy Policy content as needed -->
+  </div>
+  <p-footer>
+    <button
+      pButton
+      type="button"
+      label="Close"
+      (click)="hidePrivacyPolicyDialog()"
+      class="p-button-secondary"
+    ></button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog
+  header="Help Center"
+  [(visible)]="displayHelpCenter"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width:'100%' }"
+>
+  <!-- Include your Privacy Policy content here -->
+  <div class="p-dialog-content">
+    <!-- Replace with your actual Privacy Policy content -->
+    <div class="flex flex-col items-center justify-center gap-5 mt-10">
+      <div class="w-full h-20 bg-gray-100 rounded-lg flex space-x-4 items-center pl-1 shadow-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+          <path fill="#306cfe" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-2 0l-8 5l-8-5zm0 12H4V8l8 5l8-5z" />
+        </svg>
+        <a href="mailto:joshwajoy11@kodefixlabs.com" class="font-poppins-semibold text-black">joshwajoy11&#64;kodefixlabs.com</a>
+      </div>
+  
+      <div class="w-full h-20 bg-gray-100 rounded-lg flex items-center p-1 space-x-4 shadow-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 50 50">
+          <path fill="none" stroke="#306cfe" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M43.75 31.25v8.187a4.166 4.166 0 0 1-4.77 4.167A37.5 37.5 0 0 1 6.541 11.021a4.167 4.167 0 0 1 4.146-4.771h8.062a2.083 2.083 0 0 1 2.083 1.854c.207 2.73.913 5.4 2.084 7.875a2.083 2.083 0 0 1-.875 2.625l-1.792 1.02a2.085 2.085 0 0 0-.687 3.043a29.3 29.3 0 0 0 7.687 7.687a2.083 2.083 0 0 0 3.042-.687l1.02-1.792a2.083 2.083 0 0 1 2.709-.792a22.4 22.4 0 0 0 7.875 2.084a2.083 2.083 0 0 1 1.854 2.083" />
+        </svg>
+        <a href="tel:+917994545385" class="font-poppins-semibold text-black">+917994545385</a>
+      </div>
     </div>
-    <div class="flex flex-col items-center pb-10">
-        <img class="w-20 h-25 mb-5 rounded-full shadow-lg" src="../../../../../assets/bake.png" alt="Bonnie image"/>
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{bakeMember.memberName}}</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">{{bakeMember.designation}}</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Membership-Id: {{bakeMember.memberId}}</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400 mt-1">Business Name: {{bakeMember.businessName}}</span>
-        <div class="flex  mt-40 ">
-            <a (click)="logout()" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</a>
-            <a  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Subscribed</a>
-        </div>
-    </div>
-</div>
-</div> -->
+  
+    <!-- You can style and format your Privacy Policy content as needed -->
+  </div>
+  <p-footer>
+    <button
+      pButton
+      type="button"
+      label="Close"
+      (click)="hideHelpCenter()"
+      class="p-button-secondary"
+    ></button>
+  </p-footer>
+</p-dialog>

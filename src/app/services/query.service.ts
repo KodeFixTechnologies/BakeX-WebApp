@@ -9,6 +9,8 @@ import { Jobpost } from '../models/job';
 
 import { JobApplication } from '../models/jobApplcation';
 import { Business, RecommendedJob } from '../models/recommendedJobs';
+import { updatedExpertiseRequest } from '../components/profile/stepper/expertise-info/expertise-info.component';
+import { JobSeeker } from '../models/jobSeeker';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,11 @@ export class QueryService {
   getLocationData():Observable<any>
   {
     return this.http.get('../../../../../assets/location-info.json')
+  }
+
+  getDistrictData():Observable<any>
+  {
+    return this.http.get('../../../../../assets/districts.json')
   }
 
   getExpertiseData():Observable<any>
@@ -136,5 +143,30 @@ applyForJob(application: JobApplication): Observable<any> {
   return this.http.post<any>(environment.API_URL+'ApplyJobs', application);
 }
 
-  
+updateExpertise(updatedData:updatedExpertiseRequest): Observable<any> {
+  return this.http.post<any>(environment.API_URL+'UpdateExpertise', updatedData);
 }
+
+addBookmark(bookmark: any): Observable<any> {
+  return this.http.post<string>(`${environment.API_URL}toggleBookmark`, bookmark, { responseType: 'text' as 'json' });
+
+}
+
+removeBookmark(bookmark: any): Observable<any> {
+  return this.http.delete(`${environment.API_URL}removeBookmark`, bookmark);
+}
+
+isBookmarked(profileId: number, ownerId: number|undefined): Observable<boolean> {
+  return this.http.get<boolean>(`${environment.API_URL}isBookmarked?profileId=${profileId}&ownerId=${ownerId}`);
+}
+
+getBookmarkedJobSeekers(ownerId: number | undefined): Observable<any> {
+  return this.http.get<JobSeeker[]>(`${environment.API_URL}bookmarkedJobSeekers/${ownerId}`);
+}
+
+recordAction(action: any): Observable<void> {
+  return this.http.post<void>(`${environment.API_URL}record`, action);
+}
+
+}
+

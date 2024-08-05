@@ -15,6 +15,7 @@ import { FileService } from '../../../../services/file.service';
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
 import { DataService } from '../../../../services/data.service';
 import { Users } from '../../../../models/user';
+import { DistrictsData } from '../../../profile/stepper/location-info/location-info.component';
 
 
 @Component({
@@ -30,18 +31,30 @@ export class OwnerlocationInfoComponent implements OnInit {
 
   ngOnInit(): void {
   
-
-    this.dataService.setData(false)
-
-    this.updatedlocationInfo = this.profileService.getBakeryOwnerProfileInfo().locationInformation;
-
-    console.log(this.updatedlocationInfo)
  
     this.queryService.getLocationData().subscribe((data) => {
       this.states = data.states;
 
  
+      this.updatedlocationInfo = this.profileService.getBakeryOwnerProfileInfo().locationInformation;
+
+      if(this.updatedlocationInfo)
+        {
+         
+          this.selectedState = this.states.find((state) => state.state === this.updatedlocationInfo.state) || null;
+          this.onStateChange()
+          this.selectedDistrict=this.updatedlocationInfo.district
+        
+         
+          this.pincodes=this.updatedlocationInfo.pincode;
+          this.userplace=this.updatedlocationInfo.place
+        }
+  
     })
+
+    this.dataService.setData(false)
+
+
 
 
     this.queryService.getStateAndDistrict().subscribe((data) => {
@@ -51,7 +64,7 @@ export class OwnerlocationInfoComponent implements OnInit {
     this.dataService.getUserData().subscribe((data) => {
       this.user = data;
 
-        console.log(this.user)
+
     })
   }
 
@@ -82,10 +95,10 @@ export class OwnerlocationInfoComponent implements OnInit {
   NonBakeMember: IBakerOwnerProfileRequest = {} as IBakerOwnerProfileRequest;
   pincodes: any
   currentDate: Date;
-  states: any;
+  states: DistrictsData[]=[];
   submitted: boolean = false;
   districts: any;
-  selectedState: any;
+  selectedState: DistrictsData | null = null;
   selectedDistrict: any;
   userplace: string = ''
 
@@ -94,7 +107,7 @@ export class OwnerlocationInfoComponent implements OnInit {
 
   onStateChange() {
    
-    this.districts = this.selectedState.districts.map((district: string) => ({ label: district, value: district }));
+    this.districts = this.selectedState?.districts.map((district: string) => ({ label: district, value: district }));
   }
   nextPage() {
 

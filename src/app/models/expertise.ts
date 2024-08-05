@@ -1,5 +1,5 @@
 export interface Expertise {
-    exertiseId: string,
+    expertiseId: string,
     expertiseType: string
   }
   

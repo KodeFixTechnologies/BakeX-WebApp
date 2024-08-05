@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "'https://api.db-ip.com/v2/free/self",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+  

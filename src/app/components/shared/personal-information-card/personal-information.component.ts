@@ -32,7 +32,6 @@ export class PersonalInformationComponent implements OnInit {
       this.active = 'unknown'; // Optional: handle case where both are empty
     }
 
-    console.log(this.active);
 
   }
 

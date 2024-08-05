@@ -12,9 +12,18 @@ export interface RecommendedJob {
     expertiseType:string;
     appliedStatus : number;
     jobDescriptionLines?: string[];
+    applyDate:Date,
+    ownerActions: OwnerAction[];
+    
   }
   
-
+  export interface OwnerAction {
+    ownerId: number;
+    profileId: number;
+    actionType: string;
+    jobId: number;
+    actionDate: string; // Use ISO string format for dates
+  }
   // job.interface.ts
 export interface Business {
   postedById:number;

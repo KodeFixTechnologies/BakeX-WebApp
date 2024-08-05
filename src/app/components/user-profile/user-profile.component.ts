@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { JobSeeker } from '../../models/jobSeeker';
 import { PersonalInformationComponent } from "../shared/personal-information-card/personal-information.component";
+import { Button, ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { ExpertiseInfoComponent } from '../profile/stepper/expertise-info/expertise-info.component';
+import { ProfileService } from '../../services/profile.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 const shareData = {
   title: "Bake Joli",
@@ -17,7 +22,7 @@ const shareData = {
 @Component({
   selector: 'user-profile',
   standalone: true,
-  imports: [CommonModule, PersonalInformationComponent],
+  imports: [CommonModule, PersonalInformationComponent,ButtonModule,DialogModule,ExpertiseInfoComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })
@@ -29,13 +34,15 @@ export class UserProfileComponent implements OnInit {
 
     visible:boolean=false;
 
+    preferenceVisible: boolean = false;
 
     userProfile:JobSeeker = {} as JobSeeker
 
    constructor(
     private dataService:DataService,
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private profileService:ProfileService
 
    )
    {
@@ -51,6 +58,17 @@ export class UserProfileComponent implements OnInit {
   { 
       this.showLogout= !this.showLogout
     
+  }
+
+  showDialog()
+  {
+   this.preferenceVisible=true
+   this.profileService.setProfileInformation({
+    ...this.profileService.getProfileInformation(),
+    expertiseInformation: this.userProfile.expertiseInformation
+  });
+
+
   }
 
 
@@ -84,4 +102,11 @@ export class UserProfileComponent implements OnInit {
    }
   }
 
+
+  updateExpertiseFromProfile()
+  {
+   
+  }
+
+  
 }
