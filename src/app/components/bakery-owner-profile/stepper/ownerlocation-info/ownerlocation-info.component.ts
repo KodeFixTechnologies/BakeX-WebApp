@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ProfileService } from '../../../../services/profile.service';
 import { QueryService } from '../../../../services/query.service';
 import { ButtonModule } from 'primeng/button'
@@ -9,19 +9,20 @@ import { MessagesModule } from 'primeng/messages';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 
 import { IBakerOwnerProfile, IBakerOwnerProfileRequest } from '../../../../models/request/BakeOwnerProfileRequest';
 import { DataService } from '../../../../services/data.service';
 import { Users } from '../../../../models/user';
 import { DistrictsData } from '../../../profile/stepper/location-info/location-info.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
   selector: 'ownerlocation-info',
   standalone: true,
-  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule],
+  imports: [FormsModule, ButtonModule, CommonModule, CardModule, DropdownModule,ToastModule],
   templateUrl: './ownerlocation-info.component.html',
   styleUrl: './ownerlocation-info.component.scss'
 })
@@ -74,7 +75,8 @@ export class OwnerlocationInfoComponent implements OnInit {
     private profileService: ProfileService,
     private queryService: QueryService,
     private router: Router,
-
+    private messageService:MessageService,
+    private ngZone: NgZone,
     private dataService: DataService
   ) {
     this.currentDate = new Date();
@@ -109,43 +111,58 @@ export class OwnerlocationInfoComponent implements OnInit {
    
     this.districts = this.selectedState?.districts.map((district: string) => ({ label: district, value: district }));
   }
-  nextPage() {
-   
+   nextPage() {
+    const validationErrors = this.validateLocationInfo();
 
-    // this.fileService.uploadObject();
-    if (this.selectedState) {
-      this.updatedlocationInfo.state = this.selectedState.state;
-      this.updatedlocationInfo.district = this.selectedDistrict;
-      this.updatedlocationInfo.place = this.userplace
-      this.updatedlocationInfo.pincode = this.pincodes;
-      this.updatedOtherInfo.profileCreateDate = this.currentDate.toLocaleDateString();
+    if (validationErrors.length === 0) {
+      if (this.selectedState) {
+        this.updatedlocationInfo.state = this.selectedState.state;
+        this.updatedlocationInfo.district = this.selectedDistrict;
+        this.updatedlocationInfo.place = this.userplace;
+        this.updatedlocationInfo.pincode = this.pincodes;
+        this.updatedOtherInfo.profileCreateDate = this.currentDate.toLocaleDateString();
 
-      this.profileService.setBakeryOwnerProfileInfo({
-        ...this.profileService.getBakeryOwnerProfileInfo(),
-        locationInformation: this.updatedlocationInfo,
-        otherInformation: this.updatedOtherInfo,
-      });
+        this.profileService.setBakeryOwnerProfileInfo({
+          ...this.profileService.getBakeryOwnerProfileInfo(),
+          locationInformation: this.updatedlocationInfo,
+          otherInformation: this.updatedOtherInfo,
+        });
 
-      // this.INonBakeMember = this.profileService.getBakeryOwnerProfileInfo();
+        this.ngZone.run(() => {
+          this.router.navigate(['bakeprofile/logo']);
+        });
+      }
+    } else {
+      this.showValidationErrors(validationErrors);
+    }
+  }
 
-      // this.NonBakeMember = this.profileService.setProfileforBackend(this.INonBakeMember);
+  validateLocationInfo(): string[] {
+    const errors: string[] = [];
 
-
-
-
-      this.router.navigate([
-
-                   'bakeprofile/logo'
-                ])
-
-
+    if (!this.selectedState || !this.selectedState.state) {
+      errors.push('State is required.');
     }
 
-    else {
-      console.error('No state selected.');
+    if (!this.selectedDistrict) {
+      errors.push('District is required.');
     }
 
+    if (!this.userplace) {
+      errors.push('Place is required.');
+    }
 
+    if (!this.pincodes) {
+      errors.push('Pincode is required.');
+    }
+
+    return errors;
+  }
+
+  showValidationErrors(errors: string[]) {
+    errors.forEach(error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: error });
+    });
   }
 
 

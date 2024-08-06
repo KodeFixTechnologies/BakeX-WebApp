@@ -249,12 +249,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
      
       } else if (response.mobileNumber == null && this.user.userTypeId == 2) {
         this.dataService.setSessionStorageItem('ownerData',this.user);
-         this.otpVerification();
+       //  this.otpVerification();
           this.analyticsService.trackEvent('Login Success', ' New Owner Intitated', 'Authentication');
-    //   this.ngZone.run(() => {
-    //     this.dataService.setPhoneData(this.user.mobileNumber);
-    //     this.router.navigate(['/bakeprofile/owner']);
-    // });
+      this.ngZone.run(() => {
+        this.dataService.setPhoneData(this.user.mobileNumber);
+        this.router.navigate(['/bakeprofile/owner']);
+    });
         }
       
     });

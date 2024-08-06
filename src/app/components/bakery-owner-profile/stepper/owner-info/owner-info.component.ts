@@ -151,35 +151,57 @@ calenderAge:any;
 
 
 
-  nextPage()
-  {
+  nextPage() {
+    const validationErrors = this.validatePersonalInfo();
 
-    this.profileService.setBakeryOwnerProfileInfo({
-      ...this.profileService.getBakeryOwnerProfileInfo(),
-      personalInformation: this.updatedPersonalInfo
-    });
+    if (validationErrors.length === 0) {
+      this.profileService.setBakeryOwnerProfileInfo({
+        ...this.profileService.getBakeryOwnerProfileInfo(),
+        personalInformation: this.updatedPersonalInfo
+      });
 
-    this.user.isMobileVerified='Y';
+      this.user.isMobileVerified = 'Y';
+      this.dataService.setSessionStorageItem('ownerData', this.user);
 
-          this.dataService.setSessionStorageItem('ownerData',this.user);
-       
-           // get verified token in response
-            this.ngZone.run(() => {
-               this.router.navigate(['bakeprofile/business-info']);
-
-              });
-
-
-
-
-    this.script.onerror =(error:any)=> {
-
+      // Navigate to the next page
+      this.ngZone.run(() => {
+        this.router.navigate(['bakeprofile/business-info']);
+      });
+    } else {
+      this.showValidationErrors(validationErrors);
     }
-    this.render.appendChild(document.body,this.script)
-  
+  }
 
+  validatePersonalInfo(): string[] {
+    const errors: string[] = [];
 
-    
+    if (!this.updatedPersonalInfo.firstname) {
+      errors.push('First Name is required.');
+    }
+
+    if (!this.updatedPersonalInfo.lastname) {
+      errors.push('Last Name is required.');
+    }
+
+    if (!this.updatedPersonalInfo.age) {
+      errors.push('Age is required.');
+    }
+
+    if (!this.updatedPersonalInfo.gender) {
+      errors.push('Gender is required.');
+    }
+
+    if (!this.updatedPersonalInfo.phoneno) {
+      errors.push('Phone Number is required.');
+    }
+
+    return errors;
+  }
+
+  showValidationErrors(errors: string[]) {
+    errors.forEach(error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: error });
+    });
   }
 
   setGender(data:string)
