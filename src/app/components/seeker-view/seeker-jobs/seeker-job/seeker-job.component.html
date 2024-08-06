@@ -2,12 +2,12 @@
     <h2 class=" ms-4 text-lg text-blue-600 font-semibold">Search Jobs</h2>
 
     <!-- Search by Title -->
-    <div class="flex justify-center mt-2 ">
+    <div class="flex justify-center mt-2 px-2 ">
         <p-autoComplete [size]="30" class=" mb-2  " [(ngModel)]="searchText" [suggestions]="filteredTitles"
             (completeMethod)="searchJobs($event)" placeholder="Search by Category" (onSelect)="applyFilters()">
-            <ng-template let-title pTemplate="item">
-                <div>{{ title }}</div>
-            </ng-template>
+            <ng-template let-job pTemplate="item">
+                <div>{{ filteredTitles}}</div>
+              </ng-template>
            
         </p-autoComplete>
       
