@@ -76,7 +76,10 @@ export class OwnerNavbarComponent {
   }
 
   showDialog() {
-   this.dataService.openDialog();
+    this.router.navigate(['/ownerview'])
+    this.updateSelection('home')
+   this.dataService.setError(true);
+  
 }
 
 goToJobPage()

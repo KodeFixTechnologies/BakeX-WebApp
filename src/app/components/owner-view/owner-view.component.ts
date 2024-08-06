@@ -179,11 +179,19 @@ export class OwnerViewComponent implements OnInit, OnDestroy {
     this.analyticsService.trackEvent('Login Success', 'Owner Home Page Loaded', 'OwnerActions');
     this.dataService.setDataforheader(true);
 
-    this.backNavigationSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart && this.visible) {
-        this.visible = false;
-      }
-    });
+      this.dataService.getError().subscribe((data)=>{
+        if(data===true)
+        {
+          console.log(data)
+        
+          this.visible=true
+        }
+      })
+    // this.backNavigationSubscription = this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationStart && this.visible) {
+    //     this.visible = false;
+    //   }
+    // });
 
     this.experience = [
       {
