@@ -74,6 +74,7 @@ export class OwnerProfileComponent implements OnInit {
   }
 
   logout() {
+    this.dataService.setError(false)
     this.authService.logout();
     this.router.navigate(['']);
   }
