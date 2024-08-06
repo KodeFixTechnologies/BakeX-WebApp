@@ -13,7 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 import { BakeMember } from '../../models/bakeMember';
 import { FormsModule } from '@angular/forms';
 import { Job } from '../../models/job';
-import { CommonModule, PlatformLocation } from '@angular/common';
+import { CommonModule, IMAGE_LOADER, ImageLoaderConfig, PlatformLocation } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { Button, ButtonModule } from 'primeng/button';
 import { OwnerNavbarComponent } from '../owner-navbar/owner-navbar.component';
@@ -50,6 +50,7 @@ import { JobCardComponent } from '../shared/job-card/job-card.component';
 import { Location } from '@angular/common';
 import { environment } from '../../../environments/environment.development';
 import { AnalyticsService } from '../../services/analytics.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'owner-view',
@@ -73,7 +74,16 @@ import { AnalyticsService } from '../../services/analytics.service';
     ButtonModule,
     CarouselModule,
     JobCardComponent,
+    NgOptimizedImage
   ],
+  providers:[
+    {
+      provide: IMAGE_LOADER,
+      useValue: (config: ImageLoaderConfig) => {
+        return `https://bakejoli.blob.core.windows.net/bakecontainer/${config.src}?`;
+      },
+    },
+  ]
 })
 export class OwnerViewComponent implements OnInit, OnDestroy {
   @ViewChild('dialog', { static: false }) dialog: Dialog | undefined;
