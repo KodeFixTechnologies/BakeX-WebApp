@@ -207,6 +207,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.user.authId = 3;
     this.user.password = '';
     this.user.isMobileVerified = '';
+
     this.dataService.getUserData().subscribe((data: Users) => {
       this.user.userTypeId = data.userTypeId;
     });
