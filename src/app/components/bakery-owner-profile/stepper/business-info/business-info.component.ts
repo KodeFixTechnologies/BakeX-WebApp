@@ -78,13 +78,13 @@ export class BusinessInfoComponent  implements OnInit{
       errors.push('Business Phone is required.');
     }
 
-    // if (!this.updatedBusinessInfo.fssaiLicenseNo) {
-    //   errors.push('FSSAI License Number is required.');
-    // }
+    if (!this.updatedBusinessInfo.fssaiLicenseNo) {
+      errors.push('FSSAI License Number is required.');
+    }
 
-    // if (!this.updatedBusinessInfo.fssaiExpiryDate) {
-    //   errors.push('FSSAI Expiry Date is required.');
-    // }
+    if (!this.updatedBusinessInfo.fssaiExpiryDate) {
+      errors.push('FSSAI Expiry Date is required.');
+    }
 
     return errors;
   }
